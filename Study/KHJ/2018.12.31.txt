@@ -1,0 +1,108 @@
+Lec 04
+
+Hypothesis: H(x) = Wx + b
+Cost function: cost(W, b) = 1/m ∑(H(x(i)) - y(i))^2
+Gradient descent algorithm
+
+multi-variable
+H(x1, x2, x3) = w1x1 + w2x2 + w3x3 + b 
+cost(W, b) = 1/m ∑(H(x1(i), x2(i), x3(i)) - y(i))^2
+
+Matrix: x1, x2, x3 ... 을 보다 편하게 표현하기 위해 사용
+(x1 x2 x3) (w1
+            w2
+            w3) = (x1w1 + x2w2 + x3w3)
+H(X) = XW
+ 
+ (x11 x12 x13  (w1
+  x21 x22 x23  w2
+  x31 x32 x33   w3) = (x11w1 + x12w2 + x13w3
+                         x21w1 + x22w2 + x23w3
+                         x31w1 + x32w2 + x33w3)
+  X   *   W   =  H(X)
+[a, b]   [b, c]   [a, c]
+
+========================================================
+
+Lab 4-1
+
+기존의 data 값들을 matrix로 보다 편하게 적용 가능
+
+x_data = [[1, 2, 3], [4, 5, 6], ... [n-1, n, n+1]]
+y_data = [[a], [b], ... [y]]
+
+X = tf.placeholder(tf.float32, shape=[None, 3])
+Y = tf.placeholder(tf.float32, shape=[None, 1])
+
+나머지 코드는 기존과 동일
+
+========================================================
+
+Lab 4-2
+
+Load Data file
+
+# X1, X2, X3, Y순으로 작성된 파일 일때
+xy = np.loadtxt('파일이름', delimiter='구분하는기호', dtype=np.타입)
+x_data = xy[:, 0:-1]
+y_data = xy[:, [-1]]
+
+파일이 굉장히 큰 경우: Queue Runners
+
+1) 파일 네임 리스트
+filename_queue = tf.train.string_input_producer(
+['파일이름1', '파일이름2', ...], shuffle=False, name='filename_queue')
+
+2) 파일을 읽어올 reader 정의
+reader = tf.TextLineReader()
+key, value = reader.read(filename_queue)
+
+3) 읽어온 value를 어떻게 읽어 올 것인가 정의
+record_defaults = [[0.], [0.], [0.], [0.]] #데이터 형태 정의
+xy = tf.decode_csv(value, record_defaults=record_defaults )
+
+4) 부분만 읽기
+train_x_batch, train_y_batch = /
+			tf.train.batch([xy[0:-1], xy[-1:]], batch_size = 10) #10개씩 나누기
+
+========================================================
+
+Lec 5-1
+
+Regression
+Hypothesis: H(x) = WX
+Cost: cost(W) = 1/m ∑(WX - y)^2
+Gradient decent: W:= W - α(δ/δW) cost(W) #α: leaning rate
+
+Bunary Classification
+0~1의 값만 나오도록: Logistic Hypothesis
+z = WX
+H(x) = q(z) = 1 / (1 + e^(-z)) = 1 / (1 + e^(-WX))
+
+========================================================
+
+Lec 5-2
+
+Logistic Regression의 cost function
+
+기존의 Gradient decent를 적용
+울퉁불퉁한 그래프 -> local 최저점과 Global 최저점이 일치하지 않는 곳 多 -> 제대로 된 학습 x
+
+cost(W) = 1/m ∑ c(H(x), y)
+c(H(x), y) = { -log(H(x)) : y = 1
+              -log(1 - H(x)) : y = 0
+           = -ylog(H(x)) - (1-y)log(1-H(x))
+
+========================================================
+
+Lab 5
+
+Logistic Regression
+H(X) = 1 / (1 + e(-WX)) 
+cost(W) = - 1/m ∑ y log(H(x)) + (1 - y) (log (1 - H(x)))
+W := W - α(δ/δW) cost(W)
+
+hypothesis = tf.sigmoid(tf.matmul(X, W) + b) # == H(X) = 1 / (1 + e(-WX))
+
+predicted = tf.cast(hypothesis > 0.5, dtype = tf.float32) # 0.5가 true냐 false냐의 기준
+accutacy = tf.reduce_mean(tf.cast(tf.equal(predicted, Y), dtype = tf.float32)) # 예측 값의 적중률 
