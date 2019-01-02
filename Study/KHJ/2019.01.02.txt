@@ -1,0 +1,56 @@
+Lec 6-1
+
+Softmax Regression
+
+Multinomail classification: 여러개(3개 이상)의 정해진 결과로 나옴
+
+binary classification 갯수만큼 각각 적용
+
+A B C 세개로 구분할 때)
+
+[ Wa1 Wa2 Wa3  [ x1   = [ Wa1x1 + Wa2x2 + Wa3x3  = [ ya
+ Wb1 Wb2 Wb3    x2       Wb1x1 + Wb2x2 + Wb3x3     yb
+ Wc1 Wc2 Wc3 ]  x3 ]      Wc1x1 + Wc2x2 + Wc3x3     yc ]
+
+======================================================
+
+Lec 6-2
+
+Softmax Regression의 cost function
+
+0 ~ 1 사이 값이 나오도록 sigmoid 적용
+모두 더하면 1이 되도록(확률) => softmax 
+one-hot-encoding을 통해 하나로 정의
+
+ scores
+XW = Y 값들을 softmax로 통과
+S(yi) = e^yi / ∑ e^yi => 확률
+
+cross - entropy cost function
+
+예측 값: s(y) <- sigmoid 적용
+실제 값: L
+
+D(S, L) = -∑ Li log( Si )
+
+사실, lositic cost function이랑 동일
+
+증명: http://mazdah.tistory.com/791
+
+======================================================
+
+Lab 6-1
+
+Y = tf.matmul(X, W) + b #logits
+hypothesis = tf.nn.softmax(Y) #softmax 적용
+cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis, axis = 1))
+
+======================================================
+
+Lab 6-2
+
+cost_i = tf.nn.softmax_cross_entropy_with_logits(logits = logits #예측 값
+						labels = Y_one_hot ) #실제 값
+cost = tf.reduce_mean(cost_i)
+# 기존의 cost랑 동일
+
