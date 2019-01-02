@@ -54,3 +54,5 @@ cost_i = tf.nn.softmax_cross_entropy_with_logits(logits = logits #예측 값
 cost = tf.reduce_mean(cost_i)
 # 기존의 cost랑 동일
 
+Y_one_hot = tf.one_hot( 실제값, 몇개의클래스인지 ) #one_hot으로 바꿔줌
+Y_one_hot = tf.reshape( Y_one_hot, 몇개의클래스인지 ) 
