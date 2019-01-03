@@ -1,0 +1,55 @@
+Lec 7-1
+
+Learnig rate
+Large: overshooting
+small: take too long, at local minimum
+
+데이터 가공하기 for gradient descent: nomalized
+X' = X - 평균 / 분산값
+X_std[ : ,0 ] = (X[ : ,0 ] - X[ : ,0 ].mean()) / X[ : ,0 ].std()
+
+Overfitting
+: 학습 데이터에 너무 딱 맞는 모델로 만들어 버림
+- more taraining data
+- reduce the number of features
+- regularuzation (일반화)
+  : 모델을 구부리지 않고 피기! Weight를 너무 큰 값을 가지지 않게!
+   cost 함수 + λ ∑ W^2 (λ: regularization strength)
+   l2reg = 0.001 * tf.reduce_sum(tf.square(W)) (0.001: regularization strength)
+
+================================================================
+
+Lec 7-2
+
+Data set을 Training set과 Test set으로 나누기 (ex: 7:3)
+Training set으로 학습 -> Test set으로 테스트
++) Validation set: 모의 시험
+
+Online leaning
+: 많은 데이터를 나누어 학습
+  후에 데이터가 추가 될때 추가된 데이터부터 학습하기 편함
+
+Accutacy(정확도)
+: 95% 이어야 사용
+
+================================================================
+
+Lab 7-1
+
+nomalized input
+xy = MinMaxScaler(xy)
+
+================================================================
+
+Lab 7-2
+
+MINIST Dataset
+tensorflow.examples.tutorials.minist
+
+Training epoch/batch
+batch size: 한번 학습 시킬 때 사용할 데이터 사이즈
+epoch: 데이터 셋을 한번 다 학습 시키는 것
+
+accuracy 구하기
+sses.run()
+accuracy.eval()
