@@ -1,0 +1,93 @@
+Lec 08-1
+
+Backpropagation
+예측값과 실제값이 다를 때 (error 발생 시)
+error를 backward로 보내는 방식의 알고리즘
+
+Convolutuonal Neural Networks
+부분 부분으로 잘라서 보낸 후 나중에 합치는 방식의 알고리즘
+
+Layer가 Deep해 질수록 성능 떨어짐 + 복잡...
+
+===================================================
+
+Lec 08-2
+
+Layer에 초기값만 잘 주면 제대로 동작
+Deep한 Layer를 사용하면 더 복잡한 문제도 해결 가능
+=> Deep Nets, Deep Learning
+
+===================================================
+
+Lab 08
+
+Rank: 차원
+Shape: 모양
+Axis: 축
+
+ex) [					# axis = 0
+	[				# axis = 1
+		[ 			# axis = 2
+			[1, 2, 3, 4],	# axis = 3
+			[5, 6, 7, 8],
+			[9, 10, 11, 12]
+		],
+		[	
+			[13, 14, 15, 16], 
+			[17, 18, 19, 20], 
+			[21, 22, 23, 24]
+		]
+	]
+    ]
+Rank: 4, Shape: [1, 2, 3, 4]
+
+Broadcasting
+: Rank 및 Shape이 달라도 연산 할 수 있게 해줌
+But, 잘 모르고 쓰면 값이 산으로 감... 되도록이면 같은 Shape으로 만들어서 연산하자... 
+
+Reduce_mean
+: 평균 구하기
+axis 값으로 축 설정 가능 (제일 안쪽에 있는 축인 -1 많이 씀)
+
+Reduce_sum
+: 총합 구하기
+
+argmax
+: 가장 큰 것의 위치 구하기
+
+Reshape
+: Shape 바꾸기
+보통 가장 안쪽의 Shape은 건들이지 않음
++) squeeze: 펴주기
+++) expand: 나누기
+
+One_hot
+: 위치와 depth를 줘서 해당 위치가 1인 one_hot 행렬 만들어 줌
+
+Casting
+ex1) 타입 변경
+tf.cast([1.8, 2.2, 3.3, 4.9], tf.int32)
+[1, 2, 3, 4]
+ex2) T/F의 값을 1/0으로 변경
+tf.cast([True, False, 1==1, 0==1], tf.int32)
+[1, 0, 1, 0]
+
+Stack
+ex)
+x = [1, 4]
+y = [2, 5]
+z = [3, 6]
+tf.stack([x, y, z])
+=> [[1, 4], [2, 5], [3, 6]]
+axis=1등 축 설정 가능
+
+Ones_like & Zeros_like
+같은 Shape의 값이 1 or 0으로 채워진 행렬 만들어 줌
+
+Zip
+ex)
+for x, y in zip([[1, 2, 3], [4, 5, 6]]):
+	print(x, y)
+1 4
+2 5
+3 6
