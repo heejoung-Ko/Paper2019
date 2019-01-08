@@ -1,0 +1,86 @@
+Lec 09-1
+
+XOR
+
+Neural Net
+
+x1 & x2 -> w & b -> y1
+x1 & x2 -> w & b -> y2
+y1 & y2 -> w & b -> y(예측값)
+==============================================================
+
+Lec 09-x
+
+chain rule
+f(g(x))을 x로 미분
+af / ax = af / ag * ag / ax
+
+==============================================================
+
+Lec 09-2
+
+미분을 통해 기울기를 구하고 기울기를 따라 내려가면 최종적인 학습 모델을 구할 수 있음
+
+But, NN에서는 이게 매우 복잡해짐 
+각 Layer에서 예측값에 미치는 영향을 계산 -> 계산량이 많아지고 복잡해짐
+
+f = wx + b, g = wx, f = g + b
+w, x, b가 각각 f에 미치는 영향 구하기
+
+1) forward
+αf / αg = 1, αf / αb = 1
+αg / αw = x, αg / αx = w
+αf / αw = αf / αg * αg / αw = 1 * x = x
+αf / αx = αf / αg * αg / αx = 1 * w = w
+
+2) Backpropagation
+g . . . . a 
+a + b = f
+chain rule 적용
+αf / αw = αf / αg
+=> 복잡한 값이라도 계산할 수 있음
+
+Tensorflow는 그래프로 이루어짐 -> Backpropagation 적용하기 좋음
+(이미 다 구현되어 있음)
+
+==============================================================
+
+Lab 09-1
+
+NN for XOR
+logistic regression -> 잘 적용 x 
+
+Neural Net
+layer로 나누어 작성
+
+Wide NN for XOR		# output의 갯수 증가
+Deep NN for XOR		# layer의 갯수 증가
+모델이 더 잘 학습 됨
+
+==============================================================
+
+Lab 09-2
+
+Tensorboard
+
+1) Tensorflow 그래프에서 어떤 값을 loging 할건지 정함
+w2_hist = tf.summary.histogram("weights2", W2)
+cost_sum = tf.summary.scalar("cost", cost)
+
+2) Merge
+summary = tf.summary.merge_all()
+
+3) writer 만들기 + 그래프 추가하기
+writer = tf.summary.FileWriter('./logs')	# 어디 위치에 기록할지
+writer.add_graph(sess.graph)		# writer에 그래프 추가
+
+4) run summary 				# summary도 그래프
+s, _ = sess.run([summary, optimizer], feed_dict=feed_dict)
+writer.add_summary(s, global_step=global_step)	# 파일에 기록
+
+5) Launch TensorBoard
+tensorboard --logdir=./logs		# cmd에서 실행
+
++) with tf.name_scope("layer1") as scope:
+	W1 = tf. ...
+로 그래프 정리 가능 
