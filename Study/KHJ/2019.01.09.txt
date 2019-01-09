@@ -1,0 +1,76 @@
+Lec 10-1
+
+Backpropagation
+layer가 더 deep져도 정확성이 올라가지 x, 2~3단 이상이 가면 별로 효과 x
+sigmoid의 값은 0~1사이의 값 -> chain rule로 계속 곱해지면서 0에 수렴
+=> Vanishing gradient
+   : 결과에 가까운 layer의 경사도는 값이 크지만 점점 뒤로 갈수록 경사도가 사라짐
+
+ReLU (Rectified Linear Unit)
+Backpropagation의 sigmoid 문제를 해결
+0보다 작은 값은 꺼버림, 0보다 큰 값은 값에 비례하여 증가
+sigmoid 대신 집어 넣음
+tf.nn.sigmoid(tf.matmul(X, W1) + b1) -> tf.nn.relu(tf.matmul(X, W1) + b1)
++) 마지막 단은 sigmoid 사용 (0~1사이의 값이 나와야하기 때문)
+
+==============================================================================
+
+Lec 10-2
+
+Weight 초기화
+
+초기값으로 0을 주었을 때 -> gradient가 사라짐
+=> 모든 초기값에 0을 주면 x!
+
+RBM (Restricted Boatman Machine)
+RBM으로 초기화 시킨 Net을 Deep Belief Nets
+Forward(Encode) -> Backward(Decode) 작업을 하면서 
+가장 input의 예측값과 실제값의 차가 최저로 만들면서 Weight을 초기화
++) 2개 이상의 layer일 경우 두개씩 잘라서 RBM 실행
+
+RBM을 쓰지 않고 간단한 방식의 초기화 방법
+Xavier 초기화, He's 초기화
+: 몇 개의 입력이고 몇 개의 출력인가에 비례해서 초기화
+
+Xavier 초기화
+W = np.random.randn(fan_in, fan_out)/np.sqrt(fan_in)
+
+He 초기화
+W = np.random.randn(fan_in, fan_out)/np.sqrt(fan_in / 2)
+
+==============================================================================
+
+Lec 10-3
+
+Overfiting -> Regularizion으로 해결
+
+Dropout
+: random한 뉴런을 끊어 놓음
+L1 = tf.nn.dropout(_L1, dropout_rate)
+*) 학습하는 동안에만 dropout!
+
+앙상블
+Learning Model을 여러개 만들어 놓고 학습 시킨 후 합침
+
+==============================================================================
+
+Lec 10-4
+
+Fast Forward
+: 몇 단 스킵해서 보내는 방식
+
+Split & merge
+: 단이나 입력을 나눠서 학습시키다가 합쳐서 학습시키는 방식
+
+Recurrent network (RNN)
+: 같은 단의 옆으로도 이동할 수 있게 하는 방식
+
+==============================================================================
+
+Lab 10
+
+Deep NN은 overfitng이 일어나기 쉬움 -> dropout
+
+Optimizer
+AdamOptimizer 추천
+
