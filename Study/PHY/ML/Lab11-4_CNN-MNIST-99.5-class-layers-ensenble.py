@@ -96,12 +96,12 @@ for epoch in range(training_epochs):
             avg_cost_list[m_idx] += c / total_batch
 
 
-    print('Epoch : ', '%04d' % (epoch + 1), 'cost = ', '{:.9f}'.format(avg_cost))
+    print('Epoch : ', '%04d' % (epoch + 1), 'cost =', avg_cost_list)
 
 
 
 test_size = len(mnist.test.labels)
-predictions = np.zeors(test_size * 10).reshape(test_size, 10)
+predictions = np.zeors([test_size, 10])
 
 for m_idx, m in enumerate(models) :
     print(m_idx, 'Accuracy : ', m.get_accuracy(mnist.test.images, mnist.test.labels))
