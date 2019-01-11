@@ -101,7 +101,7 @@ for epoch in range(training_epochs):
 
 
 test_size = len(mnist.test.labels)
-predictions = np.zeors([test_size, 10])
+predictions = np.zeros([test_size, 10])
 
 for m_idx, m in enumerate(models) :
     print(m_idx, 'Accuracy : ', m.get_accuracy(mnist.test.images, mnist.test.labels))
