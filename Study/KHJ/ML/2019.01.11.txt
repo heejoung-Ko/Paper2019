@@ -17,3 +17,20 @@ bot
 image/vedio caption
 
 ==============================================================================
+
+Lab 12-1
+
+1) cell 생성
+cell = tf.contrib.rnnBasicRNNCell(num_units=hidden_size)
+
+2) 학습시키기 (두개의 결과물을 뱉어냄)
+outputs, _states = tf.nn.dynamic_rnn(cell, x_data, dtype=tf.float32)
+
+hidden_size: 출력 값
+sqeunce_length: cell을 몇개 펼칠 것인가, 입력 데이터에 따라 달라짐 ex) x_data = [h, e, l, l, o] 일시 5
+batch_size: sqeunce 데이터를 몇개씩 넣을 것인가, 입력 데이터에 따라 달라짐
+	    ex) shape = (3, 2, 1): [[[1, 0], [0, 1]],	
+				 [[0, 0], [1, 1]], 
+				 [[0, 1], [1, 0]]] #3 = batch_size, 2 = sqeunce_length
+
+==============================================================================
