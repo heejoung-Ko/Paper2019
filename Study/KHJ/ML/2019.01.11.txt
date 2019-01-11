@@ -1,0 +1,19 @@
+Lec 12
+
+RNN (Recurrent Neural Network)
+
+sequence data
+: 이전에 했던 연산이 다음 연산에 영향을 미쳐야 함
+
+Ht = fw(Ht-1, Xt) (H는 state)
+
+Ht  = tanh(WhhHt-1 + WxhXt)
+yt = WhyHt
+
+Language Modeling
+Speech
+Tanslation
+bot
+image/vedio caption
+
+==============================================================================
