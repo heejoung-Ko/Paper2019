@@ -34,3 +34,22 @@ batch_size: sqeunce 데이터를 몇개씩 넣을 것인가, 입력 데이터에 따라 달라짐
 				 [[0, 1], [1, 0]]] #3 = batch_size, 2 = sqeunce_length
 
 ==============================================================================
+
+Lab 12-2
+
+sequence_loss(logits=예측값, targets=실제값, weights=weghit(보통 전부 1로 줌))
+: 예측값과 실제값을 비교, 오차 계산
+
+==============================================================================
+
+Lab 12-3
+
+Long Sequence를 작업할 때 자동화 하기
+
+idx2char = list(set(sample))			# index -> char
+char2dix = {c: i for i, c in enumerate(idx2char)}	# char -> index
+-> one_hot(X, num_classes)
+
+dic_size = hidden_size, num_classes = len(char2idx)
+sqeunce_length = len(sample) - 1
+
