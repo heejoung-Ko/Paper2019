@@ -3,7 +3,16 @@ import numpy as np
 
 # 목표 : 긴 문장을 학습하고 예측해보자~
 
-sentence = "if you want you"
+sentence = "Tis but thy name that is my enemy. \
+            Thou are thyself, though not a Montague. \
+            What's Montague? it is nor hand, nor foot, \
+            Nor arm, nor face, nor any other part Belonging to a man. \
+            O, be some other name! what's in a name? \
+            that which we call a rose By any other name would smell as sweet;\
+            So Romeo would, were he not Romeo call'd,\
+            Retain that dear perfection which he owes \
+            Without that title, Romeo, doff thy name, \
+            And for that name which is no part of thee Take all myself."
 char_set = list(set(sentence)) # set은 중복걸러준다       index -> char
 char_dic = {w : i for i , w in enumerate(char_set)} # char -> index
 
