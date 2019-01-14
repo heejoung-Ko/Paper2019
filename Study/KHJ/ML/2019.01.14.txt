@@ -1,0 +1,25 @@
+Lab 12-4
+
+Deep & Wide하게 -> Stacked RNN
+
+cell = rnn.BasicLSTMCell(hidden, state_is_tuple = True)
+cell = rnn.MultiRNNCell([cell] * n, state_is_tuple = True) 
+(n: 쌓고 싶은 만큼~)
+
+CNN에서 후반에 softmax(fully connect)를 붙여서 더 좋은 결과를 얻음
+RNN + softmax
+reshape로 쌓아서 softmax로 보냄 -> 결과 값을 reshape로 펼침
+1) 쌓기
+X_for_softmax = tf.reshape(outputs, [-1, hidden_size])
+2) 펼치기
+outputs = tf.reshape(outputs, [batch_size, seq_length, num_classes])
+3) 
+sequence_loss = tf.contrib.seq2seq.sequence_loss(
+		logits=outputs, targers=Y, weights=weights)
+mean_loss = tf.reduce_mean(sequence_loss)
+=============================================================================
+
+Lab 12-5
+
+Dynamic RNN
+: 가변하는 sequence(글자수)를 학습할 수 있어야 함
