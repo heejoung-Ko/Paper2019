@@ -22,4 +22,15 @@ mean_loss = tf.reduce_mean(sequence_loss)
 Lab 12-5
 
 Dynamic RNN
-: 가변하는 sequence(글자수)를 학습할 수 있어야 함
+: 가변하는 sequence(문자열)를 학습할 수 있어야 함!
+각각 batch에 문자열의 값을 함께 줌
+sequence_length = [5, 3, 4]
+
+outputs, _states = tf.nn.dynamic_rnn(
+		cell, x_data, sequence_length = [5, 3, 4], dtype = tf.float32)
+
+dynamic_rnn = sequence_length에 따라 없는 데이터의 값은 0으로 출력
+
+=============================================================================
+
+
