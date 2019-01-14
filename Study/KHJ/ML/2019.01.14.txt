@@ -41,3 +41,5 @@ Time Series Data
 Many to one
 : 1~n time의 데이터를 학습하여 n+1 time째의 데이터를 예측하는 것
 이전의 데이터가 다음 데이터에 영향을 미친다
+
+
