@@ -1,0 +1,61 @@
+Lec 03
+
+Q-learning 
+
+Q에 state와 action을 입력 -> quality(reward)를 출력
+
+MAX Q = max Q(state, action)
+: Q의 출력값 중 최대값
+
+π*(s) = argmax Q(s, a)
+: Q의 출력값이 최대 값이 되게 하는 a
+
+Learning Q
+내가 현재 s에 존재하고 
+a라는 액션을 취해 s'으로 이동 + r을 보상받을 때
+Q(s', a')가 존재한다!
+
+Q(s, a) = r + Q(s', a')
+
+Future reward
+R(t) = r t + r t+1 + r t+2 + ... + r n
+R(t) = r t + R(t+1)
+R*(t) = r t + max R(t+1)
+
+Q 학습 알고리즘
+1. Q(s, a) 테이블을 만들어 0으로 초기화
+2. s를 가져온다
+3. 반복
+	1) a를 취하고,
+	2) r을 받고,
+	3) s'으로 이동하고,
+	4) 현재 s에서의 a에 대한 테이블 업데이트
+		Q(s, a) <- r + max Q(s', a')
+	5) s <- s'
+
+=============================================================================
+
+Lab 03
+
+1. Q(s, a) 테이블을 만들어 0으로 초기화
+Q = np.zeros([env.observation_space.n, env.action_space.n])
+
+2. s를 가져온다
+state = env.reset()
+
+3. 반복
+while not done:
+	
+	1) a를 취하고,
+	action = rargmax(Q[state, :])	# random하게 액션을 취함
+	
+	2) r을 받고,
+	3) s'으로 이동하고,
+	new_state, reward, done, _ = env.step(action)
+	
+	4) 현재 s에서의 a에 대한 테이블 업데이트
+		Q(s, a) <- r + max Q(s', a')
+	Q[state, action] = reward + np.max(Q[new_state, :])
+	
+	5) s <- s'
+	state = new_state

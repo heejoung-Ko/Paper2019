@@ -1,0 +1,30 @@
+Lec 01
+
+Actor(Agent)가 Environment 속에서 행동
+state 변경, 업데이트
+일련의 행동이 끝나면 reward 획득
+
+=============================================================================
+
+Lec 02
+
+OpenAI GYM
+import gym
+
+Environment 생성 
+env = gym.make("환경이름")
+observation = env.reset() 	# 환경 초기화
+
+Environment 출력
+env.render()
+
+action 선정
+action = env.action_space.sample()
+
+action 실행
+observation, reward, done, info = env.step(action)	# 상태, 보상, 종료 체크, 정보
+
+=============================================================================
+
+Lab 02
+
