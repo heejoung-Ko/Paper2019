@@ -44,7 +44,7 @@ for i in range(num_episodes) :
 		if np.random.rand(1) < e :
 			action = env.action_space.sample()
 		else :
-			a = np.argmax(Qs)
+			action = np.argmax(Qs)
 
 		new_state, reward, done, _ = env.step(action)
 
