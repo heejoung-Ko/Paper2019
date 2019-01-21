@@ -1,0 +1,9 @@
+Lec 05
+
+Nondeterministic (Shochastic) world
+: 같은 상태에서 같은 행동을 취했을 때 항상 결과가 동일하게 정해져 있지 않은 환경
+ex) 오른쪽으로 한칸 이동하려 했을 때, 바닥이 미끄러워서 다른 방향으로 가는 둥...
+
+학습하면서 전부 학습하지 않고 일부만 학습
+Learning rate, α
+Q(s, a) <- (1 - α) Q(s, a) α [r + γ max Q (s', a')]
