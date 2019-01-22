@@ -6,3 +6,17 @@ Q-Network
 기존의 state, action를 주고 Q-value를 받던 형식에서
 state만 주고 모든 action에 대한 Q-value를 받는 형식으로 변화.
 
+Q-Network training (liner regression)
+cost(W) = (Ws - y)^2
+y = r + γmax Q(s')
+
+예측값(= Ws)	실제값(= y)
+Q^(s, a|ㅣθ)  ~	 Q*(s, a)	* θ = weight(network)
+
+weight 초기화 (랜덤한 값을 줌)
+-> s를 만들고, ∮ = s
+-> 랜덤한 액션을 선택하거나 가장 좋은 액션을 선택
+-> 학습
+	Set yi = { ri				for ∮i+1가 마지막 상태 일때
+		  ri + γmax a' Q(∮i+1, a';θ)	for ∮i+1가 마지막 상태가 아닐때
+-> gradient descent (yi - Q(∮i, aj;θ))^2
