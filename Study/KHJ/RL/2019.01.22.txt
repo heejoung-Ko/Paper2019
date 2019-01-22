@@ -1,0 +1,8 @@
+Lec 06
+
+Q-Network
+: 실전의 넓고 복잡한 환경에서 Q-Table을 사용할 수 x. 
+
+기존의 state, action를 주고 Q-value를 받던 형식에서
+state만 주고 모든 action에 대한 Q-value를 받는 형식으로 변화.
+
