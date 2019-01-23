@@ -52,6 +52,8 @@ public class MainController : MonoBehaviour
         if(collision.collider.tag == "Cube")
         {
             Debug.Log("충돌 감지");
+            animator.Play("DAMAGED01", -1, 0);
+            this.transform.Translate(Vector3.back * speedZ * Time.deltaTime);
         }
     }
 
