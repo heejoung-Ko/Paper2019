@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
@@ -44,5 +44,32 @@ public class MainController : MonoBehaviour
             moveX = 0;
         }
         rigidbody.velocity = new Vector3(moveX, 0, moveZ);
+    }
+
+    // 충돌 시점에서만 작동
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag == "Cube")
+        {
+            Debug.Log("충돌 감지");
+        }
+    }
+
+    // 충돌하고 있는 동안 작동
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Cube")
+        {
+            Debug.Log("충돌 유지");
+        }
+    }
+
+    // 충돌이 끝났을 때 작동
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.tag == "Cube")
+        {
+            Debug.Log("충돌 종료");
+        }
     }
 }
