@@ -5,7 +5,8 @@ using UnityEngine;
 public class CubeController : MonoBehaviour
 {
     private float speed = 10.0f;
-    private float rotationSpeed = 20.0f;
+    private float rotationSpeed = 100.0f;
+    private float v;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,8 @@ public class CubeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        v = Input.GetAxis("Vertical");
+
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
@@ -26,11 +29,25 @@ public class CubeController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            this.transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
+            if (v > 0)
+            {
+                this.transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
+            }
+            else
+            {
+                this.transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+            }
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            this.transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+            if (v > 0)
+            {
+                this.transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+            }
+            else
+            {
+                this.transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
+            }
         }
     }
 }
