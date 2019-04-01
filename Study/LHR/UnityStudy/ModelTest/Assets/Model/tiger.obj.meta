@@ -7,7 +7,8 @@ ModelImporter:
     100002: //RootNode
     400000: default
     400002: //RootNode
-    2100000: defaultMat
+    2100000: Mat
+    2100002: None
     2300000: default
     3300000: default
     4300000: default
