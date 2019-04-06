@@ -8,56 +8,65 @@ public class PlayerMoveScript : MonoBehaviour
 
     public float minX = -360.0f;
     public float maxX = 360.0f;
-
+    public float minY = -90.0f;
+    public float maxY = 90.0f;
     public float sensX = 100.0f;
-
+    public float sensY = 50.0f;
     private float rotationX = 0.0f;
-
-    private bool isKeyDown = false;
+    private float rotationY = 0.0f;
     private float mouseRotationX = 0.0f;
+    private float mouseRotationY = 0.0f;
+
+    private Transform playerCamera = null;
+    //private bool isKeyDown = false;
+    private float verticalMove = 0.0f;
+    private float horizontalMove = 0.0f;
+    private bool isJump = false;
+    private Vector3 moveVector = new Vector3(0, 0, 0);
 
     void Start()
     {
-
+        playerCamera = GameObject.Find("Main Camera").transform;
     }
 
     void Update()
     {
-        if (Input.GetButton("Vertical") || Input.GetButton("Horizontal"))
-        {
-            isKeyDown = true;
-            if (Input.GetAxis("Vertical") > 0)
-            {
-                // (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-                this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            }
-            if (Input.GetAxis("Vertical") < 0)
-            {
-                // (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-                this.transform.Translate(Vector3.back * speed * Time.deltaTime);
-            }
-            if (Input.GetAxis("Horizontal") < 0)
-            {
-                // (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-                this.transform.Translate(Vector3.left * speed * Time.deltaTime);
-            }
-            if (Input.GetAxis("Horizontal") > 0)
-            {
-                // (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-                this.transform.Translate(Vector3.right * speed * Time.deltaTime);
-            }
-        }
-        else
-        {
-            isKeyDown = false;
-        }
-
         mouseRotationX = Input.GetAxis("Mouse X");
-        if ((mouseRotationX > float.MinValue) || (mouseRotationX < -float.MinValue))
+        mouseRotationY = Input.GetAxis("Mouse Y");
+        verticalMove = Input.GetAxisRaw("Vertical");
+        horizontalMove = Input.GetAxisRaw("Horizontal");
+        if (Input.GetButtonDown("Jump"))
+            isJump = true;
+    }
+
+    void LateUpdate()
+    {
+        PlayerRotation();
+        PlayerMove();
+    }
+
+    private void PlayerRotation()
+    {
+        // mouse rotation
+        if ((mouseRotationX > Mathf.Epsilon) || (mouseRotationX < -Mathf.Epsilon))
         {
             rotationX += mouseRotationX * sensX * Time.deltaTime;
             rotationX = Mathf.Clamp(rotationX, minX, maxX);
             transform.localEulerAngles = new Vector3(0, rotationX, 0);
         }
+        if ((mouseRotationY > Mathf.Epsilon) || (mouseRotationY < -Mathf.Epsilon))
+        {
+            rotationY += mouseRotationY * sensY * Time.deltaTime;
+            rotationY = Mathf.Clamp(rotationY, minY, maxY);
+            playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+        }
+    }
+
+    private void PlayerMove()
+    {
+        // WASD/방향키 move
+        moveVector.Set(horizontalMove, 0, verticalMove);
+        moveVector = moveVector.normalized * speed * Time.deltaTime;
+        transform.Translate(moveVector);
     }
 }
