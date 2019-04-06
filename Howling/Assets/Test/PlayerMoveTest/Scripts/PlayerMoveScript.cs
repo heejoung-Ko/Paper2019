@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMoveScript : MonoBehaviour
 {
-    public float speed = 10.0f;
+    public float speed = 5.0f;
+    public float jumpPower = 5.0f;
 
     public float minX = -360.0f;
     public float maxX = 360.0f;
@@ -18,15 +19,16 @@ public class PlayerMoveScript : MonoBehaviour
     private float mouseRotationY = 0.0f;
 
     private Transform playerCamera = null;
-    //private bool isKeyDown = false;
+    private Vector3 moveVector = new Vector3(0, 0, 0);
+    private Rigidbody rigidbody;
     private float verticalMove = 0.0f;
     private float horizontalMove = 0.0f;
     private bool isJump = false;
-    private Vector3 moveVector = new Vector3(0, 0, 0);
 
-    void Start()
+    void Awake()
     {
         playerCamera = GameObject.Find("Main Camera").transform;
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -43,6 +45,7 @@ public class PlayerMoveScript : MonoBehaviour
     {
         PlayerRotation();
         PlayerMove();
+        PlayerJump();
     }
 
     private void PlayerRotation()
@@ -51,7 +54,6 @@ public class PlayerMoveScript : MonoBehaviour
         if ((mouseRotationX > Mathf.Epsilon) || (mouseRotationX < -Mathf.Epsilon))
         {
             rotationX += mouseRotationX * sensX * Time.deltaTime;
-            rotationX = Mathf.Clamp(rotationX, minX, maxX);
             transform.localEulerAngles = new Vector3(0, rotationX, 0);
         }
         if ((mouseRotationY > Mathf.Epsilon) || (mouseRotationY < -Mathf.Epsilon))
@@ -68,5 +70,12 @@ public class PlayerMoveScript : MonoBehaviour
         moveVector.Set(horizontalMove, 0, verticalMove);
         moveVector = moveVector.normalized * speed * Time.deltaTime;
         transform.Translate(moveVector);
+    }
+
+    void PlayerJump()
+    {
+        if (!isJump) return;
+        rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        isJump = false;
     }
 }
