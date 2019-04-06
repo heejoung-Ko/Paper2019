@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Test/EnemyAITest/EnemyAITestScene.unity
+- path: Assets/Test/FollowTargetTest/FolloTargetScene.unity
   isLoaded: 1
   isActive: 1
