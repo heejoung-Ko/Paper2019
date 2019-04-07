@@ -5,22 +5,22 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // 적 상태 
-    public enum EnemyState { idle, walking, trace, escape, attack, die };
+    public enum EnemyState { idle, walk, trace, escape, attack, die };
     public EnemyState state = EnemyState.idle;
 
-    public Transform target = null;   // 현재 타겟으로 잡고 있는 객체
+    // 현재 타겟으로 설정된 객체
+    public Transform target = null;
 
-    public float cognizanceDist = 15.0f;   // 인식 범위 
-    public float attackDist = 10.0f;       // 공격 범위
+    public float attackDist = 10.0f;        // 공격 범위
 
     public float velocity = 0.0f;           // 속도
-    public float walkAcc = 0.02f;           // 걸을 때 가속도
-    public float runAcc = 0.1f;             // 뛸 때 가속도 (추적, 도주 상태 일 때)
+    public float walkAcc = 0.01f;           // 걸을 때 가속도
+    public float runAcc = 0.02f;             // 뛸 때 가속도 (추적, 도주 상태 일 때)
 
-    public float actionTime = 0.0f;
-    public float nowTime = 0.0f;
+    public float nextStateTime = 0.0f;      // 다음 랜덤 상태까지 걸리는 총 시간
+    public float nowStateTime = 0.0f;       // 현재 기본 상태(idle, walk)에서 보낸 시간
 
-    public Vector3 direction;
+    public Vector3 direction;               // 이동 방향
 
     // Start is called before the first frame update
     void Start()
@@ -35,57 +35,59 @@ public class Enemy : MonoBehaviour
         {
             // 타겟과의 거리 계산
             float distance = Vector3.Distance(target.position, transform.position);
+
             // 타겟에 닿았을 때
             if (distance <= 0.5f)
             {
                 // 타겟의 위치 랜덤화
                 // 본 게임에서는 어택 상태로 변환
                 target.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
-                NextAction();
+                ChageNextState();
                 state = EnemyState.idle;
                 target = null;
                 return;
             }
+
             direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향 
+            direction.y = 0;
+
             velocity = velocity + runAcc * Time.deltaTime;                // 속도 계산
-            this.transform.position = new Vector3(  transform.position.x + direction.x * velocity,
-                                                    transform.position.y,
-                                                    transform.position.z + direction.z * velocity    );
+
+            Move();
+
             return;
         }
         else if(state == EnemyState.escape)
         {
-            Vector3 direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향 
-            velocity = velocity + runAcc * Time.deltaTime;                // 속도 계산
-            this.transform.position = new Vector3(  transform.position.x + (-direction.x) * velocity,
-                                                    transform.position.y,
-                                                    transform.position.z + (-direction.z) * velocity    );
+            direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향 
+
+            velocity = velocity + runAcc * Time.deltaTime;                  // 속도 계산
+
+            Move();
+
             return;
         }
         else if(state == EnemyState.idle)
         {
-            nowTime += Time.deltaTime;
-            if (nowTime >= actionTime)
+            nowStateTime += Time.deltaTime;
+            if (nowStateTime >= nextStateTime)
             {
-                NextAction();
-                state = EnemyState.walking;
-                this.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+                ChageNextState();
+                state = EnemyState.walk;
                 direction = new Vector3(Random.value - 0.5f, 0, Random.value - 0.5f);
                 return;
             }
         }
-        else if(state == EnemyState.walking)
+        else if(state == EnemyState.walk)
         {
             velocity = velocity + walkAcc * Time.deltaTime;                // 속도 계산
-            float newX = transform.position.x + direction.x * velocity;
-            newX = Mathf.Clamp(newX, -5.0f, 5.0f);
-            float newZ = transform.position.z + direction.z * velocity;
-            newZ = Mathf.Clamp(newZ, -5.0f, 5.0f);
-            this.transform.position = new Vector3(newX, transform.position.y, newZ);
-            nowTime += Time.deltaTime;
-            if (nowTime >= actionTime)
+
+            Move();
+
+            nowStateTime += Time.deltaTime;
+            if (nowStateTime >= nextStateTime)
             {
-                NextAction();
+                ChageNextState();
                 state = EnemyState.idle;
             }
             return;
@@ -104,9 +106,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void NextAction()
+    private void Move()
     {
-        actionTime = Random.value * 5;
-        nowTime = 0.0f;
+        this.transform.position = new Vector3(this.transform.position.x + direction.x * velocity,
+                                                    this.transform.position.y,
+                                                    this.transform.position.z + direction.z * velocity);
+        this.transform.rotation = Quaternion.LookRotation(this.transform.forward + direction * Time.deltaTime * 5);
+    }
+
+    void ChageNextState()
+    {
+        nextStateTime = Random.value * 5;
+        nowStateTime = 0.0f;
     }
 }
