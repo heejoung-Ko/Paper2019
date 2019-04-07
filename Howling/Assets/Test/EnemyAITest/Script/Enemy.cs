@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
             float distance = Vector3.Distance(target.position, transform.position);
 
             // 타겟에 닿았을 때
-            if (distance <= 0.5f)
+            if (distance <= 1.0f)
             {
                 // 타겟의 위치 랜덤화
                 // 본 게임에서는 어택 상태로 변환
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
                 return;
             }
 
-            direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향 
+            direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향
             direction.y = 0;
 
             velocity = velocity + runAcc * Time.deltaTime;                // 속도 계산
@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
         else if(state == EnemyState.escape)
         {
             direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향 
+            direction.y = 0;
 
             velocity = velocity + runAcc * Time.deltaTime;                  // 속도 계산
 
@@ -111,12 +112,16 @@ public class Enemy : MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x + direction.x * velocity,
                                                     this.transform.position.y,
                                                     this.transform.position.z + direction.z * velocity);
-        this.transform.rotation = Quaternion.LookRotation(this.transform.forward + direction * Time.deltaTime * 5);
+
+        Quaternion newRotation = Quaternion.LookRotation(direction);
+
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
     }
 
     void ChageNextState()
     {
-        nextStateTime = Random.value * 5;
+        // 2 ~ 5 초 행동하고 다음 행동을 수행
+        nextStateTime = 2 + Random.value * 3;
         nowStateTime = 0.0f;
     }
 }
