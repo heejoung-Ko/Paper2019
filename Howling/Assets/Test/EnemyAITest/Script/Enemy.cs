@@ -37,16 +37,16 @@ public class Enemy : MonoBehaviour
             float distance = Vector3.Distance(target.position, transform.position);
 
             // 타겟에 닿았을 때
-            if (distance <= 1.0f)
-            {
-                // 타겟의 위치 랜덤화
-                // 본 게임에서는 어택 상태로 변환
-                target.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
-                ChageNextState();
-                state = EnemyState.idle;
-                target = null;
-                return;
-            }
+            // if (distance <= 1.0f)
+            // {
+            //     // 타겟의 위치 랜덤화
+            //     // 본 게임에서는 어택 상태로 변환
+            //     target.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
+            //     ChageNextState();
+            //     state = EnemyState.idle;
+            //     target = null;
+            //     return;
+            // }
 
             direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향
             direction.y = 0;
