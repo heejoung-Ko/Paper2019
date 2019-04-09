@@ -6,6 +6,7 @@ public class PlayerMoveScript : MonoBehaviour
 {
     public float speed = 5.0f;
     public float jumpPower = 5.0f;
+    private int jumpCnt = 0;
 
     public float minX = -360.0f;
     public float maxX = 360.0f;
@@ -54,7 +55,6 @@ public class PlayerMoveScript : MonoBehaviour
         if ((mouseRotationX > Mathf.Epsilon) || (mouseRotationX < -Mathf.Epsilon))
         {
             rotationX += mouseRotationX * sensX * Time.deltaTime;
-            rotationX = Mathf.Clamp(rotationX, minX, maxX);
             transform.localEulerAngles = new Vector3(0, rotationX, 0);
         }
         if ((mouseRotationY > Mathf.Epsilon) || (mouseRotationY < -Mathf.Epsilon))
