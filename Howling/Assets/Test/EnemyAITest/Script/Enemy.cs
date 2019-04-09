@@ -78,8 +78,9 @@ public class Enemy : MonoBehaviour
         }
         else if(state == EnemyState.escape)
         {
-            direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향 
+            direction = (target.position - transform.position).normalized;  // 타겟으로 향하는 방향 
             direction.y = 0;
+            direction *= -1;                                                // 타겟으로 향하는 역방향으로 전환
 
             velocity = velocity + runAcc * Time.deltaTime;                  // 속도 계산
             velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
