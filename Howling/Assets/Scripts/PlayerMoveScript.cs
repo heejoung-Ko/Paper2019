@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMoveScript : MonoBehaviour
 {
+    private enum PlayerState { idle, walk, run };
+    private PlayerState state = PlayerState.idle;
+
     private Transform playerCamera = null;
     private Rigidbody rigidbody;
 
@@ -18,8 +21,8 @@ public class PlayerMoveScript : MonoBehaviour
     private float horizontalMove = 0.0f;
 
     // jump
-    private float jumpPower = 5.0f;
-    private bool isJump = false;
+    //private float jumpPower = 5.0f;
+    //private bool isJump = false;
 
     // mouse rotation
     private float minX = -360.0f;
@@ -45,15 +48,17 @@ public class PlayerMoveScript : MonoBehaviour
         mouseRotationY = Input.GetAxis("Mouse Y");
         verticalMove = Input.GetAxis("Vertical");
         horizontalMove = Input.GetAxis("Horizontal");
-        if (Input.GetButtonDown("Jump"))
-            isJump = true;
+        if (Input.GetButton("Run")) state = PlayerState.run;
+        else state = PlayerState.walk;
+        //if (Input.GetButtonDown("Jump"))
+        //    isJump = true;
     }
 
     void LateUpdate()
     {
         PlayerRotation();
         PlayerMove();
-        PlayerJump();
+        //PlayerJump();
     }
 
     private void PlayerRotation()
@@ -79,23 +84,42 @@ public class PlayerMoveScript : MonoBehaviour
         && ((verticalMove < Mathf.Epsilon) && (verticalMove > -Mathf.Epsilon)))
         {
             velocity = 0.0f;
-            moveVector.Set(0, 0, 0);
+            moveVector.Set(horizontalMove, 0, verticalMove);
+            moveVector = moveVector.normalized;
             transform.Translate(moveVector);
             return;
         }
 
-        velocity = velocity + walkAcc * Time.deltaTime;
-        velocity = Mathf.Clamp(velocity, 0.0f, walkMaxVel);
+        if (state == PlayerState.walk)
+        {
+            if (velocity < walkMaxVel)
+            {
+                velocity = velocity + walkAcc * Time.deltaTime;
+                velocity = Mathf.Clamp(velocity, 0.0f, walkMaxVel);
+            }
+            else
+            {
+                velocity = velocity - runAcc * Time.deltaTime;
+                velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
+                Debug.Log("Walk - velocity: " + velocity);
+            }
+        }
+        else if (state == PlayerState.run)
+        {
+            velocity = velocity + runAcc * Time.deltaTime;
+            velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
+            //Debug.Log("Run - velocity: " + velocity);
+        }
 
         moveVector.Set(horizontalMove, 0, verticalMove);
         moveVector = moveVector.normalized * velocity;
         transform.Translate(moveVector);
     }
 
-    private void PlayerJump()
-    {
-        if (!isJump) return;
-        rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        isJump = false;
-    }
+    //private void PlayerJump()
+    //{
+    //    if (!isJump) return;
+    //    rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+    //    isJump = false;
+    //}
 }
