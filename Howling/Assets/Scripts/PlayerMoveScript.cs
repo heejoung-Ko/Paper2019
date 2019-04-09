@@ -54,11 +54,10 @@ public class PlayerMoveScript : MonoBehaviour
         //    isJump = true;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         PlayerRotation();
         PlayerMove();
-        //PlayerJump();
     }
 
     private void PlayerRotation()
@@ -86,7 +85,7 @@ public class PlayerMoveScript : MonoBehaviour
             velocity = 0.0f;
             moveVector.Set(horizontalMove, 0, verticalMove);
             moveVector = moveVector.normalized;
-            transform.Translate(moveVector);
+            rigidbody.AddForce(moveVector, ForceMode.Force);
             return;
         }
 
@@ -101,19 +100,19 @@ public class PlayerMoveScript : MonoBehaviour
             {
                 velocity = velocity - runAcc * Time.deltaTime;
                 velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
-                Debug.Log("Walk - velocity: " + velocity);
             }
         }
         else if (state == PlayerState.run)
         {
             velocity = velocity + runAcc * Time.deltaTime;
             velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
-            //Debug.Log("Run - velocity: " + velocity);
         }
 
         moveVector.Set(horizontalMove, 0, verticalMove);
         moveVector = moveVector.normalized * velocity;
         transform.Translate(moveVector);
+        rigidbody.MovePosition(transform.position + moveVector);
+        rigidbody.AddForce(moveVector, ForceMode.Force);
     }
 
     //private void PlayerJump()
