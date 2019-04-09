@@ -6,7 +6,6 @@ public class PlayerMoveScript : MonoBehaviour
 {
     public float speed = 5.0f;
     public float jumpPower = 5.0f;
-    private int jumpCnt = 0;
 
     public float minX = -360.0f;
     public float maxX = 360.0f;
@@ -36,8 +35,8 @@ public class PlayerMoveScript : MonoBehaviour
     {
         mouseRotationX = Input.GetAxis("Mouse X");
         mouseRotationY = Input.GetAxis("Mouse Y");
-        verticalMove = Input.GetAxisRaw("Vertical");
-        horizontalMove = Input.GetAxisRaw("Horizontal");
+        verticalMove = Input.GetAxis("Vertical");
+        horizontalMove = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
             isJump = true;
     }
