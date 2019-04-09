@@ -152,8 +152,8 @@
     <Compile Include="Assets\ML-Agents\Scripts\RpcCommunicator.cs" />
     <Compile Include="Assets\ML-Agents\Scripts\SocketCommunicator.cs" />
     <Compile Include="Assets\ML-Agents\Scripts\UnityAgentsException.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\PlayerMoveScript.cs" />
-    <Compile Include="Assets\Test\EnemyAITest\Script\Enemy.cs" />
     <Compile Include="Assets\Test\FollowTargetTest\Scripts\FollowTarget.cs" />
     <Compile Include="Assets\Test\PlayerMoveTest\Scripts\PlayerMoveTestScript.cs" />
     <Compile Include="Assets\Test\WolfTest\Assets\HolyShift\Scripts\CheckForStandardAssets.cs" />
