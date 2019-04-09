@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class PlayerMoveScript : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float jumpPower = 5.0f;
+    private Transform playerCamera = null;
+    private Rigidbody rigidbody;
 
-    public float minX = -360.0f;
-    public float maxX = 360.0f;
-    public float minY = -60.0f;
-    public float maxY = 90.0f;
-    public float sensX = 100.0f;
-    public float sensY = 50.0f;
+    // WASD move
+    private float velocity = 0.0f;
+    public static float walkAcc = 0.015f;
+    public static float runAcc = 0.025f;
+    private static float walkMaxVel = 5.0f;
+    private static float runMaxVel = 10.0f;
+    private Vector3 moveVector = new Vector3(0, 0, 0);
+    private float verticalMove = 0.0f;
+    private float horizontalMove = 0.0f;
+
+    // jump
+    private float jumpPower = 5.0f;
+    private bool isJump = false;
+
+    // mouse rotation
+    private float minX = -360.0f;
+    private float maxX = 360.0f;
+    private float minY = -60.0f;
+    private float maxY = 90.0f;
+    private float sensX = 100.0f;
+    private float sensY = 50.0f;
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;
     private float mouseRotationX = 0.0f;
     private float mouseRotationY = 0.0f;
-
-    private Transform playerCamera = null;
-    private Vector3 moveVector = new Vector3(0, 0, 0);
-    private Rigidbody rigidbody;
-    private float verticalMove = 0.0f;
-    private float horizontalMove = 0.0f;
-    private bool isJump = false;
 
     void Awake()
     {
@@ -67,8 +75,20 @@ public class PlayerMoveScript : MonoBehaviour
     private void PlayerMove()
     {
         // WASD/방향키 move
+        if (((horizontalMove < Mathf.Epsilon) && (horizontalMove > -Mathf.Epsilon))
+        && ((verticalMove < Mathf.Epsilon) && (verticalMove > -Mathf.Epsilon)))
+        {
+            velocity = 0.0f;
+            moveVector.Set(0, 0, 0);
+            transform.Translate(moveVector);
+            return;
+        }
+
+        velocity = velocity + walkAcc * Time.deltaTime;
+        velocity = Mathf.Clamp(velocity, 0.0f, walkMaxVel);
+
         moveVector.Set(horizontalMove, 0, verticalMove);
-        moveVector = moveVector.normalized * speed * Time.deltaTime;
+        moveVector = moveVector.normalized * velocity;
         transform.Translate(moveVector);
     }
 

@@ -129,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &187476439
 AudioListener:
   m_ObjectHideFlags: 0
@@ -530,14 +530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8647bad2627f3dc44bd600bf66775ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpPower: 5
-  minX: -360
-  maxX: 360
-  minY: -60
-  maxY: 90
-  sensX: 100
-  sensY: 50
 --- !u!136 &973577501
 CapsuleCollider:
   m_ObjectHideFlags: 0
