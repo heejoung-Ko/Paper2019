@@ -89,7 +89,14 @@ public class PlayerMoveScript : MonoBehaviour
 
         moveVector.Set(horizontalMove, 0, verticalMove);
         moveVector = moveVector.normalized * velocity;
-        transform.Translate(moveVector);
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, moveVector, out hit))
+        {
+            transform.Translate(hit.point - moveVector.normalized);
+            Debug.Log(hit.point);
+        }
+        else transform.Translate(moveVector);
     }
 
     private void PlayerJump()

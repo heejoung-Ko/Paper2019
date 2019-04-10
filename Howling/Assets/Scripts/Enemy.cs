@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
 
     public Vector3 direction;                   // 이동 방향
 
+    public Rigidbody rigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -154,6 +156,7 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
+        // rigidbody.AddForce(direction * velocity * Time.deltaTime, ForceMode.Force);
         this.transform.position = new Vector3(this.transform.position.x + direction.x * velocity * Time.deltaTime,
                                                     this.transform.position.y,
                                                     this.transform.position.z + direction.z * velocity * Time.deltaTime);
