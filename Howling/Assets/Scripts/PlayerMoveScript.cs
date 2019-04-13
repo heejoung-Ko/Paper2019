@@ -110,8 +110,8 @@ public class PlayerMoveScript : MonoBehaviour
 
         moveVector.Set(horizontalMove, 0, verticalMove);
         moveVector = moveVector.normalized * velocity;
-        transform.Translate(moveVector);
-        rigidbody.MovePosition(transform.position + moveVector);
+        // transform.Translate(moveVector);
+        // rigidbody.MovePosition(transform.position + moveVector);
         rigidbody.AddForce(moveVector, ForceMode.Force);
     }
 

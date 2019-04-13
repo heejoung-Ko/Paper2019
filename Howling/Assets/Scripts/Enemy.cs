@@ -17,8 +17,8 @@ public class Enemy : MonoBehaviour
     public float walkAcc = 0.01f;               // 걸을 때 가속도
     public float runAcc = 0.02f;                // 뛸 때 가속도 (추적, 도주 상태 일 때)
 
-    public static float walkMaxVel = 3.0f;      // 걸을 때 최고 속도
-    public static float runMaxVel = 3.0f;      // 뛸 때 최고 속도
+    public static float walkMaxVel = 6.0f;      // 걸을 때 최고 속도
+    public static float runMaxVel = 13.0f;      // 뛸 때 최고 속도
 
     public static float keepTraceTime = 5.0f;   // 타겟이 인식 범위 밖으로 나갔을 때 추적 상태를 유지하는 시간
     public static float keepEscapeTime = 5.0f;  // 타겟이 인식 범위 밖으로 나갔을 때 도주 상태를 유지하는 시간

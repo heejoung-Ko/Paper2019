@@ -80,3 +80,31 @@ crashlytics-build.properties
 
 
 # End of https://www.gitignore.io/api/unity
+Howling/.vs/Howling/v15/.suo
+Howling/.vs/Howling/v15/Server/sqlite3/storage.ide-shm
+Howling/.vs/Howling/v15/Server/sqlite3/storage.ide-wal
+Howling/Assembly-CSharp-Editor.csproj
+Howling/Assembly-CSharp.csproj
+Howling/Library/assetDatabase3
+Howling/Library/InspectorExpandedItems.asset
+Howling/Library/LastSceneManagerSetup.txt
+Howling/Library/metadata/86/8647bad2627f3dc44bd600bf66775ee7
+Howling/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+Howling/Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+Howling/Library/ScriptAssemblies/Assembly-CSharp.dll
+Howling/Library/ScriptAssemblies/Assembly-CSharp.pdb
+Howling/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll
+Howling/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.pdb
+Howling/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll
+Howling/Library/ScriptAssemblies/Unity.CollabProxy.Editor.pdb
+Howling/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
+Howling/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.pdb
+Howling/Library/ScriptAssemblies/Unity.TextMeshPro.dll
+Howling/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
+Howling/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.pdb
+Howling/Library/ScriptAssemblies/Unity.TextMeshPro.pdb
+Howling/Library/shadercompiler-UnityShaderCompiler.exe0.log
+Howling/Library/StateCache/Hierarchy/ad5b92-mainStage.json
+Howling/obj/Debug/Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
+Howling/obj/Debug/Assembly-CSharp-Editor.csprojAssemblyReference.cache
+Howling/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
