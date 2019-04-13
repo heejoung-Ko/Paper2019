@@ -80,22 +80,4 @@ crashlytics-build.properties
 
 
 # End of https://www.gitignore.io/api/unity
-Howling/.vs/Howling/v15/.suo
-Howling/.vs/Howling/v15/Server/sqlite3/storage.ide
-Howling/.vs/Howling/v15/Server/sqlite3/storage.ide-shm
-Howling/.vs/Howling/v15/Server/sqlite3/storage.ide-wal
-Howling/obj/Debug/Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-Howling/obj/Debug/Assembly-CSharp-Editor.csprojAssemblyReference.cache
-Howling/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
-Howling/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
-Howling/obj/Debug/Assembly-CSharp-Editor.csprojAssemblyReference.cache
-Howling/obj/Debug/Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-Howling/Library/metadata/a5/a571d3ef435765c4294ab1efefe0e85b.info
-Howling/Library/metadata/a5/a571d3ef435765c4294ab1efefe0e85b
-Howling/Library/metadata/1e/1ef467120883e4c42b7d3243816f9dbe
-Howling/Library/assetDatabase3
-Howling/Assets/Test/MLWolfTest/Brains.meta
-Howling/.vs/Howling/v15/Server/sqlite3/storage.ide-wal
-Howling/.vs/Howling/v15/Server/sqlite3/storage.ide-shm
-Howling/.vs/Howling/v15/Server/sqlite3/storage.ide
-Howling/.vs/Howling/v15/.suo
+
