@@ -12,8 +12,8 @@ public class PlayerMoveScript : MonoBehaviour
 
     // WASD move
     private float velocity = 0.0f;
-    public static float walkAcc = 0.015f;
-    public static float runAcc = 0.025f;
+    public static float walkAcc = 0.5f;
+    public static float runAcc = 1.0f;
     private static float walkMaxVel = 5.0f;
     private static float runMaxVel = 10.0f;
     private Vector3 moveVector = new Vector3(0, 0, 0);
@@ -78,17 +78,19 @@ public class PlayerMoveScript : MonoBehaviour
 
     private void PlayerMove()
     {
-        // WASD/방향키 move
+        // 방향키 안눌렀을 때 
         if (((horizontalMove < Mathf.Epsilon) && (horizontalMove > -Mathf.Epsilon))
         && ((verticalMove < Mathf.Epsilon) && (verticalMove > -Mathf.Epsilon)))
         {
             velocity = 0.0f;
             moveVector.Set(horizontalMove, 0, verticalMove);
             moveVector = moveVector.normalized;
-            rigidbody.AddForce(moveVector, ForceMode.Force);
+            //rigidbody.AddForce(moveVector, ForceMode.Force);
+            transform.Translate(moveVector);
             return;
         }
 
+        // WASD/방향키 move
         if (state == PlayerState.walk)
         {
             if (velocity < walkMaxVel)
@@ -109,10 +111,11 @@ public class PlayerMoveScript : MonoBehaviour
         }
 
         moveVector.Set(horizontalMove, 0, verticalMove);
-        moveVector = moveVector.normalized * velocity;
-        // transform.Translate(moveVector);
-        // rigidbody.MovePosition(transform.position + moveVector);
-        rigidbody.AddForce(moveVector, ForceMode.Force);
+        moveVector = moveVector.normalized * velocity * Time.deltaTime;
+        transform.Translate(moveVector);
+        //rigidbody.MovePosition(transform.position + moveVector);
+        //rigidbody.AddForce(moveVector * velocity * Time.deltaTime);
+        //Debug.Log("force: ");
     }
 
     //private void PlayerJump()
