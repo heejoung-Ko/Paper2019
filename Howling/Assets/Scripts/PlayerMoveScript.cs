@@ -9,6 +9,7 @@ public class PlayerMoveScript : MonoBehaviour
 
     private Transform playerCamera = null;
     private Rigidbody rigidbody;
+    private Animator animator;
 
     // WASD move
     private float velocity = 0.0f;
@@ -40,6 +41,7 @@ public class PlayerMoveScript : MonoBehaviour
     {
         playerCamera = GameObject.Find("Main Camera").transform;
         rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -87,6 +89,8 @@ public class PlayerMoveScript : MonoBehaviour
             moveVector = moveVector.normalized;
             //rigidbody.AddForce(moveVector, ForceMode.Force);
             transform.Translate(moveVector);
+            animator.SetBool("isMoving", false);
+            animator.SetBool("isRunning", false);
             return;
         }
 
@@ -103,11 +107,15 @@ public class PlayerMoveScript : MonoBehaviour
                 velocity = velocity - runAcc * Time.deltaTime;
                 velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
             }
+            animator.SetBool("isMoving", true);
+            animator.SetBool("isRunning", false);
         }
         else if (state == PlayerState.run)
         {
             velocity = velocity + runAcc * Time.deltaTime;
             velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
+            animator.SetBool("isMoving", true);
+            animator.SetBool("isRunning", true);
         }
 
         moveVector.Set(horizontalMove, 0, verticalMove);
