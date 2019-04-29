@@ -39,7 +39,7 @@ public class PlayerMoveScript : MonoBehaviour
 
     void Awake()
     {
-        playerCamera = GameObject.Find("Main Camera").transform;
+        playerCamera = Camera.main.transform;
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
@@ -87,7 +87,6 @@ public class PlayerMoveScript : MonoBehaviour
             velocity = 0.0f;
             moveVector.Set(horizontalMove, 0, verticalMove);
             moveVector = moveVector.normalized;
-            //rigidbody.AddForce(moveVector, ForceMode.Force);
             transform.Translate(moveVector);
             animator.SetBool("isMoving", false);
             animator.SetBool("isRunning", false);
@@ -122,8 +121,6 @@ public class PlayerMoveScript : MonoBehaviour
         moveVector = moveVector.normalized * velocity * Time.deltaTime;
         transform.Translate(moveVector);
         //rigidbody.MovePosition(transform.position + moveVector);
-        //rigidbody.AddForce(moveVector * velocity * Time.deltaTime);
-        //Debug.Log("force: ");
     }
 
     //private void PlayerJump()
