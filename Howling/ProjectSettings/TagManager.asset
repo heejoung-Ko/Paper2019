@@ -28,6 +28,8 @@ TagManager:
   - stone
   - enemy
   - target
+  - rock
+  - item
   layers:
   - Default
   - TransparentFX
@@ -43,8 +45,8 @@ TagManager:
   - goalie
   - strikerWall
   - striker
-  - palyer
-  - 
+  - Player
+  - Item
   - 
   - 
   - 
