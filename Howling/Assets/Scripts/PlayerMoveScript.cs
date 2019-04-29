@@ -2,134 +2,130 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveScript : MonoBehaviour
+namespace Howling
 {
-    private enum PlayerState { idle, walk, run };
-    private PlayerState state = PlayerState.idle;
-
-    private Transform playerCamera = null;
-    private Rigidbody rigidbody;
-    private Animator animator;
-
-    // WASD move
-    private float velocity = 0.0f;
-    public static float walkAcc = 0.5f;
-    public static float runAcc = 1.0f;
-    private static float walkMaxVel = 5.0f;
-    private static float runMaxVel = 10.0f;
-    private Vector3 moveVector = new Vector3(0, 0, 0);
-    private float verticalMove = 0.0f;
-    private float horizontalMove = 0.0f;
-
-    // jump
-    //private float jumpPower = 5.0f;
-    //private bool isJump = false;
-
-    // mouse rotation
-    private float minX = -360.0f;
-    private float maxX = 360.0f;
-    private float minY = -60.0f;
-    private float maxY = 90.0f;
-    private float sensX = 100.0f;
-    private float sensY = 50.0f;
-    private float rotationX = 0.0f;
-    private float rotationY = 0.0f;
-    private float mouseRotationX = 0.0f;
-    private float mouseRotationY = 0.0f;
-
-    void Awake()
+    public class PlayerMoveScript : MonoBehaviour
     {
-        playerCamera = GameObject.Find("Main Camera").transform;
-        rigidbody = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-    }
+        private enum PlayerState { idle, walk, run };
+        private PlayerState state = PlayerState.idle;
 
-    void Update()
-    {
-        mouseRotationX = Input.GetAxis("Mouse X");
-        mouseRotationY = Input.GetAxis("Mouse Y");
-        verticalMove = Input.GetAxis("Vertical");
-        horizontalMove = Input.GetAxis("Horizontal");
-        if (Input.GetButton("Run")) state = PlayerState.run;
-        else state = PlayerState.walk;
-        //if (Input.GetButtonDown("Jump"))
-        //    isJump = true;
-    }
+        private Transform playerCamera = null;
+        private Animator animator;
 
-    void FixedUpdate()
-    {
-        PlayerRotation();
-        PlayerMove();
-    }
+        // WASD move
+        private float velocity = 0.0f;
+        public static float walkAcc = 0.5f;
+        public static float runAcc = 1.0f;
+        private static float walkMaxVel = 5.0f;
+        private static float runMaxVel = 10.0f;
+        private Vector3 moveVector = new Vector3(0, 0, 0);
+        private float verticalMove = 0.0f;
+        private float horizontalMove = 0.0f;
 
-    private void PlayerRotation()
-    {
+        // jump
+        //private float jumpPower = 5.0f;
+        //private bool isJump = false;
+
         // mouse rotation
-        if ((mouseRotationX > Mathf.Epsilon) || (mouseRotationX < -Mathf.Epsilon))
-        {
-            rotationX += mouseRotationX * sensX * Time.deltaTime;
-            transform.localEulerAngles = new Vector3(0, rotationX, 0);
-        }
-        if ((mouseRotationY > Mathf.Epsilon) || (mouseRotationY < -Mathf.Epsilon))
-        {
-            rotationY += mouseRotationY * sensY * Time.deltaTime;
-            rotationY = Mathf.Clamp(rotationY, minY, maxY);
-            playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
-        }
-    }
+        private float minY = -60.0f;
+        private float maxY = 90.0f;
+        private float sensX = 100.0f;
+        private float sensY = 50.0f;
+        private float rotationX = 0.0f;
+        private float rotationY = 0.0f;
+        private float mouseRotationX = 0.0f;
+        private float mouseRotationY = 0.0f;
 
-    private void PlayerMove()
-    {
-        // 방향키 안눌렀을 때 
-        if (((horizontalMove < Mathf.Epsilon) && (horizontalMove > -Mathf.Epsilon))
-        && ((verticalMove < Mathf.Epsilon) && (verticalMove > -Mathf.Epsilon)))
+        void Awake()
         {
-            velocity = 0.0f;
-            moveVector.Set(horizontalMove, 0, verticalMove);
-            moveVector = moveVector.normalized;
-            //rigidbody.AddForce(moveVector, ForceMode.Force);
-            transform.Translate(moveVector);
-            animator.SetBool("isMoving", false);
-            animator.SetBool("isRunning", false);
-            return;
+            playerCamera = Camera.main.transform;
+            animator = GetComponent<Animator>();
         }
 
-        // WASD/방향키 move
-        if (state == PlayerState.walk)
+        void Update()
         {
-            if (velocity < walkMaxVel)
+            mouseRotationX = Input.GetAxis("Mouse X");
+            mouseRotationY = Input.GetAxis("Mouse Y");
+            verticalMove = Input.GetAxis("Vertical");
+            horizontalMove = Input.GetAxis("Horizontal");
+            if (Input.GetButton("Run")) state = PlayerState.run;
+            else state = PlayerState.walk;
+            //if (Input.GetButtonDown("Jump"))
+            //    isJump = true;
+        }
+
+        void FixedUpdate()
+        {
+            PlayerRotation();
+            PlayerMove();
+        }
+
+        private void PlayerRotation()
+        {
+            // mouse rotation
+            if ((mouseRotationX > Mathf.Epsilon) || (mouseRotationX < -Mathf.Epsilon))
             {
-                velocity = velocity + walkAcc * Time.deltaTime;
-                velocity = Mathf.Clamp(velocity, 0.0f, walkMaxVel);
+                rotationX += mouseRotationX * sensX * Time.deltaTime;
+                transform.localEulerAngles = new Vector3(0, rotationX, 0);
             }
-            else
+            if ((mouseRotationY > Mathf.Epsilon) || (mouseRotationY < -Mathf.Epsilon))
             {
-                velocity = velocity - runAcc * Time.deltaTime;
+                rotationY += mouseRotationY * sensY * Time.deltaTime;
+                rotationY = Mathf.Clamp(rotationY, minY, maxY);
+                playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+            }
+        }
+
+        private void PlayerMove()
+        {
+            // 방향키 안눌렀을 때 
+            if (((horizontalMove < Mathf.Epsilon) && (horizontalMove > -Mathf.Epsilon))
+            && ((verticalMove < Mathf.Epsilon) && (verticalMove > -Mathf.Epsilon)))
+            {
+                velocity = 0.0f;
+                moveVector.Set(horizontalMove, 0, verticalMove);
+                moveVector = moveVector.normalized;
+                transform.Translate(moveVector);
+                animator.SetBool("isMoving", false);
+                animator.SetBool("isRunning", false);
+                return;
+            }
+
+            // WASD/방향키 move
+            if (state == PlayerState.walk)
+            {
+                if (velocity < walkMaxVel)
+                {
+                    velocity = velocity + walkAcc * Time.deltaTime;
+                    velocity = Mathf.Clamp(velocity, 0.0f, walkMaxVel);
+                }
+                else
+                {
+                    velocity = velocity - runAcc * Time.deltaTime;
+                    velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
+                }
+                animator.SetBool("isMoving", true);
+                animator.SetBool("isRunning", false);
+            }
+            else if (state == PlayerState.run)
+            {
+                velocity = velocity + runAcc * Time.deltaTime;
                 velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
+                animator.SetBool("isMoving", true);
+                animator.SetBool("isRunning", true);
             }
-            animator.SetBool("isMoving", true);
-            animator.SetBool("isRunning", false);
-        }
-        else if (state == PlayerState.run)
-        {
-            velocity = velocity + runAcc * Time.deltaTime;
-            velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
-            animator.SetBool("isMoving", true);
-            animator.SetBool("isRunning", true);
+
+            moveVector.Set(horizontalMove, 0, verticalMove);
+            moveVector = moveVector.normalized * velocity * Time.deltaTime;
+            transform.Translate(moveVector);
+            //rigidbody.MovePosition(transform.position + moveVector);
         }
 
-        moveVector.Set(horizontalMove, 0, verticalMove);
-        moveVector = moveVector.normalized * velocity * Time.deltaTime;
-        transform.Translate(moveVector);
-        //rigidbody.MovePosition(transform.position + moveVector);
-        //rigidbody.AddForce(moveVector * velocity * Time.deltaTime);
-        //Debug.Log("force: ");
+        //private void PlayerJump()
+        //{
+        //    if (!isJump) return;
+        //    rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        //    isJump = false;
+        //}
     }
-
-    //private void PlayerJump()
-    //{
-    //    if (!isJump) return;
-    //    rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-    //    isJump = false;
-    //}
 }
