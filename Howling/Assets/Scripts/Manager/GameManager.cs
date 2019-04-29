@@ -7,7 +7,7 @@ namespace Howling
 {
     public class GameManager : MonoBehaviour
     {
-        //public float m_StartDelay = 3f;
+        public float m_StartDelay = 3f;
         public float m_EndDelay = 3f;
         private WaitForSeconds m_StartWait;
         private WaitForSeconds m_EndWait;
@@ -23,7 +23,7 @@ namespace Howling
         // Start is called before the first frame update
         private void Start()
         {
-            //m_StartWait = new WaitForSeconds(m_StartDelay);
+            m_StartWait = new WaitForSeconds(m_StartDelay);
             m_EndWait = new WaitForSeconds(m_EndDelay);
 
             SpawnPlayer();
@@ -65,12 +65,13 @@ namespace Howling
 
         private IEnumerator GameStarting()
         {
+            Debug.Log("게임 스탙으~~`");
             ResetPlayer();
             ResetAllEnemys();
-            DisableControl();
+            //DisableControl();
 
-            //yield return m_StartWait;
-            yield return null;
+            yield return m_StartWait;
+            //yield return null;
         }
 
         private IEnumerator GamePlaying()
@@ -78,7 +79,7 @@ namespace Howling
             EnableControl();
 
             // 종료 조건
-            while (!PlayerLeft())
+            while (PlayerLeft())
             {
                 yield return null;
             }
@@ -87,13 +88,14 @@ namespace Howling
         private IEnumerator GameEnding()
         {
             DisableControl();
-
+            Debug.Log("게임 끝~~~~~`");
             yield return m_EndWait;
         }
 
 
         private bool PlayerLeft()
         {
+            Debug.Log("플레이어: " + m_Player.m_Instance.activeSelf);
             if (m_Player.m_Instance.activeSelf)
                 return true;
             return false;

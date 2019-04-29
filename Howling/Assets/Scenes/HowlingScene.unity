@@ -518,7 +518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &708666022
 Transform:
   m_ObjectHideFlags: 0
@@ -711,6 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f800b25e6931224faa725d833360ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_StartDelay: 3
   m_EndDelay: 3
   m_PlayerPrefab: {fileID: 973577497}
   m_EnemyPrefab: {fileID: 627473612}
@@ -1166,6 +1167,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4192839048075070471, guid: 7d0bbee69c75a8b488ac3d45c22442f8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d0bbee69c75a8b488ac3d45c22442f8, type: 3}
 --- !u!1001 &5544149321579491023
@@ -1198,7 +1204,7 @@ PrefabInstance:
     - target: {fileID: 5544149322216534997, guid: 3f922341799d23e438d3242962fff353,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 31.2
       objectReference: {fileID: 0}
     - target: {fileID: 5544149322216534997, guid: 3f922341799d23e438d3242962fff353,
         type: 3}
@@ -1238,6 +1244,11 @@ PrefabInstance:
     - target: {fileID: 5544149322216534997, guid: 3f922341799d23e438d3242962fff353,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544149322240331678, guid: 3f922341799d23e438d3242962fff353,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
