@@ -20,6 +20,16 @@ public class ActionController : MonoBehaviour
     [SerializeField]
     private Text actionText;
 
+    [SerializeField]
+    private Image img;
+
+    Ray ray = new Ray();
+
+    private void Start()
+    {
+        img.gameObject.SetActive(true);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -27,11 +37,17 @@ public class ActionController : MonoBehaviour
         TryAction();
     }
 
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(ray.origin, ray.direction * range, Color.red);
+    }
+
     private void TryAction()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             CheckItem();
+            CanPickUp();
         }
     }
 
@@ -50,10 +66,11 @@ public class ActionController : MonoBehaviour
 
     private void CheckItem()
     {
-        Vector3 forward = new Vector3(transform.forward.x, transform.parent.forward.y, 0);
-        if (Physics.Raycast(transform.parent.position, forward, out hitInfo, range, layerMask))
+        ray.origin = transform.position;
+        ray.direction = transform.forward;
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
-            
+            Debug.Log("Raycast " + hitInfo.transform.tag);
             if (hitInfo.transform.tag == "item")
             {
                 ItemInfoAppear();
