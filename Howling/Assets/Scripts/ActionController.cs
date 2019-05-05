@@ -23,6 +23,9 @@ public class ActionController : MonoBehaviour
     [SerializeField]
     private Image img;
 
+    [SerializeField]
+    private Inventory inventory;
+
     Ray ray = new Ray();
 
     private void Start()
@@ -58,6 +61,7 @@ public class ActionController : MonoBehaviour
             if (hitInfo.transform != null)
             {
                 Debug.Log(hitInfo.transform.GetComponent<ItemPickUP>().item.ItemName + "획득");
+                inventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUP>().item);
                 Destroy(hitInfo.transform.gameObject);
                 ItemInfoDisappear();
             }
