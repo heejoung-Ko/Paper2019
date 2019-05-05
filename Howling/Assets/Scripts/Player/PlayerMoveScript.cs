@@ -56,7 +56,10 @@ namespace Howling
 
         void FixedUpdate()
         {
-            PlayerRotation();
+            if (!Inventory.inventoryActivated)
+            {
+                PlayerRotation();
+            }
             PlayerMove();
         }
 
