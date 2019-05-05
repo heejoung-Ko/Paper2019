@@ -11,6 +11,7 @@ namespace Howling
 
         private Transform playerCamera = null;
         private Animator animator;
+        private StatusController statusController;
 
         // WASD move
         private float velocity = 0.0f;
@@ -40,6 +41,7 @@ namespace Howling
         {
             playerCamera = Camera.main.transform;
             animator = GetComponent<Animator>();
+            statusController = FindObjectOfType<StatusController>();
         }
 
         void Update()
@@ -48,7 +50,7 @@ namespace Howling
             mouseRotationY = Input.GetAxis("Mouse Y");
             verticalMove = Input.GetAxis("Vertical");
             horizontalMove = Input.GetAxis("Horizontal");
-            if (Input.GetButton("Run")) state = PlayerState.run;
+            if (Input.GetButton("Run") && (statusController.GetCurrentMp() > 0)) state = PlayerState.run;
             else state = PlayerState.walk;
             //if (Input.GetButtonDown("Jump"))
             //    isJump = true;
@@ -116,6 +118,7 @@ namespace Howling
                 velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
                 animator.SetBool("isMoving", true);
                 animator.SetBool("isRunning", true);
+                statusController.DecreaseMp(10);
             }
 
             moveVector.Set(horizontalMove, 0, verticalMove);
