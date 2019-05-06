@@ -14,20 +14,28 @@ namespace Howling
 
         public GameObject m_PlayerPrefab;
         public GameObject m_EnemyPrefab;
+        public GameObject m_TreePrefab;
 
         public PLAYERManager m_Player;
         public EnemyManager[] m_Enemys;
+        public TreeManager[] m_Trees;
 
         private static float m_RandomNumber = 10f;
+        private static float m_TreeRandom = 20f;
+
+        public Transform m_EnemySpawn;
+        public Transform m_TreeSpawn;
 
         // Start is called before the first frame update
         private void Start()
         {
+            Debug.Log("이거 먼저 불리면 안댐");
             m_StartWait = new WaitForSeconds(m_StartDelay);
             m_EndWait = new WaitForSeconds(m_EndDelay);
 
             SpawnPlayer();
             SpawnAllEnemy();
+            SpawnAllTree();
 
             StartCoroutine(GameLoop());
         }
@@ -44,12 +52,23 @@ namespace Howling
             for (int i = 0; i < m_Enemys.Length; i++)
             {
                 Vector3 randomPos = new Vector3(Random.Range(-m_RandomNumber, m_RandomNumber), 0, Random.Range(-m_RandomNumber, m_RandomNumber));
-                m_Enemys[i].m_Instance = Instantiate(m_EnemyPrefab, m_Enemys[i].m_SpawnPoint.position + randomPos, m_Enemys[i].m_SpawnPoint.rotation) as GameObject;
+                m_Enemys[i].m_Instance = Instantiate(m_EnemyPrefab, m_EnemySpawn.position + randomPos, m_EnemySpawn.rotation) as GameObject;
                 m_Enemys[i].m_EnemyNumber = i + 1;
                 m_Enemys[i].Setup();
             }
         }
 
+        private void SpawnAllTree()
+        {
+            for(int i = 0; i<m_Trees.Length; i++)
+            {
+                Vector3 randomPos = new Vector3(Random.Range(-m_TreeRandom, m_TreeRandom), 0, Random.Range(-m_TreeRandom, m_TreeRandom));
+                Quaternion randomRot = Quaternion.Euler(m_TreeSpawn.rotation.x, m_TreeSpawn.rotation.y + Random.Range(0, 360), m_TreeSpawn.rotation.z);
+                m_Trees[i].m_Instance = Instantiate(m_TreePrefab, m_TreeSpawn.position + randomPos, randomRot) as GameObject;
+                m_Trees[i].m_TreeNumber = i + 1;
+                m_Trees[i].Setup();
+            }
+        }
 
         private IEnumerator GameLoop()
         {
@@ -65,8 +84,10 @@ namespace Howling
 
         private IEnumerator GameStarting()
         {
+            Debug.Log("이거 나중에 불리면 안댐");
             ResetPlayer();
             ResetAllEnemys();
+            ResetAllTrees();
             //DisableControl();
 
             yield return m_StartWait;
@@ -107,7 +128,15 @@ namespace Howling
         {
             for (int i = 0; i < m_Enemys.Length; i++)
             {
-                m_Enemys[i].Reset();
+                m_Enemys[i].Reset(m_EnemySpawn);
+            }
+        }
+
+        private void ResetAllTrees()
+        {
+            for (int i = 0; i < m_Trees.Length; i++)
+            {
+                m_Trees[i].Reset(m_TreeSpawn);
             }
         }
 
@@ -118,6 +147,10 @@ namespace Howling
             {
                 m_Enemys[i].EnableControl();
             }
+            for (int i = 0; i < m_Trees.Length; i++)
+            {
+                m_Trees[i].EnableControl();
+            }
         }
 
         private void DisableControl()
@@ -126,6 +159,10 @@ namespace Howling
             for (int i = 0; i < m_Enemys.Length; i++)
             {
                 m_Enemys[i].DisableControl();
+            }
+            for (int i = 0; i < m_Trees.Length; i++)
+            {
+                m_Trees[i].DisableControl();
             }
         }
     }
