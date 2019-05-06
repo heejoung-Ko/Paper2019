@@ -26,10 +26,10 @@ TagManager:
   - pyramid
   - switchOn
   - stone
-  - enemy
   - target
   - rock
   - item
+  - enemyCollider
   layers:
   - Default
   - TransparentFX
@@ -47,7 +47,7 @@ TagManager:
   - striker
   - Player
   - Item
-  - 
+  - EnemyCollider
   - 
   - 
   - 

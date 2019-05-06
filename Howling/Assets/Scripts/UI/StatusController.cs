@@ -226,7 +226,7 @@ public class StatusController : MonoBehaviour
         {
             DecreaseHp(enemATK);
             currentInvincibleTime = 0f;
-            Debug.Log("맞았당! HP: " + currentHp);
+            //Debug.Log("맞았당! HP: " + currentHp);
         }
     }
 }
