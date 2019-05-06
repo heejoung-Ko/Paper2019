@@ -65,7 +65,6 @@ namespace Howling
 
         private IEnumerator GameStarting()
         {
-            Debug.Log("게임 스탙으~~`");
             ResetPlayer();
             ResetAllEnemys();
             //DisableControl();
@@ -88,14 +87,12 @@ namespace Howling
         private IEnumerator GameEnding()
         {
             DisableControl();
-            Debug.Log("게임 끝~~~~~`");
             yield return m_EndWait;
         }
 
 
         private bool PlayerLeft()
         {
-            Debug.Log("플레이어: " + m_Player.m_Instance.activeSelf);
             if (m_Player.m_Instance.activeSelf)
                 return true;
             return false;
