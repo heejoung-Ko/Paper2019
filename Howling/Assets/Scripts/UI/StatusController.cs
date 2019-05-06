@@ -151,25 +151,6 @@ public class StatusController : MonoBehaviour
             Debug.Log("캐릭터의 hp가 0이 되었습니다!");
     }
 
-    public void IncreaseMp(int cnt)
-    {
-        if (currentMp + cnt < mp)
-            currentMp += cnt;
-        else
-            currentMp = mp;
-    }
-
-    public void DecreaseMp(int cnt)
-    {
-        isMpUsed = true;
-        currentMpRechargeTime = 0;
-
-        if (currentMp - cnt > 0)
-            currentMp -= cnt;
-        else
-            currentMp = 0;
-    }
-
     public void IncreaseHungry(int cnt)
     {
         if (currentHungry + cnt < hungry)
@@ -200,6 +181,17 @@ public class StatusController : MonoBehaviour
             currentThirsty = 0;
         else
             currentThirsty -= cnt;
+    }
+
+    public void DecreaseMp(int cnt)
+    {
+        isMpUsed = true;
+        currentMpRechargeTime = 0;
+
+        if (currentMp - cnt > 0)
+            currentMp -= cnt;
+        else
+            currentMp = 0;
     }
 
     public int GetCurrentMp()
