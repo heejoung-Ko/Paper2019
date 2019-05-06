@@ -58,7 +58,7 @@ namespace Howling
 
         void FixedUpdate()
         {
-            if (!Inventory.inventoryActivated)
+            if (!Slot.isSlotDrag)
             {
                 PlayerRotation();
             }
