@@ -33,7 +33,9 @@ namespace Howling
         Vector3 direction;                   // 이동 방향
 
         int hp = 10;         // 체력
-        int atk = 20;        // 공격력
+        int atk = 5;        // 공격력
+
+        Quaternion oldRotation;
 
         // Update is called once per frame
         void FixedUpdate()
@@ -147,6 +149,7 @@ namespace Howling
                 nowStateTime = 0f;
                 nextStateTime = 2f;
                 velocity = 0f;
+                oldRotation = transform.rotation;
                 return;
             }
 
@@ -200,19 +203,19 @@ namespace Howling
             nowStateTime += Time.deltaTime;
             if (nowStateTime <= 0.5f)
             { 
-                Quaternion newRotation = Quaternion.LookRotation(new Vector3(this.transform.rotation.x - 90, 0, this.transform.rotation.z - 90));
-                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
+                Quaternion newRotation = Quaternion.LookRotation(new Vector3(oldRotation.x + 60, 0, oldRotation.y + 60));
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
                 return;
             }
             else if(nowStateTime <= 1.5f)
             {
-                Quaternion newRotation = Quaternion.LookRotation(new Vector3(this.transform.rotation.x + 180, 0, this.transform.rotation.z + 180));
-                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
+                Quaternion newRotation = Quaternion.LookRotation(new Vector3(oldRotation.x - 120, 0, oldRotation.y - 120));
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
             }
             else if(nowStateTime <= nextStateTime)
             {
-                Quaternion newRotation = Quaternion.LookRotation(new Vector3(this.transform.rotation.x - 90, 0, this.transform.rotation.z - 90));
-                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
+                Quaternion newRotation = Quaternion.LookRotation(new Vector3(oldRotation.x + 60, 0, oldRotation.y + 60));
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
             }
             else
             {

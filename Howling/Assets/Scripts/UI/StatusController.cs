@@ -145,14 +145,13 @@ public class StatusController : MonoBehaviour
 
     public void IncreaseHp(int cnt)
     {
+        Debug.Log("현재 HP: " + currentHp);
         if (currentHp + cnt < hp)
         {
-            Debug.Log(currentHp);
             currentHp += cnt;
         }
         else
         {
-            currentHp = hp;
             Debug.Log(currentHp);
         }
     }
