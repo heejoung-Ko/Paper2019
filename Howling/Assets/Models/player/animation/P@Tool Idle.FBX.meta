@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 6c8aaf27a1e3d754ba4054d7026a034a
+guid: dcef5911c71ab2a4f95f4cab073d4200
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: axe
-    100002: Camera001
-    100004: Cube
+    100002: Bone001
+    100004: Camera001
     100006: mixamorig:Head
     100008: mixamorig:HeadTop_End
     100010: mixamorig:Hips
@@ -48,9 +48,10 @@ ModelImporter:
     100084: mixamorig:Spine1
     100086: mixamorig:Spine2
     100088: //RootNode
+    100090: Player
     400000: axe
-    400002: Camera001
-    400004: Cube
+    400002: Bone001
+    400004: Camera001
     400006: mixamorig:Head
     400008: mixamorig:HeadTop_End
     400010: mixamorig:Hips
@@ -93,6 +94,7 @@ ModelImporter:
     400084: mixamorig:Spine1
     400086: mixamorig:Spine2
     400088: //RootNode
+    400090: Player
     2000000: Camera001
     2100000: pants
     2100002: shirt
@@ -102,11 +104,11 @@ ModelImporter:
     2100010: Material.002
     2300000: axe
     3300000: axe
-    4300000: Cube
+    4300000: Player
     4300002: axe
-    7400000: Axe Idle
+    7400000: Take 001
     9500000: //RootNode
-    13700000: Cube
+    13700000: Player
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -134,35 +136,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Axe Idle
-      takeName: Take 001
-      firstFrame: 0
-      lastFrame: 30
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []

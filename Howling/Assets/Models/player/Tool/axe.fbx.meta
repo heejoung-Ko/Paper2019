@@ -1,35 +1,15 @@
 fileFormatVersion: 2
-guid: 172e90e702f55a949b02e1cd61abe12e
+guid: e82846f98b065f8429f12568ff08d779
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: axe
-    100002: mixamorig:RightArm
-    100004: mixamorig:RightForeArm
-    100006: mixamorig:RightHand
-    100008: mixamorig:RightHandIndex1
-    100010: mixamorig:RightShoulder
-    100012: mixamorig:Spine
-    100014: mixamorig:Spine1
-    100016: mixamorig:Spine2
-    100018: //RootNode
-    400000: axe
-    400002: mixamorig:RightArm
-    400004: mixamorig:RightForeArm
-    400006: mixamorig:RightHand
-    400008: mixamorig:RightHandIndex1
-    400010: mixamorig:RightShoulder
-    400012: mixamorig:Spine
-    400014: mixamorig:Spine1
-    400016: mixamorig:Spine2
-    400018: //RootNode
+    100000: //RootNode
+    400000: //RootNode
     2100000: Material.001
     2100002: Material.002
-    2300000: axe
-    3300000: axe
-    4300000: axe
-    7400000: Axe Idle
-    9500000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube.001
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -57,35 +37,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Axe Idle
-      takeName: Take 001
-      firstFrame: 0
-      lastFrame: 30
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -110,8 +62,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -138,7 +90,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
