@@ -229,6 +229,16 @@ namespace Howling
 
         }
 
+        public void DecreaseHp(int cnt)
+        {
+            hp -= cnt;
+
+            if (hp <= 0)
+                hp = 0;
+
+            Debug.Log("enemy hp - " + hp);
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             if(state == EnemyState.attack)
