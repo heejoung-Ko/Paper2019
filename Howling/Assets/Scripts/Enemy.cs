@@ -33,7 +33,7 @@ namespace Howling
         Vector3 direction;                   // 이동 방향
 
         int hp = 10;         // 체력
-        int atk = 5;        // 공격력
+        int atk = 20;        // 공격력
 
         // Update is called once per frame
         void FixedUpdate()

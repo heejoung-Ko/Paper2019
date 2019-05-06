@@ -17,7 +17,7 @@ public class ItemEffectDB : MonoBehaviour
     private ItemEffect[] itemEffects;
 
     [SerializeField]
-    private StatusController playerStatus;
+    private StatusController playerStatus = null;
 
     //[SerializeField]
     //private WeaponManager weaponManager;
@@ -26,6 +26,9 @@ public class ItemEffectDB : MonoBehaviour
 
     public void UseItem(Item item)
     {
+        if (playerStatus == null)
+            playerStatus = GameObject.Find("PlayerObjects(Clone)").transform.Find("Canvas").Find("Status").GetComponent<StatusController>();
+
         //if (item.itemType == Item.ItemType.Equipment)
         //{
         //      StartCoroutine(weaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
@@ -44,6 +47,7 @@ public class ItemEffectDB : MonoBehaviour
                         {
                             case HP:
                                 playerStatus.IncreaseHp(itemEffects[i].num[j]);
+                                Debug.Log(itemEffects[i].num[j] + "만큼 회복");
                                 break;
                             case MP:
                                 playerStatus.IncreaseMp(itemEffects[i].num[j]);

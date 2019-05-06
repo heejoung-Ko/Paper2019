@@ -146,9 +146,15 @@ public class StatusController : MonoBehaviour
     public void IncreaseHp(int cnt)
     {
         if (currentHp + cnt < hp)
+        {
+            Debug.Log(currentHp);
             currentHp += cnt;
+        }
         else
+        {
             currentHp = hp;
+            Debug.Log(currentHp);
+        }
     }
 
     public void DecreaseHp(int cnt)
@@ -221,7 +227,7 @@ public class StatusController : MonoBehaviour
         {
             DecreaseHp(enemATK);
             currentInvincibleTime = 0f;
-            Debug.Log("맞았당! HP: " + hp);
+            Debug.Log("맞았당! HP: " + currentHp);
         }
     }
 }

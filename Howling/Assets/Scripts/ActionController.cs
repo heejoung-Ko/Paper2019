@@ -74,7 +74,6 @@ public class ActionController : MonoBehaviour
         ray.direction = transform.forward;
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
-            Debug.Log("Raycast " + hitInfo.transform.tag);
             if (hitInfo.transform.tag == "item")
             {
                 ItemInfoAppear();
@@ -86,7 +85,6 @@ public class ActionController : MonoBehaviour
 
     private void ItemInfoAppear()
     {
-        Debug.Log("ItemInfoAppear");
         pickUpActivated = true;
         actionText.gameObject.SetActive(true);
         actionText.text = hitInfo.transform.GetComponent<ItemPickUP>().item.ItemName + "획득" + "<color=yellow>" + "(E)키" + "</color>";
