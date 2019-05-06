@@ -18,33 +18,33 @@ public class Inventory : MonoBehaviour
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
     }
 
-    void Update()
-    {
-        TryOpenInventory();
-    }
+    //void Update()
+    //{
+    //    TryOpenInventory();
+    //}
 
-    private void TryOpenInventory()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            inventoryActivated = !inventoryActivated;
+    //private void TryOpenInventory()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.I))
+    //    {
+    //        inventoryActivated = !inventoryActivated;
 
-            if (inventoryActivated)
-                OpenInventory();
-            else
-                CloseInventory();
-        }
-    }
+    //        if (inventoryActivated)
+    //            OpenInventory();
+    //        else
+    //            CloseInventory();
+    //    }
+    //}
 
-    private void OpenInventory()
-    {
-        go_InventoryBase.SetActive(true);
-    }
+    //private void OpenInventory()
+    //{
+    //    go_InventoryBase.SetActive(true);
+    //}
 
-    private void CloseInventory()
-    {
-        go_InventoryBase.SetActive(false);
-    }
+    //private void CloseInventory()
+    //{
+    //    go_InventoryBase.SetActive(false);
+    //}
 
     public void AcquireItem(Item acquireItem, int cnt = 1)
     {

@@ -31,7 +31,7 @@ namespace Howling
                 currentAtkTime++;
             else
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && Slot.isSlotClick == false)
                 {
                     AttackCheck();
                     currentAtkTime = 0;

@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class Slot : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+    public static bool isSlotClick = false;
+    public static bool isSlotDrag = false;
+
     public Item item;
     public int itemCount;
     public Image itemImage;
@@ -20,9 +23,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     void Start()
     {
         itemEffectDB = FindObjectOfType<ItemEffectDB>();
+        isSlotClick = false;
+        isSlotDrag = false;
     }
 
-private void SetColor(float alpha)
+    private void SetColor(float alpha)
     {
         Color color = itemImage.color;
         color.a = alpha;
@@ -92,11 +97,23 @@ private void SetColor(float alpha)
         }
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("pointer down");
+        isSlotClick = true;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        Debug.Log("pointer up");
+        isSlotClick = false;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
         if (item != null)
         {
+            isSlotDrag = true;
             DragSlot.instance.dragSlot = this;
             DragSlot.instance.DragSetImage(itemImage);
 
@@ -107,7 +124,6 @@ private void SetColor(float alpha)
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
         if (item != null)
         {
             DragSlot.instance.transform.position = eventData.position;
@@ -116,6 +132,8 @@ private void SetColor(float alpha)
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        isSlotDrag = false;
+
         DragSlot.instance.SetColor(0);
         DragSlot.instance.dragSlot = null;
         if (item != null)
