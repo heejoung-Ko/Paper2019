@@ -13,7 +13,7 @@ namespace Howling
         public EnemyState state = EnemyState.idle;
 
         // 현재 타겟으로 설정된 객체
-        Transform target = null;
+        GameObject target = null;
 
         float attackDist = 1.5f;            // 공격 범위
 
@@ -32,8 +32,8 @@ namespace Howling
 
         Vector3 direction;                   // 이동 방향
 
-        int hp;         // 체력
-        int atk;        // 공격력
+        int hp = 10;         // 체력
+        int atk = 5;        // 공격력
 
         // Update is called once per frame
         void FixedUpdate()
@@ -72,7 +72,7 @@ namespace Howling
                 if (other.tag == "target")
                 {
                     state = EnemyState.trace;
-                    target = other.transform;
+                    target = other.gameObject;
                     ChangeNextState();
                     nextStateTime = 0.0f;
 
@@ -138,7 +138,7 @@ namespace Howling
         void Trace()
         {
             // 타겟과의 거리 계산
-            float distance = Vector3.Distance(target.position, transform.position);
+            float distance = Vector3.Distance(target.transform.position, transform.position);
 
             // 타겟이 공격범위 안에 들어왔을 때
             if (distance <= attackDist)
@@ -150,7 +150,7 @@ namespace Howling
                 return;
             }
 
-            direction = (target.position - transform.position).normalized; // 타겟으로 향하는 방향
+            direction = (target.transform.position - transform.position).normalized; // 타겟으로 향하는 방향
             direction.y = 0;
 
             velocity = velocity + runAcc * Time.deltaTime;                // 속도 계산
@@ -173,7 +173,7 @@ namespace Howling
 
         void Escape()
         {
-            direction = (target.position - transform.position).normalized;  // 타겟으로 향하는 방향 
+            direction = (target.transform.position - transform.position).normalized;  // 타겟으로 향하는 방향 
             direction.y = 0;
             direction *= -1;                                                // 타겟으로 향하는 역방향으로 전환
 
@@ -230,7 +230,7 @@ namespace Howling
         {
             if(state == EnemyState.attack)
             {
-                Debug.Log("맞았당");
+                target.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
             }
         }
     }
