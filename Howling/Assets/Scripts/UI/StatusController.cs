@@ -152,6 +152,7 @@ public class StatusController : MonoBehaviour
         }
         else
         {
+            currentHp = hp;
             Debug.Log(currentHp);
         }
     }
