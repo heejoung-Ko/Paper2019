@@ -7,6 +7,7 @@ namespace Howling
     public class Enemy : MonoBehaviour
     {
         public int m_EnemyNumber = 1;
+        private Animator animator;
 
         // 적 상태 
         public enum EnemyState { idle, walk, trace, escape, attack, die };
@@ -37,32 +38,47 @@ namespace Howling
 
         Quaternion oldRotation;
 
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+
         // Update is called once per frame
         void FixedUpdate()
         {
             if (state == EnemyState.trace)
             {
                 Trace();
+                animator.SetBool("isMoving", true);
+                animator.SetBool("isRunning", true);
                 return;
             }
             else if (state == EnemyState.escape)
             {
                 Escape();
+                  animator.SetBool("isMoving", true);
+                animator.SetBool("isRunning", true);
                 return;
             }
             else if (state == EnemyState.idle)
             {
                 Idle();
+                animator.SetBool("isMoving", false);
+                animator.SetBool("isRunning", false);
                 return;
             }
             else if (state == EnemyState.walk)
             {
                 Walk();
+                animator.SetBool("isMoving", true);
+                animator.SetBool("isRunning", false);
                 return;
             }
             else if (state == EnemyState.attack)
             {
                 Attack();
+                animator.SetBool("isMoving", true);
+                animator.SetBool("isRunning", true);
                 return;
             }
         }
