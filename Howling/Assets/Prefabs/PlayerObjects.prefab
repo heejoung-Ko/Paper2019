@@ -2606,8 +2606,8 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 39, y: 39}
-  m_Spacing: {x: 0.7, y: 0}
+  m_CellSize: {x: 39.6, y: 39}
+  m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 10
 --- !u!1001 &5544149321377121773
@@ -2617,11 +2617,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2727,21 +2722,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469455574098225}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569824171174237}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174458465093560}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -2762,6 +2742,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469455574098225}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569824171174237}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174458465093560}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!224 &1614947076007973335 stripped
@@ -2807,11 +2807,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2917,21 +2912,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469455578689522}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569824159246238}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174458470205819}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -2952,6 +2932,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469455578689522}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569824159246238}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174458470205819}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!1 &3849174458470205819 stripped
@@ -2997,11 +2997,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3107,21 +3102,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469455557082806}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569824188266202}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174458448566335}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -3142,6 +3122,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469455557082806}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569824188266202}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174458448566335}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!114 &4004469455557082806 stripped
@@ -3187,11 +3187,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3297,21 +3292,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469455561528448}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569824175414508}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174458452505097}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -3332,6 +3312,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469455561528448}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569824175414508}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174458452505097}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!114 &4004469455561528448 stripped
@@ -3377,11 +3377,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3487,21 +3482,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469455880914617}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569823857004245}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174457631105072}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -3522,6 +3502,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469455880914617}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569823857004245}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174457631105072}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!224 &1614947075769284191 stripped
@@ -3567,11 +3567,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (9)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3677,21 +3672,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469455997442409}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569823739433221}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174457748160480}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -3712,6 +3692,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469455997442409}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569823739433221}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174457748160480}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!114 &7949569823739433221 stripped
@@ -3757,11 +3757,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3867,21 +3862,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469454407619945}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569823188983045}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174459381101536}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -3902,6 +3882,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469454407619945}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569823188983045}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174459381101536}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!224 &1614947077244708239 stripped
@@ -3947,11 +3947,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4057,21 +4052,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469454304591870}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569823153616786}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174459475745143}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -4092,6 +4072,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469454304591870}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569823153616786}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174459475745143}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!224 &1614947077146382104 stripped
@@ -4137,11 +4137,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (8)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4247,21 +4242,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469455028055193}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569822568686837}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174458995411472}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -4282,6 +4262,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469455028055193}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569822568686837}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174458995411472}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!114 &7949569822568686837 stripped
@@ -4327,11 +4327,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2125403113}
     m_Modifications:
-    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: m_Name
-      value: Slot (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 6528451033460036666, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4437,21 +4432,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 4004469455101469662}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: text_Count
-      value: 
-      objectReference: {fileID: 7949569822356925362}
-    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
-        type: 3}
-      propertyPath: go_CountImage
-      value: 
-      objectReference: {fileID: 3849174459198817623}
     - target: {fileID: 8762814832592912981, guid: 7ebb676aa4a5c1a4380c519f6613f814,
         type: 3}
       propertyPath: m_IsActive
@@ -4472,6 +4452,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1416067251110257039, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: m_Name
+      value: Slot (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 4004469455101469662}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: text_Count
+      value: 
+      objectReference: {fileID: 7949569822356925362}
+    - target: {fileID: 749237903987669757, guid: 7ebb676aa4a5c1a4380c519f6613f814,
+        type: 3}
+      propertyPath: go_CountImage
+      value: 
+      objectReference: {fileID: 3849174459198817623}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb676aa4a5c1a4380c519f6613f814, type: 3}
 --- !u!224 &1614947076349498168 stripped
