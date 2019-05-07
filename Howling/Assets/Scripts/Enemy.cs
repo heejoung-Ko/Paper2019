@@ -316,7 +316,7 @@ namespace Howling
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(state == EnemyState.attack)
+            if (state == EnemyState.attack)
             {
                 target.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
             }
