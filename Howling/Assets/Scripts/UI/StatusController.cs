@@ -47,7 +47,7 @@ public class StatusController : MonoBehaviour
 
     private const int HP = 0, MP = 1, HUNGRY = 2, THIRSTY = 3;
 
-    private float invincibleTime = 1f; // 무적 시간
+    private float invincibleTime = 2f; // 무적 시간
     private float currentInvincibleTime = 0f;
 
     // Use this for initialization
