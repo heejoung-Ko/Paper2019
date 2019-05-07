@@ -78,7 +78,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyNumber: 0
   state: 0
-  hp: 10
 --- !u!1 &5392950084712092725
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +90,7 @@ GameObject:
   - component: {fileID: 102761999014114513}
   m_Layer: 16
   m_Name: EnemyCollider
-  m_TagString: enemy
+  m_TagString: enemyCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
