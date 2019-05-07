@@ -90,8 +90,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPoi
             if (item != null)
             {
                 itemEffectDB.UseItem(item);
-                if (item.itemType == Item.ItemType.Used
-                    || item.itemType == Item.ItemType.Ingredient)
+                if (item.itemType == Item.ItemType.Used)
                     SetSlotCount(-1);
             }
         }
@@ -99,13 +98,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPoi
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("pointer down");
         isSlotClick = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("pointer up");
         isSlotClick = false;
     }
 
