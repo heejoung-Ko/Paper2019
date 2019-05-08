@@ -10,8 +10,9 @@ namespace Howling
         private Animator animator;
 
         // 적 상태 
-        public enum EnemyState { idle, walk, trace, escape, attack, die };
+        public enum EnemyState { idle, walk, trace, escape, attack, hit, die };
         public EnemyState state = EnemyState.idle;
+        public EnemyState oldState;
 
         // 현재 타겟으로 설정된 객체
         GameObject target = null;
@@ -33,14 +34,26 @@ namespace Howling
 
         Vector3 direction;                   // 이동 방향
 
-        int hp = 10;         // 체력
+        int hp = 30;         // 체력
         int atk = 5;        // 공격력
 
+        public float invincibleTime = 1f; // 무적 시간
+        public float currentInvincibleTime = 0f;
+
         Quaternion oldRotation;
+
+        public GameObject dropItem;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            animator.SetBool("Dead", false);
+            animator.SetBool("isHiting", false);
+        }
+
+        private void OnDestroy()
+        {
+            Instantiate(dropItem, transform.position, Quaternion.identity);   
         }
 
         // Update is called once per frame
@@ -56,7 +69,7 @@ namespace Howling
             else if (state == EnemyState.escape)
             {
                 Escape();
-                  animator.SetBool("isMoving", true);
+                animator.SetBool("isMoving", true);
                 animator.SetBool("isRunning", true);
                 return;
             }
@@ -80,6 +93,16 @@ namespace Howling
                 animator.SetBool("isMoving", true);
                 animator.SetBool("isRunning", true);
                 return;
+            }
+            else if (state == EnemyState.hit)
+            {
+                Hit();
+                animator.SetBool("isMoving", false);
+                animator.SetBool("isRunning", false);
+            }
+            else if(state == EnemyState.die)
+            {
+                Die();
             }
         }
 
@@ -218,19 +241,25 @@ namespace Howling
         {
             nowStateTime += Time.deltaTime;
             if (nowStateTime <= 0.5f)
-            { 
-                Quaternion newRotation = Quaternion.LookRotation(new Vector3(oldRotation.x + 60, 0, oldRotation.y + 60));
+            {
+                Quaternion rotation = Quaternion.identity;
+                rotation.eulerAngles = new Vector3(0, 30f, 0);
+                Quaternion newRotation = oldRotation * rotation;
                 this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
                 return;
             }
             else if(nowStateTime <= 1.5f)
             {
-                Quaternion newRotation = Quaternion.LookRotation(new Vector3(oldRotation.x - 120, 0, oldRotation.y - 120));
+                Quaternion rotation = Quaternion.identity;
+                rotation.eulerAngles = new Vector3(0, -60f, 0);
+                Quaternion newRotation = oldRotation * rotation;
                 this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
             }
             else if(nowStateTime <= nextStateTime)
             {
-                Quaternion newRotation = Quaternion.LookRotation(new Vector3(oldRotation.x + 60, 0, oldRotation.y + 60));
+                Quaternion rotation = Quaternion.identity;
+                rotation.eulerAngles = new Vector3(0, 0, 0);
+                Quaternion newRotation = oldRotation * rotation;
                 this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
             }
             else
@@ -239,25 +268,55 @@ namespace Howling
                 ChangeNextState();
             }
         }
+
+        void Hit()
+        {
+            currentInvincibleTime += Time.deltaTime;
+            if (currentInvincibleTime > invincibleTime)
+            {
+                Debug.Log("히트 빠져나감 ");
+                animator.SetBool("isHiting", false);
+                state = oldState;
+                currentInvincibleTime = 0f;
+            }
+        }
         
         void Die()
         {
+            Quaternion rotation = Quaternion.identity;
+            rotation.eulerAngles = new Vector3(0, 0, 90);
+            Quaternion newRotation = oldRotation * rotation;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime);
 
+            Destroy(this.gameObject, 5f);
         }
 
         public void DecreaseHp(int cnt)
         {
-            hp -= cnt;
+            if (state == EnemyState.die || state == EnemyState.hit)
+                return;
+            {
+                hp -= cnt;
+                oldState = state;
+                state = EnemyState.hit;
+                velocity = 0;
+                animator.SetBool("isHiting", true);
+                Debug.Log("데미지: " + cnt);
 
-            if (hp <= 0)
-                hp = 0;
-
-            Debug.Log("enemy hp - " + hp);
+                if (hp <= 0)
+                {
+                    Debug.Log("주겄당!!");
+                    state = EnemyState.die;
+                    oldRotation = transform.rotation;
+                    animator.SetBool("Dead", true);
+                }
+            }
+            Debug.Log("enemy hp: " + hp);
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(state == EnemyState.attack)
+            if (state == EnemyState.attack)
             {
                 target.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
             }

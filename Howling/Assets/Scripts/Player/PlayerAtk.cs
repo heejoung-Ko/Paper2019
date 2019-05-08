@@ -15,6 +15,8 @@ namespace Howling
         private bool isAtk = false;
         private int atk = 10;
 
+        private Animator animator;
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -22,11 +24,13 @@ namespace Howling
             enemyMask |= 1 << LayerMask.NameToLayer("EnemyCollider");
             currentAtkTime = 0;
             isAtk = false;
+            animator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            animator.SetBool("Attack", false);
             if (currentAtkTime <= atkTime)
                 currentAtkTime++;
             else
@@ -35,6 +39,7 @@ namespace Howling
                 {
                     AttackCheck();
                     currentAtkTime = 0;
+                    animator.SetBool("Attack", true);
                 }
             }
 
