@@ -53,7 +53,9 @@ namespace Howling
 
         private void OnDestroy()
         {
-            Instantiate(dropItem, transform.position, Quaternion.identity);   
+            GameObject item = Instantiate(dropItem) as GameObject;//큐브 동적생성 
+            item.transform.position = transform.position;
+            Destroy(item, 180f);
         }
 
         // Update is called once per frame
