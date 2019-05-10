@@ -1093,6 +1093,10 @@ MonoBehaviour:
   m_Enemys:
   - m_EnemyNumber: 0
     m_Instance: {fileID: 0}
+  - m_EnemyNumber: 0
+    m_Instance: {fileID: 0}
+  - m_EnemyNumber: 0
+    m_Instance: {fileID: 0}
   m_Trees: []
   m_EnemySpawn: {fileID: 1683451004}
   m_TreeSpawn: {fileID: 473753704}
