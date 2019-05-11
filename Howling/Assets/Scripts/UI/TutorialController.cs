@@ -10,8 +10,8 @@ namespace Howling
         private float startTime = 2f;
         private float deleteTime = 3f;
 
-        public int currentShow = 1;
-        [SerializeField] private int maxShow = 6;
+        public int currentShow = 0;
+        private int maxShow = 6;
         public bool isPlayerMove = false;
         public bool isPlayerRotation = false;
 
@@ -25,22 +25,23 @@ namespace Howling
             yield return StartCoroutine(DelayTime(delayTime));
             //currentTutorial = transform.GetChild(currentShow).gameObject;
             //currentTutorial.SetActive(true);
+            currentShow++;
             switch (currentShow)
             {
                 case 1:
                 yield return ShowMove();
+                break;
+                case 2:
                 break;
                 case 3:
                 yield return ShowRotation();
                 break;
             }
             if (currentShow < maxShow)
-            {
-                currentShow++;
                 StartCoroutine(TutorialLoop(startTime));
-            }
             else
                 Debug.Log("튜토리얼 끝!");
+            Debug.Log("currentShow - " + currentShow);
         }
 
         private IEnumerator ShowMove()

@@ -60,7 +60,7 @@ namespace Howling
 
         void FixedUpdate()
         {
-            if (!Slot.isSlotDrag && tutorialController.currentShow > 1)
+            if (!Slot.isSlotDrag && tutorialController.currentShow > 2)
             {
                 PlayerRotation();
             }
