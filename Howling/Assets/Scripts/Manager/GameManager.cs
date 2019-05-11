@@ -7,7 +7,7 @@ namespace Howling
 {
     public class GameManager : MonoBehaviour
     {
-        public float m_StartDelay = 3f;
+        public float m_StartDelay = 0f;
         public float m_EndDelay = 3f;
         private WaitForSeconds m_StartWait;
         private WaitForSeconds m_EndWait;

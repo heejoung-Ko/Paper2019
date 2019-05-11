@@ -6,26 +6,59 @@ namespace Howling
 {
     public class TutorialController : MonoBehaviour
     {
-        private float startTime = 1f;
-        private float moveTime = 1f;
         private GameObject currentTutorial = null;
+        private float startTime = 2f;
+        private float deleteTime = 3f;
+
+        public int currentShow = 0;
+        [SerializeField] private int maxShow = 2;
+        public bool isPlayerMove = false;
+        public bool isPlayerRotation = false;
 
         private void Start()
         {
-            StartCoroutine(StartTutorial());
+            StartCoroutine(TutorialLoop(startTime));
         }
 
-        private IEnumerator StartTutorial()
+        private IEnumerator TutorialLoop(float delayTime)
         {
-            yield return StartCoroutine(DelayTime(startTime));
-            yield return ShowMove();
+            yield return StartCoroutine(DelayTime(delayTime));
+            currentShow++;
+            switch (currentShow)
+            {
+                case 1:
+                yield return ShowMove();
+                break;
+                case 2:
+                yield return ShowRotation();
+                break;
+            }
+            if (currentShow < maxShow)
+                StartCoroutine(TutorialLoop(startTime));
+            else
+                Debug.Log("튜토리얼 끝!");
         }
 
         private IEnumerator ShowMove()
         {
-            currentTutorial = transform.FindChild("Tutorial_Move").gameObject;
+            currentTutorial = transform.GetChild(currentShow).gameObject;
             currentTutorial.SetActive(true);
-            yield return StartCoroutine(DelayTime(moveTime));
+            while (!isPlayerMove)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(DelayTime(0f));
+        }
+
+        private IEnumerator ShowRotation()
+        {
+            currentTutorial = transform.GetChild(0).gameObject;
+            currentTutorial.SetActive(true);
+            while (!isPlayerRotation)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(DelayTime(deleteTime));
         }
 
         private IEnumerator DelayTime(float deleyTime)
