@@ -39,7 +39,6 @@ namespace Howling
             StartCoroutine(GameLoop());
         }
 
-
         private void SpawnPlayer()
         {
             m_Player.m_Instance = Instantiate(m_PlayerPrefab, m_Player.m_SpawnPoint.position, m_Player.m_SpawnPoint.rotation) as GameObject;

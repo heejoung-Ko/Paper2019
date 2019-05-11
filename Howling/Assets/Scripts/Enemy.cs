@@ -40,6 +40,8 @@ namespace Howling
         public float invincibleTime = 1f; // 무적 시간
         public float currentInvincibleTime = 0f;
 
+        bool isDead;
+
         Quaternion oldRotation;
 
         public GameObject dropItem;
@@ -49,13 +51,7 @@ namespace Howling
             animator = GetComponent<Animator>();
             animator.SetBool("Dead", false);
             animator.SetBool("isHiting", false);
-        }
-
-        private void OnDestroy()
-        {
-            GameObject item = Instantiate(dropItem) as GameObject;//큐브 동적생성 
-            item.transform.position = transform.position;
-            Destroy(item, 180f);
+            isDead = false;
         }
 
         // Update is called once per frame
@@ -276,7 +272,6 @@ namespace Howling
             currentInvincibleTime += Time.deltaTime;
             if (currentInvincibleTime > invincibleTime)
             {
-                Debug.Log("히트 빠져나감 ");
                 animator.SetBool("isHiting", false);
                 state = oldState;
                 currentInvincibleTime = 0f;
@@ -290,7 +285,12 @@ namespace Howling
             Quaternion newRotation = oldRotation * rotation;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime);
 
-            Destroy(this.gameObject, 5f);
+            if (!isDead)
+            {
+                Invoke("DropItem", 5f);
+                Destroy(this.gameObject, 5f);
+                isDead = true;
+            }
         }
 
         public void DecreaseHp(int cnt)
@@ -322,6 +322,12 @@ namespace Howling
             {
                 target.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
             }
+        }
+
+        void DropItem()
+        {
+            Debug.Log("아이템 뿌린당!!!");
+            Instantiate(dropItem, transform.position, Quaternion.identity);
         }
     }
 }
