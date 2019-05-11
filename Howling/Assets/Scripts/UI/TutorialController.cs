@@ -13,11 +13,13 @@ namespace Howling
         private float delayDeleteTime = 3f;
 
         [HideInInspector] public int currentShow = 0;
-        private int maxShow = 4;
+        private int maxShow = 6;
         [HideInInspector] public bool isPlayerMove = false;
         [HideInInspector] public bool isPlayerRun = false;
         [HideInInspector] public bool isPlayerRotation = false;
         [HideInInspector] public bool isPlayerGetItem = false;
+        [HideInInspector] public bool isPlayerAttack = false;
+        [HideInInspector] public bool isPlayerUseItem = false;
 
         private void Start()
         {
@@ -32,18 +34,12 @@ namespace Howling
             currentTutorial.SetActive(true);
             switch (currentShow)
             {
-                case 1:
-                    yield return ShowRotation();
-                    break;
-                case 2:
-                    yield return ShowMove();
-                    break;
-                case 3:
-                    yield return ShowRun();
-                    break;
-                case 4:
-                    yield return ShowGetItem();
-                    break;
+                case 1: yield return ShowRotation(); break;
+                case 2: yield return ShowMove(); break;
+                case 3: yield return ShowRun(); break;
+                case 4: yield return ShowGetItem(); break;
+                case 5: yield return ShowAttack(); break;
+                case 6: yield return ShowUseItem(); break;
             }
             if (currentShow < maxShow)
                 StartCoroutine(TutorialLoop(readyTime));
@@ -81,6 +77,24 @@ namespace Howling
         private IEnumerator ShowGetItem()
         {
             while (!isPlayerGetItem)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(DelayTime(deleteTime));
+        }
+
+        private IEnumerator ShowAttack()
+        {
+            while (!isPlayerAttack)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(DelayTime(delayDeleteTime));
+        }
+
+        private IEnumerator ShowUseItem()
+        {
+            while (!isPlayerUseItem)
             {
                 yield return null;
             }
