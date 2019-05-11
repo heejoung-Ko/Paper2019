@@ -13,6 +13,7 @@ namespace Howling
         public int currentShow = 0;
         private int maxShow = 6;
         public bool isPlayerMove = false;
+        public bool isPlayerRun = false;
         public bool isPlayerRotation = false;
 
         private void Start()
@@ -29,13 +30,14 @@ namespace Howling
             switch (currentShow)
             {
                 case 1:
-                yield return ShowMove();
-                break;
+                    yield return ShowMove();
+                    break;
                 case 2:
-                break;
+                    yield return ShowRun();
+                    break;
                 case 3:
-                yield return ShowRotation();
-                break;
+                    yield return ShowRotation();
+                    break;
             }
             if (currentShow < maxShow)
                 StartCoroutine(TutorialLoop(startTime));
@@ -52,7 +54,18 @@ namespace Howling
             {
                 yield return null;
             }
-            yield return StartCoroutine(DelayTime(0f));
+            yield return StartCoroutine(DelayTime(0.5f));
+        }
+
+        private IEnumerator ShowRun()
+        {
+            currentTutorial = transform.GetChild(currentShow).gameObject;
+            currentTutorial.SetActive(true);
+            while (!isPlayerRun)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(DelayTime(0.5f));
         }
 
         private IEnumerator ShowRotation()
