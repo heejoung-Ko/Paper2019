@@ -52,7 +52,11 @@ namespace Howling
             mouseRotationY = Input.GetAxis("Mouse Y");
             verticalMove = Input.GetAxis("Vertical");
             horizontalMove = Input.GetAxis("Horizontal");
-            if (Input.GetButton("Run") && (statusController.GetCurrentMp() > 0)) state = PlayerState.run;
+            if (Input.GetButton("Run") && (statusController.GetCurrentMp() > 0))
+            {
+                if (tutorialController.currentShow > 1)
+                    state = PlayerState.run;
+            }
             else state = PlayerState.walk;
             //if (Input.GetButtonDown("Jump"))
             //    isJump = true;
@@ -60,11 +64,12 @@ namespace Howling
 
         void FixedUpdate()
         {
-            if (!Slot.isSlotDrag && tutorialController.currentShow > 1)
+            if (!Slot.isSlotDrag && tutorialController.currentShow > 2)
             {
                 PlayerRotation();
             }
-            PlayerMove();
+            if (tutorialController.currentShow > 0)
+                PlayerMove();
         }
 
         private void PlayerRotation()
@@ -123,6 +128,8 @@ namespace Howling
                 animator.SetBool("isMoving", true);
                 animator.SetBool("isRunning", true);
                 statusController.DecreaseMp(10);
+
+                tutorialController.isPlayerRun = true;
             }
 
             moveVector.Set(horizontalMove, 0, verticalMove);
