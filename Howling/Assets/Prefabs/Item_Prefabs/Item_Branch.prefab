@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 397681286333340849}
   - component: {fileID: 5224297822534665997}
   - component: {fileID: 3204550647679994159}
-  m_Layer: 0
-  m_Name: f_branch
-  m_TagString: Untagged
+  m_Layer: 15
+  m_Name: Item_Branch
+  m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

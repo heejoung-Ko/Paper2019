@@ -21,10 +21,12 @@ namespace Howling
         public TreeManager[] m_Trees;
 
         private static float m_RandomNumber = 10f;
-        private static float m_TreeRandom = 200f;
+        public static float m_TreeRandom = 20f;
 
         public Transform m_EnemySpawn;
         public Transform m_TreeSpawn;
+
+        public int m_NumTreesSP;
 
         // Start is called before the first frame update
         private void Start()
@@ -62,9 +64,10 @@ namespace Howling
             {
                 Vector3 randomPos = new Vector3(Random.Range(-m_TreeRandom, m_TreeRandom), 0, Random.Range(-m_TreeRandom, m_TreeRandom));
                 Quaternion randomRot = Quaternion.Euler(m_TreeSpawn.rotation.x, m_TreeSpawn.rotation.y + Random.Range(0, 360), m_TreeSpawn.rotation.z);
+                Transform spawnPoint = m_TreeSpawn.GetChild(Random.Range(0, m_NumTreesSP));
                 int index = (int)Random.Range(0, 3);
                 Debug.Log(index);
-                m_Trees[i].m_Instance = Instantiate(m_TreePrefab[index], m_TreeSpawn.position + randomPos, randomRot) as GameObject;
+                m_Trees[i].m_Instance = Instantiate(m_TreePrefab[index], spawnPoint.position + randomPos, randomRot) as GameObject;
                 m_Trees[i].m_TreeNumber = i + 1;
                 m_Trees[i].Setup();
             }

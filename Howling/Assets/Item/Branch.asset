@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Branch
   ItemImage: {fileID: 21300000, guid: 4bd0f295d8695284dbe2784be4ddebf0, type: 3}
-  ItemPrefab: {fileID: 100000, guid: e7da5c69433e1504493e93ce3fa9ceee, type: 3}
+  ItemPrefab: {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727,
+    type: 3}
   weaponType: 
   itemType: 2
