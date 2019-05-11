@@ -54,7 +54,7 @@ namespace Howling
             horizontalMove = Input.GetAxis("Horizontal");
             if (Input.GetButton("Run") && (statusController.GetCurrentMp() > 0))
             {
-                if (tutorialController.currentShow > 1)
+                if (tutorialController.currentShow > 2)
                     state = PlayerState.run;
             }
             else state = PlayerState.walk;
@@ -64,11 +64,11 @@ namespace Howling
 
         void FixedUpdate()
         {
-            if (!Slot.isSlotDrag && tutorialController.currentShow > 2)
+            if (!Slot.isSlotDrag && tutorialController.currentShow > 0)
             {
                 PlayerRotation();
             }
-            if (tutorialController.currentShow > 0)
+            if (tutorialController.currentShow > 1)
                 PlayerMove();
         }
 

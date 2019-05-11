@@ -55,8 +55,11 @@ namespace Howling
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                CheckItem();
-                CanPickUp();
+                if (tutorialController.currentShow > 3)
+                {
+                    CheckItem();
+                    CanPickUp();
+                }
             }
         }
 
