@@ -18,6 +18,8 @@ namespace Howling
         [HideInInspector] public bool isPlayerRun = false;
         [HideInInspector] public bool isPlayerRotation = false;
         [HideInInspector] public bool isPlayerGetItem = false;
+        [HideInInspector] public bool isPlayerAttack = false;
+        [HideInInspector] public bool isPlayerUseItem = false;
 
         private void Start()
         {
@@ -27,23 +29,17 @@ namespace Howling
         private IEnumerator TutorialLoop(float delayTime)
         {
             yield return StartCoroutine(DelayTime(delayTime));
-            //currentTutorial = transform.GetChild(currentShow).gameObject;
-            //currentTutorial.SetActive(true);
             currentShow++;
+            currentTutorial = transform.GetChild(currentShow).gameObject;
+            currentTutorial.SetActive(true);
             switch (currentShow)
             {
-                case 1:
-                    yield return ShowMove();
-                    break;
-                case 2:
-                    yield return ShowRun();
-                    break;
-                case 3:
-                    yield return ShowRotation();
-                    break;
-                case 4:
-                    yield return ShowGetItem();
-                    break;
+                case 1: yield return ShowRotation(); break;
+                case 2: yield return ShowMove(); break;
+                case 3: yield return ShowRun(); break;
+                case 4: yield return ShowGetItem(); break;
+                case 5: yield return ShowAttack(); break;
+                case 6: yield return ShowUseItem(); break;
             }
             if (currentShow < maxShow)
                 StartCoroutine(TutorialLoop(readyTime));
@@ -51,10 +47,17 @@ namespace Howling
                 Debug.Log("튜토리얼 끝!");
         }
 
+        private IEnumerator ShowRotation()
+        {
+            while (!isPlayerRotation)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(DelayTime(delayDeleteTime));
+        }
+
         private IEnumerator ShowMove()
         {
-            currentTutorial = transform.GetChild(currentShow).gameObject;
-            currentTutorial.SetActive(true);
             while (!isPlayerMove)
             {
                 yield return null;
@@ -64,8 +67,6 @@ namespace Howling
 
         private IEnumerator ShowRun()
         {
-            currentTutorial = transform.GetChild(currentShow).gameObject;
-            currentTutorial.SetActive(true);
             while (!isPlayerRun)
             {
                 yield return null;
@@ -73,22 +74,27 @@ namespace Howling
             yield return StartCoroutine(DelayTime(deleteTime));
         }
 
-        private IEnumerator ShowRotation()
+        private IEnumerator ShowGetItem()
         {
-            currentTutorial = transform.GetChild(currentShow).gameObject;
-            currentTutorial.SetActive(true);
-            while (!isPlayerRotation)
+            while (!isPlayerGetItem)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(DelayTime(deleteTime));
+        }
+
+        private IEnumerator ShowAttack()
+        {
+            while (!isPlayerAttack)
             {
                 yield return null;
             }
             yield return StartCoroutine(DelayTime(delayDeleteTime));
         }
 
-        private IEnumerator ShowGetItem()
+        private IEnumerator ShowUseItem()
         {
-            currentTutorial = transform.GetChild(currentShow).gameObject;
-            currentTutorial.SetActive(true);
-            while (!isPlayerGetItem)
+            while (!isPlayerUseItem)
             {
                 yield return null;
             }
