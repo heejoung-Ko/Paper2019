@@ -4,155 +4,165 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+namespace Howling
 {
-    public static bool isSlotClick = false;
-    public static bool isSlotDrag = false;
-
-    public Item item;
-    public int itemCount;
-    public Image itemImage;
-    
-    [SerializeField]
-    private Text text_Count;
-    [SerializeField]
-    private GameObject go_CountImage;
-
-    private ItemEffectDB itemEffectDB;
-
-    void Start()
+    public class Slot : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
-        itemEffectDB = FindObjectOfType<ItemEffectDB>();
-        isSlotClick = false;
-        isSlotDrag = false;
-    }
+        public static bool isSlotClick = false;
+        public static bool isSlotDrag = false;
 
-    private void SetColor(float alpha)
-    {
-        Color color = itemImage.color;
-        color.a = alpha;
-        itemImage.color = color;
+        public Item item;
+        public int itemCount;
+        public Image itemImage;
 
-        if (item != null)
+        [SerializeField]
+        private Text text_Count;
+        [SerializeField]
+        private GameObject go_CountImage;
+
+        private ItemEffectDB itemEffectDB;
+        private TutorialController tutorialController;
+
+        void Start()
         {
-            if (item.itemType != Item.ItemType.Equipment)
+            itemEffectDB = FindObjectOfType<ItemEffectDB>();
+            isSlotClick = false;
+            isSlotDrag = false;
+            tutorialController = FindObjectOfType<TutorialController>();
+        }
+
+        private void SetColor(float alpha)
+        {
+            Color color = itemImage.color;
+            color.a = alpha;
+            itemImage.color = color;
+
+            if (item != null)
             {
-                if (alpha - float.Epsilon <= 0f) go_CountImage.SetActive(false);
-                else go_CountImage.SetActive(true);
+                if (item.itemType != Item.ItemType.Equipment)
+                {
+                    if (alpha - float.Epsilon <= 0f) go_CountImage.SetActive(false);
+                    else go_CountImage.SetActive(true);
+                }
             }
         }
-    }
 
-    public void AddItem(Item addItem, int cnt = 1)
-    {
-        item = addItem;
-        itemCount = cnt;
-        itemImage.sprite = item.ItemImage;
-
-        if (item.itemType != Item.ItemType.Equipment)
+        public void AddItem(Item addItem, int cnt = 1)
         {
-            go_CountImage.SetActive(true);
-            text_Count.text = itemCount.ToString();
+            item = addItem;
+            itemCount = cnt;
+            itemImage.sprite = item.ItemImage;
+
+            if (item.itemType != Item.ItemType.Equipment)
+            {
+                go_CountImage.SetActive(true);
+                text_Count.text = itemCount.ToString();
+            }
+            else
+            {
+                text_Count.text = "0";
+                go_CountImage.SetActive(false);
+            }
+
+            SetColor(1);
         }
-        else
+
+        public void SetSlotCount(int cnt)
         {
+            itemCount += cnt;
+            text_Count.text = itemCount.ToString();
+
+            if (itemCount <= 0)
+                ClearSlot();
+        }
+
+        private void ClearSlot()
+        {
+            item = null;
+            itemCount = 0;
+            itemImage.sprite = null;
+            SetColor(0);
+
             text_Count.text = "0";
             go_CountImage.SetActive(false);
         }
 
-        SetColor(1);
-    }
-
-    public void SetSlotCount(int cnt)
-    {
-        itemCount += cnt;
-        text_Count.text = itemCount.ToString();
-
-        if (itemCount <= 0)
-            ClearSlot();
-    }
-
-    private void ClearSlot()
-    {
-        item = null;
-        itemCount = 0;
-        itemImage.sprite = null;
-        SetColor(0);
-
-        text_Count.text = "0";
-        go_CountImage.SetActive(false);
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Right)
+        public void OnPointerDown(PointerEventData eventData)
         {
-            if (item != null)
+            if (eventData.button == PointerEventData.InputButton.Left)
+                isSlotClick = true;
+            if (eventData.button == PointerEventData.InputButton.Right)
             {
-                itemEffectDB.UseItem(item);
-                if (item.itemType == Item.ItemType.Used)
-                    SetSlotCount(-1);
+                if (item != null)
+                {
+                    if (tutorialController.currentShow > 5)
+                    {
+                        itemEffectDB.UseItem(item);
+                        if (item.itemType == Item.ItemType.Used)
+                            SetSlotCount(-1);
+                        tutorialController.isPlayerUseItem = true;
+                    }
+                }
             }
         }
-    }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        isSlotClick = true;
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        isSlotClick = false;
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (item != null)
+        public void OnPointerUp(PointerEventData eventData)
         {
-            isSlotDrag = true;
-            DragSlot.instance.dragSlot = this;
-            DragSlot.instance.DragSetImage(itemImage);
-
-            DragSlot.instance.transform.position = eventData.position;
-            SetColor(0);
+            if (eventData.button == PointerEventData.InputButton.Left)
+                isSlotClick = false;
         }
-    }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (item != null)
+        public void OnBeginDrag(PointerEventData eventData)
         {
-            DragSlot.instance.transform.position = eventData.position;
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (item != null)
+                {
+                    isSlotDrag = true;
+                    DragSlot.instance.dragSlot = this;
+                    DragSlot.instance.DragSetImage(itemImage);
+
+                    DragSlot.instance.transform.position = eventData.position;
+                    SetColor(0);
+                }
+            }
         }
-    }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        isSlotDrag = false;
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (item != null)
+                {
+                DragSlot.instance.transform.position = eventData.position;
+            }
+        }
 
-        DragSlot.instance.SetColor(0);
-        DragSlot.instance.dragSlot = null;
-        if (item != null)
-            SetColor(1);
-    }
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            isSlotDrag = false;
 
-    public void OnDrop(PointerEventData eventData)
-    {
-        if (DragSlot.instance.dragSlot != null)
-            ChangeSlot();
-    }
+            DragSlot.instance.SetColor(0);
+            DragSlot.instance.dragSlot = null;
+            if (item != null)
+                SetColor(1);
+        }
 
-    private void ChangeSlot()
-    {
-        Item tempItem = item;
-        int tempItemCount = itemCount;
+        public void OnDrop(PointerEventData eventData)
+        {
+            if (DragSlot.instance.dragSlot != null)
+                ChangeSlot();
+        }
 
-        AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+        private void ChangeSlot()
+        {
+            Item tempItem = item;
+            int tempItemCount = itemCount;
 
-        if (tempItem != null)
-            DragSlot.instance.dragSlot.AddItem(tempItem, tempItemCount);
-        else
-            DragSlot.instance.dragSlot.ClearSlot();
+            AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+
+            if (tempItem != null)
+                DragSlot.instance.dragSlot.AddItem(tempItem, tempItemCount);
+            else
+                DragSlot.instance.dragSlot.ClearSlot();
+        }
     }
 }

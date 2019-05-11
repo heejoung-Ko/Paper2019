@@ -16,6 +16,7 @@ namespace Howling
         private int atk = 10;
 
         private Animator animator;
+        private TutorialController tutorialController;
 
         // Start is called before the first frame update
         void Awake()
@@ -25,6 +26,7 @@ namespace Howling
             currentAtkTime = 0;
             isAtk = false;
             animator = GetComponent<Animator>();
+            tutorialController = FindObjectOfType<TutorialController>();
         }
 
         // Update is called once per frame
@@ -37,9 +39,14 @@ namespace Howling
             {
                 if (Input.GetMouseButtonDown(0) && Slot.isSlotClick == false)
                 {
+                    if (tutorialController.currentShow > 4)
+                    {
                     AttackCheck();
                     currentAtkTime = 0;
                     animator.SetBool("Attack", true);
+
+                    tutorialController.isPlayerAttack = true;
+                    }
                 }
             }
 

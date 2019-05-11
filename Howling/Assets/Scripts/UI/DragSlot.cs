@@ -3,29 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DragSlot : MonoBehaviour
+namespace Howling
 {
-    static public DragSlot instance;
-    public Slot dragSlot;
-
-    [SerializeField]
-    private Image imageItem;
-
-    void Start()
+    public class DragSlot : MonoBehaviour
     {
-        instance = this;
-    }
+        static public DragSlot instance;
+        public Slot dragSlot;
 
-    public void DragSetImage(Image img)
-    {
-        imageItem.sprite = img.sprite;
-        SetColor(1);
-    }
+        [SerializeField]
+        private Image imageItem;
 
-    public void SetColor(float alpha)
-    {
-        Color color = imageItem.color;
-        color.a = alpha;
-        imageItem.color = color;
+        void Start()
+        {
+            instance = this;
+        }
+
+        public void DragSetImage(Image img)
+        {
+            imageItem.sprite = img.sprite;
+            SetColor(1);
+        }
+
+        public void SetColor(float alpha)
+        {
+            Color color = imageItem.color;
+            color.a = alpha;
+            imageItem.color = color;
+        }
     }
 }
