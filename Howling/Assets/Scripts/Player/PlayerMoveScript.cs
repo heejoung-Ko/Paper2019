@@ -12,6 +12,7 @@ namespace Howling
         private Transform playerCamera = null;
         private Animator animator;
         private StatusController statusController;
+        private TutorialController tutorialController;
 
         // WASD move
         private float velocity = 0.0f;
@@ -42,6 +43,7 @@ namespace Howling
             playerCamera = Camera.main.transform;
             animator = GetComponent<Animator>();
             statusController = FindObjectOfType<StatusController>();
+            tutorialController = FindObjectOfType<TutorialController>();
         }
 
         void Update()
@@ -58,7 +60,7 @@ namespace Howling
 
         void FixedUpdate()
         {
-            if (!Slot.isSlotDrag)
+            if (!Slot.isSlotDrag && tutorialController.currentShow > 1)
             {
                 PlayerRotation();
             }
@@ -79,6 +81,8 @@ namespace Howling
                 rotationY = Mathf.Clamp(rotationY, minY, maxY);
                 playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
             }
+
+            tutorialController.isPlayerRotation = true;
         }
 
         private void PlayerMove()
@@ -95,7 +99,7 @@ namespace Howling
                 animator.SetBool("isRunning", false);
                 return;
             }
-
+            
             // WASD/방향키 move
             if (state == PlayerState.walk)
             {
@@ -125,6 +129,8 @@ namespace Howling
             moveVector = moveVector.normalized * velocity * Time.deltaTime;
             transform.Translate(moveVector);
             //rigidbody.MovePosition(transform.position + moveVector);
+
+            tutorialController.isPlayerMove = true;
         }
 
         //private void PlayerJump()
