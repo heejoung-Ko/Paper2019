@@ -30,9 +30,9 @@ namespace Howling
 
         // mouse rotation
         private float minY = -60.0f;
-        private float maxY = 90.0f;
-        private float sensX = 100.0f;
-        private float sensY = 50.0f;
+        private float maxY = 60.0f;
+        private float sensX = 300.0f;
+        private float sensY = 150.0f;
         private float rotationX = 0.0f;
         private float rotationY = 0.0f;
         private float mouseRotationX = 0.0f;
