@@ -7,7 +7,7 @@ namespace Howling
 {
     public class GameManager : MonoBehaviour
     {
-        public float m_StartDelay = 0f;
+        public float m_StartDelay = 3f;
         public float m_EndDelay = 3f;
         private WaitForSeconds m_StartWait;
         private WaitForSeconds m_EndWait;
@@ -15,6 +15,7 @@ namespace Howling
         public GameObject m_PlayerPrefab;
         public GameObject m_EnemyPrefab;
         public GameObject[] m_TreePrefab;
+        public GameObject logo;
 
         public PLAYERManager m_Player;
         public EnemyManager[] m_Enemys;
@@ -85,6 +86,13 @@ namespace Howling
             //SceneManager.LoadScene(0);
         }
 
+        private IEnumerator Delay(float deleyTime)
+        {
+            yield return new WaitForSeconds(deleyTime);
+            if (logo != null)
+                logo.SetActive(false);
+        }
+
         private IEnumerator GameStarting()
         { 
             ResetPlayer();
@@ -92,8 +100,10 @@ namespace Howling
             ResetAllTrees();
             //DisableControl();
 
-            yield return m_StartWait;
-            //yield return null;
+            if (logo != null)
+                logo.SetActive(true);
+
+            yield return Delay(m_StartDelay);
         }
 
         private IEnumerator GamePlaying()
