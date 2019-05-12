@@ -17,7 +17,7 @@ public class WolfAgent : Agent
 
     private Rigidbody wolfRigidbody;
     public Transform pivotTransform; // 위치 기준점
-    
+
     // 타겟이 상태에 따라 유동적으로 바뀌어야함
     public Transform target;
     public Transform target2;
@@ -60,7 +60,6 @@ public class WolfAgent : Agent
         //Debug.Log("ResetTarget");
 
         targetEaten = false;
-        rest = false;
         Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
         target.position = randomPos + pivotTransform.position;
 
@@ -109,9 +108,11 @@ public class WolfAgent : Agent
         AddVectorObs(Mathf.Clamp(relativePos.x / maxRange, -1f, 1f));
         AddVectorObs(Mathf.Clamp(relativePos.z / maxRange, -1f, 1f));
 
-        AddVectorObs(Mathf.Clamp(wolfRigidbody.velocity.x/ maxRange, -1f, 1f));
-        AddVectorObs(Mathf.Clamp(wolfRigidbody.velocity.z/ maxRange, -1f, 1f));
+        AddVectorObs(Mathf.Clamp(wolfRigidbody.velocity.x / maxRange, -1f, 1f));
+        AddVectorObs(Mathf.Clamp(wolfRigidbody.velocity.z / maxRange, -1f, 1f));
 
+        AddVectorObs(Mathf.Clamp(hungry / 100f, -1f, 1f));
+        AddVectorObs(Mathf.Clamp(hp / 100f, -1f, 1f));
         //AddVectorObs(state, NUM_STATE);
     }
 
@@ -123,7 +124,8 @@ public class WolfAgent : Agent
             //AddReward(0.005f);
             hungryPenalty = -(100f - hungry) * 0.001f;
             hpPenalty = -(100f - hp) * 0.001f;
-        } else
+        }
+        else
         {
             hungryPenalty = -(100f - hungry) * 0.002f;
             hpPenalty = -(100f - hp) * 0.002f;
@@ -143,7 +145,7 @@ public class WolfAgent : Agent
             Debug.Log("먹었다!");
             ResetTarget();
 
-            AddReward(10.0f);
+            AddReward(1.0f);
             //if (state == (int)WolfState.Hungry)
             //{
             //    AddReward(1.0f);
@@ -157,7 +159,7 @@ public class WolfAgent : Agent
             //    AddReward(0.01f);
             //}
 
-            hungry = hungry + 10f;
+            hungry = hungry + 50f;
             hungry = Mathf.Clamp(hungry, 0f, 100f);
 
         }
@@ -165,7 +167,7 @@ public class WolfAgent : Agent
         {
             Debug.Log("쉬고있다!");
 
-            AddReward(5f);
+            AddReward(0.5f);
             //if (state == (int)WolfState.Hungry)
             //{
             //    AddReward(0.01f);
@@ -179,22 +181,20 @@ public class WolfAgent : Agent
             //    AddReward(1.0f);
             //}
 
-            hp = hp + 5f;
+            hp = hp + 20f;
             hp = Mathf.Clamp(hp, 0f, 100f);
-
-            rest = false;
         }
 
         if (dead)
         {
-            AddReward(-10.0f);
+            AddReward(-1.0f);
             Done();
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("food"))
+        if (collision.collider.CompareTag("food"))
         {
             targetEaten = true;
         }
@@ -204,11 +204,20 @@ public class WolfAgent : Agent
         }
 
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("home"))
+        {
+            rest = false;
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("dead"))
+        if (other.CompareTag("dead"))
         {
-         //   Debug.Log(hungryPenalty);
+            //   Debug.Log(hungryPenalty);
             dead = true;
         }
     }
@@ -221,20 +230,20 @@ public class WolfAgent : Agent
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < minRange || transform.position.z < minRange || transform.position.y < -1f)
-        {
-            Debug.Log("작아서 주금");
-            dead = true;
-        }
-        else if (transform.position.x > maxRange || transform.position.z > maxRange || transform.position.y > 3f)
-        {
-            Debug.Log("커서 주금");
-            dead = true;
-        }
+        //if (transform.position.x < minRange || transform.position.z < minRange || transform.position.y < -1f)
+        //{
+        //    Debug.Log("작아서 주금");
+        //    dead = true;
+        //}
+        //else if (transform.position.x > maxRange || transform.position.z > maxRange || transform.position.y > 3f)
+        //{
+        //    Debug.Log("커서 주금");
+        //    dead = true;
+        //}
 
-        if(hungry + hp <= 120f)
+        if (hungry + hp <= 150f)
         {
-            if(hungry >= hp)
+            if (hungry >= hp)
                 state = (int)WolfState.Died;
             else
                 state = (int)WolfState.Hungry;
@@ -248,6 +257,11 @@ public class WolfAgent : Agent
         hp = hp - Time.deltaTime;
 
         if (hungry <= 0f)
+        {
+            hp = hp - Time.deltaTime;
+        }
+
+        if (hp <= 0f)
         {
             dead = true;
         }
