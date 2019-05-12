@@ -7,12 +7,12 @@ namespace Howling
     public class TutorialController : MonoBehaviour
     {
         private GameObject currentTutorial = null;
-        private float startTime = 1f;
+        private float startTime = 4f;
         private float readyTime = 2f;
-        private float deleteTime = 0.5f;
+        private float deleteTime = 1f;
         private float delayDeleteTime = 3f;
 
-        [HideInInspector] public int currentShow = 6;
+        [HideInInspector] public int currentShow = 0;
         private int maxShow = 6;
         [HideInInspector] public bool isPlayerMove = false;
         [HideInInspector] public bool isPlayerRun = false;
@@ -30,6 +30,7 @@ namespace Howling
         {
             yield return StartCoroutine(DelayTime(delayTime));
             currentShow++;
+            Debug.Log("currentShow: " + currentShow);
             currentTutorial = transform.GetChild(currentShow).gameObject;
             currentTutorial.SetActive(true);
             switch (currentShow)
@@ -42,7 +43,9 @@ namespace Howling
                 case 6: yield return ShowUseItem(); break;
             }
             if (currentShow < maxShow)
+            {
                 StartCoroutine(TutorialLoop(readyTime));
+            }
             else
                 Debug.Log("튜토리얼 끝!");
         }
