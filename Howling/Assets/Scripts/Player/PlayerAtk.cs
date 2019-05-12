@@ -62,6 +62,8 @@ namespace Howling
         {
             Enemy enemy = obj.GetComponentInParent<Enemy>();
             enemy.DecreaseHp(atk);
+            EnemyExplosion enemyExplosion = enemy.GetComponentInChildren<EnemyExplosion>();
+            enemyExplosion.isEnemyAtked = true;
         }
     }
 }
