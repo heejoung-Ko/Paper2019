@@ -5,31 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - agent
-  - iWall
-  - banana
   - wall
-  - badBanana
-  - pit
   - frozenAgent
-  - ball
-  - redGoal
-  - blueGoal
-  - blueAgent
-  - redAgent
-  - redBlock
-  - goal
   - ground
-  - orangeBlock
-  - block
-  - orangeGoal
-  - switchOff
-  - pyramid
-  - switchOn
   - stone
   - target
   - rock
   - item
   - enemyCollider
+  - walkableSurface
+  - enemy
   layers:
   - Default
   - TransparentFX
