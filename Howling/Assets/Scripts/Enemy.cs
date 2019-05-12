@@ -189,7 +189,6 @@ namespace Howling
                 nextStateTime = 2f;
                 velocity = 0f;
                 oldRotation = transform.rotation;
-                isAttack = true;
                 return;
             }
 
@@ -324,6 +323,7 @@ namespace Howling
         {
             if (state == EnemyState.attack && !isAttack)
             {
+                isAttack = true;
                 target.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
             }
         }

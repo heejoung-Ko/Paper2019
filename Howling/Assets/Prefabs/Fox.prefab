@@ -675,12 +675,12 @@ Rigidbody:
   m_GameObject: {fileID: 5799073788491652058}
   serializedVersion: 2
   m_Mass: 20
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 100
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!135 &6317909534312932289
 SphereCollider:
@@ -805,8 +805,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4300603, y: 1.464026, z: 1.1773033}
-  m_Center: {x: 0.0065569133, y: 0.7429402, z: 0.047418594}
+  m_Size: {x: 0.40141183, y: 1.2015362, z: 1.1773033}
+  m_Center: {x: 0.0017820299, y: 0.6116953, z: 0.047418594}
 --- !u!1 &7167689050698558178
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +863,7 @@ Transform:
   m_GameObject: {fileID: 7525768998225119711}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 8992675088917666014}
   - {fileID: 3283680769765427849}
