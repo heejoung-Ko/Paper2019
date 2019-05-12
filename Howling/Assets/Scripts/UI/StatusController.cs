@@ -47,9 +47,6 @@ public class StatusController : MonoBehaviour
 
     private const int HP = 0, MP = 1, HUNGRY = 2, THIRSTY = 3;
 
-    private float invincibleTime = 2f; // 무적 시간
-    private float currentInvincibleTime = 0f;
-
     // Use this for initialization
     void Start()
     {
@@ -67,11 +64,6 @@ public class StatusController : MonoBehaviour
         MpRechargeTime();
         MpRecover();
         GaugeUpdate();
-
-        if (currentInvincibleTime <= invincibleTime)
-        {
-            currentInvincibleTime += Time.deltaTime;
-        }
     }
 
     private void Hungry()
@@ -223,11 +215,8 @@ public class StatusController : MonoBehaviour
 
     public void HitEnemy(int enemATK)
     {
-        if (currentInvincibleTime > invincibleTime)
-        {
-            DecreaseHp(enemATK);
-            currentInvincibleTime = 0f;
-            //Debug.Log("맞았당! HP: " + currentHp);
-        }
+        DecreaseHp(enemATK);
+        //Debug.Log("맞았당! HP: " + currentHp);
+        
     }
 }

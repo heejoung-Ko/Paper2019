@@ -35,12 +35,13 @@ namespace Howling
         Vector3 direction;                   // 이동 방향
 
         int hp = 30;         // 체력
-        int atk = 5;        // 공격력
+        int atk = 10;        // 공격력
 
         public float invincibleTime = 1f; // 무적 시간
         public float currentInvincibleTime = 0f;
 
         bool isDead;
+        bool isAttack;
 
         Quaternion oldRotation;
 
@@ -52,6 +53,7 @@ namespace Howling
             animator.SetBool("Dead", false);
             animator.SetBool("isHiting", false);
             isDead = false;
+            isAttack = false;
         }
 
         // Update is called once per frame
@@ -187,6 +189,7 @@ namespace Howling
                 nextStateTime = 2f;
                 velocity = 0f;
                 oldRotation = transform.rotation;
+                isAttack = true;
                 return;
             }
 
@@ -264,6 +267,7 @@ namespace Howling
             {
                 state = EnemyState.trace;
                 ChangeNextState();
+                isAttack = false;
             }
         }
 
@@ -318,7 +322,7 @@ namespace Howling
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (state == EnemyState.attack)
+            if (state == EnemyState.attack && !isAttack)
             {
                 target.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
             }
