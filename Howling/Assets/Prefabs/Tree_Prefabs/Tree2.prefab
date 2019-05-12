@@ -70,6 +70,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4458052660133259918}
     m_Modifications:
+    - target: {fileID: 100000, guid: 5b4604c391d3329439e92e42be08fee4, type: 3}
+      propertyPath: m_Name
+      value: OakTree2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5b4604c391d3329439e92e42be08fee4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5b4604c391d3329439e92e42be08fee4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -114,14 +122,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 5b4604c391d3329439e92e42be08fee4, type: 3}
-      propertyPath: m_Name
-      value: OakTree2
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 5b4604c391d3329439e92e42be08fee4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b4604c391d3329439e92e42be08fee4, type: 3}
 --- !u!4 &3223630593009120437 stripped
@@ -147,7 +147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7f9c2f031ffc3a34ab5e0b9641e6413a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.02
+      value: -2.42
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7f9c2f031ffc3a34ab5e0b9641e6413a, type: 3}
       propertyPath: m_LocalPosition.z
