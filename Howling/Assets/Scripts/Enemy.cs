@@ -19,6 +19,10 @@ namespace Howling
 
         float attackDist = 1.5f;            // 공격 범위
 
+        private const float atkPos = 1f;
+        private float atkRange = 1f;
+        private LayerMask targetMask;
+
         float velocity = 0.0f;               // 속도
         float walkAcc = 0.6f;               // 걸을 때 가속도
         float runAcc = 1.3f;                // 뛸 때 가속도 (추적, 도주 상태 일 때)
@@ -54,6 +58,7 @@ namespace Howling
             animator.SetBool("isHiting", false);
             isDead = false;
             isAttack = false;
+            targetMask = 1 << LayerMask.NameToLayer("Player");
         }
 
         // Update is called once per frame
@@ -254,6 +259,17 @@ namespace Howling
                 rotation.eulerAngles = new Vector3(0, -60f, 0);
                 Quaternion newRotation = oldRotation * rotation;
                 this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
+
+                if (!isAttack)
+                {
+                    Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
+                    foreach (Collider t in targets)
+                    {
+                        Debug.Log(t.tag);
+                        t.gameObject.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
+                        isAttack = true;
+                    }
+                }
             }
             else if(nowStateTime <= nextStateTime)
             {
@@ -317,15 +333,6 @@ namespace Howling
                 }
             }
             Debug.Log("enemy hp: " + hp);
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (state == EnemyState.attack && !isAttack)
-            {
-                isAttack = true;
-                target.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
-            }
         }
 
         void DropItem()
