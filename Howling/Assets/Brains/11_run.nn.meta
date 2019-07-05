@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 82172ddd7fa2d4b4398283e18e2c2ea9
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400000: Assets/Brains/11_run.nn
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 83221ad3db87f4b3b91b041047cb2bc5, type: 3}

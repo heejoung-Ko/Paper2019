@@ -27,7 +27,7 @@ Wolf Learning Brain :
     lamdda : 0.99
     buffer_size : 4096
     batch_size : 256
-    max_steps : 2.0e4
+    max_steps : 50.0e4
 
 BananaLearning:
     normalize: false

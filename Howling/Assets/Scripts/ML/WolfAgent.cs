@@ -7,12 +7,12 @@ public class WolfAgent : Agent
 {
     public enum WolfState
     {
-        Hungry, Died, Normal
+        Hungry = 1, Died, Normal
     };
 
     public enum PlayerRelation
     {
-        Enemy, Stranger, Friend, Soulmate
+        Enemy , Stranger, Friend, Soulmate
     }
 
     private Rigidbody wolfRigidbody;
@@ -110,10 +110,11 @@ public class WolfAgent : Agent
 
         AddVectorObs(Mathf.Clamp(wolfRigidbody.velocity.x / maxRange, -1f, 1f));
         AddVectorObs(Mathf.Clamp(wolfRigidbody.velocity.z / maxRange, -1f, 1f));
-
+     
         AddVectorObs(Mathf.Clamp(hungry / 100f, -1f, 1f));
         AddVectorObs(Mathf.Clamp(hp / 100f, -1f, 1f));
-        //AddVectorObs(state, NUM_STATE);
+     
+        AddVectorObs(Mathf.Clamp(state / 3, -1, 1));
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -122,17 +123,28 @@ public class WolfAgent : Agent
         if (state == (int)WolfState.Normal)
         {
             //AddReward(0.005f);
-            hungryPenalty = -(100f - hungry) * 0.001f;
-            hpPenalty = -(100f - hp) * 0.001f;
+            hungryPenalty = -(100f - hungry) * 0.0001f;
+            hpPenalty = -(100f - hp) * 0.0001f;
         }
-        else
+        else if(state ==(int)WolfState.Died)
         {
-            hungryPenalty = -(100f - hungry) * 0.002f;
-            hpPenalty = -(100f - hp) * 0.002f;
+            hungryPenalty = -(100f - hungry) * 0.0001f;
+            hpPenalty = -(100f - hp) * 0.0002f;
+        }
+        else if (state == (int)WolfState.Hungry)
+        {
+            hungryPenalty = -(100f - hungry) * 0.0003f;
+            hpPenalty = -(100f - hp) * 0.0001f;
         }
 
         penalty = hungryPenalty + hpPenalty;
         AddReward(penalty);
+
+        Vector3 distanceToTarget = target.position - transform.position;
+
+        float distanceReward = (100f - distanceToTarget.sqrMagnitude) * 0.01f;
+        AddReward(distanceReward);
+
 
         float horizontalInput = vectorAction[0];
         float verticalInput = vectorAction[1];
@@ -143,7 +155,6 @@ public class WolfAgent : Agent
         if (targetEaten)
         {
             Debug.Log("먹었다!");
-            ResetTarget();
 
             AddReward(1.0f);
             //if (state == (int)WolfState.Hungry)
@@ -156,12 +167,13 @@ public class WolfAgent : Agent
             //}
             //else if (state == (int)WolfState.Died)
             //{
-            //    AddReward(0.01f);
+            //    AddReward(0.1f);
             //}
 
-            hungry = hungry + 50f;
+            hungry = hungry + 20f;
             hungry = Mathf.Clamp(hungry, 0f, 100f);
 
+            ResetTarget();
         }
         else if (rest)
         {
@@ -170,7 +182,7 @@ public class WolfAgent : Agent
             AddReward(0.5f);
             //if (state == (int)WolfState.Hungry)
             //{
-            //    AddReward(0.01f);
+            //    AddReward(0.1f);
             //}
             //else if (state == (int)WolfState.Normal)
             //{
@@ -190,6 +202,9 @@ public class WolfAgent : Agent
             AddReward(-1.0f);
             Done();
         }
+
+        //  이름, 어떤 값, 위치
+        //Monitor.Log("reword", GetCumulativeReward(), this.gameObject.transform);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -252,8 +267,9 @@ public class WolfAgent : Agent
         {
             state = (int)WolfState.Normal;
         }
-
-        hungry = hungry - (Time.deltaTime * 2.0f);
+        
+        if(hungry > 0f)
+            hungry = hungry - (Time.deltaTime * 0.5f);
         hp = hp - Time.deltaTime;
 
         if (hungry <= 0f)

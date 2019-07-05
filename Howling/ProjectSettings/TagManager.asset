@@ -15,6 +15,9 @@ TagManager:
   - enemyCollider
   - walkableSurface
   - enemy
+  - dead
+  - food
+  - home
   layers:
   - Default
   - TransparentFX
