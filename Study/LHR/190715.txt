@@ -1,0 +1,8 @@
+- ml-agents v0.8 update 
+https://blogs.unity3d.com/kr/2019/04/15/unity-ml-agents-toolkit-v0-8-faster-training-on-real-games/
+
+- custom data 사용법
+https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Creating-Custom-Protobuf-Messages.md
+
+- AddVectorObs 설명
+https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Design-Agents.md
