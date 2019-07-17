@@ -57,6 +57,10 @@ namespace Howling
             {
                 if (CheckObject())
                 {
+                    if(hitInfo.transform.tag == "rock")
+                    {
+                        hitInfo.transform.GetComponent<Rock>().Mining();
+                    }
                     isSwing = false;
                     Debug.Log(hitInfo.transform.name);
                 }

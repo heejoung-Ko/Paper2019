@@ -56,6 +56,7 @@ namespace Howling
         {
             Collider[] enemys = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, enemyMask);
             foreach (Collider enemy in enemys) Attack(enemy.gameObject);
+            foreach (Collider rock in enemys) Mining(rock.gameObject);
         }
 
         private void Attack(GameObject obj)
@@ -65,5 +66,12 @@ namespace Howling
             EnemyExplosion enemyExplosion = enemy.GetComponentInChildren<EnemyExplosion>();
             enemyExplosion.isEnemyAtked = true;
         }
+
+        private void Mining(GameObject obj)
+        {
+            Rock rock = obj.GetComponentInParent<Rock>();
+            rock.Mining();
+        }
+
     }
 }
