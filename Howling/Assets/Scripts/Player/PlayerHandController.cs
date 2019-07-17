@@ -36,7 +36,7 @@ namespace Howling
         {
             Debug.Log("start attack coroutine");
             isAttack = true;
-            //currentHand.anim.SetTrigger("Attack");
+            currentHand.anim.SetBool("Attack", true);
 
             yield return new WaitForSeconds(currentHand.attackActiveDelay);
             isSwing = true;
@@ -46,7 +46,7 @@ namespace Howling
             yield return new WaitForSeconds(currentHand.attackCancleDelay);
             isSwing = false;
 
-
+            currentHand.anim.SetBool("Attack", false);
             yield return new WaitForSeconds(currentHand.attackDelay - currentHand.attackActiveDelay - currentHand.attackCancleDelay);
             isAttack = false;
         }
