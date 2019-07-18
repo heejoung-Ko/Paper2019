@@ -12,6 +12,8 @@ public class Rock : MonoBehaviour
 
     [SerializeField]
     private SphereCollider col;
+    [SerializeField]
+    private int count; // 돌맹이 등장 갯수
 
     [SerializeField]
     private GameObject basic_rock;
@@ -19,19 +21,17 @@ public class Rock : MonoBehaviour
     private GameObject fract_rock;
     [SerializeField]
     private GameObject effect_rock;
+    [SerializeField]
+    private GameObject item_rock;
 
     [SerializeField]
-    private AudioSource audioSource;
+    private string mining_sound;
     [SerializeField]
-    private AudioClip mining_sound;
-    [SerializeField]
-    private AudioClip crash_sound;
-
+    private string crash_sound;
 
     public void Mining()
     {
-        audioSource.clip = mining_sound;
-        audioSource.Play();
+        SoundManager.instance.PlaySE(mining_sound);
 
         var clone = Instantiate(effect_rock, col.bounds.center, Quaternion.identity);
         Destroy(clone, destroyTime);
@@ -44,10 +44,14 @@ public class Rock : MonoBehaviour
 
     private void Destruction()
     {
-        audioSource.clip = crash_sound;
-        audioSource.Play();
+        SoundManager.instance.PlaySE(crash_sound);
 
         col.enabled = false;
+        for (int i = 0; i < count; i++)
+        {
+            Instantiate(item_rock, basic_rock.transform.position, Quaternion.identity);
+        }
+
         Destroy(basic_rock);
         fract_rock.SetActive(true);
         Destroy(fract_rock, destroyTime);
