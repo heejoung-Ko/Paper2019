@@ -12,7 +12,7 @@ namespace Howling
         private float deleteTime = 1f;
         private float delayDeleteTime = 3f;
 
-        [HideInInspector] public int currentShow = 0;
+        public int currentShow = 7;
         private int maxShow = 6;
         [HideInInspector] public bool isPlayerMove = false;
         [HideInInspector] public bool isPlayerRun = false;

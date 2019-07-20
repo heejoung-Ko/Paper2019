@@ -27,7 +27,7 @@ public class ItemEffectDB : MonoBehaviour
     public void UseItem(Item item)
     {
         if (playerStatus == null)
-            playerStatus = GameObject.Find("PlayerObjects(Clone)").transform.Find("Canvas").Find("Status").GetComponent<StatusController>();
+            playerStatus = GameObject.Find("UIManager").transform.Find("Canvas").Find("Status").GetComponent<StatusController>();
 
         //if (item.itemType == Item.ItemType.Equipment)
         //{
