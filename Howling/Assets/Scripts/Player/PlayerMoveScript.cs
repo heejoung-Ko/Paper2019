@@ -100,8 +100,9 @@ namespace Howling
                 moveVector.Set(horizontalMove, 0, verticalMove);
                 moveVector = moveVector.normalized;
                 transform.Translate(moveVector);
-                animator.SetBool("isMoving", false);
-                animator.SetBool("isRunning", false);
+
+                animator.SetInteger("State", 0);
+                Debug.Log(animator.GetInteger("State"));
                 return;
             }
             
@@ -118,18 +119,21 @@ namespace Howling
                     velocity = velocity - runAcc * Time.deltaTime;
                     velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
                 }
-                animator.SetBool("isMoving", true);
-                animator.SetBool("isRunning", false);
+
+                animator.SetInteger("State", 1);
+                Debug.Log(animator.GetInteger("State"));
             }
             else if (state == PlayerState.run)
             {
                 velocity = velocity + runAcc * Time.deltaTime;
                 velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
-                animator.SetBool("isMoving", true);
-                animator.SetBool("isRunning", true);
+        
                 statusController.DecreaseMp(10);
 
                 tutorialController.isPlayerRun = true;
+
+                animator.SetInteger("State", 2);
+                Debug.Log(animator.GetInteger("State"));
             }
 
             moveVector.Set(horizontalMove, 0, verticalMove);

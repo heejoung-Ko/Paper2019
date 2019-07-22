@@ -33,6 +33,7 @@ namespace Howling
         void Update()
         {
             animator.SetBool("Attack", false);
+
             if (currentAtkTime <= atkTime)
                 currentAtkTime++;
             else
@@ -41,11 +42,11 @@ namespace Howling
                 {
                     if (tutorialController.currentShow > 4)
                     {
-                    AttackCheck();
-                    currentAtkTime = 0;
-                    animator.SetBool("Attack", true);
+                        animator.SetBool("Attack", true);
 
-                    tutorialController.isPlayerAttack = true;
+                        AttackCheck();
+                        currentAtkTime = 0;
+                        tutorialController.isPlayerAttack = true;
                     }
                 }
             }

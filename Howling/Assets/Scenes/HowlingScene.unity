@@ -2448,7 +2448,7 @@ PrefabInstance:
     - target: {fileID: 388661695684618361, guid: b7731a12337d29a4a9b75e13204fba44,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5152069598074103091, guid: b7731a12337d29a4a9b75e13204fba44,
         type: 3}
@@ -2469,7 +2469,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Avatar
       value: 
-      objectReference: {fileID: 9000000, guid: 4b653b37d51efea4183ef8531fb7c466, type: 3}
+      objectReference: {fileID: 9000000, guid: 94fe847c9fb3c5d4ba79aeb031073c2a, type: 3}
     - target: {fileID: 5045246165558586178, guid: b7731a12337d29a4a9b75e13204fba44,
         type: 3}
       propertyPath: actionText
@@ -12569,6 +12569,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: f_player_mecanim
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141737587957312016, guid: 42e2d91aaaae14e4fab3f82d8f14348d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4141737587957312014, guid: 42e2d91aaaae14e4fab3f82d8f14348d,
         type: 3}
