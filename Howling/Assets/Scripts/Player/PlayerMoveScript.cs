@@ -102,7 +102,6 @@ namespace Howling
                 transform.Translate(moveVector);
 
                 animator.SetInteger("State", 0);
-                Debug.Log(animator.GetInteger("State"));
                 return;
             }
             
@@ -121,7 +120,6 @@ namespace Howling
                 }
 
                 animator.SetInteger("State", 1);
-                Debug.Log(animator.GetInteger("State"));
             }
             else if (state == PlayerState.run)
             {
@@ -133,7 +131,6 @@ namespace Howling
                 tutorialController.isPlayerRun = true;
 
                 animator.SetInteger("State", 2);
-                Debug.Log(animator.GetInteger("State"));
             }
 
             moveVector.Set(horizontalMove, 0, verticalMove);

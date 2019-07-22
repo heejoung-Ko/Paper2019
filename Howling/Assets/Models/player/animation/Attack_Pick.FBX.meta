@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 78c5f9cdbae9d2543b236d33fee9089e
+guid: 04cb27dc01c081446ba2c02f2761f01d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -240,7 +240,7 @@ ModelImporter:
     4300012: RPG-Character-Mesh
     4300014: Spear
     4300016: 2Hand-Sword
-    7400000: 2Hand-Sword-Attack5
+    7400000: Player_Attack_Pick
     9500000: //RootNode
     11100000: //RootNode
     13700000: Soldier_Mesh
@@ -257,7 +257,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: Motion
+    motionNodeName: <Root Transform>
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -277,7 +277,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 2Hand-Sword-Attack5
+      name: Player_Attack_Pick
       takeName: Take 001
       firstFrame: 0
       lastFrame: 36

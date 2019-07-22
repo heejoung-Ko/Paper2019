@@ -2485,6 +2485,11 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1978531898}
+    - target: {fileID: 5045246165558586176, guid: b7731a12337d29a4a9b75e13204fba44,
+        type: 3}
+      propertyPath: field of view
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7731a12337d29a4a9b75e13204fba44, type: 3}
 --- !u!1 &302468534
@@ -9828,25 +9833,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7028972262634610052}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1700875278 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5045246165558586180, guid: b7731a12337d29a4a9b75e13204fba44,
-    type: 3}
-  m_PrefabInstance: {fileID: 292386756}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1700875284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700875278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a31299e459e01ac4ea4dc976881822cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headJoint: {fileID: 1727179410}
 --- !u!4 &1702159109 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2918309796397889072, guid: e43a484090aea37439315728426b331e,
@@ -9906,12 +9892,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9052363185018462599, guid: 46c3aaa9c23a2f84496e4f9dc1362dee,
     type: 3}
   m_PrefabInstance: {fileID: 7028972262600529601}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1727179410 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5045246165419496309, guid: b7731a12337d29a4a9b75e13204fba44,
-    type: 3}
-  m_PrefabInstance: {fileID: 292386756}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1733870302 stripped
 Transform:
@@ -12573,7 +12553,7 @@ PrefabInstance:
     - target: {fileID: 4141737587957312016, guid: 42e2d91aaaae14e4fab3f82d8f14348d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4141737587957312014, guid: 42e2d91aaaae14e4fab3f82d8f14348d,
         type: 3}
