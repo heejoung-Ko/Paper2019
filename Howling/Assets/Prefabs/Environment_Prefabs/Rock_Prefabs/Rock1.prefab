@@ -2371,11 +2371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initHp: 3
-  hp: 0
   destroy: 0
   destroyTime: 3
   respawnTime: 10
-  respawnTimeCount: 0
   col: {fileID: 4492385062288619512}
   count: 5
   basic_rock: {fileID: 100000}
