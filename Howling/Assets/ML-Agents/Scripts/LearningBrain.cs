@@ -39,8 +39,7 @@ namespace MLAgents
         private ModelParamLoader _modelParamLoader;
         private TFSharpInferenceEngine _engine;
 #elif ENABLE_BARRACUDA 
-        public Barracuda.NNModel model;
-        //public MLAgents.InferenceBrain.NNModel model;
+        public NNModel model;
         private Model _barracudaModel;
         private IWorker _engine;
         private bool _verbose = false;
