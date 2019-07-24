@@ -142,7 +142,7 @@ public class WolfAgent : Agent
 
         Vector3 distanceToTarget = target.position - transform.position;
 
-        float distanceReward = (100f - distanceToTarget.sqrMagnitude) * 0.01f;
+        float distanceReward = (100f - distanceToTarget.sqrMagnitude) * 0.001f;
         AddReward(distanceReward);
 
 
@@ -212,6 +212,7 @@ public class WolfAgent : Agent
         if (collision.collider.CompareTag("food"))
         {
             targetEaten = true;
+            Debug.Log("닿았다");
         }
         else if (collision.collider.CompareTag("home"))
         {
