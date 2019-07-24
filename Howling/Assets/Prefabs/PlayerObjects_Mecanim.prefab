@@ -1344,7 +1344,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5045246165419593561}
-  - component: {fileID: 5045246165426790589}
   m_Layer: 0
   m_Name: f_player_mecanim
   m_TagString: Untagged
@@ -1368,25 +1367,6 @@ Transform:
   m_Father: {fileID: 5045246167024226977}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5045246165426790589
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5045246165419496313}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1bc011cd7598b0c45a23b23694d8a742, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5045246165419496319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,7 +1609,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5045246165558586180}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a31299e459e01ac4ea4dc976881822cd, type: 3}
   m_Name: 
@@ -1699,10 +1679,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.28518522
-  m_Height: 1.7621238
+  m_Radius: 0.3107823
+  m_Height: 1.6960284
   m_Direction: 1
-  m_Center: {x: 0.002538383, y: 0.85266614, z: 0.039026856}
+  m_Center: {x: 0.002538383, y: 0.8857139, z: 0.06462395}
 --- !u!114 &5045246167024226980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1784,6 +1764,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9083275970416870917}
     m_Modifications:
+    - target: {fileID: 100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
+      propertyPath: m_Name
+      value: knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -1826,14 +1814,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
-      propertyPath: m_Name
-      value: knife
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
