@@ -12,12 +12,12 @@ namespace Howling
         private WaitForSeconds m_StartWait;
         private WaitForSeconds m_EndWait;
 
-        public GameObject m_PlayerPrefab;
+        //public GameObject m_PlayerPrefab;
         public GameObject m_EnemyPrefab;
         public GameObject[] m_TreePrefab;
         public GameObject logo;
 
-        public PLAYERManager m_Player;
+        //public PLAYERManager m_Player;
         public EnemyManager[] m_Enemys;
         public TreeManager[] m_Trees;
 
@@ -35,7 +35,7 @@ namespace Howling
             m_StartWait = new WaitForSeconds(m_StartDelay);
             m_EndWait = new WaitForSeconds(m_EndDelay);
 
-            SpawnPlayer();
+            //SpawnPlayer();
             SpawnAllEnemy();
             SpawnAllTree();
 
@@ -44,8 +44,8 @@ namespace Howling
 
         private void SpawnPlayer()
         {
-            m_Player.m_Instance = Instantiate(m_PlayerPrefab, m_Player.m_SpawnPoint.position, m_Player.m_SpawnPoint.rotation) as GameObject;
-            m_Player.Setup();
+            //m_Player.m_Instance = Instantiate(m_PlayerPrefab, m_Player.m_SpawnPoint.position, m_Player.m_SpawnPoint.rotation) as GameObject;
+            //m_Player.Setup();
         }
 
         private void SpawnAllEnemy()
@@ -95,7 +95,7 @@ namespace Howling
 
         private IEnumerator GameStarting()
         { 
-            ResetPlayer();
+            //ResetPlayer();
             ResetAllEnemys();
             ResetAllTrees();
             //DisableControl();
@@ -126,14 +126,14 @@ namespace Howling
 
         private bool PlayerLeft()
         {
-            if (m_Player.m_Instance.activeSelf)
+            if (true)
                 return true;
             return false;
         }
 
         private void ResetPlayer()
         {
-            m_Player.Reset();
+            //m_Player.Reset();
         }
 
         private void ResetAllEnemys()
@@ -154,7 +154,7 @@ namespace Howling
 
         private void EnableControl()
         {
-            m_Player.EnableControl();
+            //m_Player.EnableControl();
             for (int i = 0; i < m_Enemys.Length; i++)
             {
                 m_Enemys[i].EnableControl();
@@ -167,7 +167,7 @@ namespace Howling
 
         private void DisableControl()
         {
-            m_Player.DisableControl();
+            //m_Player.DisableControl();
             for (int i = 0; i < m_Enemys.Length; i++)
             {
                 m_Enemys[i].DisableControl();
