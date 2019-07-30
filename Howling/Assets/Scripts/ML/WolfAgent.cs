@@ -51,6 +51,9 @@ public class WolfAgent : Agent
     private int currentHungryDecreaseTime;
 
     private int hpRewardTime = 0;
+    private bool isResetTarget = false;
+    private int resetTargetTime = 0;
+    private Transform target;
 
     void Awake()
     {
@@ -65,6 +68,9 @@ public class WolfAgent : Agent
         Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
         target_food.position = randomPos + pivotTransform.position;
 
+        isResetTarget = false;
+        resetTargetTime = 0;
+        target_food.gameObject.SetActive(true);
         //Debug.Log(target.position);
 
     }
@@ -95,12 +101,27 @@ public class WolfAgent : Agent
     // Agent가 주변을 관측하는 함수 = Agent의 눈과 귀를 만드는 함수
     public override void CollectObservations()
     {
-        Vector3 distanceToTarget = target_food.position - transform.position;
+        if (state == (int)WolfState.Normal)
+        {
+            target = target_food;
+            if (isResetTarget) target = target_home;
+        }
+        else if (state == (int)WolfState.Died)
+        {
+            target = target_home;
+        }
+        else if (state == (int)WolfState.Hungry)
+        {
+            target = target_food;
+            if (isResetTarget) target = target_home;
+        }
+
+        Vector3 distanceToTarget = target.position - transform.position;
 
         AddVectorObs(Mathf.Clamp(distanceToTarget.x / maxRange, -1f, 1f));
         AddVectorObs(Mathf.Clamp(distanceToTarget.z / maxRange, -1f, 1f));
 
-        distanceToTarget = target_home.position - transform.position;
+        distanceToTarget = target.position - transform.position;
 
         AddVectorObs(Mathf.Clamp(distanceToTarget.x / maxRange, -1f, 1f));
         AddVectorObs(Mathf.Clamp(distanceToTarget.z / maxRange, -1f, 1f));
@@ -125,10 +146,10 @@ public class WolfAgent : Agent
         //AddReward(-0.001f);
 
         // status, state 추가될 때 바뀔 내용. 스크립트로 빼자.
-        Transform target = target_food;
         if (state == (int)WolfState.Normal)
         {
             target = target_food;
+            if (isResetTarget) target = target_home;
         }
         else if (state == (int)WolfState.Died)
         {
@@ -137,6 +158,7 @@ public class WolfAgent : Agent
         else if (state == (int)WolfState.Hungry)
         {
             target = target_food;
+            if (isResetTarget) target = target_home;
         }
 
         float d1 = (target.position - transform.position).sqrMagnitude;
@@ -150,7 +172,7 @@ public class WolfAgent : Agent
         float d2 = (target.position - transform.position).sqrMagnitude;
         if (d1 > d2)
         {
-            float distanceReward = (400 - d2) * 0.001f/4;
+            float distanceReward = (400 - d2) * 0.001f / 4;
             if (distanceReward >= 0) AddReward(distanceReward);
         }
         else
@@ -161,14 +183,19 @@ public class WolfAgent : Agent
 
         if (targetEaten)
         {
-            Debug.Log("food 먹었다!");
+            if (target_food.gameObject.activeSelf == true)
+            {
+                Debug.Log("food 먹었다!");
 
-            AddReward(1 + ((100 - hungry) * 0.01f));
+                AddReward(1 + ((100 - hungry) * 0.01f));
 
-            hungry = hungry + 20f;
-            hungry = Mathf.Clamp(hungry, 0f, 100f);
+                hungry = hungry + 20f;
+                hungry = Mathf.Clamp(hungry, 0f, 100f);
 
-            ResetTarget();
+                isResetTarget = true;
+                target_food.gameObject.SetActive(false);
+                //ResetTarget();
+            }
         }
 
         if (rest)
@@ -176,7 +203,7 @@ public class WolfAgent : Agent
             AddReward(0.01f);
             hpRewardTime++;
 
-            if (hpRewardTime > 50)
+            if (hpRewardTime > 200)
             {
                 Debug.Log("home 쉬고있다!");
                 AddReward(1 + ((100 - hp) * 0.01f));
@@ -191,6 +218,10 @@ public class WolfAgent : Agent
             AddReward(-1.0f);
             Done();
         }
+
+        float hpPenalty = -(100 - hp) * 0.001f;
+        //float hungryPenalty = -(100 - hungry) * 0.001f;
+        AddReward(hpPenalty);
 
         //  이름, 어떤 값, 위치
         //Monitor.Log("reword", GetCumulativeReward(), this.gameObject.transform);
@@ -239,13 +270,19 @@ public class WolfAgent : Agent
         //    dead = true;
         //}
 
+        if (isResetTarget)
+        {
+            resetTargetTime++;
+            if (resetTargetTime > 200) ResetTarget();
+        }
+
         // 상태 바꿔주는 것도 스크립트로 빼자. 
         if (hungry > 0f)
-            hungry = hungry - (Time.deltaTime * 0.02f);
+            hungry = hungry - (Time.deltaTime * 0.5f);
         else
         {
             hungry = 0f;
-            hp = hp - Time.deltaTime * 0.01f;
+            hp = hp - Time.deltaTime * 0.5f;
         }
 
         if (hp <= 0f)
