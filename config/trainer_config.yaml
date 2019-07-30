@@ -266,3 +266,18 @@ BasicLearning:
     max_steps: 5.0e5
     summary_freq: 2000
     time_horizon: 3
+
+HerbivoreBrain :
+    use_recurrent: true
+    sequence_length: 64
+    num_layers: 1
+    hidden_units: 128 
+    memory_size: 512
+    beta: 1.0e-2
+    gamma: 0.99
+    num_epoch: 3
+    buffer_size: 1024
+    batch_size: 128
+    max_steps: 5.0e5
+    summary_freq: 500
+    time_horizon: 128

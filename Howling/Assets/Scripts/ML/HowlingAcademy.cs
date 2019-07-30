@@ -5,6 +5,10 @@ using MLAgents;
 
 public class HowlingAcademy : Academy
 {
+    //public override void InitializeAcademy()
+    //{
+    //    Monitor.SetActive(true);
+    //}
     public override void AcademyReset()
     {
 

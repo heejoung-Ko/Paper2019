@@ -18,6 +18,9 @@ TagManager:
   - dead
   - food
   - home
+  - herbivore
+  - carnivore
+  - plant
   layers:
   - Default
   - TransparentFX

@@ -42,7 +42,12 @@ public class Plant : MonoBehaviour
     {
         if (CanGrow) Grow();
         if (CanReproduce) Reproduce();
-        if (Dead) Destroy(this);
+        if (Dead)
+        {
+            Destroy(this);
+            Debug.Log("Tree Dead!!");
+        }
+
         age += ageRate;
         energy += energyGrowthRate;
     }
@@ -89,7 +94,7 @@ public class Plant : MonoBehaviour
     {
         var vec = Random.insideUnitCircle * seedSpreadRadius
             + new Vector2(transform.position.x, transform.position.z);
-        Instantiate(seedingSpawn, new Vector3(vec.x, 0, vec.y), Quaternion.identity, Environment);
+        Instantiate(seedingSpawn, new Vector3(vec.x, transform.position.y, vec.y), Quaternion.identity, Environment);
         energy = energy / 2;
     }
 }
