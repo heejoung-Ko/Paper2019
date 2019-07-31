@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 
-public enum CreatureType
+public enum NewWolfType
 {
     Herbivore,
     Carnivore
 }
-public class CreatureAgent : Agent
+public class NewWolfAgent : Agent
 {
     [Header("Creature Type")]
-    public CreatureType CreatureType;
+    public NewWolfType newWolfType;
     [Header("Creature Points (100 Max)")]
     public float MaxEnergy;
     public float MatureSize;
@@ -140,7 +140,7 @@ public class CreatureAgent : Agent
         float damage = 0f;
         currentAction = "Attack";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
-        var vic = FirstAdjacent("herbivore").GetComponent<CreatureAgent>();
+        var vic = FirstAdjacent("herbivore").GetComponent<NewWolfAgent>();
         if (vic != null)
         {
             Debug.Log("null 아님");
@@ -158,7 +158,7 @@ public class CreatureAgent : Agent
         {
             Debug.Log("null 임");
 
-            vic = FirstAdjacent("carnivore").GetComponent<CreatureAgent>();
+            vic = FirstAdjacent("carnivore").GetComponent<NewWolfAgent>();
             if (vic != null)
             {
                 if (vic.currentAction == "Defend")
@@ -255,7 +255,7 @@ public class CreatureAgent : Agent
     {
         get
         {
-            if(CreatureType == CreatureType.Herbivore)
+            if(newWolfType == NewWolfType.Herbivore)
             {
                 if (FirstAdjacent("plant") != null) return true;
             }
@@ -343,16 +343,16 @@ public class CreatureAgent : Agent
     {
         if (CanEat)
         {
-            if (CreatureType == CreatureType.Herbivore)
+            if (newWolfType == NewWolfType.Herbivore)
             {
                 var adj = FirstAdjacent("plant");
                 if (adj != null)
                 {
-                    var creature = adj.GetComponent<Plant>();
-                    var consume = Mathf.Min(creature.Energy, 5);
-                    creature.Energy -= consume;
-                    if (creature.Energy < .1) Destroy(adj);
-                    Energy += consume;
+                    //var creature = adj.GetComponent<Plant>();
+                    //var consume = Mathf.Min(creature.Energy, 5);
+                    //creature.Energy -= consume;
+                    //if (creature.Energy < .1) Destroy(adj);
+                    //Energy += consume;
                     AddReward(.1f);
                     nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
                     currentAction = "Eating";
