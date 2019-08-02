@@ -28,11 +28,41 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2222346078413859982}
+  - {fileID: 7003717198019124467}
   - {fileID: 7909266565347904801}
   - {fileID: 821149246281585605}
-  - {fileID: 7003717198019124467}
-  m_Father: {fileID: 5045246165419593575}
-  m_RootOrder: 1
+  m_Father: {fileID: 4237814164468518113}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1635152252052980499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8576114826060896682}
+  m_Layer: 0
+  m_Name: CameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8576114826060896682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635152252052980499}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.089, z: 0.078}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5045246165419593557}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3424692566078280110
 GameObject:
@@ -60,7 +90,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 9083275970416870917}
   m_Father: {fileID: 5152069598074103091}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -186,7 +217,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5045246165419593569}
-  - {fileID: 9083275970416870917}
   m_Father: {fileID: 5045246165419593573}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1301,6 +1331,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 0.064774476, z: -0.002491154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 8576114826060896682}
   - {fileID: 5045246165419593559}
   m_Father: {fileID: 5045246165419593581}
   m_RootOrder: 0
@@ -1333,7 +1364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5045246165419593557}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5045246165419496313
 GameObject:
@@ -1541,9 +1572,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.25
+  near clip plane: 0.2
   far clip plane: 500
-  field of view: 45
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1609,12 +1640,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5045246165558586180}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a31299e459e01ac4ea4dc976881822cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headJoint: {fileID: 5045246165419496311}
+  headJoint: {fileID: 1635152252052980499}
 --- !u!1 &5045246167024226982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,7 +1741,13 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed by
+    Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+    'mixamorig:Spine1'\n\tTransform 'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform
+    'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightFoot'\n\tTransform 'mixamorig:Head'\n\tTransform
+    'mixamorig:LeftUpLeg'\n\tTransform 'mixamorig:LeftArm'\n\tand more ...\n\tFrom
+    animation clip 'SwapTool'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1802,7 +1839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1932,7 +1969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4296929895643056, guid: 6191d242d97347540a6f4263049bdfed, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4296929895643056, guid: 6191d242d97347540a6f4263049bdfed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2011,7 +2048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d58d041323548914fa4e6b8c70454d31, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d58d041323548914fa4e6b8c70454d31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d56410585250249b2ae517eb3814f2, type: 3}
   m_Name: Branch
   m_EditorClassIdentifier: 
-  ItemName: Branch
+  ItemName: "\uB098\uBB47\uAC00\uC9C0"
   ItemImage: {fileID: 21300000, guid: 4bd0f295d8695284dbe2784be4ddebf0, type: 3}
   ItemPrefab: {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727,
     type: 3}

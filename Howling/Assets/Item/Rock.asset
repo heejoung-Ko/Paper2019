@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d56410585250249b2ae517eb3814f2, type: 3}
   m_Name: Rock
   m_EditorClassIdentifier: 
-  ItemName: Rock
+  ItemName: "\uB3CC\uB9F9\uC774"
   ItemImage: {fileID: 21300000, guid: 68399cd5aa5e0a341859d5b0d94cd04c, type: 3}
   ItemPrefab: {fileID: 3348651261939690299, guid: 80448679b99b05346864111c18ddf6af,
     type: 3}
