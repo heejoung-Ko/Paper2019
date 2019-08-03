@@ -61,6 +61,11 @@ namespace Howling
                     {
                         hitInfo.transform.GetComponent<Rock>().Mining();
                     }
+                    if(hitInfo.transform.tag == "treee")
+                    {
+                        Debug.Log("때렸다!! 나무!!");
+                        hitInfo.transform.GetComponent<Tree>().Chopping();
+                    }
                     isSwing = false;
                     Debug.Log(hitInfo.transform.name);
                 }

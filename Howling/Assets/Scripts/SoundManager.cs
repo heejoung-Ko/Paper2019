@@ -47,7 +47,7 @@ public class SoundManager : MonoBehaviour
             {
                 for (int j = 0; j < effectsAudioSource.Length; j++)
                 {
-                    if(!effectsAudioSource[i].isPlaying)
+                    if(!effectsAudioSource[j].isPlaying)
                     {
                         playSEName[j] = effectSounds[i].name;
                         effectsAudioSource[j].clip = effectSounds[i].clip;
