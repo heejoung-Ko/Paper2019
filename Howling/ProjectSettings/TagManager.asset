@@ -22,6 +22,10 @@ TagManager:
   - carnivore
   - plant
   - treee
+  - pick
+  - axe
+  - bat
+  - knife
   layers:
   - Default
   - TransparentFX

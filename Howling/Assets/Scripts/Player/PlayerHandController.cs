@@ -61,11 +61,7 @@ namespace Howling
                     {
                         hitInfo.transform.GetComponent<Rock>().Mining();
                     }
-                    if(hitInfo.transform.tag == "treee")
-                    {
-                        Debug.Log("때렸다!! 나무!!");
-                        hitInfo.transform.GetComponent<Tree>().Chopping();
-                    }
+
                     isSwing = false;
                     Debug.Log(hitInfo.transform.name);
                 }
@@ -77,6 +73,8 @@ namespace Howling
         {
             if (Physics.Raycast(transform.position, transform.forward, out hitInfo, currentHand.range))
             {
+                //Debug.DrawRay(transform.position, transform.forward * currentHand.range, Color.red, 5f);
+                
                 return true;
             }
             return false;

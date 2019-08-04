@@ -38,12 +38,13 @@ public class Rock : MonoBehaviour
     [SerializeField]
     private string crash_sound;
 
+    private float init_posY;
+
     private void Start()
     {
         respawnTimeCount = respawnTime;
         hp = initHp;
-        //basic_rock_clone = Instantiate(basic_rock, col.bounds.center, Quaternion.identity);
-        //fract_rock_clone = Instantiate(fract_rock, col.bounds.center, Quaternion.identity);
+        init_posY = transform.position.y;
     }
 
     private void Update()
@@ -63,6 +64,8 @@ public class Rock : MonoBehaviour
     public void Respawn()
     {
         Debug.Log("Respawn Rock");
+
+        transform.position = new Vector3 (transform.position.x, init_posY);
 
         destroy = false;
         hp = initHp;
