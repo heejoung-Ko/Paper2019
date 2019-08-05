@@ -20,54 +20,45 @@ namespace Howling
         // 손 위치
         public GameObject HandPosition;
 
-        // 착용 가능한 도구들. Hand-Tool에 있는 것들 전부
-        public string[] EquipableTools;
-        // 현재 착용 중인 도구
+        // 현재 착용 중인 도구 타입
+        // -1이면 None
+        public int EquipToolType;
 
+        [SerializeField]
+        private GameObject Player;
 
         private void Start()
         {
             int count = transform.GetChild(0).childCount;
 
-            EquipableTools = new string[count];
-
-            for (int i = 0; i < count; i++) 
-            {
-                Debug.Log(transform.GetChild(0).GetChild(i).transform.name);
-                EquipableTools.SetValue(transform.GetChild(0).GetChild(i).transform.name, i);
-            }
+            EquipToolType = -1;
         }
 
         private void Update()
         {
             transform.position = HandPosition.transform.position;
             transform.rotation = HandPosition.transform.rotation;
-
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-
-            }
         }
 
-        void swapTools(int n)
+        public void swapTools(int n)
         {
+            if (EquipToolType == n) return;
 
+            // 맨 손일 때
+            if (n == -1)
+            {
+                transform.GetChild(0).transform.GetChild(EquipToolType).gameObject.SetActive(false);
+            }
+            else
+            {
+                if(EquipToolType != -1)
+                    transform.GetChild(0).transform.GetChild(EquipToolType).gameObject.SetActive(false);
+                EquipToolType = n;
+                transform.GetChild(0).transform.GetChild(EquipToolType).gameObject.SetActive(true);
+            }
+            anim.SetInteger("Tool", EquipToolType);
+            anim.SetBool("Swap", true);
+            anim.SetBool("Swap", false);
         }
     }
 }

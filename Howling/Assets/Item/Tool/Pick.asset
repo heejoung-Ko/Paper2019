@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93d56410585250249b2ae517eb3814f2, type: 3}
-  m_Name: Meat
+  m_Name: Pick
   m_EditorClassIdentifier: 
-  ItemName: "\uACE0\uAE30"
-  ItemImage: {fileID: 21300000, guid: bd020730f0b00f54f86c85745d42178d, type: 3}
-  ItemPrefab: {fileID: 197605295, guid: d0d79044380a6fc4ba279b7ed30b2274, type: 3}
-  weaponType: 
-  itemType: 1
+  ItemName: "\uACE1\uAD2D\uC774"
+  ItemImage: {fileID: 21300000, guid: 4ac3913852538494091ad0cbf56eaaf6, type: 3}
+  ItemPrefab: {fileID: 7481286292432363270, guid: 392535ec2944d6043aed2ffb2716b4f0,
+    type: 3}
+  weaponType: 1
+  itemType: 0

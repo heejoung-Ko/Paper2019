@@ -164,5 +164,13 @@ namespace Howling
             else
                 DragSlot.instance.dragSlot.ClearSlot();
         }
+
+        public void SelectSlot(bool select)
+        {
+            if (select)
+                transform.FindChild("Select").gameObject.SetActive(true);
+            else
+                transform.FindChild("Select").gameObject.SetActive(false);
+        }
     }
 }

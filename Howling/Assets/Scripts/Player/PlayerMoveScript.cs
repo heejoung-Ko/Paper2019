@@ -46,7 +46,7 @@ namespace Howling
             tutorialController = FindObjectOfType<TutorialController>();
         }
 
-        void Update()
+        void FixedUpdate()
         {
             mouseRotationX = Input.GetAxis("Mouse X");
             mouseRotationY = Input.GetAxis("Mouse Y");
@@ -58,17 +58,12 @@ namespace Howling
                     state = PlayerState.run;
             }
             else state = PlayerState.walk;
-            //if (Input.GetButtonDown("Jump"))
-            //    isJump = true;
-        }
 
-        void FixedUpdate()
-        {
             if (!Slot.isSlotDrag && tutorialController.currentShow > 0)
             {
                 PlayerRotation();
             }
-            if (tutorialController.currentShow > 1)
+            //if (tutorialController.currentShow > 1)
                 PlayerMove();
         }
 
