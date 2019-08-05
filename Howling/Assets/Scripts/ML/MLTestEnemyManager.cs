@@ -4,23 +4,43 @@ using UnityEngine;
 
 public class MLTestEnemyManager : MonoBehaviour
 {
-    public Transform m_SpawnPoint;
-    [HideInInspector] public GameObject m_Instance;
+    [HideInInspector] public GameObject instance;
+    public bool herbivoreRespawn;
+    public bool carnivoreRespawn;
+    public GameObject herbivorePrefab;
+    public GameObject carnivorePrefab;
+    public Transform pivotTransform;
+    public Transform herbivoreSpawn;
+    public Transform carnivoreSpawn;
 
-    private MLTestEnemy m_TestEnemy;
+    private MLTestEnemy herbivoreEnemy;
+    private MLTestEnemy carnivoreEnemy;
+    private float herbivoreRespawnTime;
+    private float carnivoreRespawnTime;
 
     public void Setup()
     {
-        m_TestEnemy = m_Instance.GetComponent<MLTestEnemy>();
-    }
-
-    void Start()
-    {
-        
+        herbivoreEnemy = instance.GetComponent<MLTestEnemy>();
+        carnivoreEnemy = instance.GetComponent<MLTestEnemy>();
     }
 
     void Update()
     {
-        
+        if (herbivoreRespawn) herbivoreRespawnTime += 1;
+        if (carnivoreRespawn) carnivoreRespawnTime += 1;
+        if (herbivoreRespawnTime > 200)
+        {
+            herbivoreRespawnTime = 0;
+            Vector3 randomPos = new Vector3(Random.Range(-10, 10), 0.5f, Random.Range(-10, 10));
+            var position = randomPos + pivotTransform.position;
+            herbivoreEnemy.instance = Instantiate(herbivorePrefab, position + randomPos, herbivoreSpawn.rotation) as GameObject;
+        }
+        if (carnivoreRespawnTime > 200)
+        {
+            carnivoreRespawnTime = 0;
+            Vector3 randomPos = new Vector3(Random.Range(-10, 10), 0.5f, Random.Range(-10, 10));
+            var position = randomPos + pivotTransform.position;
+            carnivoreEnemy.instance = Instantiate(carnivorePrefab, position + randomPos, carnivoreSpawn.rotation) as GameObject;
+        }
     }
 }
