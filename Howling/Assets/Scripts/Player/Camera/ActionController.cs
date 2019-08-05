@@ -89,11 +89,21 @@ namespace Howling
                 {
                     ItemInfoAppear();
                 }
+
+                if(hitInfo.transform.tag == "rock")
+                {
+                    ObjectInfoAppear();
+                }
             }
             else
                 ItemInfoDisappear();
         }
 
+        private void ObjectInfoAppear()
+        {
+            actionText.gameObject.SetActive(true);
+            actionText.text = hitInfo.transform.name + "선택됨";
+        }
         private void ItemInfoAppear()
         {
             pickUpActivated = true;

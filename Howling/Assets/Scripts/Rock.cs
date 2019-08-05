@@ -95,16 +95,16 @@ public class Rock : MonoBehaviour
 
         SoundManager.instance.PlaySE(crash_sound);
 
-        col.enabled = false;
         for (int i = 0; i < count; i++)
         {
-            Instantiate(item_rock, col.transform.position, Quaternion.identity);
+            Instantiate(item_rock, col.bounds.center, Quaternion.identity);
         }
         
         var fract_clone = Instantiate(fract_rock, col.bounds.center, Quaternion.identity);
         fract_clone.SetActive(true);
         Destroy(fract_clone, destroyTime);
 
+        col.enabled = false;
         destroy = true;
     }
 }
