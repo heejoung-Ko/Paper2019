@@ -4,18 +4,72 @@ using UnityEngine;
 
 public class MLTestEnemy : MonoBehaviour
 {
+    [HideInInspector] public GameObject instance;
+    public GameObject dropItem;
     public float Hp;
     public float AttackDamage;
+    public Vector3 direction;
+    public float velocity;
 
-    // Start is called before the first frame update
-    void Start()
+    private bool dead;
+    private MLTestEnemyManager manager;
+
+    private void Start()
     {
-        
+        dead = false;
+        manager = base.GetComponent<MLTestEnemyManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (0 >= Hp)
+        {
+            if (tag == "herbivore") manager.herbivoreRespawn = true;
+            else if (tag == "carnivore") manager.carnivoreRespawn = true;
+            Invoke("DropItem", 5f);
+            Destroy(gameObject, 5f);
+            return;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!dead) Move();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("dead"))
+        {
+            dead = true;
+            direction.x += 0.1f;
+            if (direction.x >= 1) direction.x = 0;
+            Mathf.Clamp(direction.x, 0, 1);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("dead"))
+        {
+            dead = false;
+        }
+    }
+
+    private void Move()
+    {
+        transform.position = new Vector3(transform.position.x + direction.x * velocity * Time.deltaTime,
+                                                    transform.position.y,
+                                                    transform.position.z + direction.z * velocity * Time.deltaTime);
+
+        Quaternion newRotation = Quaternion.LookRotation(direction);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 5.0f);
+    }
+
+    void DropItem()
+    {
+        Debug.Log("Drop Item!!!");
+        Instantiate(dropItem, transform.position, Quaternion.identity);
     }
 }
