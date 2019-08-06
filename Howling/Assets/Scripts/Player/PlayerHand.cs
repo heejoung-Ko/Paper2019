@@ -42,12 +42,16 @@ namespace Howling
 
         public void swapTools(int n)
         {
-            if (EquipToolType == n) return;
-
+            if (EquipToolType == n)
+            {
+                anim.SetBool("Swap", true);
+                return;
+            }
             // 맨 손일 때
             if (n == -1)
-            {
+            { 
                 transform.GetChild(0).transform.GetChild(EquipToolType).gameObject.SetActive(false);
+                EquipToolType = n;
             }
             else
             {
@@ -58,7 +62,6 @@ namespace Howling
             }
             anim.SetInteger("Tool", EquipToolType);
             anim.SetBool("Swap", true);
-            anim.SetBool("Swap", false);
         }
     }
 }

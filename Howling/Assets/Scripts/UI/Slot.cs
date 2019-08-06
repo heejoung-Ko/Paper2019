@@ -168,9 +168,9 @@ namespace Howling
         public void SelectSlot(bool select)
         {
             if (select)
-                transform.FindChild("Select").gameObject.SetActive(true);
+                transform.Find("Select").gameObject.SetActive(true);
             else
-                transform.FindChild("Select").gameObject.SetActive(false);
+                transform.Find("Select").gameObject.SetActive(false);
         }
     }
 }

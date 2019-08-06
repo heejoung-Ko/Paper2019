@@ -32,8 +32,6 @@ namespace Howling
         // Update is called once per frame
         void Update()
         {
-            animator.SetBool("Attack", false);
-
             if (currentAtkTime <= atkTime)
                 currentAtkTime++;
             else
