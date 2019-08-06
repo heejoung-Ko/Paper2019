@@ -20,7 +20,7 @@ public class Rock : MonoBehaviour
     private float respawnTimeCount; // 리스폰 카운트
 
     [SerializeField]
-    private SphereCollider col;
+    private CapsuleCollider col;
     [SerializeField]
     private int count; // 돌맹이 등장 갯수
 

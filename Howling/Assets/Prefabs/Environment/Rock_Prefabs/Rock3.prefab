@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 2918309796397889072}
   - component: {fileID: 1677674146399225882}
   - component: {fileID: 2106762908197049155}
-  - component: {fileID: 5092445610839097095}
+  - component: {fileID: 8377785298028393582}
   m_Layer: 0
   m_Name: Rock3
   m_TagString: rock
@@ -647,7 +647,7 @@ MonoBehaviour:
   destroy: 0
   destroyTime: 3
   respawnTime: 1440
-  col: {fileID: 5092445610839097095}
+  col: {fileID: 8377785298028393582}
   count: 5
   basic_rock: {fileID: 7638813021859968224}
   fract_rock: {fileID: 2655263234734779822}
@@ -657,8 +657,8 @@ MonoBehaviour:
     type: 3}
   mining_sound: mining_rock_se
   crash_sound: crash_rock_se
---- !u!135 &5092445610839097095
-SphereCollider:
+--- !u!136 &8377785298028393582
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -667,9 +667,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.3
-  m_Center: {x: 0.2465607, y: 0.16463864, z: 0}
+  m_Radius: 1.2634909
+  m_Height: 3.3162808
+  m_Direction: 1
+  m_Center: {x: 0.22064328, y: 0.67281413, z: -0.20221925}
 --- !u!1001 &2655263234734746382
 PrefabInstance:
   m_ObjectHideFlags: 0
