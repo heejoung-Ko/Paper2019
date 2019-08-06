@@ -11,60 +11,55 @@ public class MLTestEnemy : MonoBehaviour
     public Vector3 direction;
     public float velocity;
 
-    private bool dead;
-    private MLTestEnemyManager manager;
+    //private bool dead;
+    //private MLTestManager manager;
 
     private void Start()
     {
-        dead = false;
-        manager = base.GetComponent<MLTestEnemyManager>();
+        //dead = false;
+        //manager = base.GetComponent<MLTestManager>();
     }
 
     void Update()
     {
         if (0 >= Hp)
         {
-            if (tag == "herbivore") manager.herbivoreRespawn = true;
-            else if (tag == "carnivore") manager.carnivoreRespawn = true;
+            //if (tag == "herbivore") manager.herbivoreRespawn = true;
+            //else if (tag == "carnivore") manager.carnivoreRespawn = true;
             Invoke("DropItem", 5f);
             Destroy(gameObject, 5f);
             return;
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (!dead) Move();
-    }
+    //private void FixedUpdate()
+    //{
+    //    /*if (!dead)*/ Move();
+    //}
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("dead"))
         {
-            dead = true;
-            direction.x += 0.1f;
-            if (direction.x >= 1) direction.x = 0;
-            Mathf.Clamp(direction.x, 0, 1);
+                //dead = true;
+                direction.y += 100;
+                if (direction.y >= 360) direction.y = 0;
+                Mathf.Clamp(direction.y, 0, 360);
+                transform.Rotate(0, direction.y, 0);
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("dead"))
-        {
-            dead = false;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("dead"))
+    //    {
+    //        dead = false;
+    //    }
+    //}
 
     private void Move()
     {
-        transform.position = new Vector3(transform.position.x + direction.x * velocity * Time.deltaTime,
-                                                    transform.position.y,
-                                                    transform.position.z + direction.z * velocity * Time.deltaTime);
-
-        Quaternion newRotation = Quaternion.LookRotation(direction);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 5.0f);
+        transform.position += transform.forward * velocity * Time.deltaTime;
     }
 
     void DropItem()
