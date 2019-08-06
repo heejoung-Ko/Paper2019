@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5740455209522530304}
   - component: {fileID: 5265048134502768803}
-  - component: {fileID: 6722065098372069088}
   - component: {fileID: 2699112348531328957}
+  - component: {fileID: 237501683913661803}
   m_Layer: 0
   m_Name: Rock2
   m_TagString: rock
@@ -51,19 +51,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!135 &6722065098372069088
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740455209522530305}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.8435199
-  m_Center: {x: 0.051323056, y: 0.28916323, z: -0.08183354}
 --- !u!114 &2699112348531328957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,12 +64,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initHp: 3
-  hp: 0
   destroy: 0
   destroyTime: 3
   respawnTime: 1440
-  respawnTimeCount: 0
-  col: {fileID: 6722065098372069088}
+  col: {fileID: 237501683913661803}
   count: 5
   basic_rock: {fileID: 1805094537471572920}
   fract_rock: {fileID: 6966648387792604121}
@@ -92,6 +77,20 @@ MonoBehaviour:
     type: 3}
   mining_sound: mining_rock_se
   crash_sound: crash_rock_se
+--- !u!136 &237501683913661803
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740455209522530305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.8745411
+  m_Height: 2.4726274
+  m_Direction: 1
+  m_Center: {x: 0.059586108, y: 0.7363137, z: -0.076610565}
 --- !u!54 &2884100446997841753
 Rigidbody:
   m_ObjectHideFlags: 0
