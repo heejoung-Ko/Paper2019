@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MLTestEnemyManager : MonoBehaviour
+public class MLTestManager : MonoBehaviour
 {
     [HideInInspector] public GameObject instance;
     public bool herbivoreRespawn;
     public bool carnivoreRespawn;
     public GameObject herbivorePrefab;
     public GameObject carnivorePrefab;
+    public GameObject meatPrefab;
     public Transform pivotTransform;
     public Transform herbivoreSpawn;
     public Transform carnivoreSpawn;
@@ -18,6 +19,8 @@ public class MLTestEnemyManager : MonoBehaviour
     private float herbivoreRespawnTime;
     private float carnivoreRespawnTime;
 
+    private float meatRespawnTime;
+
     public void Setup()
     {
         herbivoreEnemy = instance.GetComponent<MLTestEnemy>();
@@ -26,6 +29,7 @@ public class MLTestEnemyManager : MonoBehaviour
 
     void Update()
     {
+        // enemy 
         if (herbivoreRespawn) herbivoreRespawnTime += 1;
         if (carnivoreRespawn) carnivoreRespawnTime += 1;
         if (herbivoreRespawnTime > 200)
@@ -42,5 +46,21 @@ public class MLTestEnemyManager : MonoBehaviour
             var position = randomPos + pivotTransform.position;
             carnivoreEnemy.instance = Instantiate(carnivorePrefab, position + randomPos, carnivoreSpawn.rotation) as GameObject;
         }
+
+        // meat 
+        meatRespawnTime += 1;
+        if (meatRespawnTime > 1000)
+        {
+            meatRespawnTime = 0;
+            Invoke("DropItem", 5f);
+        }
+    }
+
+    void DropItem()
+    {
+        Debug.Log("Manager - Drop Meat!");
+        Vector3 randomPos = new Vector3(Random.Range(-10, 10), 0.5f, Random.Range(-10, 10));
+        var position = randomPos + pivotTransform.position;
+        Instantiate(meatPrefab, position, Quaternion.identity);
     }
 }
