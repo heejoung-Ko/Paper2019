@@ -91,11 +91,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8325718163407526940}
+  - component: {fileID: 4455951390570943780}
   - component: {fileID: 8325718163407526929}
   - component: {fileID: 8325718163407526930}
   - component: {fileID: 8325718163407526931}
   m_Layer: 0
-  m_Name: WolfAgent
+  m_Name: p_WolfAgent
   m_TagString: agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +118,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8325718163407526929
+--- !u!114 &4455951390570943780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,6 +126,43 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8325718163407526941}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b033203256b7d7e4bb68f5c5b0eef609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 11400000, guid: dca55ce12e97534409976c21be1b97c1, type: 2}
+  agentParameters:
+    agentCameras: []
+    maxStep: 0
+    resetOnDone: 1
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 1
+  pivotTransform: {fileID: 0}
+  targetPlayer: {fileID: 0}
+  targetHome: {fileID: 0}
+  MaxHp: 100
+  MaxHungry: 100
+  MaxFriendly: 100
+  EatingSpeed: 100
+  MaxSpeed: 100
+  AttackDamage: 20
+  DefendDamage: 10
+  Eyesight: 2
+  moveForce: 1
+  Hp: 100
+  Hungry: 100
+  Friendly: 0
+  currentAction: 
+  playerRelation: 0
+  targetType: 0
+--- !u!114 &8325718163407526929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325718163407526941}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 556b153788529b843be1c4a9de55abfa, type: 3}
   m_Name: 
