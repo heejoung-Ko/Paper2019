@@ -63,5 +63,19 @@ namespace Howling
             anim.SetInteger("Tool", EquipToolType);
             anim.SetBool("Swap", true);
         }
+
+        public bool EquipAxe()
+        {
+            if (EquipToolType == 0)
+                return true;
+            else return false;
+        }
+
+        public bool EquipPick()
+        {
+            if (EquipToolType == 1)
+                return true;
+            else return false;
+        }
     }
 }

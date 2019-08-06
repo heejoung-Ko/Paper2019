@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 2690800763067450789}
   m_Layer: 0
   m_Name: Tree3
-  m_TagString: rock
+  m_TagString: tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,7 +328,7 @@ Transform:
   m_GameObject: {fileID: 5241609699559535214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 5381396922275150689}
   - {fileID: 4956572783154198378}
@@ -369,11 +369,11 @@ MonoBehaviour:
   respawnTime: 10
   col: {fileID: 2690800763067450789}
   count: 7
-  basic_rock: {fileID: 5381396922274719553}
-  fract_rock: {fileID: 4956572783153900362}
-  effect_rock: {fileID: 7270058404980271658, guid: 77b658d12cb8e2b4cb7c075c96bf517a,
+  basic_resource: {fileID: 5381396922274719553}
+  fract_resource: {fileID: 4956572783153900362}
+  effect_resource: {fileID: 7270058404980271658, guid: 77b658d12cb8e2b4cb7c075c96bf517a,
     type: 3}
-  item_rock: {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727,
+  item_resource: {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727,
     type: 3}
   mining_sound: chop_wood_se
   crash_sound: falling_wood_se

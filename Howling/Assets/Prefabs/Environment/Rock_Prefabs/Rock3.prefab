@@ -608,7 +608,7 @@ Transform:
   m_GameObject: {fileID: 2918309796397889079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 7638813021859539136}
   - {fileID: 2655263234734616974}
@@ -649,11 +649,11 @@ MonoBehaviour:
   respawnTime: 1440
   col: {fileID: 8377785298028393582}
   count: 5
-  basic_rock: {fileID: 7638813021859968224}
-  fract_rock: {fileID: 2655263234734779822}
-  effect_rock: {fileID: 7270058404980271658, guid: 77b658d12cb8e2b4cb7c075c96bf517a,
+  basic_resource: {fileID: 7638813021859968224}
+  fract_resource: {fileID: 2655263234734779822}
+  effect_resource: {fileID: 7270058404980271658, guid: 77b658d12cb8e2b4cb7c075c96bf517a,
     type: 3}
-  item_rock: {fileID: 3348651261939690299, guid: 80448679b99b05346864111c18ddf6af,
+  item_resource: {fileID: 3348651261939690299, guid: 80448679b99b05346864111c18ddf6af,
     type: 3}
   mining_sound: mining_rock_se
   crash_sound: crash_rock_se

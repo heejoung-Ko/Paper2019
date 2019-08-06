@@ -90,7 +90,7 @@ namespace Howling
                     ItemInfoAppear();
                 }
 
-                if(hitInfo.transform.tag == "rock")
+                if(hitInfo.transform.tag == "resource")
                 {
                     ObjectInfoAppear();
                 }

@@ -57,9 +57,13 @@ namespace Howling
             {
                 if (CheckObject())
                 {
-                    if(hitInfo.transform.tag == "rock")
+                    if(hitInfo.transform.tag == "tree" && currentHand.EquipAxe())
                     {
-                        hitInfo.transform.GetComponent<Rock>().Mining();
+                        hitInfo.transform.GetComponent<Resource>().Gathering();
+                    }
+                    else if (hitInfo.transform.tag == "rock" && currentHand.EquipPick())
+                    {
+                        hitInfo.transform.GetComponent<Resource>().Gathering();
                     }
 
                     isSwing = false;

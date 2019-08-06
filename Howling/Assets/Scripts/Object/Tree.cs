@@ -49,8 +49,8 @@ public class Tree : MonoBehaviour
         respawnTimeCount = respawnTime;
         age = Random.Range(1.0f, 3.0f);
         hp = initHp;
-        //basic_rock_clone = Instantiate(basic_rock, col.bounds.center, Quaternion.identity);
-        //fract_rock_clone = Instantiate(fract_rock, col.bounds.center, Quaternion.identity);
+        //basic_resource_clone = Instantiate(basic_resource, col.bounds.center, Quaternion.identity);
+        //fract_resource_clone = Instantiate(fract_resource, col.bounds.center, Quaternion.identity);
     }
 
     private void Update()
