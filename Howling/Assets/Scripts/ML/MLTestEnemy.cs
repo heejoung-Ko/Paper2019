@@ -12,16 +12,20 @@ public class MLTestEnemy : MonoBehaviour
     public float velocity;
 
     private bool dead;
+    private MLTestEnemyManager manager;
 
     private void Start()
     {
         dead = false;
+        manager = base.GetComponent<MLTestEnemyManager>();
     }
 
     void Update()
     {
         if (0 >= Hp)
         {
+            if (tag == "herbivore") manager.herbivoreRespawn = true;
+            else if (tag == "carnivore") manager.carnivoreRespawn = true;
             Invoke("DropItem", 5f);
             Destroy(gameObject, 5f);
             return;
