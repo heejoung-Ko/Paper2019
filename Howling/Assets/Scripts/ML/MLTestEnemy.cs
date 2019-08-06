@@ -12,12 +12,12 @@ public class MLTestEnemy : MonoBehaviour
     public float velocity;
 
     private bool dead;
-    private MLTestEnemyManager manager;
+    private MLTestManager manager;
 
     private void Start()
     {
         dead = false;
-        manager = base.GetComponent<MLTestEnemyManager>();
+        manager = base.GetComponent<MLTestManager>();
     }
 
     void Update()
