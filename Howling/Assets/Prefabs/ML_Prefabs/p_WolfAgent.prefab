@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8325718163407526940}
   - component: {fileID: 4455951390570943780}
-  - component: {fileID: 8325718163407526929}
+  - component: {fileID: 7934211602809734166}
   - component: {fileID: 8325718163407526930}
   - component: {fileID: 8325718163407526931}
   m_Layer: 0
@@ -155,34 +155,18 @@ MonoBehaviour:
   currentAction: 
   playerRelation: 0
   targetType: 0
---- !u!114 &8325718163407526929
+--- !u!114 &7934211602809734166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8325718163407526941}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556b153788529b843be1c4a9de55abfa, type: 3}
+  m_Script: {fileID: 11500000, guid: bb172294dbbcc408286b156a2c4b553c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: a901bdd423fc7c943bf77ede4d0111d9, type: 2}
-  agentParameters:
-    agentCameras: []
-    maxStep: 0
-    resetOnDone: 1
-    onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
-  pivotTransform: {fileID: 0}
-  target_food: {fileID: 0}
-  target_home: {fileID: 0}
-  moveForce: 1
-  minRange: -10
-  maxRange: 10
-  hp: 100
-  hungry: 100
-  friendly: 0
 --- !u!54 &8325718163407526930
 Rigidbody:
   m_ObjectHideFlags: 0
