@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MLTestManager : MonoBehaviour
 {
-    [HideInInspector] public GameObject instance;
+    //[HideInInspector] public GameObject instance;
     public bool herbivoreRespawn;
     public bool carnivoreRespawn;
     public GameObject herbivorePrefab;
@@ -14,37 +14,31 @@ public class MLTestManager : MonoBehaviour
     public Transform herbivoreSpawn;
     public Transform carnivoreSpawn;
 
-    private MLTestEnemy herbivoreEnemy;
-    private MLTestEnemy carnivoreEnemy;
     private float herbivoreRespawnTime;
     private float carnivoreRespawnTime;
 
     private float meatRespawnTime;
-
-    public void Setup()
-    {
-        herbivoreEnemy = instance.GetComponent<MLTestEnemy>();
-        carnivoreEnemy = instance.GetComponent<MLTestEnemy>();
-    }
+    private float minRange = -3;
+    private float maxRange = 3;
 
     void Update()
     {
         // enemy 
-        if (herbivoreRespawn) herbivoreRespawnTime += 1;
-        if (carnivoreRespawn) carnivoreRespawnTime += 1;
-        if (herbivoreRespawnTime > 200)
+        herbivoreRespawnTime += 1;
+        carnivoreRespawnTime += 1;
+        if (herbivoreRespawnTime > 2000)
         {
             herbivoreRespawnTime = 0;
-            Vector3 randomPos = new Vector3(Random.Range(-10, 10), 0.5f, Random.Range(-10, 10));
+            Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
             var position = randomPos + pivotTransform.position;
-            herbivoreEnemy.instance = Instantiate(herbivorePrefab, position + randomPos, herbivoreSpawn.rotation) as GameObject;
+            Instantiate(herbivorePrefab, position + randomPos, herbivoreSpawn.rotation);
         }
-        if (carnivoreRespawnTime > 200)
+        if (carnivoreRespawnTime > 3000)
         {
             carnivoreRespawnTime = 0;
-            Vector3 randomPos = new Vector3(Random.Range(-10, 10), 0.5f, Random.Range(-10, 10));
+            Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
             var position = randomPos + pivotTransform.position;
-            carnivoreEnemy.instance = Instantiate(carnivorePrefab, position + randomPos, carnivoreSpawn.rotation) as GameObject;
+            Instantiate(carnivorePrefab, position + randomPos, carnivoreSpawn.rotation);
         }
 
         // meat 
@@ -59,7 +53,7 @@ public class MLTestManager : MonoBehaviour
     void DropItem()
     {
         Debug.Log("Manager - Drop Meat!");
-        Vector3 randomPos = new Vector3(Random.Range(-10, 10), 0.5f, Random.Range(-10, 10));
+        Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
         var position = randomPos + pivotTransform.position;
         Instantiate(meatPrefab, position, Quaternion.identity);
     }
