@@ -41,11 +41,11 @@ public class MLTestEnemy : MonoBehaviour
     {
         if (other.CompareTag("dead"))
         {
-                //dead = true;
-                direction.y += 100;
-                if (direction.y >= 360) direction.y = 0;
-                Mathf.Clamp(direction.y, 0, 360);
-                transform.Rotate(0, direction.y, 0);
+            //dead = true;
+            direction.y += 100;
+            if (direction.y >= 360) direction.y = 0;
+            Mathf.Clamp(direction.y, 0, 360);
+            transform.Rotate(0, direction.y, 0);
         }
     }
 

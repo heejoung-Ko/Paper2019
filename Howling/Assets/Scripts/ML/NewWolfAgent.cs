@@ -89,7 +89,7 @@ public class NewWolfAgent : Agent
         agentRB = GetComponent<Rigidbody>();
     }
 
-    private void Awake()
+    private void Start()
     {
         InitializeAgent();
         AgentReset();
