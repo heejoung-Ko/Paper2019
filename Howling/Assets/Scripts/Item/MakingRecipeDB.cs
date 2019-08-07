@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MakingMaterial
-{
-    // 재료 이름
-    public string ItemName;
-   // 재료 갯수
-    int num;
-}
 
 [System.Serializable]
 public class MakingRecipe

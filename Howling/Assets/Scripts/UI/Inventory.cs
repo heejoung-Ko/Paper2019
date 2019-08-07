@@ -124,5 +124,31 @@ namespace Howling
 
             }
         }
+
+        public int getItemNum(Item item)
+        {
+            int c = 0;
+            for (int i = 0; i < slots.Length; i++) 
+            {
+                if (item == slots[i].item)
+                    c+= slots[i].itemCount;
+            }
+            return c;
+        }
+
+        public void subItem(Item acquireItem, int cnt)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i].item != null)
+                {
+                    if (slots[i].item.ItemName == acquireItem.ItemName)
+                    {
+                        slots[i].SetSlotCount(-cnt);
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

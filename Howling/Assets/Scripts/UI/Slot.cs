@@ -51,7 +51,7 @@ namespace Howling
         {
             item = addItem;
             itemCount = cnt;
-            itemImage.sprite = item.ItemImage;
+            itemImage.sprite = item.ItemImage_32x32;
 
             if (item.itemType != Item.ItemType.Equipment)
             {
