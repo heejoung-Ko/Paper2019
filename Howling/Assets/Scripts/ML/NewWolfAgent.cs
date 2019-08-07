@@ -63,7 +63,6 @@ public class NewWolfAgent : Agent
     [HideInInspector] public PlayerRelation playerRelation;
     [HideInInspector] public TargetType targetType;
 
-
     // 랜덤 스폰하기 위한 임시적인 범위, 맵 20X20 공간에서만 가능
     private float minRange = -10f;
     private float maxRange = 10f;
@@ -76,10 +75,13 @@ public class NewWolfAgent : Agent
 
     private GameObject Environment;
     private Rigidbody agentRB;
+    private RayPerception rayPer;
     private float nextAction;
+
     private bool died;
     private bool enterDeadZone;
-    private RayPerception rayPer;
+    private bool canRest;
+    private float canRestTime;
 
     public override void InitializeAgent()
     {
@@ -255,6 +257,7 @@ public class NewWolfAgent : Agent
     void Update()
     {
         if (Dead) return;
+        if (canRest) canRestTime += 1;
         MonitorLog();
     }
 
@@ -282,9 +285,9 @@ public class NewWolfAgent : Agent
 
     public void AddPenalty()
     {
-        if (Hp >= 100 || Hungry > 0) return;
-        float hpPenalty = -(100 - Hp) * 0.0001f;
-        AddReward(hpPenalty);
+        float hpPenalty = Hp / MaxHp * 0.001f;
+        float hungryPenalty = Hungry / MaxHungry * 0.001f;
+        AddReward(hpPenalty + hungryPenalty);
     }
 
     public void MonitorLog()
@@ -308,7 +311,16 @@ public class NewWolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("home") != null) return true;
+            if (FirstAdjacent("home") != null)
+            {
+                canRest = true;
+                if (canRestTime > 200)
+                {
+                    canRestTime = 0;
+                    return true;
+                }
+            }
+            else canRest = false;
             return false;
         }
     }
@@ -399,7 +411,7 @@ public class NewWolfAgent : Agent
                 if (Hp < 100)
                 {
                     target = targetHome;
-                    AddReward(.001f);
+                    AddReward(.25f);
                 }
 
                 Hp += 20f;
