@@ -23,9 +23,9 @@ public enum ActionType
     REST,
     GOTOPLAYER,
     ATTACK,
+    DEFEND,
     MOVEORDERS,
     ROTATION,
-    DEFEND,
 }
 
 public class NewWolfAgent : Agent
@@ -76,10 +76,13 @@ public class NewWolfAgent : Agent
 
     private GameObject Environment;
     private Rigidbody agentRB;
+    private RayPerception rayPer;
     private float nextAction;
+
     private bool died;
     private bool enterDeadZone;
-    private RayPerception rayPer;
+    private bool canRest;
+    private float canRestTime;
 
     public override void InitializeAgent()
     {
@@ -87,7 +90,7 @@ public class NewWolfAgent : Agent
         agentRB = GetComponent<Rigidbody>();
     }
 
-    private void Awake()
+    private void Start()
     {
         InitializeAgent();
         AgentReset();
@@ -210,25 +213,24 @@ public class NewWolfAgent : Agent
     {
         currentAction = "Attack";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+        MLTestEnemy vic = null;
         var testvic = FirstAdjacent("herbivore");
-        if (testvic == null)
+        if (testvic != null)
         {
-            testvic = FirstAdjacent("carnivore");
-            if (testvic == null) { target = null; return; }
-        }
-        var vic = FirstAdjacent("herbivore").GetComponent<MLTestEnemy>();
-        if (vic != null)
-        {
+            vic = FirstAdjacent("herbivore").GetComponent<MLTestEnemy>();
+            if (vic == null) return;
             Debug.Log("herbivore enemy!");
         }
-        else
+        else if (testvic == null)
         {
-            vic = FirstAdjacent("carnivore").GetComponent<MLTestEnemy>();
-            if (vic != null)
+            testvic = FirstAdjacent("carnivore");
+            if (testvic != null)
             {
+                vic = FirstAdjacent("carnivore").GetComponent<MLTestEnemy>();
+                if (vic == null) return;
                 Debug.Log("carnivore enemy!");
             }
-            else { target = null; return; }
+            else if (testvic == null) { target = null; return; }
         }
 
         if (vic != null)
@@ -255,6 +257,7 @@ public class NewWolfAgent : Agent
     void Update()
     {
         if (Dead) return;
+        if (canRest) canRestTime += 1;
         MonitorLog();
     }
 
@@ -282,9 +285,9 @@ public class NewWolfAgent : Agent
 
     public void AddPenalty()
     {
-        if (Hp >= 100 || Hungry > 0) return;
-        float hpPenalty = -(100 - Hp) * 0.0001f;
-        AddReward(hpPenalty);
+        float hpPenalty = Hp / MaxHp * 0.001f;
+        float hungryPenalty = Hungry / MaxHungry * 0.001f;
+        AddReward(hpPenalty + hungryPenalty);
     }
 
     public void MonitorLog()
@@ -308,7 +311,16 @@ public class NewWolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("home") != null) return true;
+            if (FirstAdjacent("home") != null)
+            {
+                canRest = true;
+                if (canRestTime > 200)
+                {
+                    canRestTime = 0;
+                    return true;
+                }
+            }
+            else canRest = false;
             return false;
         }
     }
@@ -399,7 +411,7 @@ public class NewWolfAgent : Agent
                 if (Hp < 100)
                 {
                     target = targetHome;
-                    AddReward(.001f);
+                    AddReward(.25f);
                 }
 
                 Hp += 20f;

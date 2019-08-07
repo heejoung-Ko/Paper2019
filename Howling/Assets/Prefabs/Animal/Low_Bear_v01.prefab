@@ -1362,6 +1362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4888045419233748}
   - component: {fileID: 111179909344374228}
+  - component: {fileID: 8972520372907112625}
   m_Layer: 0
   m_Name: Low_Bear_v01
   m_TagString: Untagged
@@ -1392,7 +1393,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923101477069022}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400048, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
   m_Animations:
@@ -1425,6 +1426,25 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!95 &8972520372907112625
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923101477069022}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 127e9586e1ce9424fb46f9fe0abb0ad5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1940199798037580
 GameObject:
   m_ObjectHideFlags: 0

@@ -854,6 +854,7 @@ Transform:
   m_Children:
   - {fileID: 6214427277309861712}
   - {fileID: 6214427275899232020}
+  - {fileID: 6011574362160986921}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -873,7 +874,7 @@ MonoBehaviour:
   carnivoreRespawn: 0
   herbivorePrefab: {fileID: 1291221079822693554, guid: a26e610995d34164d8cb385751811591,
     type: 3}
-  carnivorePrefab: {fileID: 6179245959551986042, guid: 17d2300775b944c4380b7d60530157f5,
+  carnivorePrefab: {fileID: 2933619886062542268, guid: f9f474c53b56a66418aeaba2213bb2cb,
     type: 3}
   meatPrefab: {fileID: 3046654654559911320, guid: 13dbb83f892600349a9029d91b1c475c,
     type: 3}
@@ -1172,6 +1173,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: carnivore bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179245959551986042, guid: 17d2300775b944c4380b7d60530157f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6179245959551985985, guid: 17d2300775b944c4380b7d60530157f5,
         type: 3}
@@ -1652,6 +1658,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a26e610995d34164d8cb385751811591, type: 3}
+--- !u!4 &6011574362160986921 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8924771850118293166}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6214427275899232020 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6179245959551985985, guid: 17d2300775b944c4380b7d60530157f5,
@@ -1779,3 +1791,72 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8325718163407526929, guid: 22ec8b219f8b38a47a9f2314082ec2e0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22ec8b219f8b38a47a9f2314082ec2e0, type: 3}
+--- !u!1001 &8924771850118293166
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1370279668}
+    m_Modifications:
+    - target: {fileID: 2933619886062542268, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_Name
+      value: carnivore bear2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.017317772
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933619886062542215, guid: f9f474c53b56a66418aeaba2213bb2cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f9f474c53b56a66418aeaba2213bb2cb, type: 3}

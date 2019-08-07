@@ -8,6 +8,7 @@ public class Resource : MonoBehaviour
     private int initHp;
 
     private int hp;
+    private int age;
 
     [SerializeField]
     private bool destroy;
@@ -42,6 +43,9 @@ public class Resource : MonoBehaviour
 
     private void Start()
     {
+        //age = (int)(Random.Range(1.0f, 10.0f));
+
+        //transform.localScale = Vector3.one * (age * 0.2f);
         respawnTimeCount = respawnTime;
         hp = initHp;
         init_posY = transform.position.y;
@@ -64,7 +68,7 @@ public class Resource : MonoBehaviour
     public void Respawn()
     {
         transform.position = new Vector3 (transform.position.x, init_posY);
-
+        //transform.localScale = Vector3.one * Mathf.Pow(age, 1 / 3);
         destroy = false;
         hp = initHp;
         respawnTimeCount = respawnTime;

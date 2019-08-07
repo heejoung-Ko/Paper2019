@@ -5,246 +5,409 @@ using MLAgents;
 
 public class WolfAgent : Agent
 {
-    public enum WolfState
-    {
-        Hungry = 1, Died, Normal
-    };
+    private Animator animator;
 
-    public enum PlayerRelation
+    [Header("Creature Parameters")]
+    public Transform pivotTransform; // 임시 위치 기준점, 트레이닝룸 위치
+    public Transform targetPlayer;
+    public Transform targetHome;
+    //public Transform targetFood;
+    //public Transform targetEnemy;
+    //[SerializeField] private Transform target;
+
+    [Header("Creature Points (100 Max)")]
+    public float MaxHp;
+    public float MaxHungry;
+    public float MaxFriendly;
+    public float EatingSpeed;
+    public float RestSpeed;
+    public float MaxSpeed;
+    public float AttackDamage;
+    public float DefendDamage;
+    public float Eyesight;
+
+    [Header("Monitoring")]
+    public float Hp;
+    public float Hungry;
+    public float Friendly;
+    public string currentAction;
+
+    [Header("Species Parameters")]
+
+
+    /////////////////  Hide Parameters  /////////////////
+    [HideInInspector] public PlayerRelation playerRelation;
+    [HideInInspector] public TargetType targetType;
+
+
+    // 랜덤 스폰하기 위한 임시적인 범위, 맵 20X20 공간에서만 가능
+    private float minRange = -10f;
+    private float maxRange = 10f;
+
+    private GameObject Environment;
+    private Rigidbody agentRB;
+    private float nextAction;
+    private bool died;
+    private bool enterDeadZone;
+    private RayPerception rayPer;
+
+    private void Awake()
     {
-        Enemy , Stranger, Friend, Soulmate
+        InitializeAgent();
+        AgentReset();
     }
 
-    private Rigidbody wolfRigidbody;
-    public Transform pivotTransform; // 위치 기준점
-
-    // 타겟이 상태에 따라 유동적으로 바뀌어야함
-    public Transform target_food;
-    public Transform target_home;
-
-    public float moveForce;
-    private bool targetEaten = false;
-    private bool dead = false;
-    private bool rest = false;
-
-    public float minRange = -10f;
-    public float maxRange = 10f;
-
-    int state = (int)WolfState.Normal;
-
-    // 늑대의 스테이터스
-    public float hp = 100f;
-    public float hungry = 100f;
-    public float friendly = 0f;
-
-    // 패널티
-    private float penalty = 0f;
-    private float hpPenalty = 0f;
-    private float hungryPenalty = 0f;
-    private float friendlyPenalty = 0f;
-
-    private int hpIncreaseSpeed;
-    private int hpRechargeTime;
-    private int currentHpRechargeTime;
-
-    private int hungryDecreseTime;
-    private int currentHungryDecreaseTime;
-
-    private int hpRewardTime = 0;
-    private bool isResetTarget = false;
-    private int resetTargetTime = 0;
-    private Transform target;
-
-    void Awake()
+    public override void InitializeAgent()
     {
-        wolfRigidbody = GetComponent<Rigidbody>();
+        base.InitializeAgent();
+
+        rayPer = GetComponent<RayPerception>();
+        agentRB = GetComponent<Rigidbody>();
+
+        currentAction = "Idle";
     }
 
-    void ResetTarget()
+    public override void AgentReset()   // TODO: Reset 할 곳에 추가하기
     {
-        //Debug.Log("ResetTarget");
-
-        targetEaten = false;
-        Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
-        target_food.position = randomPos + pivotTransform.position;
-
-        isResetTarget = false;
-        resetTargetTime = 0;
-        target_food.gameObject.SetActive(true);
-        //Debug.Log(target.position);
-
-    }
-
-    // Agent가 리셋할때 자동으로 실행되는 함수 - Agent를 어떻게 reset할지 작성
-    // 1. agnet 게임 오브젝트가 처음 활성화 될 때
-    // 2. 에피소드가 끝나고 다음 에피소드가 넘어가서 학습환경을 초기화 할 때
-    // 3. 목표를 완수 했을 때
-    // 4. 목표를 실패했을 때 (agent가 죽어버린 경우도 포함)
-    public override void AgentReset()
-    {
-        Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
+        Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 1f, Random.Range(minRange, maxRange));
         transform.position = randomPos + pivotTransform.position;
 
-        //Debug.Log(randomPos);
-        //Debug.Log(pivotTransform.position);
-        dead = false;
-        rest = false;
-        state = (int)WolfState.Normal;
-        hp = 100f;
-        hungry = 100f;
+        Hp = 100;
+        Hungry = 100;
+        Friendly = 0;
 
-        wolfRigidbody.velocity = Vector3.zero;
-
-        ResetTarget();
+        currentAction = "Idle";
+        playerRelation = PlayerRelation.Enemy;
+        died = false;
+        //enterDeadZone = false;
+        //target = null;
     }
 
-    // Agent가 주변을 관측하는 함수 = Agent의 눈과 귀를 만드는 함수
+    public void MonitorLog()
+    {
+        Monitor.Log("Action", currentAction, transform);
+        Monitor.Log("Hp", Hp / MaxHp, transform);
+        Monitor.Log("Hungry", Hungry / MaxHungry, transform);
+        Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
+    }
+
+    void Update()
+    {
+        if (Dead) return;
+        MonitorLog();
+    }
+
+    public void FixedUpdate()
+    {
+        if (Time.timeSinceLevelLoad > nextAction)
+        {
+            currentAction = "Deciding";
+            RequestDecision();
+        }
+
+        DecreaseStatus();
+    }
+
+    public void DecreaseStatus()
+    {
+        Hungry -= Time.deltaTime * 0.5f;
+    }
+
+    public override void AgentOnDone()
+    {
+    }
+
     public override void CollectObservations()
     {
-        if (state == (int)WolfState.Normal)
-        {
-            target = target_food;
-            if (isResetTarget) target = target_home;
-        }
-        else if (state == (int)WolfState.Died)
-        {
-            target = target_home;
-        }
-        else if (state == (int)WolfState.Hungry)
-        {
-            target = target_food;
-            if (isResetTarget) target = target_home;
-        }
+        float rayDistance = Eyesight;
+        float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
+        string[] detectableObjects = { "food", "home", "feed", "player" };
+        AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f)); // rayAngles * (detectableObjects + 2) = 42
+        Vector3 localVelocity = transform.InverseTransformDirection(agentRB.velocity);
+        AddVectorObs(localVelocity.x);
+        AddVectorObs(localVelocity.z);
+        AddVectorObs(Hp);
+        AddVectorObs(Hungry);
+        AddVectorObs(Friendly);
+        AddVectorObs(BoolToFloat(CanEat));
+        AddVectorObs(BoolToFloat(CanRest));
+        AddVectorObs(BoolToFloat(CanGoToPlayer));
 
-        Vector3 distanceToTarget = target.position - transform.position;
-
-        AddVectorObs(Mathf.Clamp(distanceToTarget.x / maxRange, -1f, 1f));
-        AddVectorObs(Mathf.Clamp(distanceToTarget.z / maxRange, -1f, 1f));
-
-        distanceToTarget = target.position - transform.position;
-
-        AddVectorObs(Mathf.Clamp(distanceToTarget.x / maxRange, -1f, 1f));
-        AddVectorObs(Mathf.Clamp(distanceToTarget.z / maxRange, -1f, 1f));
-
-        Vector3 relativePos = transform.position - pivotTransform.position;
-
-        AddVectorObs(Mathf.Clamp(relativePos.x / maxRange, -1f, 1f));
-        AddVectorObs(Mathf.Clamp(relativePos.z / maxRange, -1f, 1f));
-
-        AddVectorObs(Mathf.Clamp(wolfRigidbody.velocity.x / maxRange, -1f, 1f));
-        AddVectorObs(Mathf.Clamp(wolfRigidbody.velocity.z / maxRange, -1f, 1f));
-     
-        AddVectorObs(Mathf.Clamp(hungry / 100f, -1f, 1f));
-        AddVectorObs(Mathf.Clamp(hp / 100f, -1f, 1f));
-     
-        AddVectorObs(Mathf.Clamp(state / 3, -1, 1));
+        // TODO: 플레이어와의 거리 or 플레이어 위치 추가? (일단 없앴음.) 
+        //AddVectorObs(targetPlayer.position);
+        //AddVectorObs((int)playerRelation);
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
+        //Action Space 6 float
 
-        //AddReward(-0.001f);
-
-        // status, state 추가될 때 바뀔 내용. 스크립트로 빼자.
-        if (state == (int)WolfState.Normal)
+        int maxAction = 0;
+        for (int i = 0; i < (int)ActionType.DEFEND; ++i)
         {
-            target = target_food;
-            if (isResetTarget) target = target_home;
-        }
-        else if (state == (int)WolfState.Died)
-        {
-            target = target_home;
-        }
-        else if (state == (int)WolfState.Hungry)
-        {
-            target = target_food;
-            if (isResetTarget) target = target_home;
+            if (vectorAction[i] < vectorAction[i + 1])
+            {
+                if (vectorAction[i + 1] > .5f)
+                    maxAction = i + 1;
+            }
         }
 
-        float d1 = (target.position - transform.position).sqrMagnitude;
-
-        float horizontalInput = vectorAction[0];
-        float verticalInput = vectorAction[1];
-
-        transform.LookAt(target);
-        transform.position = transform.position + new Vector3(horizontalInput, 0f, verticalInput) * moveForce;
-
-        float d2 = (target.position - transform.position).sqrMagnitude;
-        if (d1 > d2)
+        switch (maxAction)
         {
-            float distanceReward = (400 - d2) * 0.001f / 4;
-            if (distanceReward >= 0) AddReward(distanceReward);
+            case (int)ActionType.MOVE:
+                animator.SetBool("isWalk", true);
+                MoveAgent(vectorAction);
+                animator.SetBool("isWalk", false);
+                break;
+            case (int)ActionType.EAT:
+                animator.SetTrigger("eatTrigger");
+                Eat();
+                break;
+            case (int)ActionType.REST:
+                animator.SetTrigger("restTrigger");
+                Rest();
+                break;
+            case (int)ActionType.GOTOPLAYER:
+                animator.SetBool("isWalk", true);
+                GoToPlayer();
+                animator.SetBool("isWalk", false);
+                break;
+            case (int)ActionType.ATTACK:
+                animator.SetTrigger("attackTrigger");
+                Attack();
+                break;
+            case (int)ActionType.DEFEND:
+                animator.SetTrigger("hitTrigger");
+                Defend();
+                break;
+        }
+    }
+
+    private GameObject FirstAdjacent(string tag)
+    {
+        var colliders = Physics.OverlapSphere(transform.position, 2f);
+        foreach (var collider in colliders)
+        {
+            if (collider.gameObject.tag == tag)
+            {
+                return collider.gameObject;
+            }
+        }
+        return null;
+    }
+    
+
+    // Actions
+    public void MoveAgent(float[] act)
+    {
+        Vector3 rotateDir = Vector3.zero;
+        rotateDir = transform.up * Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, -1f);
+
+        if (act[(int)ActionType.MOVEORDERS] > .5f)
+        {
+            transform.position += transform.forward;
+        }
+
+        Hp -= .01f;
+        transform.Rotate(rotateDir, Time.fixedDeltaTime * MaxSpeed);
+        currentAction = "Moving";
+        nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+
+
+        /*
+        float d1 = 0, d2 = 0;
+
+        if (target != null)
+        {
+            transform.LookAt(target);
+            d1 = (target.position - transform.position).sqrMagnitude;
         }
         else
         {
-            float distancePenalty = -0.1f;
-            AddReward(distancePenalty);
+            var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
+            transform.Rotate(transform.up, rotate * 25f);
         }
 
-        if (targetEaten)
+        if (act[(int)ActionType.MOVEORDERS] > .5f)
         {
-            if (target_food.gameObject.activeSelf == true)
+            transform.position += transform.forward;
+        }
+
+
+        if (target != null)
+        {
+            d2 = (target.position - transform.position).sqrMagnitude;
+            if (d1 > d2)
             {
-                Debug.Log("food 먹었다!");
+                float distanceReward = .001f;
+                if (distanceReward >= 0) AddReward(distanceReward);
+            }
+            else
+            {
+                float distancePenalty = -.1f;
+                AddReward(distancePenalty);
+            }
+        }
+        */
+    }
 
-                AddReward(1 + ((100 - hungry) * 0.01f));
+    bool CanEat
+    {
+        get
+        {
+            if (FirstAdjacent("food") != null || FirstAdjacent("feed") != null) return true;
+            return false;
+        }
+    }
 
-                hungry = hungry + 20f;
-                hungry = Mathf.Clamp(hungry, 0f, 100f);
+    public void Eat()
+    {
+        if (CanEat)
+        {
+            var adj = FirstAdjacent("food");
+            if (adj != null)
+            {
+                Destroy(adj);
+                Hungry += 10f;
+                Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
 
-                isResetTarget = true;
-                target_food.gameObject.SetActive(false);
-                //ResetTarget();
+                AddReward(.01f);
+                nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
+                currentAction = "Eating";
+            } else
+            {
+                adj = FirstAdjacent("feed");
+                if(adj != null)
+                {
+                    Destroy(adj);
+
+                    Hungry += 10f;
+                    Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
+
+                    Friendly += 5f;
+                    Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
+                    AddReward(.02f);
+                    nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
+                    currentAction = "Eating";
+                }
+            }
+        }
+    }
+
+    bool CanRest
+    {
+        get
+        {
+            if (FirstAdjacent("home") != null) return true;
+            return false;
+        }
+    }
+
+    public void Rest()
+    {
+        if (CanRest)
+        {
+            var adj = FirstAdjacent("home");
+            if (adj != null)
+            {
+                Debug.Log("rest 중!!!");
+
+                if (Hp < 100)
+                {
+                    AddReward(.01f);
+                }
+
+                Hp += 10f;
+                Hp = Mathf.Clamp(Hp, 0f, MaxHp);
+
+                nextAction = Time.timeSinceLevelLoad + (25 / RestSpeed);
+                currentAction = "Resting";
+            }
+        }
+    }
+
+    bool CanGoToPlayer
+    {
+        get
+        {
+            // TODO: playerRelation 따라서 판단. (일단 임시로 정했음.)
+            if (playerRelation >= PlayerRelation.Friend)
+            {
+                if (FirstAdjacent("Player") != null) return true;
+                return false;
+            }
+            return false;
+        }
+    }
+
+    public void GoToPlayer()
+    {
+        // TODO: tag == "Player" 조건 추가
+        if (CanGoToPlayer)
+        {
+            Friendly += 5f;
+            Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
+
+            AddReward(.01f);
+            nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+            currentAction = "GoToPlayer";
+        }
+    }
+
+    void Attack()
+    {
+        float damage = 0f;
+
+        currentAction = "Attack";
+        nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+
+        var target = FirstAdjacent("enemy").GetComponent<Enemy>();
+        
+        if(target != null)
+        {
+            damage = AttackDamage;
+        }
+        else
+        {
+            Debug.Log("공격할 대상이 없당");
+        }
+
+        if(damage > 0)
+        {
+            target.DecreaseHp((int)damage);
+            AddReward(.01f); // 공격 보상
+            if(target.state == Enemy.EnemyState.die)
+            {
+                AddReward(.25f); // 사냥 성공 보상
             }
         }
 
-        if (rest)
-        {
-            AddReward(0.01f);
-            hpRewardTime++;
+        Hungry -= .1f;
+    }
 
-            if (hpRewardTime > 200)
+    void Defend()
+    {
+        currentAction = "Defend";
+        nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+    }
+
+    bool Dead
+    {
+        get
+        {
+            if (died) return true;
+
+            if (Hp <= 0 || enterDeadZone || Hungry <= 0)
             {
-                Debug.Log("home 쉬고있다!");
-                AddReward(1 + ((100 - hp) * 0.01f));
-                hp = hp + 20f;
-                hp = Mathf.Clamp(hp, 0f, 100f);
-                hpRewardTime = 0;
+                currentAction = "Dead";
+                died = true;
+                AddReward(-1f);
+                Done();
+                AgentReset();
+                return true;
             }
-        }
 
-        if (dead)
-        {
-            AddReward(-1.0f);
-            Done();
-        }
-
-        float hpPenalty = -(100 - hp) * 0.001f;
-        //float hungryPenalty = -(100 - hungry) * 0.001f;
-        AddReward(hpPenalty);
-
-        //  이름, 어떤 값, 위치
-        //Monitor.Log("reword", GetCumulativeReward(), this.gameObject.transform);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("food"))
-        {
-            targetEaten = true;
-        }
-        else if (collision.collider.CompareTag("home"))
-        {
-            rest = true;
-        }
-
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.CompareTag("home"))
-        {
-            rest = false;
+            return false;
         }
     }
 
@@ -252,57 +415,22 @@ public class WolfAgent : Agent
     {
         if (other.CompareTag("dead"))
         {
-            //   Debug.Log(hungryPenalty);
-            dead = true;
+            enterDeadZone = true;
         }
     }
 
-    void Update()
+    public void SetPlayerRelation() // TODO: Friendly 값 바뀌는 곳에 이 함수 추가하기
     {
-        //if (transform.position.x < minRange || transform.position.z < minRange || transform.position.y < -1f)
-        //{
-        //    Debug.Log("작아서 주금");
-        //    dead = true;
-        //}
-        //else if (transform.position.x > maxRange || transform.position.z > maxRange || transform.position.y > 3f)
-        //{
-        //    Debug.Log("커서 주금");
-        //    dead = true;
-        //}
-
-        if (isResetTarget)
-        {
-            resetTargetTime++;
-            if (resetTargetTime > 200) ResetTarget();
-        }
-
-        // 상태 바꿔주는 것도 스크립트로 빼자. 
-        if (hungry > 0f)
-            hungry = hungry - (Time.deltaTime * 0.5f);
-        else
-        {
-            hungry = 0f;
-            hp = hp - Time.deltaTime * 0.5f;
-        }
-
-        if (hp <= 0f)
-        {
-            hp = 0f;
-            dead = true;
-        }
-
-        if (hp <= 50f)
-        {
-            state = (int)WolfState.Died;
-        }
-        else if (hungry <= 50f)
-        {
-            state = (int)WolfState.Hungry;
-        }
-        else
-        {
-            state = (int)WolfState.Normal;
-        }
+        // TODO: playerRelation 상태 바뀌는 기준 정하기. (일단 임시로 정했음.)
+        if (Friendly < MaxFriendly * 0.2) playerRelation = PlayerRelation.Enemy;
+        else if (Friendly < MaxFriendly * 0.5) playerRelation = PlayerRelation.Stranger;
+        else if (Friendly < MaxFriendly * 0.8) playerRelation = PlayerRelation.Friend;
+        else playerRelation = PlayerRelation.Soulmate;
     }
 
+    private float BoolToFloat(bool val)
+    {
+        if (val) return 1.0f;
+        else return 0.0f;
+    }
 }

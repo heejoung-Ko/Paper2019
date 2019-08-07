@@ -7,6 +7,6 @@ public class WolfAcademy : Academy
 {
     public override void AcademyReset()
     {
-       // Monitor.SetActive(true);
+       Monitor.SetActive(true);
     }
 }

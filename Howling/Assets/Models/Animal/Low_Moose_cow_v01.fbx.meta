@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45007da6dc3cc2740b801f6ff2e11324
+guid: 4cb6dc8d7a998e64d853c6c18facb280
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -137,7 +137,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Forest_color
-    second: {fileID: 2100000, guid: caa69bf6cd98119458167ebc829a889d, type: 2}
+    second: {fileID: 2100000, guid: 582fc8b66e578c74884dfbc9a72efd44, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -157,7 +157,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -217,7 +217,7 @@ ModelImporter:
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
