@@ -63,6 +63,7 @@ public class NewWolfAgent : Agent
     [HideInInspector] public PlayerRelation playerRelation;
     [HideInInspector] public TargetType targetType;
 
+
     // 랜덤 스폰하기 위한 임시적인 범위, 맵 20X20 공간에서만 가능
     private float minRange = -10f;
     private float maxRange = 10f;
@@ -212,25 +213,24 @@ public class NewWolfAgent : Agent
     {
         currentAction = "Attack";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+        MLTestEnemy vic = null;
         var testvic = FirstAdjacent("herbivore");
-        if (testvic == null)
+        if (testvic != null)
         {
-            testvic = FirstAdjacent("carnivore");
-            if (testvic == null) { target = null; return; }
-        }
-        var vic = FirstAdjacent("herbivore").GetComponent<MLTestEnemy>();
-        if (vic != null)
-        {
+            vic = FirstAdjacent("herbivore").GetComponent<MLTestEnemy>();
+            if (vic == null) return;
             Debug.Log("herbivore enemy!");
         }
-        else
+        else if (testvic == null)
         {
-            vic = FirstAdjacent("carnivore").GetComponent<MLTestEnemy>();
-            if (vic != null)
+            testvic = FirstAdjacent("carnivore");
+            if (testvic != null)
             {
+                vic = FirstAdjacent("carnivore").GetComponent<MLTestEnemy>();
+                if (vic == null) return;
                 Debug.Log("carnivore enemy!");
             }
-            else { target = null; return; }
+            else if (testvic == null) { target = null; return; }
         }
 
         if (vic != null)
