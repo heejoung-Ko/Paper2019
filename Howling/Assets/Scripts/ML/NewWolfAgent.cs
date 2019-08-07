@@ -23,9 +23,9 @@ public enum ActionType
     REST,
     GOTOPLAYER,
     ATTACK,
+    DEFEND,
     MOVEORDERS,
     ROTATION,
-    DEFEND,
 }
 
 public class NewWolfAgent : Agent

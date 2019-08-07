@@ -23,9 +23,9 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHp = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().hp;
-        currentFriendly = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().friendly;
-        currentHungry = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().hungry;
+        currentHp = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().Hp;
+        currentFriendly = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().Friendly;
+        currentHungry = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().Hungry;
 
         //currentHungryDecreaseTime = 0;
     }
@@ -33,9 +33,9 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentHp = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().hp;
-        currentFriendly = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().friendly;
-        currentHungry = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().hungry;
+        currentHp = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().Hp;
+        currentFriendly = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().Friendly;
+        currentHungry = GameObject.Find("wolf_agent").GetComponent<WolfAgent>().Hungry;
         GaugeUpdate();
     }
 

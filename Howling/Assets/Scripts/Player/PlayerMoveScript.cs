@@ -14,6 +14,7 @@ namespace Howling
         private StatusController statusController;
         private TutorialController tutorialController;
 
+
         // WASD move
         private float velocity = 0.0f;
         public static float walkAcc = 5.0f;
