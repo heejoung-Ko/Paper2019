@@ -26,8 +26,6 @@ public class WolfAgent : Agent
     public float DefendDamage;
     public float Eyesight;
 
-    public float moveForce;
-
     [Header("Monitoring")]
     public float Hp;
     public float Hungry;
@@ -123,7 +121,7 @@ public class WolfAgent : Agent
     {
         float rayDistance = Eyesight;
         float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-        string[] detectableObjects = { "food", "home", "herbivore", "carnivore" };
+        string[] detectableObjects = { "food", "home", "feed", "player" };
         AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f)); // rayAngles * (detectableObjects + 2) = 42
         Vector3 localVelocity = transform.InverseTransformDirection(agentRB.velocity);
         AddVectorObs(localVelocity.x);
@@ -157,21 +155,29 @@ public class WolfAgent : Agent
         switch (maxAction)
         {
             case (int)ActionType.MOVE:
+                animator.SetBool("isWalk", true);
                 MoveAgent(vectorAction);
+                animator.SetBool("isWalk", false);
                 break;
             case (int)ActionType.EAT:
+                animator.SetTrigger("eatTrigger");
                 Eat();
                 break;
             case (int)ActionType.REST:
+                animator.SetTrigger("restTrigger");
                 Rest();
                 break;
             case (int)ActionType.GOTOPLAYER:
+                animator.SetBool("isWalk", true);
                 GoToPlayer();
+                animator.SetBool("isWalk", false);
                 break;
             case (int)ActionType.ATTACK:
+                animator.SetTrigger("attackTrigger");
                 Attack();
                 break;
             case (int)ActionType.DEFEND:
+                animator.SetTrigger("hitTrigger");
                 Defend();
                 break;
         }
@@ -196,6 +202,11 @@ public class WolfAgent : Agent
     {
         Vector3 rotateDir = Vector3.zero;
         rotateDir = transform.up * Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, -1f);
+
+        if (act[(int)ActionType.MOVEORDERS] > .5f)
+        {
+            transform.position += transform.forward;
+        }
 
         Hp -= .01f;
         transform.Rotate(rotateDir, Time.fixedDeltaTime * MaxSpeed);
@@ -386,7 +397,7 @@ public class WolfAgent : Agent
         {
             if (died) return true;
 
-            if (Hp <= 0 || enterDeadZone)
+            if (Hp <= 0 || enterDeadZone || Hungry <= 0)
             {
                 currentAction = "Dead";
                 died = true;
