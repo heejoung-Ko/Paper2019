@@ -5,8 +5,8 @@ using MLAgents;
 
 public class WolfAcademy : Academy
 {
-    public override void AcademyReset()
+    public override void InitializeAcademy()
     {
-       Monitor.SetActive(true);
+        Monitor.SetActive(true);
     }
 }

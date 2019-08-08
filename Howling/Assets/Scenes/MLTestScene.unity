@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1775786, g: 0.22232205, b: 0.30451748, a: 1}
+  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -146,6 +146,7 @@ Transform:
   - {fileID: 4611623109618512503}
   - {fileID: 742882024}
   - {fileID: 188885793}
+  - {fileID: 456396748}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -378,6 +379,87 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8325718163407526940, guid: 22ec8b219f8b38a47a9f2314082ec2e0,
     type: 3}
   m_PrefabInstance: {fileID: 8325718163172561323}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &456396747
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 50936095}
+    m_Modifications:
+    - target: {fileID: 3576447411941303425, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_Name
+      value: FeedTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a224fcbfe2882e045b3703f8c04be8fb, type: 3}
+--- !u!4 &456396748 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 456396747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &456396749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3576447411941303425, guid: a224fcbfe2882e045b3703f8c04be8fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 456396747}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &742882023
 GameObject:
@@ -878,6 +960,7 @@ MonoBehaviour:
     type: 3}
   meatPrefab: {fileID: 3046654654559911320, guid: 13dbb83f892600349a9029d91b1c475c,
     type: 3}
+  feedPrefab: {fileID: 456396749}
   pivotTransform: {fileID: 73243883}
   herbivoreSpawn: {fileID: 983963949}
   carnivoreSpawn: {fileID: 93224170}

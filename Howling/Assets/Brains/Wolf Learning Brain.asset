@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wolf Learning Brain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 50
+    vectorObservationSize: 51
     numStackedVectorObservations: 5
     vectorActionSize: 08000000
     cameraResolutions: []

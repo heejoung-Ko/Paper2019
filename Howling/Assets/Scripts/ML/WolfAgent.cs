@@ -5,6 +5,7 @@ using MLAgents;
 
 public class WolfAgent : Agent
 {
+    [SerializeField]
     private Animator animator;
 
     [Header("Creature Parameters")]
@@ -39,15 +40,13 @@ public class WolfAgent : Agent
     [HideInInspector] public PlayerRelation playerRelation;
     [HideInInspector] public TargetType targetType;
 
-
     // 랜덤 스폰하기 위한 임시적인 범위, 맵 20X20 공간에서만 가능
-    private float minRange = -10f;
-    private float maxRange = 10f;
+    private float minRange = -9f;
+    private float maxRange = 9f;
 
     private GameObject Environment;
     private Rigidbody agentRB;
     private float nextAction;
-    private bool died;
     private bool enterDeadZone;
     private RayPerception rayPer;
 
@@ -76,10 +75,11 @@ public class WolfAgent : Agent
         Hungry = 100;
         Friendly = 0;
 
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
         currentAction = "Idle";
         playerRelation = PlayerRelation.Enemy;
-        died = false;
-        //enterDeadZone = false;
+        enterDeadZone = false;
         //target = null;
     }
 
@@ -93,8 +93,14 @@ public class WolfAgent : Agent
 
     void Update()
     {
-        if (Dead) return;
-        MonitorLog();
+        if (Dead)
+        {
+            currentAction = "Dead";
+            AddReward(-1f);
+            Done();
+            AgentReset();
+        }
+            MonitorLog();
     }
 
     public void FixedUpdate()
@@ -110,7 +116,7 @@ public class WolfAgent : Agent
 
     public void DecreaseStatus()
     {
-        Hungry -= Time.deltaTime * 0.5f;
+        Hungry -= Time.deltaTime * 0.1f;
     }
 
     public override void AgentOnDone()
@@ -121,7 +127,7 @@ public class WolfAgent : Agent
     {
         float rayDistance = Eyesight;
         float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-        string[] detectableObjects = { "food", "home", "feed", "player" };
+        string[] detectableObjects = { "food", "home", "enemy", "Player" };
         AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f)); // rayAngles * (detectableObjects + 2) = 42
         Vector3 localVelocity = transform.InverseTransformDirection(agentRB.velocity);
         AddVectorObs(localVelocity.x);
@@ -132,6 +138,7 @@ public class WolfAgent : Agent
         AddVectorObs(BoolToFloat(CanEat));
         AddVectorObs(BoolToFloat(CanRest));
         AddVectorObs(BoolToFloat(CanGoToPlayer));
+        AddVectorObs(BoolToFloat(CanAttack));
 
         // TODO: 플레이어와의 거리 or 플레이어 위치 추가? (일단 없앴음.) 
         //AddVectorObs(targetPlayer.position);
@@ -160,11 +167,9 @@ public class WolfAgent : Agent
                 animator.SetBool("isWalk", false);
                 break;
             case (int)ActionType.EAT:
-                animator.SetTrigger("eatTrigger");
                 Eat();
                 break;
             case (int)ActionType.REST:
-                animator.SetTrigger("restTrigger");
                 Rest();
                 break;
             case (int)ActionType.GOTOPLAYER:
@@ -173,11 +178,9 @@ public class WolfAgent : Agent
                 animator.SetBool("isWalk", false);
                 break;
             case (int)ActionType.ATTACK:
-                animator.SetTrigger("attackTrigger");
                 Attack();
                 break;
             case (int)ActionType.DEFEND:
-                animator.SetTrigger("hitTrigger");
                 Defend();
                 break;
         }
@@ -185,7 +188,7 @@ public class WolfAgent : Agent
 
     private GameObject FirstAdjacent(string tag)
     {
-        var colliders = Physics.OverlapSphere(transform.position, 2f);
+        var colliders = Physics.OverlapSphere(transform.position, 3f);
         foreach (var collider in colliders)
         {
             if (collider.gameObject.tag == tag)
@@ -208,7 +211,7 @@ public class WolfAgent : Agent
             transform.position += transform.forward;
         }
 
-        Hp -= .01f;
+        Hungry -= .01f;
         transform.Rotate(rotateDir, Time.fixedDeltaTime * MaxSpeed);
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
@@ -255,7 +258,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("food") != null || FirstAdjacent("feed") != null) return true;
+            if (FirstAdjacent("food") != null) return true;
             return false;
         }
     }
@@ -264,32 +267,24 @@ public class WolfAgent : Agent
     {
         if (CanEat)
         {
+            Debug.Log("냠냠");
+            animator.SetTrigger("eatTrigger");
+
             var adj = FirstAdjacent("food");
             if (adj != null)
             {
+                transform.LookAt(adj.transform);
+
                 Destroy(adj);
                 Hungry += 10f;
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
 
+                Friendly += 1f;
+                Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
+
                 AddReward(.01f);
                 nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
                 currentAction = "Eating";
-            } else
-            {
-                adj = FirstAdjacent("feed");
-                if(adj != null)
-                {
-                    Destroy(adj);
-
-                    Hungry += 10f;
-                    Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
-
-                    Friendly += 5f;
-                    Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
-                    AddReward(.02f);
-                    nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
-                    currentAction = "Eating";
-                }
             }
         }
     }
@@ -307,9 +302,13 @@ public class WolfAgent : Agent
     {
         if (CanRest)
         {
+            animator.SetTrigger("restTrigger");
+
             var adj = FirstAdjacent("home");
             if (adj != null)
             {
+                transform.LookAt(adj.transform);
+
                 Debug.Log("rest 중!!!");
 
                 if (Hp < 100)
@@ -354,39 +353,61 @@ public class WolfAgent : Agent
         }
     }
 
-    void Attack()
+    bool CanAttack
     {
-        float damage = 0f;
-
-        currentAction = "Attack";
-        nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
-
-        var target = FirstAdjacent("enemy").GetComponent<Enemy>();
-        
-        if(target != null)
+        get
         {
-            damage = AttackDamage;
-        }
-        else
-        {
-            Debug.Log("공격할 대상이 없당");
-        }
+            var testvic = FirstAdjacent("enemy");
 
-        if(damage > 0)
-        {
-            target.DecreaseHp((int)damage);
-            AddReward(.01f); // 공격 보상
-            if(target.state == Enemy.EnemyState.die)
+            if (testvic != null)
             {
-                AddReward(.25f); // 사냥 성공 보상
+                Debug.Log("발견!");
+                return true;
+            }
+            else
+            {
+                //Debug.Log("공격대상이 없당");
+                return false;
             }
         }
+    }
+    void Attack()
+    {
+        currentAction = "Attack";
+        nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+        MLTestEnemy vic = null;
 
-        Hungry -= .1f;
+        if(CanAttack)
+        {
+            Debug.Log("공격!");
+            vic = FirstAdjacent("enemy").GetComponent<MLTestEnemy>();
+            transform.LookAt(vic.transform);
+
+            if (vic != null)
+            {
+                animator.SetTrigger("attackTrigger");
+
+                vic.Hp -= AttackDamage;
+                Hp -= vic.AttackDamage; // 몬스터 AI 완성되면 없어짐
+                AddReward(vic.AttackDamage/100f); // 공격 보상
+
+                if (vic.Hp <= 0)
+                {
+                    Debug.Log("해치웠다!");
+
+                    AddReward(.25f);
+                }
+            } else {
+                Debug.Log("vic에  null 들감");
+            }
+        }
+        Hungry -= 1f; // 공격했으니 허기소비
     }
 
     void Defend()
     {
+        animator.SetTrigger("hitTrigger");
+
         currentAction = "Defend";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
     }
@@ -395,15 +416,8 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (died) return true;
-
             if (Hp <= 0 || enterDeadZone || Hungry <= 0)
             {
-                currentAction = "Dead";
-                died = true;
-                AddReward(-1f);
-                Done();
-                AgentReset();
                 return true;
             }
 

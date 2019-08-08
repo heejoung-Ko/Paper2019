@@ -22,7 +22,7 @@ public class MLTestEnemy : MonoBehaviour
 
     void Update()
     {
-        if (0 >= Hp)
+        if (Hp <= 0)
         {
             //if (tag == "herbivore") manager.herbivoreRespawn = true;
             //else if (tag == "carnivore") manager.carnivoreRespawn = true;

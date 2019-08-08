@@ -30,9 +30,9 @@ Wolf Learning Brain :
     beta: 1.0e-2
     gamma: 0.99
     num_epoch: 3
-    buffer_size: 1024
+    buffer_size: 2048
     batch_size: 128
-    max_steps: 100.0e5
+    max_steps: 50.0e5
     summary_freq: 500
     time_horizon: 128
 
