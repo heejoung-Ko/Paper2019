@@ -12,6 +12,9 @@ public class WolfAgent : Agent
     public Transform pivotTransform; // 임시 위치 기준점, 트레이닝룸 위치
     public Transform targetPlayer;
     public Transform targetHome;
+
+    public LayerMask colliderLayerMask;
+
     //public Transform targetFood;
     //public Transform targetEnemy;
     //[SerializeField] private Transform target;
@@ -188,14 +191,14 @@ public class WolfAgent : Agent
 
     private GameObject FirstAdjacent(string tag)
     {
-        var colliders = Physics.OverlapSphere(transform.position, 3f);
+        var colliders = Physics.OverlapSphere(transform.position, 3f, colliderLayerMask);
         foreach (var collider in colliders)
         {
-            if(tag == "item")
+            if (tag == "item")
             {
                 var adj = collider.gameObject;
-                if (adj.GetComponent<Item>().ItemName == "손질되지 않은 고기" ||
-                    adj.GetComponent<Item>().ItemName == "손질된 고기")
+                if (adj.GetComponent<ItemPickUP>().item.ItemName == "Meat" ||
+                    adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
                 {
                     return collider.gameObject;
                 }
@@ -209,7 +212,7 @@ public class WolfAgent : Agent
         }
         return null;
     }
-    
+
 
     // Actions
     public void MoveAgent(float[] act)
@@ -250,13 +253,13 @@ public class WolfAgent : Agent
             {
                 transform.LookAt(adj.transform);
 
-                if(adj.GetComponent<Item>().ItemName == "손질되지 않은 고기")
+                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
                 {
                     Hungry += 5f;
                     AddReward(0.05f);
                 }
 
-                if(adj.GetComponent<Item>().ItemName == "손질된 고기")
+                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Meat")
                 {
                     Hungry += 10f;
                     Friendly += 5f;

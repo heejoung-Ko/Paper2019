@@ -279,6 +279,8 @@ GameObject:
   - component: {fileID: 691647852}
   - component: {fileID: 691647851}
   - component: {fileID: 691647850}
+  - component: {fileID: 7034754739373183434}
+  - component: {fileID: 6487584846483167924}
   m_Layer: 0
   m_Name: p_enemy fox
   m_TagString: enemy
@@ -337,7 +339,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691647849}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e15bf089839aad34a99034f67b1ea1cd, type: 3}
   m_Name: 
@@ -349,6 +351,43 @@ MonoBehaviour:
   AttackDamage: 2
   direction: {x: 0, y: 0, z: 0.1}
   velocity: 6
+--- !u!114 &7034754739373183434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691647849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148ce60cadeb223498de743ca9931ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyNumber: 1
+  state: 0
+  oldState: 0
+  invincibleTime: 1
+  currentInvincibleTime: 0
+  dropItem: {fileID: 197605295, guid: d0d79044380a6fc4ba279b7ed30b2274, type: 3}
+--- !u!95 &6487584846483167924
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691647849}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a666bc52ea3645348930a8ea354d3c20, type: 3}
+  m_Controller: {fileID: 9100000, guid: 019e60275d44bfe4d8c5e580f4e8bdca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &745583275
 GameObject:
   m_ObjectHideFlags: 0
