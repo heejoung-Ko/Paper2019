@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
+  m_IndirectSpecularColor: {r: 0.1775786, g: 0.22232205, b: 0.30451748, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -392,6 +392,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FeedTarget
       objectReference: {fileID: 0}
+    - target: {fileID: 3576447411941303425, guid: a224fcbfe2882e045b3703f8c04be8fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -452,12 +457,6 @@ PrefabInstance:
 --- !u!4 &456396748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 520526768181744699, guid: a224fcbfe2882e045b3703f8c04be8fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 456396747}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &456396749 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3576447411941303425, guid: a224fcbfe2882e045b3703f8c04be8fb,
     type: 3}
   m_PrefabInstance: {fileID: 456396747}
   m_PrefabAsset: {fileID: 0}
@@ -1864,12 +1863,17 @@ PrefabInstance:
     - target: {fileID: 4455951390570943780, guid: 22ec8b219f8b38a47a9f2314082ec2e0,
         type: 3}
       propertyPath: MaxSpeed
-      value: 1000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 4455951390570943780, guid: 22ec8b219f8b38a47a9f2314082ec2e0,
         type: 3}
       propertyPath: EatingSpeed
-      value: 1000
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455951390570943780, guid: 22ec8b219f8b38a47a9f2314082ec2e0,
+        type: 3}
+      propertyPath: moveForce
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8325718163407526929, guid: 22ec8b219f8b38a47a9f2314082ec2e0, type: 3}
