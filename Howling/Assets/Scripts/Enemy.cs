@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
     {
         if (target == null)
         {
-            if (other.tag == "target")
+            if (other.tag == "target" || other.tag == "agent")
             {
                 state = EnemyState.trace;
                 target = other.gameObject;
@@ -313,8 +313,8 @@ public class Enemy : MonoBehaviour
 
         if (!isDead)
         {
-            Invoke("DropItem", 5f);
-            Destroy(this.gameObject, 5f);
+            Invoke("DropItem", 8f);
+            Destroy(this.gameObject, 8f);
             isDead = true;
         }
     }
