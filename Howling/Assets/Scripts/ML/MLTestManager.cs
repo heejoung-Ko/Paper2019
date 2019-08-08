@@ -26,14 +26,14 @@ public class MLTestManager : MonoBehaviour
         // enemy 
         herbivoreRespawnTime += 1;
         carnivoreRespawnTime += 1;
-        if (herbivoreRespawnTime > 2000)
+        if (herbivoreRespawnTime > 800)
         {
             herbivoreRespawnTime = 0;
             Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
             var position = randomPos + pivotTransform.position;
             Instantiate(herbivorePrefab, position + randomPos, herbivoreSpawn.rotation);
         }
-        if (carnivoreRespawnTime > 3000)
+        if (carnivoreRespawnTime > 1000)
         {
             carnivoreRespawnTime = 0;
             Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
@@ -43,7 +43,7 @@ public class MLTestManager : MonoBehaviour
 
         // meat 
         meatRespawnTime += 1;
-        if (meatRespawnTime > 1000)
+        if (meatRespawnTime > 500)
         {
             meatRespawnTime = 0;
             Invoke("DropItem", 5f);
