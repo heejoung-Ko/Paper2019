@@ -191,6 +191,17 @@ public class WolfAgent : Agent
         var colliders = Physics.OverlapSphere(transform.position, 3f);
         foreach (var collider in colliders)
         {
+            if(tag == "item")
+            {
+                var adj = collider.gameObject;
+                if (adj.GetComponent<Item>().ItemName == "손질되지 않은 고기" ||
+                    adj.GetComponent<Item>().ItemName == "손질된 고기")
+                {
+                    return collider.gameObject;
+                }
+                else return null;
+            }
+
             if (collider.gameObject.tag == tag)
             {
                 return collider.gameObject;
@@ -222,7 +233,7 @@ public class WolfAgent : Agent
         get
         {
             var adj = FirstAdjacent("item");
-            if (adj != null && adj.GetComponent<Item>().ItemName == "") return true;
+            if (adj != null) return true;
             return false;
         }
     }
@@ -234,19 +245,28 @@ public class WolfAgent : Agent
             Debug.Log("냠냠");
             animator.SetTrigger("eatTrigger");
 
-            var adj = FirstAdjacent("food");
+            var adj = FirstAdjacent("item");
             if (adj != null)
             {
                 transform.LookAt(adj.transform);
 
-                Destroy(adj);
-                Hungry += 10f;
-                Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
+                if(adj.GetComponent<Item>().ItemName == "손질되지 않은 고기")
+                {
+                    Hungry += 5f;
+                    AddReward(0.05f);
+                }
 
-                Friendly += 1f;
+                if(adj.GetComponent<Item>().ItemName == "손질된 고기")
+                {
+                    Hungry += 10f;
+                    Friendly += 5f;
+                    AddReward(0.1f);
+                }
+
+                Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
-                AddReward(.01f);
+                Destroy(adj);
                 nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
                 currentAction = "Eating";
             }
