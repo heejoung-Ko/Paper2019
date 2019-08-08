@@ -37,6 +37,7 @@ public class NewWolfAgent : Agent
     //public Transform targetFood;
     //public Transform targetEnemy;
     //[SerializeField] private Transform target;
+    public LayerMask colliderLayerMask;
 
     [Header("Creature Points (100 Max)")]
     public float MaxHp;
@@ -118,7 +119,7 @@ public class NewWolfAgent : Agent
     {
         float rayDistance = Eyesight;
         float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-        string[] detectableObjects = { "food", "home", "herbivore", "carnivore" };
+        string[] detectableObjects = { "item", "home", "herbivore", "carnivore" };
         AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f)); // rayAngles * (detectableObjects + 2) = 42
         Vector3 localVelocity = transform.InverseTransformDirection(agentRB.velocity);
         AddVectorObs(localVelocity.x);
@@ -314,7 +315,7 @@ public class NewWolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("food") != null) return true;
+            if (FirstAdjacent("item") != null) return true;
             return false;
         }
     }
@@ -347,9 +348,20 @@ public class NewWolfAgent : Agent
 
     private GameObject FirstAdjacent(string tag)
     {
-        var colliders = Physics.OverlapSphere(transform.position, 2f);
+        var colliders = Physics.OverlapSphere(transform.position, 3f, colliderLayerMask);
         foreach (var collider in colliders)
         {
+            if (tag == "item")
+            {
+                var adj = collider.gameObject;
+                if (adj.GetComponent<ItemPickUP>().item.ItemName == "Meat" ||
+                    adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
+                {
+                    return collider.gameObject;
+                }
+                else return null;
+            }
+
             if (collider.gameObject.tag == tag)
             {
                 return collider.gameObject;
@@ -391,14 +403,28 @@ public class NewWolfAgent : Agent
     {
         if (CanEat)
         {
-            var adj = FirstAdjacent("food");
+            var adj = FirstAdjacent("item");
             if (adj != null)
             {
-                Destroy(adj);
-                Hungry += 20f;
-                Hungry = Mathf.Clamp(Hungry, 0f, 100f);
+                //if (adj.GetComponent<Item>().ItemName == "Meat")
+                if (adj.GetComponent<ItemPickUP>().item.ItemName == "Meat")
+                {
+                    Hungry += 5f;
+                    AddReward(0.05f);
+                }
 
-                AddReward(.1f);
+                //if (adj.GetComponent<Item>().ItemName == "Fillet")
+                if (adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
+                {
+                        Hungry += 10f;
+                    Friendly += 5f;
+                    AddReward(0.1f);
+                }
+
+                Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
+                Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
+
+                Destroy(adj);
                 nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
                 currentAction = "Eating";
             }

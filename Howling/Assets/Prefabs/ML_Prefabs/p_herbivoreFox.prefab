@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1291221079822693559}
   - component: {fileID: 1291221079822693557}
   - component: {fileID: 1291221079822693556}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: p_herbivoreFox
   m_TagString: herbivore
   m_Icon: {fileID: 0}

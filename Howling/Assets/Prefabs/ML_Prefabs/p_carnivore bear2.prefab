@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2933619886062542265}
   - component: {fileID: 2933619886062542267}
   - component: {fileID: 2933619886062542266}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: p_carnivore bear2
   m_TagString: carnivore
   m_Icon: {fileID: 0}
