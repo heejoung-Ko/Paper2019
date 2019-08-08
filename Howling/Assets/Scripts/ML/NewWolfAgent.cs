@@ -119,7 +119,7 @@ public class NewWolfAgent : Agent
     {
         float rayDistance = Eyesight;
         float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-        string[] detectableObjects = { "item", "home", "herbivore", "carnivore" };
+        string[] detectableObjects = { "item", "home", "enemy", "Player" };
         AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f)); // rayAngles * (detectableObjects + 2) = 42
         Vector3 localVelocity = transform.InverseTransformDirection(agentRB.velocity);
         AddVectorObs(localVelocity.x);
@@ -204,11 +204,11 @@ public class NewWolfAgent : Agent
     {
         currentAction = "Attack";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
-        MLTestEnemy vic = null;
+        Enemy vic = null;
         var testvic = FirstAdjacent("herbivore");
         if (testvic != null)
         {
-            vic = FirstAdjacent("herbivore").GetComponent<MLTestEnemy>();
+            vic = FirstAdjacent("herbivore").GetComponent<Enemy>();
             if (vic == null) return;
             Debug.Log("herbivore enemy!");
         }
@@ -217,7 +217,7 @@ public class NewWolfAgent : Agent
             testvic = FirstAdjacent("carnivore");
             if (testvic != null)
             {
-                vic = FirstAdjacent("carnivore").GetComponent<MLTestEnemy>();
+                vic = FirstAdjacent("carnivore").GetComponent<Enemy>();
                 if (vic == null) return;
                 Debug.Log("carnivore enemy!");
             }
@@ -226,10 +226,10 @@ public class NewWolfAgent : Agent
 
         if (vic != null)
         {
-            vic.Hp -= AttackDamage;
-            Hp -= vic.AttackDamage;
+            //vic.Hp -= AttackDamage;
+            //Hp -= vic.AttackDamage;
             AddReward(.01f);
-            if (vic.Hp <= 0) AddReward(.25f);
+            //if (vic.Hp <= 0) AddReward(.25f);
             if (Hp < 0) Hp = 0;
         }
     }
@@ -351,7 +351,7 @@ public class NewWolfAgent : Agent
         var colliders = Physics.OverlapSphere(transform.position, 3f, colliderLayerMask);
         foreach (var collider in colliders)
         {
-            if (tag == "item")
+            if (collider.CompareTag("item"))
             {
                 var adj = collider.gameObject;
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "Meat" ||
@@ -406,14 +406,12 @@ public class NewWolfAgent : Agent
             var adj = FirstAdjacent("item");
             if (adj != null)
             {
-                //if (adj.GetComponent<Item>().ItemName == "Meat")
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "Meat")
                 {
                     Hungry += 5f;
                     AddReward(0.05f);
                 }
 
-                //if (adj.GetComponent<Item>().ItemName == "Fillet")
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
                 {
                         Hungry += 10f;

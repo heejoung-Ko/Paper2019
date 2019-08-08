@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
 
     private const float atkPos = 1f;
     private float atkRange = 1f;
-    private LayerMask targetMask;
+    public LayerMask targetMask;
 
     float velocity = 0.0f;               // 속도
     float walkAcc = 0.6f;               // 걸을 때 가속도
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isHiting", false);
         isDead = false;
         isAttack = false;
-        targetMask = 1 << LayerMask.NameToLayer("Player");
+        //targetMask = 1 << LayerMask.NameToLayer("Player");
     }
 
     // Update is called once per frame
