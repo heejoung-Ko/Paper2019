@@ -200,15 +200,14 @@ public class WolfAgent : Agent
                 {
                     var adj = collider.gameObject;
 
-                    Debug.Log(adj.name);
-                    //if (adj.GetComponent<ItemPickUP>().item.ItemName == "Meat" ||
-                    //    adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
-                    //{
-                    //    return collider.gameObject;
-                    //}
-                    //else return null;
+                    if (adj.GetComponent<ItemPickUP>().item.ItemName == "Meat" ||
+                        adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
+                    {
+                        return collider.gameObject;
+                    }
+                    else return null;
 
-                    return collider.gameObject;
+                    //return collider.gameObject;
                 }
 
                 return collider.gameObject;
@@ -221,8 +220,8 @@ public class WolfAgent : Agent
     // Actions
     public void MoveAgent(float[] act)
     {
-        Vector3 rotateDir = Vector3.zero;
-        rotateDir = transform.up * Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
+        var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
+        transform.Rotate(transform.up, rotate * 25f);
 
         if (act[(int)ActionType.MOVEORDERS] > .5f)
         {
@@ -230,7 +229,7 @@ public class WolfAgent : Agent
         }
 
         Hungry -= .01f;
-        transform.Rotate(rotateDir, Time.fixedDeltaTime * MaxSpeed);
+
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
     }

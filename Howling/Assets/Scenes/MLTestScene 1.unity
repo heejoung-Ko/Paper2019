@@ -916,11 +916,12 @@ MonoBehaviour:
   carnivoreRespawn: 0
   herbivorePrefab: {fileID: 691647849, guid: 595ae5149fadb26449d4b2cb7a3ee451, type: 3}
   carnivorePrefab: {fileID: 1414212599, guid: 260e51762a437844dae8e311f53bf412, type: 3}
-  meatPrefab: {fileID: 5410309303250987450, guid: 4d7c6275324d8044e8dce01781a1cc3c,
-    type: 3}
+  meatPrefab: {fileID: 197605295, guid: d0d79044380a6fc4ba279b7ed30b2274, type: 3}
+  feedPrefab: {fileID: 1849314918}
   pivotTransform: {fileID: 73243883}
   herbivoreSpawn: {fileID: 1898834730}
   carnivoreSpawn: {fileID: 2044430175}
+  playerPos: {fileID: 4611623109618512503}
 --- !u!4 &1049875388
 Transform:
   m_ObjectHideFlags: 0
@@ -1059,7 +1060,7 @@ GameObject:
   - component: {fileID: 1464242258}
   m_Layer: 14
   m_Name: WolfAgent
-  m_TagString: Untagged
+  m_TagString: agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1462,6 +1463,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1849314918 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5410309303250987450, guid: 4d7c6275324d8044e8dce01781a1cc3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 200225591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1867225058
 PrefabInstance:
   m_ObjectHideFlags: 0
