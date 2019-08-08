@@ -82,7 +82,7 @@ public class NewWolfAgent : Agent
     private bool died;
     private bool enterDeadZone;
     private bool canRest;
-    private float canRestTime;
+    [SerializeField] private float canRestTime = 0;
 
     public override void InitializeAgent()
     {
@@ -246,6 +246,23 @@ public class NewWolfAgent : Agent
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.CompareTag("home"))
+        {
+            canRest = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("home"))
+        {
+            if (canRestTime > 200)
+                canRest = false;
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("dead"))
@@ -257,7 +274,15 @@ public class NewWolfAgent : Agent
     void Update()
     {
         if (Dead) return;
-        if (canRest) canRestTime += 1;
+        if (canRest)
+        {
+            canRestTime += 1;
+            if (canRestTime > 200)
+            {
+                canRest = false;
+                canRestTime = 0;
+            }
+        }
         MonitorLog();
     }
 
@@ -285,8 +310,8 @@ public class NewWolfAgent : Agent
 
     public void AddPenalty()
     {
-        float hpPenalty = Hp / MaxHp * 0.001f;
-        float hungryPenalty = Hungry / MaxHungry * 0.001f;
+        float hpPenalty = Hp / MaxHp * 0.01f;
+        float hungryPenalty = Hungry / MaxHungry * 0.01f;
         AddReward(hpPenalty + hungryPenalty);
     }
 
@@ -313,14 +338,8 @@ public class NewWolfAgent : Agent
         {
             if (FirstAdjacent("home") != null)
             {
-                canRest = true;
-                if (canRestTime > 200)
-                {
-                    canRestTime = 0;
-                    return true;
-                }
+                if (canRestTime == 0 && canRest) return true;
             }
-            else canRest = false;
             return false;
         }
     }
@@ -390,7 +409,7 @@ public class NewWolfAgent : Agent
                 Hungry += 20f;
                 Hungry = Mathf.Clamp(Hungry, 0f, 100f);
 
-                AddReward(.5f);
+                AddReward(1f);
                 nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
                 currentAction = "Eating";
             }
@@ -401,7 +420,7 @@ public class NewWolfAgent : Agent
 
     public void Rest()
     {
-        if (CanRest)
+        if (canRest)
         {
             var adj = FirstAdjacent("home");
             if (adj != null)
@@ -411,7 +430,7 @@ public class NewWolfAgent : Agent
                 if (Hp < 100)
                 {
                     target = targetHome;
-                    AddReward(.25f);
+                    AddReward(.5f);
                 }
 
                 Hp += 20f;
@@ -440,38 +459,38 @@ public class NewWolfAgent : Agent
 
     public void MoveAgent(float[] act)
     {
-        float d1 = 0, d2 = 0;
+        //float d1 = 0, d2 = 0;
 
-        if (target != null)
-        {
-            transform.LookAt(target);
-            d1 = (target.position - transform.position).sqrMagnitude;
-        }
-        else
-        {
+        //if (target != null)
+        //{
+        //    transform.LookAt(target);
+        //    //d1 = (target.position - transform.position).sqrMagnitude;
+        //}
+        //else
+        //{
             var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
             transform.Rotate(transform.up, rotate * 25f);
-        }
+        //}
 
         if (act[(int)ActionType.MOVEORDERS] > .5f)
         {
             transform.position += transform.forward;
         }
 
-        if (target != null)
-        {
-            d2 = (target.position - transform.position).sqrMagnitude;
-            if (d1 > d2)
-            {
-                float distanceReward = .001f;
-                if (distanceReward >= 0) AddReward(distanceReward);
-            }
-            else
-            {
-                float distancePenalty = -.1f;
-                AddReward(distancePenalty);
-            }
-        }
+        //if (target != null)
+        //{
+        //    d2 = (target.position - transform.position).sqrMagnitude;
+        //    if (d1 > d2)
+        //    {
+        //        float distanceReward = .001f;
+        //        if (distanceReward >= 0) AddReward(distanceReward);
+        //    }
+        //    else
+        //    {
+        //        float distancePenalty = -.1f;
+        //        AddReward(distancePenalty);
+        //    }
+        //}
 
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
