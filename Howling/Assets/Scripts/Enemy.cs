@@ -264,7 +264,16 @@ public class Enemy : MonoBehaviour
                 foreach (Collider t in targets)
                 {
                     Debug.Log(t.tag);
-                    t.gameObject.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
+                    //t.gameObject.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
+                    if(t.gameObject.CompareTag("Player"))
+                    {
+                        
+                    } else if (t.gameObject.CompareTag("agent"))
+                    {
+                        WolfAgent wolf = GetComponent<WolfAgent>();
+                        wolf.Hp -= atk;
+                    } 
+
                     isAttack = true;
                 }
             }

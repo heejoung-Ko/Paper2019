@@ -41,8 +41,8 @@ public class WolfAgent : Agent
     [HideInInspector] public TargetType targetType;
 
     // 랜덤 스폰하기 위한 임시적인 범위, 맵 20X20 공간에서만 가능
-    private float minRange = -9f;
-    private float maxRange = 9f;
+    private float minRange = -10f;
+    private float maxRange = 10f;
 
     private GameObject Environment;
     private Rigidbody agentRB;
@@ -204,7 +204,7 @@ public class WolfAgent : Agent
     public void MoveAgent(float[] act)
     {
         Vector3 rotateDir = Vector3.zero;
-        rotateDir = transform.up * Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, -1f);
+        rotateDir = transform.up * Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
 
         if (act[(int)ActionType.MOVEORDERS] > .5f)
         {
@@ -215,50 +215,14 @@ public class WolfAgent : Agent
         transform.Rotate(rotateDir, Time.fixedDeltaTime * MaxSpeed);
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
-
-
-        /*
-        float d1 = 0, d2 = 0;
-
-        if (target != null)
-        {
-            transform.LookAt(target);
-            d1 = (target.position - transform.position).sqrMagnitude;
-        }
-        else
-        {
-            var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
-            transform.Rotate(transform.up, rotate * 25f);
-        }
-
-        if (act[(int)ActionType.MOVEORDERS] > .5f)
-        {
-            transform.position += transform.forward;
-        }
-
-
-        if (target != null)
-        {
-            d2 = (target.position - transform.position).sqrMagnitude;
-            if (d1 > d2)
-            {
-                float distanceReward = .001f;
-                if (distanceReward >= 0) AddReward(distanceReward);
-            }
-            else
-            {
-                float distancePenalty = -.1f;
-                AddReward(distancePenalty);
-            }
-        }
-        */
     }
 
     bool CanEat
     {
         get
         {
-            if (FirstAdjacent("food") != null) return true;
+            var adj = FirstAdjacent("item");
+            if (adj != null && adj.GetComponent<Item>().ItemName == "") return true;
             return false;
         }
     }
@@ -371,27 +335,27 @@ public class WolfAgent : Agent
             }
         }
     }
+
     void Attack()
     {
         currentAction = "Attack";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
-        MLTestEnemy vic = null;
+        Enemy vic = null;
 
         if(CanAttack)
         {
             Debug.Log("공격!");
-            vic = FirstAdjacent("enemy").GetComponent<MLTestEnemy>();
+            vic = FirstAdjacent("enemy").GetComponent<Enemy>();
             transform.LookAt(vic.transform);
 
             if (vic != null)
             {
                 animator.SetTrigger("attackTrigger");
 
-                vic.Hp -= AttackDamage;
-                Hp -= vic.AttackDamage; // 몬스터 AI 완성되면 없어짐
-                AddReward(vic.AttackDamage/100f); // 공격 보상
+                vic.DecreaseHp((int)AttackDamage);
+                AddReward(AttackDamage/100f); // 공격 보상
 
-                if (vic.Hp <= 0)
+                if (vic.state == Enemy.EnemyState.die)
                 {
                     Debug.Log("해치웠다!");
 
