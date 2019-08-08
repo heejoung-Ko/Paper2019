@@ -46,7 +46,7 @@ TagManager:
   - Item
   - EnemyCollider
   - Target
-  - 
+  - Wolf
   - foot
   - sand
   - grass
