@@ -36,7 +36,7 @@ public class NewWolfAgent : Agent
     public Transform targetHome;
     //public Transform targetFood;
     //public Transform targetEnemy;
-    [SerializeField] private Transform target;
+    //[SerializeField] private Transform target;
 
     [Header("Creature Points (100 Max)")]
     public float MaxHp;
@@ -68,12 +68,6 @@ public class NewWolfAgent : Agent
     private float minRange = -10f;
     private float maxRange = 10f;
 
-    // Penalty
-    //private float penalty = 0f;
-    //private float hpPenalty = 0f;
-    //private float hungryPenalty = 0f;
-    //private float friendlyPenalty = 0f;
-
     private GameObject Environment;
     private Rigidbody agentRB;
     private RayPerception rayPer;
@@ -100,18 +94,14 @@ public class NewWolfAgent : Agent
     {
         Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 1f, Random.Range(minRange, maxRange));
         transform.position = randomPos + pivotTransform.position;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Hp = 100;
         Hungry = 100;
         Friendly = 0;
         currentAction = "Idle";
         playerRelation = PlayerRelation.Enemy;
-        //penalty = 0f;
-        //hpPenalty = 0f;
-        //hungryPenalty = 0f;
-        //friendlyPenalty = 0f;
         died = false;
         enterDeadZone = false;
-        target = null;
     }
 
     public override void AgentOnDone()
@@ -178,7 +168,7 @@ public class NewWolfAgent : Agent
                 break;
         }
 
-        AddPenalty();
+        //AddPenalty();
 
         //if (vectorAction[(int)ActionType.MOVE] > .5)
         //{
@@ -230,19 +220,16 @@ public class NewWolfAgent : Agent
                 if (vic == null) return;
                 Debug.Log("carnivore enemy!");
             }
-            else if (testvic == null) { target = null; return; }
+            else if (testvic == null) return;
         }
 
         if (vic != null)
         {
-            target = vic.transform;
             vic.Hp -= AttackDamage;
             Hp -= vic.AttackDamage;
-            if (vic.Hp <= 0)
-            {
-                AddReward(.25f);
-                target = null;
-            }
+            AddReward(.01f);
+            if (vic.Hp <= 0) AddReward(.25f);
+            if (Hp < 0) Hp = 0;
         }
     }
 
@@ -258,7 +245,7 @@ public class NewWolfAgent : Agent
     {
         if (collision.collider.CompareTag("home"))
         {
-            if (canRestTime > 200)
+            if (canRestTime > 20)
                 canRest = false;
         }
     }
@@ -277,7 +264,7 @@ public class NewWolfAgent : Agent
         if (canRest)
         {
             canRestTime += 1;
-            if (canRestTime > 200)
+            if (canRestTime > 20)
             {
                 canRest = false;
                 canRestTime = 0;
@@ -300,20 +287,20 @@ public class NewWolfAgent : Agent
     public void DecreaseStatus()
     {
         Hungry -= Time.deltaTime * 0.5f;
-        if (Hungry <= 0)
-        {
-            Hungry = 0f;
-            Hp -= Time.deltaTime * 0.5f;
-            if (Hp <= 0f) Hp = 0f;
-        }
+        //if (Hungry <= 0)
+        //{
+        //    Hungry = 0f;
+        //    Hp -= Time.deltaTime * 0.01f;
+        //    if (Hp <= 0f) Hp = 0f;
+        //}
     }
 
-    public void AddPenalty()
-    {
-        float hpPenalty = Hp / MaxHp * 0.01f;
-        float hungryPenalty = Hungry / MaxHungry * 0.01f;
-        AddReward(hpPenalty + hungryPenalty);
-    }
+    //public void AddPenalty()
+    //{
+    //    float hpPenalty = Hp / MaxHp * 0.01f;
+    //    float hungryPenalty = Hungry / MaxHungry * 0.01f;
+    //    AddReward(hpPenalty + hungryPenalty);
+    //}
 
     public void MonitorLog()
     {
@@ -338,7 +325,7 @@ public class NewWolfAgent : Agent
         {
             if (FirstAdjacent("home") != null)
             {
-                if (canRestTime == 0 && canRest) return true;
+                if (canRestTime == 0) return true;
             }
             return false;
         }
@@ -349,7 +336,11 @@ public class NewWolfAgent : Agent
         get
         {
             // TODO: playerRelation 따라서 판단. (일단 임시로 정했음.)
-            if (playerRelation >= PlayerRelation.Friend) return true;
+            if (playerRelation >= PlayerRelation.Friend)
+            {
+                if (FirstAdjacent("Player") != null) return true;
+                return false;
+            }
             return false;
         }
     }
@@ -382,7 +373,7 @@ public class NewWolfAgent : Agent
         {
             if (died) return true;
 
-            if (Hp <= 0 || enterDeadZone)
+            if (Hp <= 0 || enterDeadZone || Hungry <= 0)
             {
                 currentAction = "Dead";
                 died = true;
@@ -403,24 +394,20 @@ public class NewWolfAgent : Agent
             var adj = FirstAdjacent("food");
             if (adj != null)
             {
-                target = adj.transform;
-
                 Destroy(adj);
                 Hungry += 20f;
                 Hungry = Mathf.Clamp(Hungry, 0f, 100f);
 
-                AddReward(1f);
+                AddReward(.1f);
                 nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
                 currentAction = "Eating";
             }
-            else target = null;
         }
-        else target = null;
     }
 
     public void Rest()
     {
-        if (canRest)
+        if (canRestTime == 0 && canRest)
         {
             var adj = FirstAdjacent("home");
             if (adj != null)
@@ -429,8 +416,7 @@ public class NewWolfAgent : Agent
 
                 if (Hp < 100)
                 {
-                    target = targetHome;
-                    AddReward(.5f);
+                    AddReward(.01f);
                 }
 
                 Hp += 20f;
@@ -439,21 +425,19 @@ public class NewWolfAgent : Agent
                 nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
                 currentAction = "Resting";
             }
-            else target = null;
         }
-        else target = null;
     }
 
     public void GoToPlayer()
     {
-        // TODO: tag == "Player" 조건 추가
         if (CanGoToPlayer)
         {
-            target = targetPlayer;
-        }
-        else
-        {
-            target = null;
+            Friendly += 5f;
+            Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
+
+            AddReward(.01f);
+            nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+            currentAction = "GoToPlayer";
         }
     }
 
@@ -474,7 +458,7 @@ public class NewWolfAgent : Agent
 
         if (act[(int)ActionType.MOVEORDERS] > .5f)
         {
-            transform.position += transform.forward;
+            transform.position += transform.forward * moveForce;
         }
 
         //if (target != null)
