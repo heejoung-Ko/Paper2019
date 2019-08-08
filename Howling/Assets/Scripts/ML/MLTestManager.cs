@@ -10,9 +10,11 @@ public class MLTestManager : MonoBehaviour
     public GameObject herbivorePrefab;
     public GameObject carnivorePrefab;
     public GameObject meatPrefab;
+    public GameObject feedPrefab;
     public Transform pivotTransform;
     public Transform herbivoreSpawn;
     public Transform carnivoreSpawn;
+    public Transform playerPos;
 
     private float herbivoreRespawnTime;
     private float carnivoreRespawnTime;
@@ -46,15 +48,24 @@ public class MLTestManager : MonoBehaviour
         if (meatRespawnTime > 500)
         {
             meatRespawnTime = 0;
-            Invoke("DropItem", 5f);
+            Invoke("DropMeat", 5f);
+            Invoke("DropFeed", 5f);
         }
     }
 
-    void DropItem()
+    void DropMeat()
     {
         Debug.Log("Manager - Drop Meat!");
         Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 0.5f, Random.Range(minRange, maxRange));
         var position = randomPos + pivotTransform.position;
         Instantiate(meatPrefab, position, Quaternion.identity);
+    }
+
+    void DropFeed()
+    {
+        Debug.Log("Manager - Drop Feed!");
+        Vector3 randomPos = new Vector3(Random.Range(minRange / 3, maxRange / 3), 0.5f, Random.Range(minRange / 3, maxRange / 3));
+        var position = randomPos + playerPos.position;
+        Instantiate(feedPrefab, position, Quaternion.identity);
     }
 }
