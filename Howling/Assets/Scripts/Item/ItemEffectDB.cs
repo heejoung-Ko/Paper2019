@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class ItemEffect
 {
-    public string ItemName;
+    public Item item;
     [Tooltip("HP, MP, HUNGRY, THIRSTY만 가능합니다.")]
     public string[] type;
     public int[] num;
@@ -39,7 +39,7 @@ public class ItemEffectDB : MonoBehaviour
         {
             for (int i = 0; i < itemEffects.Length; ++i)
             {
-                if (itemEffects[i].ItemName == item.ItemName)
+                if (itemEffects[i].item == item)
                 {
                     for (int j = 0; j < itemEffects[i].type.Length; ++j)
                     {

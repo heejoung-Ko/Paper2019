@@ -19,6 +19,12 @@ namespace Howling
         private Slot[] slots;
         private Slot selectSlot;
 
+        [SerializeField]
+        private GameObject itemEffectDB;
+
+        [SerializeField]
+        private GameObject player;
+
         void Awake()
         {
             slots = go_SlotsParent.GetComponentsInChildren<Slot>();
@@ -74,6 +80,11 @@ namespace Howling
                 selectSlot.DropItem();
                 SwapItem();
             }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                useItem();
+            }
         }
 
         public void AddItem(Item acquireItem, int cnt = 1)
@@ -118,11 +129,11 @@ namespace Howling
 
         public void SwapItem()
         {
-            if (selectSlot.item == null)
+            if (selectSlot.item == null || selectSlot.item.itemType != Item.ItemType.Equipment)
             {
                 go_PlayerHand.GetComponent<PlayerHand>().swapTools(-1);
             }
-            else if (selectSlot.item != null && selectSlot.item.itemType == Item.ItemType.Equipment)
+            else
             {
                 go_PlayerHand.GetComponent<PlayerHand>().swapTools(selectSlot.item.weaponType);
 
@@ -152,6 +163,17 @@ namespace Howling
                         return;
                     }
                 }
+            }
+        }
+
+        void useItem()
+        {
+            if (selectSlot.item != null && selectSlot.item.itemType == Item.ItemType.Used)
+            {
+                itemEffectDB.GetComponent<ItemEffectDB>().UseItem(selectSlot.item);
+                subItem(selectSlot.item, 1);
+                player.GetComponent<PlayerAtk>().setDrink();
+                SwapItem();
             }
         }
     }
