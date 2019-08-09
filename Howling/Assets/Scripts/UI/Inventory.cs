@@ -68,6 +68,12 @@ namespace Howling
             {
                 SwapSlot(9);
             }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                selectSlot.DropItem();
+                SwapItem();
+            }
         }
 
         public void AddItem(Item acquireItem, int cnt = 1)
@@ -101,15 +107,13 @@ namespace Howling
 
         public void SwapSlot(int n)
         {
-            if (selectSlot == slots[n]) ;
-            else
-            {
-                selectSlot.SelectSlot(false);
-                selectSlot = slots[n];
-                selectSlot.SelectSlot(true);
+            if (selectSlot == slots[n]) return;
 
-                SwapItem();
-            }
+            selectSlot.SelectSlot(false);
+            selectSlot = slots[n];
+            selectSlot.SelectSlot(true);
+
+            SwapItem();
         }
 
         public void SwapItem()

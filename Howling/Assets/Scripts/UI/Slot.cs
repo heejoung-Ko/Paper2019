@@ -22,6 +22,8 @@ namespace Howling
 
         private ItemEffectDB itemEffectDB;
         private TutorialController tutorialController;
+        public Transform itemDropSpawn;
+        public float itemDropForce;
 
         void Start()
         {
@@ -85,6 +87,19 @@ namespace Howling
 
             text_Count.text = "0";
             go_CountImage.SetActive(false);
+        }
+
+        public void DropItem()
+        {
+            if (item != null)
+            {
+                Rigidbody itemInstance = Instantiate(item.ItemPrefab.GetComponent<Rigidbody>(), itemDropSpawn.position + itemDropSpawn.forward / 2, itemDropSpawn.rotation) as Rigidbody;
+                if (itemInstance != null)
+                {
+                    itemInstance.velocity = itemDropForce * itemDropSpawn.forward;
+                }
+                SetSlotCount(-1);
+            }
         }
 
         public void OnPointerDown(PointerEventData eventData)
