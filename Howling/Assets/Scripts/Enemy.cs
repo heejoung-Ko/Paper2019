@@ -52,8 +52,6 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        animator.SetBool("Dead", false);
-        animator.SetBool("isHiting", false);
         isDead = false;
         isAttack = false;
         //targetMask = 1 << LayerMask.NameToLayer("Player");
@@ -64,47 +62,46 @@ public class Enemy : MonoBehaviour
     {
         if (state == EnemyState.trace)
         {
-            Trace();
-            animator.SetBool("isMoving", true);
             animator.SetBool("isRunning", true);
+            animator.SetBool("isMoving", false);
+            Trace();
             return;
         }
         else if (state == EnemyState.escape)
         {
-            Escape();
-            animator.SetBool("isMoving", true);
             animator.SetBool("isRunning", true);
+            animator.SetBool("isMoving", false);
+            Escape();
             return;
         }
         else if (state == EnemyState.idle)
         {
-            Idle();
-            animator.SetBool("isMoving", false);
             animator.SetBool("isRunning", false);
+            animator.SetBool("isMoving", false);
+            Idle();
             return;
         }
         else if (state == EnemyState.walk)
         {
-            Walk();
-            animator.SetBool("isMoving", true);
             animator.SetBool("isRunning", false);
+            animator.SetBool("isMoving", true);
+            Walk();
             return;
         }
         else if (state == EnemyState.attack)
         {
+            animator.SetTrigger("attckTrigger");
             Attack();
-            animator.SetBool("isMoving", true);
-            animator.SetBool("isRunning", true);
             return;
         }
         else if (state == EnemyState.hit)
         {
+            animator.SetTrigger("hitTrigger");
             Hit();
-            animator.SetBool("isMoving", false);
-            animator.SetBool("isRunning", false);
         }
         else if (state == EnemyState.die)
         {
+            animator.SetTrigger("dieTrigger");
             Die();
         }
     }
@@ -173,6 +170,7 @@ public class Enemy : MonoBehaviour
         if (nowStateTime >= nextStateTime)
         {
             ChangeNextState();
+            animator.SetBool("isMoving", false);
             state = EnemyState.idle;
         }
         return;
@@ -241,55 +239,65 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-        nowStateTime += Time.deltaTime;
-        if (nowStateTime <= 0.5f)
-        {
-            Quaternion rotation = Quaternion.identity;
-            rotation.eulerAngles = new Vector3(0, 30f, 0);
-            Quaternion newRotation = oldRotation * rotation;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
-            return;
-        }
-        else if (nowStateTime <= 1.5f)
-        {
-            Quaternion rotation = Quaternion.identity;
-            rotation.eulerAngles = new Vector3(0, -60f, 0);
-            Quaternion newRotation = oldRotation * rotation;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
 
-            if (!isAttack)
+        if (!isAttack)
+        {
+            Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
+            foreach (Collider t in targets)
             {
-                Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
-                foreach (Collider t in targets)
+                Debug.Log(t.tag);
+                if (t.gameObject.CompareTag("Player"))
                 {
-                    Debug.Log(t.tag);
-                    //t.gameObject.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
-                    if(t.gameObject.CompareTag("Player"))
-                    {
-                        
-                    } else if (t.gameObject.CompareTag("agent"))
-                    {
-                        WolfAgent wolf = t.GetComponent<WolfAgent>();
-                        wolf.Hp -= atk;
-                    } 
-
-                    isAttack = true;
+                    t.gameObject.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
                 }
+                else if (t.gameObject.CompareTag("agent"))
+                {
+                    WolfAgent wolf = t.GetComponent<WolfAgent>();
+                    wolf.Hp -= atk;
+                }
+
+                isAttack = true;
             }
         }
-        else if (nowStateTime <= nextStateTime)
-        {
-            Quaternion rotation = Quaternion.identity;
-            rotation.eulerAngles = new Vector3(0, 0, 0);
-            Quaternion newRotation = oldRotation * rotation;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
-        }
-        else
+
+        nowStateTime += Time.deltaTime;
+        if (nowStateTime >= nextStateTime)
         {
             state = EnemyState.trace;
             ChangeNextState();
             isAttack = false;
         }
+        return;
+
+        //if (nowStateTime <= 0.5f)
+        //{
+        //    Quaternion rotation = Quaternion.identity;
+        //    rotation.eulerAngles = new Vector3(0, 30f, 0);
+        //    Quaternion newRotation = oldRotation * rotation;
+        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
+        //    return;
+        //}
+        //else if (nowStateTime <= 1.5f)
+        //{
+        //    Quaternion rotation = Quaternion.identity;
+        //    rotation.eulerAngles = new Vector3(0, -60f, 0);
+        //    Quaternion newRotation = oldRotation * rotation;
+        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
+
+        //}
+        //else if (nowStateTime <= nextStateTime)
+        //{
+        //    Quaternion rotation = Quaternion.identity;
+        //    rotation.eulerAngles = new Vector3(0, 0, 0);
+        //    Quaternion newRotation = oldRotation * rotation;
+        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
+        //}
+        //else
+        //{
+        //    state = EnemyState.trace;
+        //    ChangeNextState();
+        //    isAttack = false;
+        //}
     }
 
     void Hit()
@@ -297,7 +305,6 @@ public class Enemy : MonoBehaviour
         currentInvincibleTime += Time.deltaTime;
         if (currentInvincibleTime > invincibleTime)
         {
-            animator.SetBool("isHiting", false);
             state = oldState;
             currentInvincibleTime = 0f;
         }
@@ -327,7 +334,6 @@ public class Enemy : MonoBehaviour
             oldState = state;
             state = EnemyState.hit;
             velocity = 0;
-            animator.SetBool("isHiting", true);
             Debug.Log("데미지: " + cnt);
 
             if (hp <= 0)
@@ -335,7 +341,7 @@ public class Enemy : MonoBehaviour
                 Debug.Log("주겄당!!");
                 state = EnemyState.die;
                 oldRotation = transform.rotation;
-                animator.SetBool("Dead", true);
+                animator.SetTrigger("dieTrigger");
             }
         }
         Debug.Log("enemy hp: " + hp);
