@@ -155,7 +155,7 @@ public class WolfAgent : Agent
     {
         float rayDistance = Eyesight;
         float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-        string[] detectableObjects = { "item", "home", "enemy", "Player" };
+        string[] detectableObjects = { "item", "home", "enemyCollider", "Player" };
         AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f)); // rayAngles * (detectableObjects + 2) = 42
         Vector3 localVelocity = transform.InverseTransformDirection(agentRB.velocity);
         AddVectorObs(localVelocity.x);
@@ -371,7 +371,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            var testvic = FirstAdjacent("enemy");
+            var testvic = FirstAdjacent("enemyCollider");
 
             if (testvic != null)
             {
@@ -395,7 +395,7 @@ public class WolfAgent : Agent
             Enemy vic = null;
 
             Debug.Log("공격!");
-            vic = FirstAdjacent("enemy").GetComponent<Enemy>();
+            vic = FirstAdjacent("enemyCollider").GetComponentInParent<Enemy>();
             transform.LookAt(vic.transform);
 
             if (vic != null)
