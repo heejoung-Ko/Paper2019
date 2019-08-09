@@ -18,7 +18,7 @@ public class MLTestManager : MonoBehaviour
     private float minRange = -3;
     private float maxRange = 3;
 
-    void Update()
+    void FixedUpdate()
     {
         // enemy 
         herbivoreRespawnTime += 1;

@@ -8,7 +8,7 @@ public class FeedController : MonoBehaviour
     private float meatRespawnTime;
     private bool meatRespawn;
 
-    void Update()
+    private void FixedUpdate()
     {
         // meat
 
