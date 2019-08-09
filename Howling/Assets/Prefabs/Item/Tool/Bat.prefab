@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 654653939787578919}
   - component: {fileID: 1092636561761844482}
   - component: {fileID: 1573079632574972280}
+  - component: {fileID: 8454490162856380842}
   m_Layer: 15
   m_Name: Bat
   m_TagString: item
@@ -105,3 +106,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: fc653cb6d6ee0d44d90f61ff8fa4c636, type: 2}
+--- !u!54 &8454490162856380842
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869295460261702580}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 20
+  m_AngularDrag: 100
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

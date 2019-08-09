@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6837769792648982829}
   - component: {fileID: 2381632719669035175}
   - component: {fileID: 2988057614417754337}
+  - component: {fileID: 307397668324114172}
   m_Layer: 15
   m_Name: Axe
   m_TagString: item
@@ -106,3 +107,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a829aee9dbcc70f4692ddb32f364fb94, type: 2}
+--- !u!54 &307397668324114172
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673291128827928002}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 20
+  m_AngularDrag: 100
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

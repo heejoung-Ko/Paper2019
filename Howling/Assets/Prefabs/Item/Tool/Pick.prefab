@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4431542142847091771}
   - component: {fileID: 6639159146684384566}
   - component: {fileID: 2259270363145200009}
+  - component: {fileID: 80424583795284634}
   m_Layer: 15
   m_Name: Pick
   m_TagString: item
@@ -106,3 +107,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 5af01c847a669da4a976d71ad561b35a, type: 2}
+--- !u!54 &80424583795284634
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481286292432363270}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 20
+  m_AngularDrag: 100
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
