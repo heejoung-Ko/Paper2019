@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightController : MonoBehaviour
 {
     float lerpT = 1;
+    float rotation;
 
     // 게임 내 한 시간에 해당하는 현실 시간(초 단위)
     [SerializeField]float oneHour;
@@ -34,7 +35,7 @@ public class LightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float rotation = Time.deltaTime / oneHour / 24 * 360;
+        rotation = Time.deltaTime / oneHour / 24 * 360;
 
         //Debug.Log(transform.rotation);
 
@@ -75,5 +76,10 @@ public class LightController : MonoBehaviour
         currentFogDensity = Mathf.Lerp(nightFogDensity, dayFogDensity, lerpT * 2);
 
         //Debug.Log(test -= Time.deltaTime / oneHosur / 12);
+    }
+
+    public float getClockCalc()
+    {
+        return rotation;
     }
 }
