@@ -23,7 +23,7 @@ public enum ActionType
     REST,
     GOTOPLAYER,
     ATTACK,
-    DEFEND,
+    DIG,
     MOVEORDERS,
     ROTATION,
 }

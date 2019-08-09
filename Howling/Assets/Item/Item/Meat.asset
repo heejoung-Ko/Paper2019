@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d56410585250249b2ae517eb3814f2, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  ItemName: Meat
+  ItemName: Fillet
   ItemImage_32x32: {fileID: 21300000, guid: db11af7dc3bba0a48a4a0bb9fa2b284e, type: 3}
   ItemImage_64x64: {fileID: 21300000, guid: 58edcc4ced5097d4aa45255643ff39f2, type: 3}
   ItemPrefab: {fileID: 197605295, guid: d0d79044380a6fc4ba279b7ed30b2274, type: 3}

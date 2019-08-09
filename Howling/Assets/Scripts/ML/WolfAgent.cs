@@ -36,13 +36,13 @@ public class WolfAgent : Agent
     public float Friendly;
     public string currentAction;
 
-    [Header("Species Parameters")]
 
 
     /////////////////  Hide Parameters  /////////////////
     [HideInInspector] public PlayerRelation playerRelation;
     [HideInInspector] public TargetType targetType;
 
+    [Header("Species Parameters")]
     // 랜덤 스폰하기 위한 임시적인 범위, 맵 20X20 공간에서만 가능
     private float minRange = -10f;
     private float maxRange = 10f;
@@ -52,6 +52,8 @@ public class WolfAgent : Agent
     private float nextAction;
     private bool enterDeadZone;
     private RayPerception rayPer;
+
+    public GameObject[] dropItem;
 
     private void Awake()
     {
@@ -153,7 +155,7 @@ public class WolfAgent : Agent
         //Action Space 6 float
 
         int maxAction = 0;
-        for (int i = 0; i < (int)ActionType.DEFEND; ++i)
+        for (int i = 0; i < (int)ActionType.DIG; ++i)
         {
             if (vectorAction[i] < vectorAction[i + 1])
             {
@@ -183,8 +185,8 @@ public class WolfAgent : Agent
             case (int)ActionType.ATTACK:
                 Attack();
                 break;
-            case (int)ActionType.DEFEND:
-                Defend();
+            case (int)ActionType.DIG:
+                Dig();
                 break;
         }
     }
@@ -248,7 +250,6 @@ public class WolfAgent : Agent
     {
         if (CanEat)
         {
-            Debug.Log("냠냠");
             animator.SetTrigger("eatTrigger");
 
             var adj = FirstAdjacent("item");
@@ -258,12 +259,14 @@ public class WolfAgent : Agent
 
                 if(adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
                 {
+                    Debug.Log("생고기 냠냠");    
                     Hungry += 5f;
                     AddReward(0.05f);
                 }
 
                 if(adj.GetComponent<ItemPickUP>().item.ItemName == "Meat")
                 {
+                    Debug.Log("사료 냠냠");
                     Hungry += 10f;
                     Friendly += 5f;
                     AddReward(0.1f);
@@ -301,7 +304,7 @@ public class WolfAgent : Agent
 
                 Debug.Log("rest 중!!!");
 
-                if (Hp < 100)
+                if (Hp < 90)
                 {
                     AddReward(.01f);
                 }
@@ -320,7 +323,7 @@ public class WolfAgent : Agent
         get
         {
             // TODO: playerRelation 따라서 판단. (일단 임시로 정했음.)
-            if (playerRelation >= PlayerRelation.Friend)
+            if (playerRelation >= PlayerRelation.Stranger)
             {
                 if (FirstAdjacent("Player") != null) return true;
                 return false;
@@ -337,7 +340,7 @@ public class WolfAgent : Agent
             Friendly += 5f;
             Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
-            AddReward(.01f);
+            AddReward(.05f);
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
             currentAction = "GoToPlayer";
         }
@@ -394,12 +397,38 @@ public class WolfAgent : Agent
         Hungry -= 1f; // 공격했으니 허기소비
     }
 
-    void Defend()
+    void Dig()
     {
-        animator.SetTrigger("hitTrigger");
+        animator.SetTrigger("digTrigger");
 
-        currentAction = "Defend";
+        currentAction = "Dig";
+        AddReward(.01f); // 땅파기 보상
+
+        if(Random.Range(0.0f, 1.0f) <= 0.5f) // 땅파기 성공!
+        {
+            animator.SetTrigger("successTrigger");
+            currentAction = "DigSuccess";
+
+            DropItem();
+
+            AddReward(.25f); // 성공 보상
+        }
+        else
+        {
+            animator.SetTrigger("failTrigger");
+            currentAction = "DigFail T.T";
+        }
+
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+    }
+
+    void DropItem()
+    {
+        Debug.Log("땅파기 성공!!");
+        int itemIndex = Random.Range(0, dropItem.Length);
+
+        // 땅파서 아이템 나오는 위치 보고,, 수정하던지 해야할듯,,!
+        Instantiate(dropItem[itemIndex], transform.position, Quaternion.identity);
     }
 
     bool Dead

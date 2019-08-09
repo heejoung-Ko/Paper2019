@@ -33,7 +33,7 @@ Wolf Learning Brain :
     buffer_size: 2048
     batch_size: 128
     max_steps: 50.0e5
-    summary_freq: 500
+    summary_freq: 1000
     time_horizon: 128
 
 BananaLearning:
