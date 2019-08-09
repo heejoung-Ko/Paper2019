@@ -410,8 +410,7 @@ public class WolfAgent : Agent
                 animator.SetTrigger("attackTrigger");
 
                 vic.DecreaseHp((int)AttackDamage);
-                //TODO: Enemy AttackDamage로 바꾸기
-                AddReward(AttackDamage / 100f); // 공격 보상
+                AddReward(vic.atk / 100f); // 공격 보상
 
                 if (vic.state == Enemy.EnemyState.die)
                 {
