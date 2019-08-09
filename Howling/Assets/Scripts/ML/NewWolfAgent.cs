@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 
-public enum PlayerRelation
-{
-    Enemy, Stranger, Friend, Soulmate
-}
+//public enum PlayerRelation
+//{
+//    Enemy, Stranger, Friend, Soulmate
+//}
 
-public enum TargetType
-{
-    Player,
-    Home,
-    Foods,
-    Enemies
-}
+//public enum TargetType
+//{
+//    Player,
+//    Home,
+//    Foods,
+//    Enemies
+//}
 
-public enum ActionType
-{
-    MOVE,
-    EAT,
-    REST,
-    GOTOPLAYER,
-    ATTACK,
-    DIG,
-    MOVEORDERS,
-    ROTATION,
-}
+//public enum ActionType
+//{
+//    MOVE,
+//    EAT,
+//    REST,
+//    GOTOPLAYER,
+//    ATTACK,
+//    DIG,
+//    MOVEORDERS,
+//    ROTATION,
+//}
 
 public class NewWolfAgent : Agent
 {

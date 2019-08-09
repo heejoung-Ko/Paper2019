@@ -3,6 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 
+public enum PlayerRelation
+{
+    Enemy, Stranger, Friend, Soulmate
+}
+
+public enum TargetType
+{
+    Player,
+    Home,
+    Foods,
+    Enemies
+}
+
+public enum ActionType
+{
+    MOVE,
+    EAT,
+    REST,
+    GOTOPLAYER,
+    ATTACK,
+    DIG,
+    MOVEORDERS,
+    ROTATION,
+}
+
 public class WolfAgent : Agent
 {
     [SerializeField]
@@ -17,7 +42,6 @@ public class WolfAgent : Agent
 
     //public Transform targetFood;
     //public Transform targetEnemy;
-    //[SerializeField] private Transform target;
 
     [Header("Creature Points (100 Max)")]
     public float MaxHp;
@@ -56,7 +80,7 @@ public class WolfAgent : Agent
 
     public GameObject[] dropItem;
 
-    private void Awake()
+    private void Start()
     {
         InitializeAgent();
         AgentReset();
@@ -76,17 +100,15 @@ public class WolfAgent : Agent
     {
         Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 1f, Random.Range(minRange, maxRange));
         transform.position = randomPos + pivotTransform.position;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
         Hp = 100;
         Hungry = 100;
         Friendly = 0;
 
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-
         currentAction = "Idle";
         playerRelation = PlayerRelation.Enemy;
         enterDeadZone = false;
-        //target = null;
     }
 
     public void MonitorLog()
@@ -106,7 +128,7 @@ public class WolfAgent : Agent
             Done();
             AgentReset();
         }
-            MonitorLog();
+        MonitorLog();
     }
 
     public void FixedUpdate()
@@ -153,7 +175,7 @@ public class WolfAgent : Agent
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        //Action Space 6 float
+        //Action Space 8 float
 
         int maxAction = 0;
         for (int i = 0; i < (int)ActionType.DIG; ++i)
@@ -209,10 +231,7 @@ public class WolfAgent : Agent
                         return collider.gameObject;
                     }
                     else return null;
-
-                    //return collider.gameObject;
                 }
-
                 return collider.gameObject;
             }
         }
@@ -258,14 +277,14 @@ public class WolfAgent : Agent
             {
                 transform.LookAt(adj.transform);
 
-                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
+                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Meat")
                 {
                     Debug.Log("생고기 냠냠");    
                     Hungry += 5f;
                     AddReward(0.05f);
                 }
 
-                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Meat")
+                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
                 {
                     Debug.Log("사료 냠냠");
                     Hungry += 10f;
@@ -277,6 +296,7 @@ public class WolfAgent : Agent
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
                 Destroy(adj);
+                SetPlayerRelation();
                 nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
                 currentAction = "Eating";
             }
@@ -335,13 +355,13 @@ public class WolfAgent : Agent
 
     public void GoToPlayer()
     {
-        // TODO: tag == "Player" 조건 추가
         if (CanGoToPlayer)
         {
             Friendly += 5f;
             Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
             AddReward(.05f);
+            SetPlayerRelation();
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
             currentAction = "GoToPlayer";
         }
@@ -355,7 +375,7 @@ public class WolfAgent : Agent
 
             if (testvic != null)
             {
-                Debug.Log("발견!");
+                Debug.Log("enemy 발견!");
                 return true;
             }
             else
@@ -368,12 +388,12 @@ public class WolfAgent : Agent
 
     void Attack()
     {
-        currentAction = "Attack";
-        nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
-        Enemy vic = null;
-
         if(CanAttack)
         {
+            currentAction = "Attack";
+            nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+            Enemy vic = null;
+
             Debug.Log("공격!");
             vic = FirstAdjacent("enemy").GetComponent<Enemy>();
             transform.LookAt(vic.transform);
@@ -383,7 +403,8 @@ public class WolfAgent : Agent
                 animator.SetTrigger("attackTrigger");
 
                 vic.DecreaseHp((int)AttackDamage);
-                AddReward(AttackDamage/100f); // 공격 보상
+                //TODO: Enemy AttackDamage로 바꾸기
+                AddReward(AttackDamage / 100f); // 공격 보상
 
                 if (vic.state == Enemy.EnemyState.die)
                 {
