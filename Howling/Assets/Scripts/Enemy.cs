@@ -36,8 +36,8 @@ public class Enemy : MonoBehaviour
 
     Vector3 direction;                   // 이동 방향
 
-    int hp = 30;         // 체력
-    int atk = 10;        // 공격력
+    public int hp;         // 체력
+    public int atk;        // 공격력
 
     public float invincibleTime = 1f; // 무적 시간
     public float currentInvincibleTime = 0f;

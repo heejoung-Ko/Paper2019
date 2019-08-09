@@ -25,6 +25,7 @@ public class WolfAgent : Agent
     public float MaxFriendly;
     public float EatingSpeed;
     public float RestSpeed;
+    public float DigSpeed;
     public float MaxSpeed;
     public float AttackDamage;
     public float DefendDamage;
@@ -402,24 +403,27 @@ public class WolfAgent : Agent
         animator.SetTrigger("digTrigger");
 
         currentAction = "Dig";
-        AddReward(.01f); // 땅파기 보상
 
-        if(Random.Range(0.0f, 1.0f) <= 0.5f) // 땅파기 성공!
+        AddReward(0.001f);
+
+        if(Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
         {
             animator.SetTrigger("successTrigger");
             currentAction = "DigSuccess";
 
             DropItem();
 
-            AddReward(.25f); // 성공 보상
+            AddReward(.05f); // 성공 보상
         }
         else
         {
+            Debug.Log("땅파기 실패!!");
+
             animator.SetTrigger("failTrigger");
-            currentAction = "DigFail T.T";
+            currentAction = "DigFail";
         }
 
-        nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+        nextAction = Time.timeSinceLevelLoad + (25 / DigSpeed);
     }
 
     void DropItem()

@@ -949,6 +949,7 @@ MonoBehaviour:
   MaxFriendly: 100
   EatingSpeed: 10
   RestSpeed: 10
+  DigSpeed: 1
   MaxSpeed: 100
   AttackDamage: 25
   DefendDamage: 5

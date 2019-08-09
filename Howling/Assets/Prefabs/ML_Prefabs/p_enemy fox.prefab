@@ -369,6 +369,8 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 278528
+  hp: 20
+  atk: 5
   invincibleTime: 1
   currentInvincibleTime: 0
   dropItem: {fileID: 197605295, guid: d0d79044380a6fc4ba279b7ed30b2274, type: 3}
