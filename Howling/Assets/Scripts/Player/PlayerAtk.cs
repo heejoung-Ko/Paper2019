@@ -72,5 +72,9 @@ namespace Howling
             resource.Gathering();
         }
 
+        public void setDrink()
+        {
+            animator.SetTrigger("Drink");
+        }
     }
 }
