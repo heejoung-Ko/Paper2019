@@ -123,6 +123,8 @@ public class WolfAgent : Agent
     {
         if (Dead)
         {
+            animator.SetTrigger("deadTrigger");
+
             currentAction = "Dead";
             AddReward(-1f);
             Done();
@@ -155,7 +157,7 @@ public class WolfAgent : Agent
     {
         float rayDistance = Eyesight;
         float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-        string[] detectableObjects = { "item", "home", "enemy", "Player" };
+        string[] detectableObjects = { "item", "home", "enemyCollider", "Player" };
         AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f)); // rayAngles * (detectableObjects + 2) = 42
         Vector3 localVelocity = transform.InverseTransformDirection(agentRB.velocity);
         AddVectorObs(localVelocity.x);
@@ -333,6 +335,9 @@ public class WolfAgent : Agent
                 Hp += 10f;
                 Hp = Mathf.Clamp(Hp, 0f, MaxHp);
 
+                Friendly += 1f;
+                Hungry -= 1f;
+
                 nextAction = Time.timeSinceLevelLoad + (25 / RestSpeed);
                 currentAction = "Resting";
             }
@@ -343,13 +348,15 @@ public class WolfAgent : Agent
     {
         get
         {
-            // TODO: playerRelation 따라서 판단. (일단 임시로 정했음.)
-            if (playerRelation >= PlayerRelation.Stranger)
-            {
-                if (FirstAdjacent("Player") != null) return true;
-                return false;
-            }
+            if (FirstAdjacent("Player") != null) return true;
             return false;
+
+            //// TODO: playerRelation 따라서 판단. (일단 임시로 정했음.)
+            //if (playerRelation >= PlayerRelation.Stranger)
+            //{
+            //    if (FirstAdjacent("Player") != null) return true;
+            //    return false;
+            //}
         }
     }
 
@@ -360,7 +367,7 @@ public class WolfAgent : Agent
             Friendly += 5f;
             Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
-            AddReward(.05f);
+            AddReward(0.001f * Friendly);
             SetPlayerRelation();
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
             currentAction = "GoToPlayer";
@@ -371,7 +378,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            var testvic = FirstAdjacent("enemy");
+            var testvic = FirstAdjacent("enemyCollider");
 
             if (testvic != null)
             {
@@ -395,7 +402,7 @@ public class WolfAgent : Agent
             Enemy vic = null;
 
             Debug.Log("공격!");
-            vic = FirstAdjacent("enemy").GetComponent<Enemy>();
+            vic = FirstAdjacent("enemyCollider").GetComponentInParent<Enemy>();
             transform.LookAt(vic.transform);
 
             if (vic != null)
@@ -425,7 +432,8 @@ public class WolfAgent : Agent
 
         currentAction = "Dig";
 
-        AddReward(0.001f);
+        Hungry -= 1f;
+        //AddReward(0.001f);
 
         if(Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
         {
@@ -453,7 +461,7 @@ public class WolfAgent : Agent
         int itemIndex = Random.Range(0, dropItem.Length);
 
         // 땅파서 아이템 나오는 위치 보고,, 수정하던지 해야할듯,,!
-        Instantiate(dropItem[itemIndex], transform.position, Quaternion.identity);
+        //Instantiate(dropItem[itemIndex], transform.position, Quaternion.identity);
     }
 
     bool Dead

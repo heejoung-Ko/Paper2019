@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (target == null)
         {
@@ -119,7 +119,6 @@ public class Enemy : MonoBehaviour
                 target = other.gameObject;
                 ChangeNextState();
                 nextStateTime = 0.0f;
-
             }
         }
     }
@@ -270,7 +269,7 @@ public class Enemy : MonoBehaviour
                         
                     } else if (t.gameObject.CompareTag("agent"))
                     {
-                        WolfAgent wolf = GetComponent<WolfAgent>();
+                        WolfAgent wolf = t.GetComponent<WolfAgent>();
                         wolf.Hp -= atk;
                     } 
 
