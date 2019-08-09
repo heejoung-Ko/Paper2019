@@ -252,8 +252,6 @@ public class WolfAgent : Agent
             transform.position += transform.forward;
         }
 
-        Hungry -= .01f;
-
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
     }
@@ -336,7 +334,7 @@ public class WolfAgent : Agent
                 Hp = Mathf.Clamp(Hp, 0f, MaxHp);
 
                 Friendly += 1f;
-                Hungry -= 1f;
+                Hungry -= Time.deltaTime * 0.01f;
 
                 nextAction = Time.timeSinceLevelLoad + (25 / RestSpeed);
                 currentAction = "Resting";
@@ -422,7 +420,7 @@ public class WolfAgent : Agent
                 Debug.Log("vic에  null 들감");
             }
         }
-        Hungry -= 1f; // 공격했으니 허기소비
+        Hungry -= Time.deltaTime * 0.01f; // 공격했으니 허기소비
     }
 
     void Dig()
@@ -431,7 +429,7 @@ public class WolfAgent : Agent
 
         currentAction = "Dig";
 
-        Hungry -= 1f;
+        Hungry -= Time.deltaTime * 0.1f;
         //AddReward(0.001f);
 
         if(Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
