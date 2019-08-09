@@ -375,7 +375,7 @@ public class WolfAgent : Agent
 
             if (testvic != null)
             {
-                Debug.Log("발견!");
+                Debug.Log("enemy 발견!");
                 return true;
             }
             else
