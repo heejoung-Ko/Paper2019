@@ -292,6 +292,13 @@ public class WolfAgent : Agent
                     AddReward(0.1f);
                 }
 
+                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Apple")
+                {
+                    Debug.Log("사과 냠냠");
+                    Hungry += 3f;
+                    AddReward(0.03f);
+                }
+
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
