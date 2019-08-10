@@ -11,21 +11,14 @@ public class UIManagerController : MonoBehaviour
     // 창 끄고 켜기 위해
     public GameObject MakingUI;
     public GameObject MapUI;
-<<<<<<< HEAD
     public GameObject BoxUI;
+    public GameObject MenuUI;
 
     bool isBox = false;
 
     enum UIState
     {
-        NONE, MAKING, MAP, BOX
-=======
-    public GameObject MenuUI;
-
-    enum UIState
-    {
-        NONE, MAKING, MAP, MENU
->>>>>>> b780b45b8deff85ae6cbb7b3c71ebd44cbde44df
+        NONE, MAKING, MAP, MENU, BOX
     };
 
     [SerializeField]
@@ -66,7 +59,6 @@ public class UIManagerController : MonoBehaviour
                 enterMap();
             }
         }
-<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (isBox)
@@ -74,7 +66,6 @@ public class UIManagerController : MonoBehaviour
         }
         if (state == UIState.BOX && isBox == false)
             isBox = true;
-=======
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             if(state == UIState.MENU)
@@ -85,8 +76,6 @@ public class UIManagerController : MonoBehaviour
                 enterMenu();
             }
         }
-
->>>>>>> b780b45b8deff85ae6cbb7b3c71ebd44cbde44df
     }
 
     void enterMaking()
@@ -122,7 +111,28 @@ public class UIManagerController : MonoBehaviour
         MapUI.SetActive(false);
     }
 
-<<<<<<< HEAD
+    void enterMenu()
+    {
+        state = UIState.MENU;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        MenuUI.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    void exitMenu()
+    {
+        state = UIState.NONE;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        MenuUI.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
     public void enterBox()
     {
         state = UIState.BOX;
@@ -131,6 +141,8 @@ public class UIManagerController : MonoBehaviour
 
         BoxUI.SetActive(true);
         //BoxUI.GetComponent<BoxController>().BoxStart();
+
+        Time.timeScale = 0f;
     }
 
     void exitBox()
@@ -144,22 +156,8 @@ public class UIManagerController : MonoBehaviour
         //BoxUI.GetComponent<BoxController>().BoxEnd();
 
         BoxUI.SetActive(false);
-=======
-    void enterMenu()
-    {
-        state = UIState.MENU;
 
-        MenuUI.SetActive(true);
-        Time.timeScale = 0f;
-    }
-
-    void exitMenu()
-    {
-        state = UIState.NONE;
-
-        MenuUI.SetActive(false);
         Time.timeScale = 1f;
->>>>>>> b780b45b8deff85ae6cbb7b3c71ebd44cbde44df
     }
 
     void enterUI()
