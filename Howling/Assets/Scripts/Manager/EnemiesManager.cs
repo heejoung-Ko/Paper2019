@@ -52,25 +52,25 @@ public class EnemiesManager : MonoBehaviour
 
     public void Die(Enemy enemy)
     {
-        //Invoke("DropItem", 5f);
-        StartCoroutine(DropItem(enemy));
         enemies[(int)enemy.type].currentNum -= 1;
-        Destroy(enemy.gameObject, 8f);
-        Invoke("AddEnemy", 5f);
+        StartCoroutine(DestroyEnemy(enemy));
+        StartCoroutine(AddEnemy(enemy));
     }
 
-    IEnumerator DropItem(Enemy enemy)
+    IEnumerator DestroyEnemy(Enemy enemy)
     {
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(8f);
         Debug.Log("아이템 뿌린당!!!");
         Instantiate(dropItem, enemy.transform.position, Quaternion.identity);
+        Destroy(enemy.gameObject);
     }
 
-    public void AddEnemy()
+    IEnumerator AddEnemy(Enemy enemy)
     {
+        yield return new WaitForSeconds(5f);
         for (int k = 0; k < enemies.Length; ++k)
         {
-            if (enemies[k].currentNum >= enemies[k].maxNum) return;
+            if (enemies[k].currentNum >= enemies[k].maxNum) continue;
             SpawnEnemy(k);
         }
     }

@@ -8,7 +8,7 @@ namespace Howling
     {
         private const float atkPos = 1f;
         private float atkRange = 1f;
-        private LayerMask enemyMask;
+        public LayerMask enemyMask;
 
         private int atkTime = 30;
         private int currentAtkTime = 0;
@@ -21,8 +21,8 @@ namespace Howling
         // Start is called before the first frame update
         void Awake()
         {
-            enemyMask = 1 << LayerMask.NameToLayer("EnemyCollider");
-            enemyMask |= 1 << LayerMask.NameToLayer("EnemyCollider");
+            //enemyMask = 1 << LayerMask.NameToLayer("EnemyCollider");
+            //enemyMask |= 1 << LayerMask.NameToLayer("EnemyCollider");
             currentAtkTime = 0;
             isAtk = false;
             animator = GetComponent<Animator>();
@@ -68,8 +68,11 @@ namespace Howling
 
         private void Gathering(GameObject obj)
         {
-            Resource resource = obj.GetComponentInParent<Resource>();
-            resource.Gathering();
+            if (obj.tag == "tree" || obj.tag == "rock")
+            {
+                Resource resource = obj.GetComponentInParent<Resource>();
+                resource.Gathering();
+            }
         }
 
         public void setDrink()
