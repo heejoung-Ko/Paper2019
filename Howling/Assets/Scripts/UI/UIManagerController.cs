@@ -11,6 +11,7 @@ public class UIManagerController : MonoBehaviour
     // 창 끄고 켜기 위해
     public GameObject MakingUI;
     public GameObject MapUI;
+<<<<<<< HEAD
     public GameObject BoxUI;
 
     bool isBox = false;
@@ -18,6 +19,13 @@ public class UIManagerController : MonoBehaviour
     enum UIState
     {
         NONE, MAKING, MAP, BOX
+=======
+    public GameObject MenuUI;
+
+    enum UIState
+    {
+        NONE, MAKING, MAP, MENU
+>>>>>>> b780b45b8deff85ae6cbb7b3c71ebd44cbde44df
     };
 
     [SerializeField]
@@ -58,6 +66,7 @@ public class UIManagerController : MonoBehaviour
                 enterMap();
             }
         }
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (isBox)
@@ -65,6 +74,19 @@ public class UIManagerController : MonoBehaviour
         }
         if (state == UIState.BOX && isBox == false)
             isBox = true;
+=======
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(state == UIState.MENU)
+            {
+                exitMenu();
+            } else if(state == UIState.NONE)
+            {
+                enterMenu();
+            }
+        }
+
+>>>>>>> b780b45b8deff85ae6cbb7b3c71ebd44cbde44df
     }
 
     void enterMaking()
@@ -100,6 +122,7 @@ public class UIManagerController : MonoBehaviour
         MapUI.SetActive(false);
     }
 
+<<<<<<< HEAD
     public void enterBox()
     {
         state = UIState.BOX;
@@ -121,6 +144,22 @@ public class UIManagerController : MonoBehaviour
         //BoxUI.GetComponent<BoxController>().BoxEnd();
 
         BoxUI.SetActive(false);
+=======
+    void enterMenu()
+    {
+        state = UIState.MENU;
+
+        MenuUI.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    void exitMenu()
+    {
+        state = UIState.NONE;
+
+        MenuUI.SetActive(false);
+        Time.timeScale = 1f;
+>>>>>>> b780b45b8deff85ae6cbb7b3c71ebd44cbde44df
     }
 
     void enterUI()
