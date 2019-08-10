@@ -25,6 +25,9 @@ namespace Howling
         [SerializeField]
         private GameObject player;
 
+        [SerializeField]
+        private Item Feed;
+
         void Awake()
         {
             slots = go_SlotsParent.GetComponentsInChildren<Slot>();
@@ -84,6 +87,11 @@ namespace Howling
             if (Input.GetMouseButtonDown(1))
             {
                 useItem();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                deactivateMeat();
             }
         }
 
@@ -173,6 +181,16 @@ namespace Howling
                 itemEffectDB.GetComponent<ItemEffectDB>().UseItem(selectSlot.item);
                 subItem(selectSlot.item, 1);
                 player.GetComponent<PlayerAtk>().setDrink();
+                SwapItem();
+            }
+        }
+
+        void deactivateMeat()
+        {
+            if (selectSlot.item != null && selectSlot.item.ItemName == "손질되지 않은 고기")
+            {
+                subItem(selectSlot.item, 1);
+                AddItem(Feed, 1);
                 SwapItem();
             }
         }
