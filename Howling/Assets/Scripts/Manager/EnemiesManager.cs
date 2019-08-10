@@ -19,7 +19,7 @@ public class EnemiesManager : MonoBehaviour
         [HideInInspector] public Enemy enemy;
     }
     public EnemiesDB[] enemies;
-    public GameObject dropItem;
+    public GameObject[] dropItems;
     public static float randomNum = 10f;
 
     private void Start()
@@ -61,7 +61,8 @@ public class EnemiesManager : MonoBehaviour
     {
         yield return new WaitForSeconds(8f);
         Debug.Log("아이템 뿌린당!!!");
-        Instantiate(dropItem, enemy.transform.position, Quaternion.identity);
+        for(int i = 0; i < dropItems.Length; ++i)
+            Instantiate(dropItems[i], enemy.transform.position, Quaternion.identity);
         Destroy(enemy.gameObject);
     }
 
