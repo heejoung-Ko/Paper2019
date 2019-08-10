@@ -133,7 +133,7 @@ namespace Howling
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (DragSlot.instance == null) return;
-            if (eventData.button == PointerEventData.InputButton.Left)
+            if (eventData.button == PointerEventData.InputButton.Left && isSlotClick)
             {
                 if (item != null)
                 {

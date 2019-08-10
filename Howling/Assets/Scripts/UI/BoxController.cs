@@ -24,7 +24,7 @@ public class BoxController : MonoBehaviour
     {
         inventory.GetComponent<Inventory>().setColor(1);
 
-        int cnt = inventory.transform.GetChild(0).GetChild(0).GetChildCount();
+        int cnt = inventory.transform.GetChild(0).GetChild(0).childCount;
         for (int i = 0; i < cnt; i++)
         {
             GameObject baseGo = inventory.transform.GetChild(0).GetChild(0).GetChild(i).gameObject;
@@ -36,12 +36,12 @@ public class BoxController : MonoBehaviour
             go.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        cnt = slotsBase.transform.GetChildCount();
+        cnt = slotsBase.transform.childCount;
 
         for (int i = 0; i<cnt; i++)
         {
             GameObject slotBaseList = slotsBase.transform.GetChild(i).GetChild(0).gameObject;
-            int c = slotBaseList.transform.GetChildCount();
+            int c = slotBaseList.transform.childCount;
             for(int j = 0; j<c; j++)
             {
                 GameObject baseGo = slotBaseList.transform.GetChild(j).gameObject;
