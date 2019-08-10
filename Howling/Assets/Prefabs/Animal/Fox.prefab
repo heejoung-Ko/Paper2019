@@ -710,9 +710,14 @@ MonoBehaviour:
   m_EnemyNumber: 1
   state: 0
   oldState: 0
+  type: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  hp: 0
+  atk: 0
   invincibleTime: 1
   currentInvincibleTime: 0
-  dropItem: {fileID: 197605295, guid: d0d79044380a6fc4ba279b7ed30b2274, type: 3}
 --- !u!95 &9079438593013238241
 Animator:
   serializedVersion: 3

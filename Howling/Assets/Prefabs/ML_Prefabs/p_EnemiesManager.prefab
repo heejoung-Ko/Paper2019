@@ -44,22 +44,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - enemiesPrefab: {fileID: 1300277686414938378, guid: 2e577607f6688264ab74457b0cdbec42,
+  - type: 0
+    enemiesPrefab: {fileID: 1300277686414938378, guid: 2e577607f6688264ab74457b0cdbec42,
       type: 3}
-    enemiesSpawn: []
-    maxNum: 200
-  - enemiesPrefab: {fileID: 691647849, guid: 595ae5149fadb26449d4b2cb7a3ee451, type: 3}
-    enemiesSpawn: []
-    maxNum: 200
-  - enemiesPrefab: {fileID: 6273670386298079841, guid: 4c36d853a393f9244bac4c7a1aabe012,
-      type: 3}
-    enemiesSpawn: []
-    maxNum: 100
-  - enemiesPrefab: {fileID: 4913550258663328031, guid: bf757c9a8c8ded14b8a7e219c82d24f6,
-      type: 3}
-    enemiesSpawn: []
     maxNum: 3
-  - enemiesPrefab: {fileID: 1414212599, guid: 260e51762a437844dae8e311f53bf412, type: 3}
     enemiesSpawn: []
+    currentNum: 0
+    enemy: {fileID: 0}
+  - type: 1
+    enemiesPrefab: {fileID: 691647849, guid: 595ae5149fadb26449d4b2cb7a3ee451, type: 3}
+    maxNum: 3
+    enemiesSpawn: []
+    currentNum: 0
+    enemy: {fileID: 0}
+  - type: 2
+    enemiesPrefab: {fileID: 6273670386298079841, guid: 4c36d853a393f9244bac4c7a1aabe012,
+      type: 3}
+    maxNum: 3
+    enemiesSpawn: []
+    currentNum: 0
+    enemy: {fileID: 0}
+  - type: 3
+    enemiesPrefab: {fileID: 4913550258663328031, guid: bf757c9a8c8ded14b8a7e219c82d24f6,
+      type: 3}
+    maxNum: 2
+    enemiesSpawn: []
+    currentNum: 0
+    enemy: {fileID: 0}
+  - type: 4
+    enemiesPrefab: {fileID: 1414212599, guid: 260e51762a437844dae8e311f53bf412, type: 3}
     maxNum: 1
-  numTreesSP: 0
+    enemiesSpawn: []
+    currentNum: 0
+    enemy: {fileID: 0}
