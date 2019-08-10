@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1772089991793919012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4973337316635948746}
+  - component: {fileID: 3433697733900359633}
+  m_Layer: 0
+  m_Name: p_EnemiesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4973337316635948746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772089991793919012}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3433697733900359633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772089991793919012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f032b95e7972144cbc6787c8a2dcc6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - enemiesPrefab: {fileID: 1300277686414938378, guid: 2e577607f6688264ab74457b0cdbec42,
+      type: 3}
+    enemiesSpawn: []
+    maxNum: 200
+  - enemiesPrefab: {fileID: 691647849, guid: 595ae5149fadb26449d4b2cb7a3ee451, type: 3}
+    enemiesSpawn: []
+    maxNum: 200
+  - enemiesPrefab: {fileID: 6273670386298079841, guid: 4c36d853a393f9244bac4c7a1aabe012,
+      type: 3}
+    enemiesSpawn: []
+    maxNum: 100
+  - enemiesPrefab: {fileID: 4913550258663328031, guid: bf757c9a8c8ded14b8a7e219c82d24f6,
+      type: 3}
+    enemiesSpawn: []
+    maxNum: 3
+  - enemiesPrefab: {fileID: 1414212599, guid: 260e51762a437844dae8e311f53bf412, type: 3}
+    enemiesSpawn: []
+    maxNum: 1
+  numTreesSP: 0
