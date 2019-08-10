@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2557083530403391940}
   - component: {fileID: 2529529969677754206}
   - component: {fileID: 2538325262946491298}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: "\u0421rystal_1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7428239213397537808}
   - component: {fileID: 4810430721195085490}
   - component: {fileID: 5880878559128923131}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Item_Sapphire
   m_TagString: item
   m_Icon: {fileID: 0}

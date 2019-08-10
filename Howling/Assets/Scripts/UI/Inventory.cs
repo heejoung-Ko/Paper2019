@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Howling
 {
@@ -103,7 +104,7 @@ namespace Howling
                 {
                     if (slots[i].item != null)
                     {
-                        if (slots[i].item.ItemName == acquireItem.ItemName)
+                        if (slots[i].item.ItemName == acquireItem.ItemName && slots[i].itemCount < slots[i].getItemMax())
                         {
                             slots[i].SetSlotCount(cnt);
                             return;
@@ -161,14 +162,17 @@ namespace Howling
 
         public void subItem(Item acquireItem, int cnt)
         {
+            int c = cnt;
             for (int i = 0; i < slots.Length; i++)
             {
                 if (slots[i].item != null)
                 {
-                    if (slots[i].item.ItemName == acquireItem.ItemName)
+                    if (slots[i].item == acquireItem)
                     {
-                        slots[i].SetSlotCount(-cnt);
-                        return;
+                        if (cnt == 0)
+                            return;
+                        slots[i].SetSlotCount(-1);
+                        cnt -= 1;
                     }
                 }
             }
@@ -193,6 +197,13 @@ namespace Howling
                 AddItem(Feed, 1);
                 SwapItem();
             }
+        }
+
+        public void setColor(float alpha)
+        {
+            Image image = transform.GetChild(0).GetComponent<Image>();
+
+            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
         }
     }
 }

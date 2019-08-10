@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Howling;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +11,16 @@ public class UIManagerController : MonoBehaviour
     // 창 끄고 켜기 위해
     public GameObject MakingUI;
     public GameObject MapUI;
+    public GameObject BoxUI;
+
+    bool isBox = false;
 
     enum UIState
     {
-        NONE, MAKING, MAP
+        NONE, MAKING, MAP, BOX
     };
+
+    [SerializeField]
 
     UIState state;
 
@@ -52,6 +58,13 @@ public class UIManagerController : MonoBehaviour
                 enterMap();
             }
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isBox)
+                exitBox();
+        }
+        if (state == UIState.BOX && isBox == false)
+            isBox = true;
     }
 
     void enterMaking()
@@ -87,17 +100,42 @@ public class UIManagerController : MonoBehaviour
         MapUI.SetActive(false);
     }
 
+    public void enterBox()
+    {
+        state = UIState.BOX;
+
+        enterUI();
+
+        BoxUI.SetActive(true);
+        //BoxUI.GetComponent<BoxController>().BoxStart();
+    }
+
+    void exitBox()
+    {
+        isBox = false;
+
+        state = UIState.NONE;
+
+        exitUI();
+
+        //BoxUI.GetComponent<BoxController>().BoxEnd();
+
+        BoxUI.SetActive(false);
+    }
+
     void enterUI()
     {
-        PlayerController.GetComponent<Howling.PlayerMoveScript>().enabled = false;
-        PlayerController.GetComponent<Howling.PlayerAtk>().enabled = false;
-        PlayerController.GetComponentInChildren<Howling.PlayerHandController>().enabled = false;
+        PlayerController.GetComponent<PlayerMoveScript>().enabled = false;
+        PlayerController.GetComponent<PlayerAtk>().enabled = false;
+        PlayerController.GetComponentInChildren<PlayerHandController>().enabled = false;
+        PlayerController.GetComponentInChildren<ActionController>().enabled = false;
     }
 
     void exitUI()
     {
-        PlayerController.GetComponent<Howling.PlayerMoveScript>().enabled = true;
-        PlayerController.GetComponent<Howling.PlayerAtk>().enabled = true;
-        PlayerController.GetComponentInChildren<Howling.PlayerHandController>().enabled = true;
+        PlayerController.GetComponent<PlayerMoveScript>().enabled = true;
+        PlayerController.GetComponent<PlayerAtk>().enabled = true;
+        PlayerController.GetComponentInChildren<PlayerHandController>().enabled = true;
+        PlayerController.GetComponentInChildren<ActionController>().enabled = true;
     }
 }
