@@ -90,17 +90,26 @@ public class Enemy : MonoBehaviour
         }
         else if (state == EnemyState.attack)
         {
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isMoving", false);
+
             animator.SetTrigger("attckTrigger");
             Attack();
             return;
         }
         else if (state == EnemyState.hit)
         {
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isMoving", false);
+
             animator.SetTrigger("hitTrigger");
             Hit();
         }
         else if (state == EnemyState.die)
         {
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isMoving", false);
+
             animator.SetTrigger("dieTrigger");
             Die();
         }
