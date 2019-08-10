@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Enemy : MonoBehaviour
 {
     public int m_EnemyNumber = 1;
@@ -11,6 +12,7 @@ public class Enemy : MonoBehaviour
     public enum EnemyState { idle, walk, trace, escape, attack, hit, die };
     public EnemyState state = EnemyState.idle;
     public EnemyState oldState;
+    public EnemyType type;
 
     // 현재 타겟으로 설정된 객체
     GameObject target = null;
@@ -48,10 +50,12 @@ public class Enemy : MonoBehaviour
     Quaternion oldRotation;
 
     public GameObject dropItem;
+    private EnemiesManager enemiesManager;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        enemiesManager = FindObjectOfType<EnemiesManager>();
         isDead = false;
         isAttack = false;
         //targetMask = 1 << LayerMask.NameToLayer("Player");
@@ -319,8 +323,7 @@ public class Enemy : MonoBehaviour
 
         if (!isDead)
         {
-            Invoke("DropItem", 8f);
-            Destroy(this.gameObject, 8f);
+            enemiesManager.Die(this);
             isDead = true;
         }
     }
