@@ -15,6 +15,7 @@ MonoBehaviour:
   ItemName: Apple
   ItemImage_32x32: {fileID: 21300000, guid: cd30da8f312a2bd4980ef275f0be9997, type: 3}
   ItemImage_64x64: {fileID: 21300000, guid: 53926f1afcbed5d43bafc383e8717812, type: 3}
-  ItemPrefab: {fileID: 104228, guid: 6e2e5a60179bbe147bb39ecf08436cee, type: 3}
+  ItemPrefab: {fileID: 8718725412594261390, guid: 123050e4ff8890342901ab4a4649d9a6,
+    type: 3}
   weaponType: 0
   itemType: 1
