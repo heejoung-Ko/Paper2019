@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 5947704296487588946}
   m_Layer: 0
   m_Name: p_enemy deer
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
