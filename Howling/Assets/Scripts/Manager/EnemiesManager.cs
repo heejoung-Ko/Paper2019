@@ -62,7 +62,7 @@ public class EnemiesManager : MonoBehaviour
         yield return new WaitForSeconds(8f);
         Debug.Log("아이템 뿌린당!!!");
         for(int i = 0; i < dropItems.Length; ++i)
-            Instantiate(dropItems[i], enemy.transform.position, Quaternion.identity);
+            Instantiate(dropItems[i], enemy.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
         Destroy(enemy.gameObject);
     }
 
