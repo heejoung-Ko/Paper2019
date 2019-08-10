@@ -1672,7 +1672,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 48919
+    m_Bits: 327447
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2012,14 +2012,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9083275970416870917}
     m_Modifications:
-    - target: {fileID: 100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
-      propertyPath: m_Name
-      value: knife
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -2064,6 +2056,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
+      propertyPath: m_Name
+      value: knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c116d9c3fd3b05a40b4c1ef344aa910a, type: 3}
 --- !u!1001 &2222346078413469198
@@ -2073,14 +2073,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9083275970416870917}
     m_Modifications:
-    - target: {fileID: 100000, guid: e82846f98b065f8429f12568ff08d779, type: 3}
-      propertyPath: m_Name
-      value: axe
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: e82846f98b065f8429f12568ff08d779, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e82846f98b065f8429f12568ff08d779, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.047
@@ -2124,6 +2116,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: e82846f98b065f8429f12568ff08d779, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -84.53198
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e82846f98b065f8429f12568ff08d779, type: 3}
+      propertyPath: m_Name
+      value: axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e82846f98b065f8429f12568ff08d779, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e82846f98b065f8429f12568ff08d779, type: 3}
@@ -2209,14 +2209,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9083275970416870917}
     m_Modifications:
-    - target: {fileID: 100000, guid: d58d041323548914fa4e6b8c70454d31, type: 3}
-      propertyPath: m_Name
-      value: bat
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d58d041323548914fa4e6b8c70454d31, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d58d041323548914fa4e6b8c70454d31, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -2259,6 +2251,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d58d041323548914fa4e6b8c70454d31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d58d041323548914fa4e6b8c70454d31, type: 3}
+      propertyPath: m_Name
+      value: bat
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d58d041323548914fa4e6b8c70454d31, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
