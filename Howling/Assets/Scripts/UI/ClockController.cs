@@ -36,4 +36,14 @@ public class ClockController : MonoBehaviour
 
         //Debug.Log("Day " + day + " | " + hour + "h " + Mathf.Floor(minit) * 10 + "m");
     }
+
+    public float GetClock()
+    {
+        return clock;
+    }
+
+    public void SetClock(float _saveClock)
+    {
+        clock = _saveClock;
+    }
 }

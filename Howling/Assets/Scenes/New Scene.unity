@@ -2200,15 +2200,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 437648, guid: 47f9e7e645ecebb47855f14cae5b4712, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 437648, guid: 47f9e7e645ecebb47855f14cae5b4712, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 437648, guid: 47f9e7e645ecebb47855f14cae5b4712, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47f9e7e645ecebb47855f14cae5b4712, type: 3}
@@ -3208,7 +3208,9 @@ MonoBehaviour:
   PlayerController: {fileID: 0}
   MakingUI: {fileID: 615031970}
   MapUI: {fileID: 269618166}
+  BoxUI: {fileID: 0}
   MenuUI: {fileID: 949265320}
+  state: 0
 --- !u!4 &837447178
 Transform:
   m_ObjectHideFlags: 0
@@ -3814,6 +3816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseUI: {fileID: 1302296106}
+  SaveLoad: {fileID: 0}
 --- !u!1 &1006722866
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,6 +4453,7 @@ MonoBehaviour:
   go_InventoryBase: {fileID: 838363650}
   go_SlotsParent: {fileID: 1780819816}
   go_PlayerHand: {fileID: 0}
+  items: []
   itemEffectDB: {fileID: 0}
   player: {fileID: 0}
   Feed: {fileID: 0}

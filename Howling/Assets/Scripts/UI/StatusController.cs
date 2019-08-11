@@ -10,21 +10,21 @@ public class StatusController : MonoBehaviour
     private int currentHp;
 
     [SerializeField]
-    private int mp;
-    private int currentMp;
+    private int sp;
+    private int currentSp;
 
     [SerializeField]
-    private int mpIncreaseSpeed;
+    private int spIncreaseSpeed;
 
     [SerializeField]
-    private int mpRechargeTime;
-    private int currentMpRechargeTime;
+    private int spRechargeTime;
+    private int currentSpRechargeTime;
 
     [SerializeField]
-    private int mpRecoverTime;
-    private int currentMpRecoverTime;
+    private int spRecoverTime;
+    private int currentSpRecoverTime;
 
-    private bool isMpUsed;
+    private bool isSpUsed;
 
     [SerializeField]
     private float hungry;
@@ -45,13 +45,13 @@ public class StatusController : MonoBehaviour
     [SerializeField]
     private Image[] imgStatusGauge;
 
-    private const int HP = 0, MP = 1, HUNGRY = 2, THIRSTY = 3;
+    private const int HP = 0, SP = 1, HUNGRY = 2, THIRSTY = 3;
 
     // Use this for initialization
     void Start()
     {
         currentHp = hp;
-        currentMp = mp;
+        currentSp = sp;
         currentHungry = hungry;
         currentThirsty = thirsty;
     }
@@ -64,6 +64,42 @@ public class StatusController : MonoBehaviour
         MpRechargeTime();
         MpRecover();
         GaugeUpdate();
+    }
+
+    public int GetHP()
+    {
+        return currentHp;
+    }
+    public void SetHP(int saveHp)
+    {
+        currentHp = saveHp;
+    }
+
+    public int GetSP()
+    {
+        return currentSp;
+    }
+    public void SetSP(int saveSp)
+    {
+        currentSp = saveSp;
+    }
+
+    public float GetHungry()
+    {
+        return currentHungry;
+    }
+    public void SetHungry(float saveHungry)
+    {
+        currentHungry = saveHungry;
+    }
+
+    public float GetThirsty()
+    {
+        return currentThirsty;
+    }
+    public void SetThirsty(float saveThirsty)
+    {
+        currentThirsty = saveThirsty;
     }
 
     private void Hungry()
@@ -104,25 +140,25 @@ public class StatusController : MonoBehaviour
 
     private void MpRechargeTime()
     {
-        if (isMpUsed)
+        if (isSpUsed)
         {
-            if (currentMpRechargeTime < mpRechargeTime)
-                currentMpRechargeTime++;
+            if (currentSpRechargeTime < spRechargeTime)
+                currentSpRechargeTime++;
             else
-                isMpUsed = false;
+                isSpUsed = false;
         }
     }
 
     private void MpRecover()
     {
-        if (!isMpUsed && currentMp < mp)
+        if (!isSpUsed && currentSp < sp)
         {
-            if (currentMpRecoverTime < mpRecoverTime)
-                currentMpRecoverTime++;
+            if (currentSpRecoverTime < spRecoverTime)
+                currentSpRecoverTime++;
             else
             {
-                currentMp += mpIncreaseSpeed;
-                currentMpRecoverTime = 0;
+                currentSp += spIncreaseSpeed;
+                currentSpRecoverTime = 0;
             }
         }
     }
@@ -130,7 +166,7 @@ public class StatusController : MonoBehaviour
     private void GaugeUpdate()
     {
         imgStatusGauge[HP].fillAmount = (float)currentHp / hp;
-        imgStatusGauge[MP].fillAmount = (float)currentMp / mp;
+        imgStatusGauge[SP].fillAmount = (float)currentSp / sp;
         imgStatusGauge[HUNGRY].fillAmount = currentHungry / hungry;
         imgStatusGauge[THIRSTY].fillAmount = currentThirsty / thirsty;
     }
@@ -159,21 +195,21 @@ public class StatusController : MonoBehaviour
 
     public void IncreaseMp(int cnt)
     {
-        if (currentMp + cnt < mp)
-            currentMp += cnt;
+        if (currentSp + cnt < sp)
+            currentSp += cnt;
         else
-            currentMp = mp;
+            currentSp = sp;
     }
 
     public void DecreaseMp(int cnt)
     {
-        isMpUsed = true;
-        currentMpRechargeTime = 0;
+        isSpUsed = true;
+        currentSpRechargeTime = 0;
 
-        if (currentMp - cnt > 0)
-            currentMp -= cnt;
+        if (currentSp - cnt > 0)
+            currentSp -= cnt;
         else
-            currentMp = 0;
+            currentSp = 0;
     }
 
     public void IncreaseHungry(int cnt)
@@ -210,7 +246,7 @@ public class StatusController : MonoBehaviour
 
     public int GetCurrentMp()
     {
-        return currentMp;
+        return currentSp;
     }
 
     public void HitEnemy(int enemATK)

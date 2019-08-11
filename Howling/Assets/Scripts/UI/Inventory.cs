@@ -20,7 +20,7 @@ namespace Howling
         private Slot[] slots;
         private Slot selectSlot;
 
-        public Slot[] GetSlots() { return slots; }
+        public Slot[] GetInvenSlots() { return slots; }
         [SerializeField] private Item[] items;
 
         [SerializeField]

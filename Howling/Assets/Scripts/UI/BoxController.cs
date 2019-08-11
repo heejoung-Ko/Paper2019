@@ -20,6 +20,10 @@ public class BoxController : MonoBehaviour
 
     Transform[] slotList;
 
+    [SerializeField]
+    private Slot[] boxSlots;
+    public Slot[] GetBoxSlots() { return boxSlots; }
+
     public void BoxStart()
     {
         inventory.GetComponent<Inventory>().setColor(1);
