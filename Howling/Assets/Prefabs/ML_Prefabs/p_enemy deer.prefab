@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3138304488837704169}
-  - component: {fileID: 2504869278363150178}
   - component: {fileID: 1848890445567743725}
+  - component: {fileID: 2861570311349856969}
   m_Layer: 16
   m_Name: collider
   m_TagString: enemyCollider
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 8599248350483425058}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2504869278363150178
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5543376803469081021}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 1.4643238, z: 2.03355}
-  m_Center: {x: 0, y: 0.7321619, z: 0.34528294}
 --- !u!114 &1848890445567743725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +47,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   psExplosion: {fileID: 2313243166893073549}
   isEnemyAtked: 1
+--- !u!136 &2861570311349856969
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5543376803469081021}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6746334
+  m_Height: 2.3143678
+  m_Direction: 2
+  m_Center: {x: -0.0076001287, y: 0.6760684, z: 0.35340643}
 --- !u!1 &8599248350483425059
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,8 +125,8 @@ Rigidbody:
   m_GameObject: {fileID: 8599248350483425059}
   serializedVersion: 2
   m_Mass: 40
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 10
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -234,6 +235,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532003362679, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532003362679, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70eeb2e6e80bba84ba6394311c7d3a2f, type: 3}

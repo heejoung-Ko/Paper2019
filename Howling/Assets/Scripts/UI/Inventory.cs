@@ -219,5 +219,19 @@ namespace Howling
 
             image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
         }
+
+        public Item getSelectItem()
+        {
+            return selectSlot.item;
+        }
+
+        public void useWoodToCampfire()
+        {
+            if (selectSlot != null && selectSlot.item.ItemName == "나무")
+            {
+                selectSlot.SetSlotCount(-1);
+            }
+            SwapItem();
+        }
     }
 }

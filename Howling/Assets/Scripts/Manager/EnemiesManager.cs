@@ -14,17 +14,53 @@ public class EnemiesManager : MonoBehaviour
         public EnemyType type;
         public GameObject enemiesPrefab;            // 종류
         public int maxNum;                          // Prefab 종류 순서대로 소환 되는 수
-        public Transform[] enemiesSpawn;            // 종류별로 스폰 갯수, 위치
+        //public Transform[] enemiesSpawn;            // 종류별로 스폰 갯수, 위치
+        [HideInInspector] public ArrayList enemiesSpawn;            // 종류별로 스폰 갯수, 위치
         [HideInInspector] public int currentNum;
         [HideInInspector] public Enemy enemy;
     }
     public EnemiesDB[] enemies;
     public GameObject[] dropItems;
-    public static float randomNum = 10f;
+    [SerializeField] public static float randomNum = 10f;
+    public Transform[] spawnPoints;
 
     private void Start()
     {
+        InitialSpawnPoints();
         SpawnAllEnemies();
+    }
+
+    private void InitialSpawnPoints()
+    {
+        for (int k = 0; k < enemies.Length; ++k)
+        {
+            enemies[k].enemiesSpawn = new ArrayList();
+            if (enemies[k].type == EnemyType.RABBIT)
+            {
+                for (int i = 0; i < (int)(spawnPoints.Length * 0.8); ++i)
+                    enemies[k].enemiesSpawn.Add(spawnPoints[i]);
+            }
+            else if (enemies[k].type == EnemyType.FOX)
+            {
+                for (int i = (int)(spawnPoints.Length * 0.2); i < (int)(spawnPoints.Length * 0.6); ++i)
+                    enemies[k].enemiesSpawn.Add(spawnPoints[i]);
+            }
+            else if (enemies[k].type == EnemyType.DEAR)
+            {
+                for (int i = (int)(spawnPoints.Length * 0.6); i < (int)(spawnPoints.Length * 0.8); ++i)
+                    enemies[k].enemiesSpawn.Add(spawnPoints[i]);
+            }
+            else if (enemies[k].type == EnemyType.BOAR)
+            {
+                for (int i = (int)(spawnPoints.Length * 0.8); i < (int)(spawnPoints.Length * 0.9); ++i)
+                    enemies[k].enemiesSpawn.Add(spawnPoints[i]);
+            }
+            else if (enemies[k].type == EnemyType.BEAR)
+            {
+                for (int i = (int)(spawnPoints.Length * 0.9); i < spawnPoints.Length; ++i)
+                    enemies[k].enemiesSpawn.Add(spawnPoints[i]);
+            }
+        }
     }
 
     private void SpawnAllEnemies()
@@ -40,8 +76,8 @@ public class EnemiesManager : MonoBehaviour
 
     public void SpawnEnemy(int k)
     {
-        int randomSpawn = Random.Range(0, enemies[k].enemiesSpawn.Length);
-        Transform spawn = enemies[k].enemiesSpawn[randomSpawn];
+        int randomSpawn = Random.Range(0, enemies[k].enemiesSpawn.Count);
+        Transform spawn = enemies[k].enemiesSpawn[randomSpawn] as Transform;
         Vector3 randomPos = new Vector3(Random.Range(-randomNum, randomNum), 0, Random.Range(-randomNum, randomNum));
         Quaternion randomRot = Quaternion.Euler(spawn.rotation.x, spawn.rotation.y + Random.Range(0, 360), spawn.rotation.z);
         GameObject instance = Instantiate(enemies[k].enemiesPrefab, spawn.position + randomPos, randomRot) as GameObject;

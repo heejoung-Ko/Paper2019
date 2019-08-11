@@ -14,11 +14,18 @@ namespace Howling
 
         private RaycastHit hitInfo;             // 충돌체 정보 저장
         private RaycastHit hitInfoBox;
+        private RaycastHit hitInfoCampfire;
 
         // 아이템 레이어에만 반응하도록 레이어 마스크 설정
         [SerializeField]
         private LayerMask itemMask;
-      
+
+        [SerializeField]
+        private LayerMask boxMask;
+
+        [SerializeField]
+        private LayerMask campfireMask;
+
         // 필요한 컴포넌트
         [SerializeField]
         private Text actionText;
@@ -31,14 +38,11 @@ namespace Howling
 
         [SerializeField]
         TutorialController tutorialController = null;
-
-        [SerializeField]
-        private LayerMask boxMask;
-
         [SerializeField]
         public GameObject UIManager;
 
-        private bool boxOpen = false;
+        private bool isBox = false;
+        private bool isCampfire = false;
 
         Ray ray = new Ray();
 
@@ -69,14 +73,21 @@ namespace Howling
                     CheckItem();
                     CanPickUp();
                     CheckBoxOpen();
+                    CheckUseWoodToCampfire();
                 }
             }
         }
 
         private void CheckBoxOpen()
         {
-            if (boxOpen)
+            if (isBox)
                 OpenBox();
+        }
+
+        private void CheckUseWoodToCampfire()
+        {
+            if (isCampfire)
+                UseWoodToCampfire();
         }
 
         private void CanPickUp()
@@ -111,15 +122,24 @@ namespace Howling
                 {
                     ObjectInfoAppear();
                 }
+                return;
             }
             else
                 ItemInfoDisappear();
             if (Physics.Raycast(transform.position, transform.forward, out hitInfoBox, range, boxMask))
             {
                 BoxAppear();
+                return;
             }
             else
                 BoxDisapper();
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfoCampfire, range, campfireMask))
+            {
+                CampfireAppear();
+                return;
+            }
+            else
+                CampfireDisappear();
         }
 
         private void ObjectInfoAppear()
@@ -145,7 +165,7 @@ namespace Howling
             actionText.gameObject.SetActive(true);
             actionText.text = "상자 열기" + "<color=yellow>" + "(E)키" + "</color>";
 
-            boxOpen = true;
+            isBox = true;
         }
 
         private void BoxDisapper()
@@ -153,12 +173,40 @@ namespace Howling
             if(!pickUpActivated)
                 actionText.gameObject.SetActive(false);
 
-            boxOpen = false;
+            isBox = false;
         }
 
         private void OpenBox()
         {
             UIManager.GetComponent<UIManagerController>().enterBox();
+        }
+
+        private void CampfireAppear()
+        {
+            Item selectItem = inventory.GetComponent<Inventory>().getSelectItem();
+
+            if (selectItem != null && selectItem.ItemName == "나무")
+            {
+                actionText.gameObject.SetActive(true);
+                actionText.text = "나무 넣기" + "<color=yellow>" + "(E)키" + "</color>";
+
+                isCampfire = true;
+            }
+        }
+
+        private void CampfireDisappear()
+        {
+            if (!pickUpActivated && !isBox)
+                actionText.gameObject.SetActive(false);
+
+            isCampfire = false;
+        }
+
+        private void UseWoodToCampfire()
+        {
+            inventory.GetComponent<Inventory>().useWoodToCampfire();
+
+            hitInfoCampfire.transform.GetComponent<Campfire>().InputWood();
         }
     }
 }

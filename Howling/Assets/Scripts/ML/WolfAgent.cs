@@ -80,50 +80,50 @@ public class WolfAgent : Agent
 
     public GameObject[] dropItem;
 
-    public Vector3 GetPos()
-    {
-        return transform.position;
-    }
-    public void SetPos(Vector3 savePos)
-    {
-        transform.position = savePos;
-    }
+    //public Vector3 GetPos()
+    //{
+    //    return transform.position;
+    //}
+    //public void SetPos(Vector3 savePos)
+    //{
+    //    transform.position = savePos;
+    //}
 
-    public Vector3 GetRot()
-    {
-        return transform.eulerAngles;
-    }
-    public void SetRot(Vector3 saveRot)
-    {
-        transform.eulerAngles = saveRot;
-    }
+    //public Vector3 GetRot()
+    //{
+    //    return transform.eulerAngles;
+    //}
+    //public void SetRot(Vector3 saveRot)
+    //{
+    //    transform.eulerAngles = saveRot;
+    //}
 
-    public float GetHp()
-    {
-        return Hp;
-    }
-    public void SetHp(float saveHp)
-    {
-        Hp = saveHp;
-    }
+    //public float GetHp()
+    //{
+    //    return Hp;
+    //}
+    //public void SetHp(float saveHp)
+    //{
+    //    Hp = saveHp;
+    //}
 
-    public float GetHungry()
-    {
-        return Hungry;
-    }
-    public void SetHungry(float saveHungry)
-    {
-        Hungry = saveHungry;
-    }
+    //public float GetHungry()
+    //{
+    //    return Hungry;
+    //}
+    //public void SetHungry(float saveHungry)
+    //{
+    //    Hungry = saveHungry;
+    //}
 
-    public float GetFriendly()
-    {
-        return Friendly;
-    }
-    public void SetFriendly(float saveFriendly)
-    {
-        Friendly = saveFriendly;
-    }
+    //public float GetFriendly()
+    //{
+    //    return Friendly;
+    //}
+    //public void SetFriendly(float saveFriendly)
+    //{
+    //    Friendly = saveFriendly;
+    //}
 
     private void Start()
     {
