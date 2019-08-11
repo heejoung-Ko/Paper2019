@@ -20,9 +20,69 @@ public class BoxController : MonoBehaviour
 
     Transform[] slotList;
 
-    [SerializeField]
-    private Slot[] boxSlots;
-    public Slot[] GetBoxSlots() { return boxSlots; }
+    [SerializeField] private Item[] items;
+
+    [SerializeField] private GameObject boxSlotsParent_line1;
+    [SerializeField] private GameObject boxSlotsParent_line2;
+    [SerializeField] private GameObject boxSlotsParent_line3;
+    [SerializeField] private GameObject boxSlotsParent_line4;
+    private Slot[] boxSlots_line1;
+    private Slot[] boxSlots_line2;
+    private Slot[] boxSlots_line3;
+    private Slot[] boxSlots_line4;
+
+    public Slot[] GetBoxSlot(int line)
+    {
+        switch(line) {
+            case 1:
+                return boxSlots_line1;
+            case 2:
+                return boxSlots_line2;
+            case 3:
+                return boxSlots_line3;
+            case 4:
+                return boxSlots_line4;
+            default:
+                return boxSlots_line4;
+        }
+    }
+    //private Slot[][] boxSlots;
+    //public Slot[][] GetBoxSlots() {
+    //    return boxSlots;
+    //}
+
+    private void Start()
+    {
+        boxSlots_line1 = boxSlotsParent_line1.GetComponentsInChildren<Slot>();
+        boxSlots_line2 = boxSlotsParent_line2.GetComponentsInChildren<Slot>();
+        boxSlots_line3 = boxSlotsParent_line3.GetComponentsInChildren<Slot>();
+        boxSlots_line4 = boxSlotsParent_line4.GetComponentsInChildren<Slot>();
+    }
+
+    public void LoadToBoxLine(int line, int _arrayNum, string _itemName, int _itemNum)
+    {
+        for (int i = 0; i < items.Length; ++i)
+        {
+            if (items[i].ItemName == _itemName)
+            {
+                switch(line)
+                {
+                    case 1:
+                        boxSlots_line1[_arrayNum].AddItem(items[i], _itemNum);
+                        break;
+                    case 2:
+                        boxSlots_line1[_arrayNum].AddItem(items[i], _itemNum);
+                        break;
+                    case 3:
+                        boxSlots_line1[_arrayNum].AddItem(items[i], _itemNum);
+                        break;
+                    case 4:
+                        boxSlots_line1[_arrayNum].AddItem(items[i], _itemNum);
+                        break;
+                }
+            }
+        }
+    }
 
     public void BoxStart()
     {

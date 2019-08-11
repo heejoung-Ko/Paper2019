@@ -22,9 +22,19 @@ public class SaveData
     public List<string> invenItemName = new List<string>();
     public List<int> invenItemNumber = new List<int>();
     // 아이템 - 상자
-    public List<int> boxArrayNumber = new List<int>();
-    public List<string> boxItemName = new List<string>();
-    public List<int> boxItemNumber = new List<int>();
+    public List<int> boxArrayNumber1 = new List<int>();
+    public List<string> boxItemName1 = new List<string>();
+    public List<int> boxItemNumber1 = new List<int>();
+    public List<int> boxArrayNumber2 = new List<int>();
+    public List<string> boxItemName2 = new List<string>();
+    public List<int> boxItemNumber2 = new List<int>();
+    public List<int> boxArrayNumber3 = new List<int>();
+    public List<string> boxItemName3 = new List<string>();
+    public List<int> boxItemNumber3 = new List<int>();
+    public List<int> boxArrayNumber4 = new List<int>();
+    public List<string> boxItemName4 = new List<string>();
+    public List<int> boxItemNumber4 = new List<int>();
+
 
     // 늑대
     public Vector3 wolfPos;
@@ -81,7 +91,7 @@ public class SaveLoadController : MonoBehaviour
         Howling.Slot[] invenSlots = myInven.GetInvenSlots();
         for (int i = 0; i < invenSlots.Length; i++)
         {
-            if(invenSlots[i].item != null)
+            if (invenSlots[i].item != null)
             {
                 saveData.invenArrayNumber.Add(i);
                 saveData.invenItemName.Add(invenSlots[i].item.ItemName);
@@ -89,7 +99,46 @@ public class SaveLoadController : MonoBehaviour
             }
         }
 
-        Howling.Slot[] boxSlots = myBox.GetBoxSlots();
+        Howling.Slot[] boxSlots1 = myBox.GetBoxSlot(1);
+        Howling.Slot[] boxSlots2 = myBox.GetBoxSlot(2);
+        Howling.Slot[] boxSlots3 = myBox.GetBoxSlot(3);
+        Howling.Slot[] boxSlots4 = myBox.GetBoxSlot(4);
+        for (int i = 0; i < boxSlots1.Length; i++)
+        {
+            if(boxSlots1[i].item != null)
+            {
+                saveData.boxArrayNumber1.Add(i);
+                saveData.boxItemName1.Add(boxSlots1[i].item.ItemName);
+                saveData.boxItemNumber1.Add(boxSlots1[i].itemCount);
+            }
+        }
+        for (int i = 0; i < boxSlots2.Length; i++)
+        {
+            if (boxSlots2[i].item != null)
+            {
+                saveData.boxArrayNumber2.Add(i);
+                saveData.boxItemName2.Add(boxSlots2[i].item.ItemName);
+                saveData.boxItemNumber2.Add(boxSlots2[i].itemCount);
+            }
+        }
+        for (int i = 0; i < boxSlots3.Length; i++)
+        {
+            if (boxSlots3[i].item != null)
+            {
+                saveData.boxArrayNumber3.Add(i);
+                saveData.boxItemName3.Add(boxSlots3[i].item.ItemName);
+                saveData.boxItemNumber3.Add(boxSlots3[i].itemCount);
+            }
+        }
+        for (int i = 0; i < boxSlots4.Length; i++)
+        {
+            if (boxSlots4[i].item != null)
+            {
+                saveData.boxArrayNumber4.Add(i);
+                saveData.boxItemName4.Add(boxSlots4[i].item.ItemName);
+                saveData.boxItemNumber4.Add(boxSlots4[i].itemCount);
+            }
+        }
 
         saveData.wolfPos = myWolf.transform.position;
         saveData.wolfRot = myWolf.transform.eulerAngles;
@@ -135,10 +184,24 @@ public class SaveLoadController : MonoBehaviour
                 myInven.LoadToInven(saveData.invenArrayNumber[i], saveData.invenItemName[i], saveData.invenItemNumber[i]);
             }
 
-            for (int i = 0; i < saveData.boxItemName.Count; ++i)
-            {
 
+            for (int i = 0; i < saveData.boxItemName1.Count; ++i)
+            {
+                myBox.LoadToBoxLine(1, saveData.boxArrayNumber1[i], saveData.boxItemName1[i], saveData.boxItemNumber1[i]);
             }
+            for (int i = 0; i < saveData.boxItemName2.Count; ++i)
+            {
+                myBox.LoadToBoxLine(2, saveData.boxArrayNumber2[i], saveData.boxItemName2[i], saveData.boxItemNumber2[i]);
+            }
+            for (int i = 0; i < saveData.boxItemName3.Count; ++i)
+            {
+                myBox.LoadToBoxLine(3, saveData.boxArrayNumber3[i], saveData.boxItemName3[i], saveData.boxItemNumber3[i]);
+            }
+            for (int i = 0; i < saveData.boxItemName4.Count; ++i)
+            {
+                myBox.LoadToBoxLine(4, saveData.boxArrayNumber4[i], saveData.boxItemName4[i], saveData.boxItemNumber4[i]);
+            }
+
 
             myWolf.transform.position = saveData.wolfPos;
             myWolf.transform.eulerAngles = saveData.wolfRot;

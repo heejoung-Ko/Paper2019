@@ -21,7 +21,9 @@ namespace Howling
         private Slot selectSlot;
 
         public Slot[] GetInvenSlots() { return slots; }
-        [SerializeField] private Item[] items;
+        Item[] items = Resources.LoadAll<Item>("Recipe");
+
+//        [SerializeField] private Item[] items;
 
         [SerializeField]
         private GameObject itemEffectDB;
