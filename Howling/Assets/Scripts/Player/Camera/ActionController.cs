@@ -13,11 +13,12 @@ namespace Howling
         private bool pickUpActivated = false;   // 습득이 가능한지 활성화
 
         private RaycastHit hitInfo;             // 충돌체 정보 저장
+        private RaycastHit hitInfoBox;
 
         // 아이템 레이어에만 반응하도록 레이어 마스크 설정
         [SerializeField]
-        private LayerMask layerMask;
-
+        private LayerMask itemMask;
+      
         // 필요한 컴포넌트
         [SerializeField]
         private Text actionText;
@@ -31,7 +32,13 @@ namespace Howling
         [SerializeField]
         TutorialController tutorialController = null;
 
-        private Animator animator;
+        [SerializeField]
+        private LayerMask boxMask;
+
+        [SerializeField]
+        public GameObject UIManager;
+
+        private bool boxOpen = false;
 
         Ray ray = new Ray();
 
@@ -39,7 +46,6 @@ namespace Howling
         {
             img.gameObject.SetActive(true);
             tutorialController = FindObjectOfType<TutorialController>();
-            animator = transform.parent.GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -62,8 +68,15 @@ namespace Howling
                 {
                     CheckItem();
                     CanPickUp();
+                    CheckBoxOpen();
                 }
             }
+        }
+
+        private void CheckBoxOpen()
+        {
+            if (boxOpen)
+                OpenBox();
         }
 
         private void CanPickUp()
@@ -87,7 +100,7 @@ namespace Howling
         {
             ray.origin = transform.position;
             ray.direction = transform.forward;
-            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, itemMask))
             {
                 if (hitInfo.transform.tag == "item")
                 {
@@ -101,6 +114,12 @@ namespace Howling
             }
             else
                 ItemInfoDisappear();
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfoBox, range, boxMask))
+            {
+                BoxAppear();
+            }
+            else
+                BoxDisapper();
         }
 
         private void ObjectInfoAppear()
@@ -119,6 +138,27 @@ namespace Howling
         {
             pickUpActivated = false;
             actionText.gameObject.SetActive(false);
+        }
+
+        private void BoxAppear()
+        {
+            actionText.gameObject.SetActive(true);
+            actionText.text = "상자 열기" + "<color=yellow>" + "(E)키" + "</color>";
+
+            boxOpen = true;
+        }
+
+        private void BoxDisapper()
+        {
+            if(!pickUpActivated)
+                actionText.gameObject.SetActive(false);
+
+            boxOpen = false;
+        }
+
+        private void OpenBox()
+        {
+            UIManager.GetComponent<UIManagerController>().enterBox();
         }
     }
 }

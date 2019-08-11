@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Howling;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,12 +11,17 @@ public class UIManagerController : MonoBehaviour
     // 창 끄고 켜기 위해
     public GameObject MakingUI;
     public GameObject MapUI;
+    public GameObject BoxUI;
     public GameObject MenuUI;
+
+    bool isBox = false;
 
     enum UIState
     {
-        NONE, MAKING, MAP, MENU
+        NONE, MAKING, MAP, MENU, BOX
     };
+
+    [SerializeField]
 
     UIState state;
 
@@ -53,6 +59,15 @@ public class UIManagerController : MonoBehaviour
                 enterMap();
             }
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isBox)
+                exitBox();
+        }
+        if (state == UIState.BOX && isBox == false)
+        {
+            isBox = true;
+        }
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             if(state == UIState.MENU)
@@ -63,7 +78,6 @@ public class UIManagerController : MonoBehaviour
                 enterMenu();
             }
         }
-
     }
 
     void enterMaking()
@@ -105,7 +119,6 @@ public class UIManagerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
         MenuUI.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -121,17 +134,46 @@ public class UIManagerController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void enterBox()
+    {
+        state = UIState.BOX;
+
+        enterUI();
+
+        BoxUI.SetActive(true);
+        //BoxUI.GetComponent<BoxController>().BoxStart();
+
+        Time.timeScale = 0f;
+    }
+
+    void exitBox()
+    {
+        isBox = false;
+
+        state = UIState.NONE;
+
+        exitUI();
+
+        //BoxUI.GetComponent<BoxController>().BoxEnd();
+
+        BoxUI.SetActive(false);
+
+        Time.timeScale = 1f;
+    }
+
     void enterUI()
     {
-        PlayerController.GetComponent<Howling.PlayerMoveScript>().enabled = false;
-        PlayerController.GetComponent<Howling.PlayerAtk>().enabled = false;
-        PlayerController.GetComponentInChildren<Howling.PlayerHandController>().enabled = false;
+        PlayerController.GetComponent<PlayerMoveScript>().enabled = false;
+        PlayerController.GetComponent<PlayerAtk>().enabled = false;
+        PlayerController.GetComponentInChildren<PlayerHandController>().enabled = false;
+        PlayerController.GetComponentInChildren<ActionController>().enabled = false;
     }
 
     void exitUI()
     {
-        PlayerController.GetComponent<Howling.PlayerMoveScript>().enabled = true;
-        PlayerController.GetComponent<Howling.PlayerAtk>().enabled = true;
-        PlayerController.GetComponentInChildren<Howling.PlayerHandController>().enabled = true;
+        PlayerController.GetComponent<PlayerMoveScript>().enabled = true;
+        PlayerController.GetComponent<PlayerAtk>().enabled = true;
+        PlayerController.GetComponentInChildren<PlayerHandController>().enabled = true;
+        PlayerController.GetComponentInChildren<ActionController>().enabled = true;
     }
 }

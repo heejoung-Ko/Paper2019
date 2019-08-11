@@ -8,6 +8,8 @@ namespace Howling
 {
     public class Slot : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
+        static public int itemMaxCount = 3;
+
         public static bool isSlotClick = false;
         public static bool isSlotDrag = false;
 
@@ -104,6 +106,7 @@ namespace Howling
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (DragSlot.instance == null) return;
             if (eventData.button == PointerEventData.InputButton.Left)
                 isSlotClick = true;
             if (eventData.button == PointerEventData.InputButton.Right)
@@ -129,7 +132,8 @@ namespace Howling
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (eventData.button == PointerEventData.InputButton.Left)
+            if (DragSlot.instance == null) return;
+            if (eventData.button == PointerEventData.InputButton.Left && isSlotClick)
             {
                 if (item != null)
                 {
@@ -145,6 +149,8 @@ namespace Howling
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (DragSlot.instance == null) return;
+
             if (item != null)
                 {
                 DragSlot.instance.transform.position = eventData.position;
@@ -153,6 +159,8 @@ namespace Howling
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (DragSlot.instance == null) return;
+
             isSlotDrag = false;
 
             DragSlot.instance.SetColor(0);
@@ -163,6 +171,8 @@ namespace Howling
 
         public void OnDrop(PointerEventData eventData)
         {
+            if (DragSlot.instance == null) return;
+
             if (DragSlot.instance.dragSlot != null)
                 ChangeSlot();
         }
@@ -176,6 +186,12 @@ namespace Howling
 
             if (tempItem != null)
                 DragSlot.instance.dragSlot.AddItem(tempItem, tempItemCount);
+            else if (tempItem == DragSlot.instance.dragSlot.item && itemCount + DragSlot.instance.dragSlot.itemCount > itemMaxCount)
+            {
+                int sumCnt = itemCount + DragSlot.instance.dragSlot.itemCount;
+                itemCount = itemMaxCount;
+                DragSlot.instance.dragSlot.itemCount = sumCnt - itemMaxCount;
+            }
             else
                 DragSlot.instance.dragSlot.ClearSlot();
         }
@@ -187,5 +203,7 @@ namespace Howling
             else
                 transform.Find("Select").gameObject.SetActive(false);
         }
+
+        public int getItemMax() { return itemMaxCount; }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 933977071987271894}
   - component: {fileID: 2281391622577687967}
   - component: {fileID: 8792819022170949004}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Item_Ruby
   m_TagString: item
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7874728252079509408}
   - component: {fileID: 7867366788563237178}
   - component: {fileID: 7858151411254558150}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: "\u0421rystal_1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
