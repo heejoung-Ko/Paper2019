@@ -5,13 +5,17 @@ using UnityEngine;
 public class LogoController : MonoBehaviour
 {
     public Texture fadeTexture;
+
     public GameObject Logo;
-    public GameObject Menu;
+    public GameObject Loby;
+
     public Color startColor;
     public Color endColor;
     public Color currentColor;
     public float duration = 3.0f;
 
+    private bool isEndLogo = false;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -28,20 +32,31 @@ public class LogoController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        currentColor = Color.Lerp(startColor, endColor, Time.time / duration);
+        if(!isEndLogo)
+        {
+            currentColor = Color.Lerp(startColor, endColor, Time.time / duration);
 
-        if(currentColor == endColor)
+            if(isEndState)
+            {
+                isEndLogo = true;
+            }
+        }
+
+        if(isEndLogo)
         {
             Logo.SetActive(false);
-            Invoke("SceneChange", 0.5f);
+            Loby.SetActive(true);
+            currentColor = Color.Lerp(endColor, startColor, Time.time / duration);
+
         }
     }
 
-    void SceneChange()
+    bool isEndState
     {
-        Menu.SetActive(true);
-
-
-
+        get
+        {
+            if (currentColor == endColor) return true;
+            else return false;
+        }
     }
 }

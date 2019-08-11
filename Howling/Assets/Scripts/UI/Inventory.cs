@@ -20,6 +20,9 @@ namespace Howling
         private Slot[] slots;
         private Slot selectSlot;
 
+        public Slot[] GetSlots() { return slots; }
+        [SerializeField] private Item[] items;
+
         [SerializeField]
         private GameObject itemEffectDB;
 
@@ -93,6 +96,17 @@ namespace Howling
             if (Input.GetKeyDown(KeyCode.R))
             {
                 deactivateMeat();
+            }
+        }
+
+        public void LoadToInven(int _arrayNum, string _itemName, int _itemNum)
+        {
+            for (int i = 0; i < items.Length; ++i)
+            {
+                if(items[i].ItemName == _itemName)
+                {
+                    slots[_arrayNum].AddItem(items[i], _itemNum);
+                }
             }
         }
 
