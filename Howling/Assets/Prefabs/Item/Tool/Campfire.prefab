@@ -377,6 +377,26 @@ PrefabInstance:
       propertyPath: m_Range
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 11202879244385133, guid: 02cf2aa292f37d34ba8a697d2e88e155,
+        type: 3}
+      propertyPath: m_DrawHalo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11202879244385133, guid: 02cf2aa292f37d34ba8a697d2e88e155,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11202879244385133, guid: 02cf2aa292f37d34ba8a697d2e88e155,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11202879244385133, guid: 02cf2aa292f37d34ba8a697d2e88e155,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02cf2aa292f37d34ba8a697d2e88e155, type: 3}
 --- !u!1 &7835714306450943712 stripped
@@ -406,7 +426,7 @@ PrefabInstance:
     - target: {fileID: 11202880614694224, guid: 02cf2aa292f37d34ba8a697d2e88e155,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11202880614694225, guid: 02cf2aa292f37d34ba8a697d2e88e155,
         type: 3}
