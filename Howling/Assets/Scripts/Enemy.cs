@@ -252,16 +252,15 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-
         if (!isAttack)
         {
             Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
             foreach (Collider t in targets)
             {
                 Debug.Log(t.tag);
-                if (t.gameObject.CompareTag("Player"))
+                if (t.gameObject.CompareTag("target"))
                 {
-                    t.gameObject.transform.Find("Canvas").Find("Status").GetComponent<StatusController>().HitEnemy(atk);
+                    GameObject.Find("UIManager").transform.GetChild(0).Find("Status").GetComponent<StatusController>().HitEnemy(atk);
                 }
                 else if (t.gameObject.CompareTag("agent"))
                 {
