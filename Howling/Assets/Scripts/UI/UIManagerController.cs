@@ -12,6 +12,7 @@ public class UIManagerController : MonoBehaviour
     public GameObject MakingUI;
     public GameObject MapUI;
     public GameObject BoxUI;
+    //public BoxSlotManager BoxSlotM;
     public GameObject MenuUI;
 
     bool isBox = false;
@@ -25,9 +26,9 @@ public class UIManagerController : MonoBehaviour
 
     UIState state;
 
-    // Start is called before the first frame update
     void Start()
     {
+        //BoxSlotM.GetComponent<BoxSlotManager>();
         state = UIState.NONE;
     }
 
@@ -141,6 +142,13 @@ public class UIManagerController : MonoBehaviour
         enterUI();
 
         BoxUI.SetActive(true);
+
+        // Box Slot Manager -> Box Controller
+        //BoxUI.boxControllerSlots_line1 = BoxSlotM.boxSlots_line1;
+        //BoxUI.boxControllerSlots_line2 = BoxSlotM.boxSlots_line2;
+        //BoxUI.boxControllerSlots_line3 = BoxSlotM.boxSlots_line3;
+        //BoxUI.boxControllerSlots_line4 = BoxSlotM.boxSlots_line4;
+
         //BoxUI.GetComponent<BoxController>().BoxStart();
 
         Time.timeScale = 0f;
@@ -154,7 +162,11 @@ public class UIManagerController : MonoBehaviour
 
         exitUI();
 
-        //BoxUI.GetComponent<BoxController>().BoxEnd();
+        // Box Controller -> Box Slot Manager
+        //BoxSlotM.boxSlots_line1 = BoxUI.boxControllerSlots_line1;
+        //BoxSlotM.boxSlots_line2 = BoxUI.boxControllerSlots_line2;
+        //BoxSlotM.boxSlots_line3 = BoxUI.boxControllerSlots_line3;
+        //BoxSlotM.boxSlots_line4 = BoxUI.boxControllerSlots_line4;
 
         BoxUI.SetActive(false);
 

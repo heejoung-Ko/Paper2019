@@ -5,7 +5,7 @@ using UnityEngine;
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject BaseUI;
-    public SaveLoadController SaveLoad;
+    [SerializeField] private SaveLoadController SaveLoad;
     public void ClickSave()
     {
         Debug.Log("세이브");

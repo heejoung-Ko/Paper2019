@@ -111,7 +111,6 @@ public class StatusController : MonoBehaviour
             else
             {
                 currentHungry -= Time.deltaTime * 60f;
-                Debug.Log(currentHungry);
                 currentHungryDecreaseTime = 0;
             }
         }
