@@ -114,10 +114,10 @@ public class StatusController : MonoBehaviour
                 currentHungryDecreaseTime = 0;
             }
         }
-        else
-        {
-            Debug.Log("배고픔 수치가 0이 되었습니다");
-        }
+        //else
+        //{
+        //    //Debug.Log("배고픔 수치가 0이 되었습니다");
+        //}
     }
 
     private void Thirsty()
@@ -132,10 +132,10 @@ public class StatusController : MonoBehaviour
                 currentThirstyDecreaseTime = 0;
             }
         }
-        else
-        {
-            Debug.Log("목마름 수치가 0이 되었습니다");
-        }
+        //else
+        //{
+        //    Debug.Log("목마름 수치가 0이 되었습니다");
+        //}
     }
 
     private void MpRechargeTime()
@@ -173,7 +173,7 @@ public class StatusController : MonoBehaviour
 
     public void IncreaseHp(int cnt)
     {
-        Debug.Log("현재 HP: " + currentHp);
+        //Debug.Log("현재 HP: " + currentHp);
         if (currentHp + cnt < hp)
         {
             currentHp += cnt;
@@ -181,7 +181,7 @@ public class StatusController : MonoBehaviour
         else
         {
             currentHp = hp;
-            Debug.Log(currentHp);
+            //Debug.Log(currentHp);
         }
     }
 
@@ -190,7 +190,8 @@ public class StatusController : MonoBehaviour
         currentHp -= cnt;
 
         if (currentHp <= 0)
-            Debug.Log("캐릭터의 hp가 0이 되었습니다!");
+            currentHp = 0;
+        //    Debug.Log("캐릭터의 hp가 0이 되었습니다!");
     }
 
     public void IncreaseMp(int cnt)

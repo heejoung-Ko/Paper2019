@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Recipe_Axe
   m_EditorClassIdentifier: 
   Result: {fileID: 11400000, guid: a829aee9dbcc70f4692ddb32f364fb94, type: 2}
-  Explanation: "\uB098\uBB34\uB97C \uBC38 \uC218 \uC788\uB294 \uB3C4\uAD6C\uC774\uB2E4."
+  Explanation: "\uB098\uBB34\uB97C \uBC38 \uC218 \uC788\uB294 \uB3C4\uAD6C."
   Material1: {fileID: 11400000, guid: 20a258cddcc4d404595ce41770651195, type: 2}
   Material1_num: 1
   Material2: {fileID: 11400000, guid: 0c3f752860675ea4b933f5e26fa53538, type: 2}

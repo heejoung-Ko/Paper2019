@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d56410585250249b2ae517eb3814f2, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  ItemName: Apple
+  ItemName: "\uC0AC\uACFC"
   ItemImage_32x32: {fileID: 21300000, guid: cd30da8f312a2bd4980ef275f0be9997, type: 3}
   ItemImage_64x64: {fileID: 21300000, guid: 53926f1afcbed5d43bafc383e8717812, type: 3}
   ItemPrefab: {fileID: 8718725412594261390, guid: 123050e4ff8890342901ab4a4649d9a6,

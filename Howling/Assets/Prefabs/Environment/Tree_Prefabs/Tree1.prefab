@@ -368,12 +368,18 @@ MonoBehaviour:
   destroyTime: 5
   respawnTime: 10
   col: {fileID: 3118374845578139639}
-  count: 5
+  count1: 2
+  count2: 3
+  hiddenCout: 2
   basic_resource: {fileID: 4922331627076541574}
   fract_resource: {fileID: 8243852363309985900}
   effect_resource: {fileID: 7270058404980271658, guid: 77b658d12cb8e2b4cb7c075c96bf517a,
     type: 3}
-  item_resource: {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727,
+  item_resource1: {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727,
+    type: 3}
+  item_resource2: {fileID: 3356607131644530245, guid: 99c2a926de1842244b02c2db9c179670,
+    type: 3}
+  item_hidden: {fileID: 8718725412594261390, guid: 123050e4ff8890342901ab4a4649d9a6,
     type: 3}
   mining_sound: chop_wood_se
   crash_sound: falling_wood_se

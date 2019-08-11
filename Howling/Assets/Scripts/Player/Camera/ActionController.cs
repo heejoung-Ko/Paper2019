@@ -15,6 +15,8 @@ namespace Howling
         private RaycastHit hitInfo;             // 충돌체 정보 저장
         private RaycastHit hitInfoBox;
         private RaycastHit hitInfoCampfire;
+        private RaycastHit hitInfoWater;
+        private RaycastHit hitInfoMap;
 
         // 아이템 레이어에만 반응하도록 레이어 마스크 설정
         [SerializeField]
@@ -25,6 +27,12 @@ namespace Howling
 
         [SerializeField]
         private LayerMask campfireMask;
+
+        [SerializeField]
+        private LayerMask waterMask;
+
+        [SerializeField]
+        private LayerMask mapMask;
 
         // 필요한 컴포넌트
         [SerializeField]
@@ -43,6 +51,10 @@ namespace Howling
 
         private bool isBox = false;
         private bool isCampfire = false;
+        private bool isWater = false;
+
+        [SerializeField]
+        Item water;
 
         Ray ray = new Ray();
 
@@ -74,6 +86,8 @@ namespace Howling
                     CanPickUp();
                     CheckBoxOpen();
                     CheckUseWoodToCampfire();
+                    if (isWater)
+                        GetWater();
                 }
             }
         }
@@ -140,6 +154,18 @@ namespace Howling
             }
             else
                 CampfireDisappear();
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfoMap, range, mapMask))
+            {
+                WaterDisapear();
+
+                return;
+            }
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfoWater, range, waterMask))
+            {
+                WaterApear();
+            }
+            else
+                WaterDisapear();
         }
 
         private void ObjectInfoAppear()
@@ -207,6 +233,28 @@ namespace Howling
             inventory.GetComponent<Inventory>().useWoodToCampfire();
 
             hitInfoCampfire.transform.GetComponent<Campfire>().InputWood();
+        }
+
+        private void WaterApear()
+        {
+            actionText.gameObject.SetActive(true);
+
+            actionText.text = "물 획득" + "<color=yellow>" + "(E)키" + "</color>";
+
+            isWater = true;
+        }
+
+        private void WaterDisapear()
+        {
+            if (!pickUpActivated && !isBox && !isCampfire)
+                actionText.gameObject.SetActive(false);
+
+            isWater = false;
+        }
+
+        private void GetWater()
+        {
+            inventory.GetComponent<Inventory>().AddItem(water);
         }
     }
 }

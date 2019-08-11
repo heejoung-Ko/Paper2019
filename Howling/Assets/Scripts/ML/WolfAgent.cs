@@ -61,16 +61,14 @@ public class WolfAgent : Agent
     public float Friendly;
     public string currentAction;
 
-
-
     /////////////////  Hide Parameters  /////////////////
     [HideInInspector] public PlayerRelation playerRelation;
     [HideInInspector] public TargetType targetType;
 
     [Header("Species Parameters")]
     // 랜덤 스폰하기 위한 임시적인 범위, 맵 20X20 공간에서만 가능
-    private float minRange = -10f;
-    private float maxRange = 10f;
+    private float minRange = -40f;
+    private float maxRange = 40f;
 
     private GameObject Environment;
     private Rigidbody agentRB;
@@ -143,7 +141,7 @@ public class WolfAgent : Agent
 
     public override void AgentReset()   // TODO: Reset 할 곳에 추가하기
     {
-        Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 1f, Random.Range(minRange, maxRange));
+        Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 20f, Random.Range(minRange, maxRange));
         transform.position = randomPos + pivotTransform.position;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
@@ -214,6 +212,7 @@ public class WolfAgent : Agent
         AddVectorObs(BoolToFloat(CanRest));
         AddVectorObs(BoolToFloat(CanGoToPlayer));
         AddVectorObs(BoolToFloat(CanAttack));
+        AddVectorObs(BoolToFloat(CanDig));
 
         // TODO: 플레이어와의 거리 or 플레이어 위치 추가? (일단 없앴음.) 
         //AddVectorObs(targetPlayer.position);
@@ -272,8 +271,9 @@ public class WolfAgent : Agent
                 {
                     var adj = collider.gameObject;
 
-                    if (adj.GetComponent<ItemPickUP>().item.ItemName == "Meat" ||
-                        adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
+                    if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기" ||
+                        adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기" ||
+                        adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                     {
                         return collider.gameObject;
                     }
@@ -306,7 +306,10 @@ public class WolfAgent : Agent
         get
         {
             var adj = FirstAdjacent("item");
-            if (adj != null) return true;
+            if (adj != null)
+            {
+                return true;
+            }
             return false;
         }
     }
@@ -322,14 +325,14 @@ public class WolfAgent : Agent
             {
                 transform.LookAt(adj.transform);
 
-                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Meat")
+                if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기")
                 {
-                    Debug.Log("생고기 냠냠");    
+                    Debug.Log("생고기 냠냠");
                     Hungry += 5f;
                     AddReward(0.05f);
                 }
 
-                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Fillet")
+                if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
                 {
                     Debug.Log("사료 냠냠");
                     Hungry += 10f;
@@ -337,7 +340,7 @@ public class WolfAgent : Agent
                     AddReward(0.1f);
                 }
 
-                if(adj.GetComponent<ItemPickUP>().item.ItemName == "Apple")
+                if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
                     Debug.Log("사과 냠냠");
                     Hungry += 3f;
@@ -445,7 +448,7 @@ public class WolfAgent : Agent
 
     void Attack()
     {
-        if(CanAttack)
+        if (CanAttack)
         {
             currentAction = "Attack";
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
@@ -475,33 +478,50 @@ public class WolfAgent : Agent
         Hungry -= Time.deltaTime * 0.01f; // 공격했으니 허기소비
     }
 
+    bool CanDig
+    {
+        get
+        {
+            float rayDistance = Eyesight * 0.6f;
+            float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
+            string[] detectableObjects = { "item", "home", "enemyCollider", "Player" };
+            List<float> tmpEyesight = rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f);
+            if (tmpEyesight.Count == 0) return true;
+            else return false;
+        }
+    }
+
     void Dig()
     {
-        animator.SetTrigger("digTrigger");
-
-        currentAction = "Dig";
-
-        Hungry -= Time.deltaTime * 0.1f;
-        //AddReward(0.001f);
-
-        if(Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
+        if (CanDig)
         {
-            animator.SetTrigger("successTrigger");
-            currentAction = "DigSuccess";
+            animator.SetTrigger("digTrigger");
 
-            DropItem();
+            currentAction = "Dig";
 
-            AddReward(.05f); // 성공 보상
+            Hungry -= Time.deltaTime * 0.1f;
+            //AddReward(0.001f);
+
+            if (Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
+            {
+                animator.SetTrigger("successTrigger");
+                currentAction = "DigSuccess";
+
+                DropItem();
+
+                AddReward(.05f); // 성공 보상
+            }
+            else
+            {
+                Debug.Log("땅파기 실패!!");
+
+                animator.SetTrigger("failTrigger");
+                currentAction = "DigFail";
+            }
+
+            nextAction = Time.timeSinceLevelLoad + (25 / DigSpeed);
+
         }
-        else
-        {
-            Debug.Log("땅파기 실패!!");
-
-            animator.SetTrigger("failTrigger");
-            currentAction = "DigFail";
-        }
-
-        nextAction = Time.timeSinceLevelLoad + (25 / DigSpeed);
     }
 
     void DropItem()
