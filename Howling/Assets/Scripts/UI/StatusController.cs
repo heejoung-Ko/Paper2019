@@ -27,16 +27,16 @@ public class StatusController : MonoBehaviour
     private bool isMpUsed;
 
     [SerializeField]
-    private int hungry;
-    private int currentHungry;
+    private float hungry;
+    private float currentHungry;
 
     [SerializeField]
     private int hungryDecreaseTime;
     private int currentHungryDecreaseTime;
 
     [SerializeField]
-    private int thirsty;
-    private int currentThirsty;
+    private float thirsty;
+    private float currentThirsty;
 
     [SerializeField]
     private int thirstyDecreaseTime;
@@ -74,7 +74,7 @@ public class StatusController : MonoBehaviour
                 currentHungryDecreaseTime++;
             else
             {
-                currentHungry--;
+                currentHungry -= Time.deltaTime * 1f;
                 currentHungryDecreaseTime = 0;
             }
         }
@@ -92,7 +92,7 @@ public class StatusController : MonoBehaviour
                 currentThirstyDecreaseTime++;
             else
             {
-                currentThirsty--;
+                currentThirsty -= (int)(Time.deltaTime * 1f);
                 currentThirstyDecreaseTime = 0;
             }
         }
@@ -131,8 +131,8 @@ public class StatusController : MonoBehaviour
     {
         imgStatusGauge[HP].fillAmount = (float)currentHp / hp;
         imgStatusGauge[MP].fillAmount = (float)currentMp / mp;
-        imgStatusGauge[HUNGRY].fillAmount = (float)currentHungry / hungry;
-        imgStatusGauge[THIRSTY].fillAmount = (float)currentThirsty / thirsty;
+        imgStatusGauge[HUNGRY].fillAmount = currentHungry / hungry;
+        imgStatusGauge[THIRSTY].fillAmount = currentThirsty / thirsty;
     }
 
     public void IncreaseHp(int cnt)

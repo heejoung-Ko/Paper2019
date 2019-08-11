@@ -103,6 +103,9 @@ public class UIManagerController : MonoBehaviour
     {
         state = UIState.MENU;
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
         MenuUI.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -110,6 +113,9 @@ public class UIManagerController : MonoBehaviour
     void exitMenu()
     {
         state = UIState.NONE;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         MenuUI.SetActive(false);
         Time.timeScale = 1f;
