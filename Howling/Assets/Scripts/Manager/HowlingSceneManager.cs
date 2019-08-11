@@ -8,14 +8,14 @@ public class HowlingSceneManager : MonoBehaviour
 {
     public GameObject Loby;
     public GameObject Loading;
-    public Image progressImage;
+    public Image progressBar;
     public Text progressText;
 
     public string sceneName = "HowlingScene";
-    private float timer = 0f;
 
     public static HowlingSceneManager instance;
-    private SaveLoadController saveNLoad;
+    private SaveLoadController SaveLoad;
+
     private void Awake()
     {
         if(instance == null)
@@ -46,52 +46,47 @@ public class HowlingSceneManager : MonoBehaviour
         Debug.Log("게임 로드 중 . .. ..!");
         SceneManager.LoadScene(sceneName);
 
-
         StartCoroutine(LoadCoroutine());
     }
 
     IEnumerator LoadCoroutine()
     {
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        Debug.Log(operation.progress);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
-        operation.allowSceneActivation = false;
-        while (!operation.isDone)
+        float timer = 0.0f;
+
+        while (!asyncOperation.isDone)
         {
-
-            //float progress = Mathf.Clamp(operation.progress / .9f);
-
-            progressImage.fillAmount = operation.progress;
-            progressText.text = operation.progress * 100f + "%";
-
-            Debug.Log(operation.progress);
             yield return null;
-            //if(operation.progress >= 0.9f)
-            //{
-            //    progressImage.fillAmount = Mathf.Lerp(progressImage.fillAmount, 1f, timer);
 
-            //    //if (progressImage.fillAmount == 1.0f)
-            //    //{
-            //    //    operation.allowSceneActivation = true;
-            //    //}
-            //}
-            //else
-            //{
-            //    progressImage.fillAmount = Mathf.Lerp(progressImage.fillAmount, operation.progress, timer);
-            //    if(progressImage.fillAmount >= operation.progress)
-            //    {
-            //        timer = 0f;
-            //    }
-            //}
+            float progress = Mathf.Clamp01(asyncOperation.progress / .9f);
+
+            timer += Time.deltaTime;
+
+            progressBar.fillAmount = asyncOperation.progress;
+            progressText.text = progress * 100f + "%";
+
+            if (asyncOperation.progress >= 0.9f)
+            {
+                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 1f, timer);
+
+                if (progressBar.fillAmount == 1.0f)
+                    break;
+            }
+            else
+            {
+                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, asyncOperation.progress, timer);
+                if (progressBar.fillAmount >= asyncOperation.progress)
+                {
+                    timer = 0f;
+                }
+            }
+
         }
 
-
-        Debug.Log(operation.progress);
-        operation.allowSceneActivation = true;
-
-        saveNLoad = FindObjectOfType<SaveLoadController>();
-        saveNLoad.LoadData();
+        SaveLoad = FindObjectOfType<SaveLoadController>();
+        SaveLoad.LoadData();
         gameObject.SetActive(false);
     }
     public void ClickExit()
