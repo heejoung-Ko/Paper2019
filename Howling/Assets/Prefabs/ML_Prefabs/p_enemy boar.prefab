@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2023126944917530356}
-  - component: {fileID: 6719001992135357157}
   - component: {fileID: 789395360617663049}
+  - component: {fileID: 2666802316059531710}
   m_Layer: 16
   m_Name: collider
   m_TagString: enemyCollider
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 9105239298221749026}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6719001992135357157
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613138634723683914}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.53914845, y: 1.090111, z: 1.8038274}
-  m_Center: {x: 0.007473409, y: 0.5450555, z: 0.01712805}
 --- !u!114 &789395360617663049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +47,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   psExplosion: {fileID: 2789213081464367015}
   isEnemyAtked: 1
+--- !u!136 &2666802316059531710
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613138634723683914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5420791
+  m_Height: 1.8670002
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.5470282, z: -0.02526027}
 --- !u!1 &9105239298221749027
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +235,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532003362679, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532003362679, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.8301887
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.6992548
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.6539694
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.6037736
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.48615167
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0.43574226
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.r
+      value: 0.3301887
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.g
+      value: 0.26010147
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.b
+      value: 0.26010147
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134813532018553133, guid: 70eeb2e6e80bba84ba6394311c7d3a2f,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70eeb2e6e80bba84ba6394311c7d3a2f, type: 3}
