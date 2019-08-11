@@ -112,7 +112,7 @@ namespace Howling
 
         public void AddItem(Item acquireItem, int cnt = 1)
         {
-            if (Item.ItemType.Equipment != acquireItem.itemType)
+            if (Item.ItemType.Equipment != acquireItem.itemType && Item.ItemType.ETC != acquireItem.itemType)
             {
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -223,6 +223,11 @@ namespace Howling
         public Item getSelectItem()
         {
             return selectSlot.item;
+        }
+
+        public void subSelecSlot()
+        {
+            selectSlot.SetSlotCount(-1);
         }
 
         public void useWoodToCampfire()
