@@ -46,8 +46,8 @@ Rigidbody:
   m_GameObject: {fileID: 691647849}
   serializedVersion: 2
   m_Mass: 20
-  m_Drag: 0.001
-  m_AngularDrag: 0.05
+  m_Drag: 10
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   atk: 5
   invincibleTime: 1
   currentInvincibleTime: 0
+  dropItem: {fileID: 0}
 --- !u!95 &6487584846483167924
 Animator:
   serializedVersion: 3
@@ -275,6 +276,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1476838307}
     m_Modifications:
+    - target: {fileID: 1038072212367056, guid: 51c0d1f803a2fcb4486027e84ca196eb, type: 3}
+      propertyPath: m_Name
+      value: Low_Fox_v01
+      objectReference: {fileID: 0}
     - target: {fileID: 4505549777907970, guid: 51c0d1f803a2fcb4486027e84ca196eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -318,10 +323,6 @@ PrefabInstance:
     - target: {fileID: 4505549777907970, guid: 51c0d1f803a2fcb4486027e84ca196eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1038072212367056, guid: 51c0d1f803a2fcb4486027e84ca196eb, type: 3}
-      propertyPath: m_Name
-      value: Low_Fox_v01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51c0d1f803a2fcb4486027e84ca196eb, type: 3}

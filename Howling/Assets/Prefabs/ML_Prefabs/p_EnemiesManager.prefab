@@ -48,47 +48,41 @@ MonoBehaviour:
     enemiesPrefab: {fileID: 5248994665506766699, guid: 2e577607f6688264ab74457b0cdbec42,
       type: 3}
     maxNum: 3
-    enemiesSpawn:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     currentNum: 0
     enemy: {fileID: 0}
   - type: 1
     enemiesPrefab: {fileID: 691647849, guid: 595ae5149fadb26449d4b2cb7a3ee451, type: 3}
     maxNum: 3
-    enemiesSpawn:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     currentNum: 0
     enemy: {fileID: 0}
   - type: 2
     enemiesPrefab: {fileID: 8599248350483425059, guid: 4c36d853a393f9244bac4c7a1aabe012,
       type: 3}
     maxNum: 3
-    enemiesSpawn:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     currentNum: 0
     enemy: {fileID: 0}
   - type: 3
     enemiesPrefab: {fileID: 9105239298221749027, guid: bf757c9a8c8ded14b8a7e219c82d24f6,
       type: 3}
     maxNum: 2
-    enemiesSpawn:
-    - {fileID: 0}
-    - {fileID: 0}
     currentNum: 0
     enemy: {fileID: 0}
   - type: 4
     enemiesPrefab: {fileID: 1414212599, guid: 260e51762a437844dae8e311f53bf412, type: 3}
     maxNum: 1
-    enemiesSpawn:
-    - {fileID: 0}
     currentNum: 0
     enemy: {fileID: 0}
   dropItems:
   - {fileID: 197605295, guid: eba5ea91128e3ed418b5b51db3df9a05, type: 3}
   - {fileID: 2277552367229377910, guid: dbccc5dd87447124c9a76934e59f7985, type: 3}
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
