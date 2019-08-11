@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3079815601189900737}
   - component: {fileID: 3079815601189900750}
   m_Layer: 0
-  m_Name: WolfAcademy
+  m_Name: p_WolfAcademy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
     width: 80
     height: 80
     qualityLevel: 0
-    timeScale: 15
+    timeScale: 30
     targetFrameRate: 60
   inferenceConfiguration:
     width: 1280

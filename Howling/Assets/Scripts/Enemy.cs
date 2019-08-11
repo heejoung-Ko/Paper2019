@@ -257,7 +257,7 @@ public class Enemy : MonoBehaviour
             Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
             foreach (Collider t in targets)
             {
-                Debug.Log(t.tag);
+                //Debug.Log(t.tag);
                 if (t.gameObject.CompareTag("target"))
                 {
                     GameObject.Find("UIManager").transform.GetChild(0).Find("Status").GetComponent<StatusController>().HitEnemy(atk);
@@ -355,7 +355,7 @@ public class Enemy : MonoBehaviour
                 animator.SetTrigger("dieTrigger");
             }
         }
-        Debug.Log("enemy hp: " + hp);
+        //Debug.Log("enemy hp: " + hp);
     }
 
     void DropItem()
