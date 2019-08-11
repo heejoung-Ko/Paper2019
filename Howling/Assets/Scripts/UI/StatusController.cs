@@ -110,7 +110,8 @@ public class StatusController : MonoBehaviour
                 currentHungryDecreaseTime++;
             else
             {
-                currentHungry -= Time.deltaTime * 1f;
+                currentHungry -= Time.deltaTime * 60f;
+                Debug.Log(currentHungry);
                 currentHungryDecreaseTime = 0;
             }
         }
@@ -128,7 +129,7 @@ public class StatusController : MonoBehaviour
                 currentThirstyDecreaseTime++;
             else
             {
-                currentThirsty -= (int)(Time.deltaTime * 1f);
+                currentThirsty -= (int)(Time.deltaTime * 40f);
                 currentThirstyDecreaseTime = 0;
             }
         }
