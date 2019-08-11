@@ -15,7 +15,7 @@ MonoBehaviour:
   Result: {fileID: 11400000, guid: 81bace4dc9056b346af7ee29d08bc7bd, type: 2}
   Explanation: "\uBB3C\uAC74\uC744 \uC800\uC7A5\uD560 \uC218 \uC788\uB294 \uC0C1\uC790."
   Material1: {fileID: 11400000, guid: c53be92f54c9e9e478c7e2d9e508c0eb, type: 2}
-  Material1_num: 0
+  Material1_num: 5
   Material2: {fileID: 0}
   Material2_num: 0
   Material3: {fileID: 0}

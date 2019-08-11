@@ -27,11 +27,11 @@ public class Trees : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).name == "Tree1")
+            if (transform.GetChild(i).name == "Tree1(Clone)")
                 oldTrees[i] = new OldTree(1, transform.GetChild(i).transform);
-            else if (transform.GetChild(i).name == "Tree2")
+            else if (transform.GetChild(i).name == "Tree2(Clone)")
                 oldTrees[i] = new OldTree(2, transform.GetChild(i).transform);
-            else if (transform.GetChild(i).name == "Tree3")
+            else if (transform.GetChild(i).name == "Tree3(Clone)")
                 oldTrees[i] = new OldTree(3, transform.GetChild(i).transform);
         }
 
