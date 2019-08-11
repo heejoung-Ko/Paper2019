@@ -58,6 +58,9 @@ public class CraftController : MonoBehaviour
     {
         Item select = Inventory.GetComponent<Inventory>().getSelectItem();
 
+        if (isBox || isCampfire)
+            return;
+
         if (select == Box.item)
         {
             isBox = true;
@@ -112,17 +115,25 @@ public class CraftController : MonoBehaviour
         if (go.transform.position == new Vector3(0f, 0f, 0f))
             return;
 
+        if (!go.GetComponent<CanCraftCheck>().checkCraft())
+            return;
+
         Vector3 position = go.transform.position;
 
         Destroy(go);
         GameObject newGo = Instantiate(Box.prefab);
         newGo.transform.position = position;
         Inventory.GetComponent<Inventory>().subSelecSlot();
+
+        isBox = false;
     }
 
     void CraftCampfire()
     {
         if (go.transform.position == new Vector3(0f, 0f, 0f))
+            return;
+
+        if (!go.GetComponent<CanCraftCheck>().checkCraft())
             return;
 
         Vector3 position = go.transform.position;
@@ -131,5 +142,7 @@ public class CraftController : MonoBehaviour
         GameObject newGo = Instantiate(CampFire.prefab);
         newGo.transform.position = position;
         Inventory.GetComponent<Inventory>().subSelecSlot();
+
+        isCampfire = false;
     }
 }
