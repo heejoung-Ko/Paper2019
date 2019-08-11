@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Recipe_Bat
   m_EditorClassIdentifier: 
   Result: {fileID: 11400000, guid: fc653cb6d6ee0d44d90f61ff8fa4c636, type: 2}
-  Explanation: "\uAC00\uC7A5 \uAE30\uBCF8\uC801\uC778 \uBB34\uAE30\uC774\uB2E4."
+  Explanation: "\uAC00\uC7A5 \uAE30\uBCF8\uC801\uC778 \uBB34\uAE30."
   Material1: {fileID: 11400000, guid: 0c3f752860675ea4b933f5e26fa53538, type: 2}
   Material1_num: 2
   Material2: {fileID: 0}

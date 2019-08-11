@@ -28,13 +28,13 @@ public class Rocks : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).name == "Rock1")
+            if (transform.GetChild(i).name == "Rock1(Clone)")
                 oldRocks[i] = new OldRock(1, transform.GetChild(i).transform);
-            else if (transform.GetChild(i).name == "Rock2")
+            else if (transform.GetChild(i).name == "Rock2(Clone)")
                 oldRocks[i] = new OldRock(2, transform.GetChild(i).transform);
-            else if (transform.GetChild(i).name == "Rock3")
+            else if (transform.GetChild(i).name == "Rock3(Clone)")
                 oldRocks[i] = new OldRock(3, transform.GetChild(i).transform);
-            else if (transform.GetChild(i).name == "Rock4")
+            else if (transform.GetChild(i).name == "Rock4(Clone)")
                 oldRocks[i] = new OldRock(4, transform.GetChild(i).transform);
         }
 

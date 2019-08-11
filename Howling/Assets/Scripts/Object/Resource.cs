@@ -23,7 +23,11 @@ public class Resource : MonoBehaviour
     [SerializeField]
     private CapsuleCollider col;
     [SerializeField]
-    private int count; // 자원 등장 갯수
+    private int count1; // 자원 등장 갯수
+    [SerializeField]
+    private int count2; // 자원 등장 갯수
+    [SerializeField]
+    private int hiddenCout; // 자원 등장 갯수
 
     [SerializeField]
     private GameObject basic_resource;
@@ -32,7 +36,11 @@ public class Resource : MonoBehaviour
     [SerializeField]
     private GameObject effect_resource;
     [SerializeField]
-    private GameObject item_resource;
+    private GameObject item_resource1;
+    [SerializeField]
+    private GameObject item_resource2;
+    [SerializeField]
+    private GameObject item_hidden;
 
     [SerializeField]
     private string mining_sound;
@@ -97,11 +105,22 @@ public class Resource : MonoBehaviour
 
         SoundManager.instance.PlaySE(crash_sound);
 
-        for (int i = 0; i < count; i++)
+        Vector3 position = new Vector3(col.bounds.center.x, col.bounds.center.y + 0.2f, col.bounds.center.z);
+
+        for (int i = 0; i < count1; i++)
         {
-            Instantiate(item_resource, col.bounds.center, Quaternion.identity);
+            Instantiate(item_resource1, col.bounds.center, Quaternion.identity);
         }
-        
+        for (int i = 0; i < count2; i++)
+        {
+
+            Instantiate(item_resource2, col.bounds.center, Quaternion.identity);
+        }
+
+        int ran = Random.Range(0, 10);
+        if(ran < hiddenCout)
+            Instantiate(item_hidden, col.bounds.center, Quaternion.identity);
+
         var fract_clone = Instantiate(fract_resource, col.bounds.center, Quaternion.identity);
         fract_clone.SetActive(true);
         Destroy(fract_clone, destroyTime);

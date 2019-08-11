@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8718725412594261389}
   - component: {fileID: 8718725412594261388}
   - component: {fileID: 8718725412594261391}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Item_Apple
   m_TagString: item
   m_Icon: {fileID: 0}
@@ -86,6 +86,10 @@ PrefabInstance:
     - target: {fileID: 104228, guid: 6e2e5a60179bbe147bb39ecf08436cee, type: 3}
       propertyPath: m_Name
       value: Apple
+      objectReference: {fileID: 0}
+    - target: {fileID: 104228, guid: 6e2e5a60179bbe147bb39ecf08436cee, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 453888, guid: 6e2e5a60179bbe147bb39ecf08436cee, type: 3}
       propertyPath: m_LocalPosition.x

@@ -2375,12 +2375,18 @@ MonoBehaviour:
   destroyTime: 3
   respawnTime: 10
   col: {fileID: 3663387229225275660}
-  count: 5
+  count1: 1
+  count2: 2
+  hiddenCout: 2
   basic_resource: {fileID: 100000}
   fract_resource: {fileID: 6617637833413034941}
   effect_resource: {fileID: 7270058404980271658, guid: 77b658d12cb8e2b4cb7c075c96bf517a,
     type: 3}
-  item_resource: {fileID: 3348651261939690299, guid: 80448679b99b05346864111c18ddf6af,
+  item_resource1: {fileID: 3348651261939690299, guid: 80448679b99b05346864111c18ddf6af,
+    type: 3}
+  item_resource2: {fileID: 3348651261939690299, guid: 80448679b99b05346864111c18ddf6af,
+    type: 3}
+  item_hidden: {fileID: 4073457979917749041, guid: 1cfabfa5c908dd4498013151ed4e1ada,
     type: 3}
   mining_sound: mining_rock_se
   crash_sound: crash_rock_se
