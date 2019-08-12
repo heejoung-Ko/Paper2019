@@ -477,7 +477,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            return true;
+            return false;
         }
     }
 
@@ -489,7 +489,7 @@ public class WolfAgent : Agent
 
             currentAction = "Dig";
 
-            Hungry -= Time.deltaTime * 0.1f;
+            Hungry -= Time.deltaTime * 1f;
             //AddReward(0.001f);
 
             if (Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
