@@ -22,19 +22,12 @@ default:
     curiosity_enc_size: 128
 
 Wolf Learning Brain : 
-    use_recurrent: true
-    sequence_length: 64
-    num_layers: 1
-    hidden_units: 128 
-    memory_size: 512
-    beta: 1.0e-2
-    gamma: 0.99
-    num_epoch: 3
-    buffer_size: 2048
-    batch_size: 128
-    max_steps: 50.0e5
-    summary_freq: 1000
-    time_horizon: 128
+    normalize : true
+    gamma : 0.90
+    lamdda : 0.99
+    batch_size: 256
+    buffer_size: 4096
+    max_steps: 10000
 
 BananaLearning:
     normalize: false
