@@ -323,10 +323,10 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Quaternion rotation = Quaternion.identity;
-        rotation.eulerAngles = new Vector3(0, 0, 90);
-        Quaternion newRotation = oldRotation * rotation;
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime);
+        // Quaternion rotation = Quaternion.identity;
+        // rotation.eulerAngles = new Vector3(0, 0, 90);
+        // Quaternion newRotation = oldRotation * rotation;
+        // this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime);
 
         if (!isDead)
         {

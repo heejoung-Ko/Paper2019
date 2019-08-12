@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4cdf8f927483f42b010131fc5167cf, type: 3}
   m_Name: Recipe_Campfire
   m_EditorClassIdentifier: 
-  Result: {fileID: 11400000, guid: b1759e035d5550c48b9a7ba41eb8df9e, type: 2}
+  Result: {fileID: 11400000, guid: 5c6188bd2779905498451ecc62b757eb, type: 2}
   Explanation: "\uBD88\uC744 \uC9C0\uD544 \uC218 \uC788\uB294 \uBAA8\uB2E5\uBD88."
   Material1: {fileID: 11400000, guid: 20a258cddcc4d404595ce41770651195, type: 2}
   Material1_num: 3

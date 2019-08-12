@@ -24,8 +24,8 @@ public enum ActionType
     GOTOPLAYER,
     ATTACK,
     DIG,
-    MOVEORDERS,
     ROTATION,
+    MOVEORDERS,
 }
 
 public class WolfAgent : Agent
@@ -290,10 +290,7 @@ public class WolfAgent : Agent
         var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
         transform.Rotate(transform.up, rotate * 25f);
 
-        if (act[(int)ActionType.MOVEORDERS] > .5f)
-        {
-            transform.position += transform.forward;
-        }
+            transform.position += transform.forward * 10f;
 
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
