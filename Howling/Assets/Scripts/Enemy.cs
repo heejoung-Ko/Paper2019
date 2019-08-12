@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     float attackDist = 1.5f;            // 공격 범위
 
     private const float atkPos = 1f;
-    private float atkRange = 1f;
+    public float atkRange = 3f;
     public LayerMask targetMask;
 
     float velocity = 0.0f;               // 속도
@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
     static float keepTraceTime = 5.0f;   // 타겟이 인식 범위 밖으로 나갔을 때 추적 상태를 유지하는 시간
     static float keepEscapeTime = 5.0f;  // 타겟이 인식 범위 밖으로 나갔을 때 도주 상태를 유지하는 시간
-
+    
     float nextStateTime = 0.0f;          // 다음 랜덤 상태까지 걸리는 총 시간
     float nowStateTime = 0.0f;           // 현재 기본 상태(idle, walk)에서 보낸 시간
 
@@ -331,7 +331,7 @@ public class Enemy : MonoBehaviour
 
         if (!isDead)
         {
-            enemiesManager.Die(this);
+            //enemiesManager.Die(this);
             isDead = true;
         }
     }

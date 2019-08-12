@@ -21,7 +21,9 @@ namespace Howling
         private Slot selectSlot;
 
         public Slot[] GetInvenSlots() { return slots; }
-        [SerializeField] private Item[] items;
+        public Item[] items;
+
+//        [SerializeField] private Item[] items;
 
         [SerializeField]
         private GameObject itemEffectDB;
@@ -32,9 +34,12 @@ namespace Howling
         [SerializeField]
         private Item Feed;
 
-        void Awake()
+        void Start()
         {
+            items = Resources.LoadAll<Item>("Item");
+
             slots = go_SlotsParent.GetComponentsInChildren<Slot>();
+
             selectSlot = slots[0];
             selectSlot.SelectSlot(true);
         }

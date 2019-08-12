@@ -44,9 +44,9 @@ public class LogoController : MonoBehaviour
 
         if(isEndLogo)
         {
-            Logo.SetActive(false);
             Loby.SetActive(true);
             currentColor = Color.Lerp(endColor, startColor, Time.time / duration);
+            Logo.SetActive(false);
 
         }
     }

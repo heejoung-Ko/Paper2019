@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class BoxController : MonoBehaviour
 {
+    private bool isInitialize = false;
+
     [SerializeField]
     GameObject slots;
     [SerializeField]
@@ -20,9 +22,22 @@ public class BoxController : MonoBehaviour
 
     Transform[] slotList;
 
-    [SerializeField]
-    private Slot[] boxSlots;
-    public Slot[] GetBoxSlots() { return boxSlots; }
+    //[SerializeField] private GameObject boxControllerSlotsParent_line1;
+    //[SerializeField] private GameObject boxControllerSlotsParent_line2;
+    //[SerializeField] private GameObject boxControllerSlotsParent_line3;
+    //[SerializeField] private GameObject boxControllerSlotsParent_line4;
+    //public Slot[] boxControllerSlots_line1;
+    //public Slot[] boxControllerSlots_line2;
+    //public Slot[] boxControllerSlots_line3;
+    //public Slot[] boxControllerSlots_line4;
+
+    //private void Start()
+    //{
+    //    boxControllerSlots_line1 = boxControllerSlotsParent_line1.GetComponentsInChildren<Slot>();
+    //    boxControllerSlots_line2 = boxControllerSlotsParent_line2.GetComponentsInChildren<Slot>();
+    //    boxControllerSlots_line3 = boxControllerSlotsParent_line3.GetComponentsInChildren<Slot>();
+    //    boxControllerSlots_line4 = boxControllerSlotsParent_line4.GetComponentsInChildren<Slot>();
+    //}
 
     public void BoxStart()
     {
