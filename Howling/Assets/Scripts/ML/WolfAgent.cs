@@ -482,12 +482,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            float rayDistance = Eyesight * 0.6f;
-            float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-            string[] detectableObjects = { "item", "home", "enemyCollider", "Player" };
-            List<float> tmpEyesight = rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f);
-            if (tmpEyesight.Count == 0) return true;
-            else return false;
+            return true;
         }
     }
 
