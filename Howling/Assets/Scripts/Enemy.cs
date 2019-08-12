@@ -17,9 +17,8 @@ public class Enemy : MonoBehaviour
     // 현재 타겟으로 설정된 객체
     GameObject target = null;
 
-    float attackDist = 1.5f;            // 공격 범위
 
-    private const float atkPos = 1f;
+    public float atkPos = 0f;
     public float atkRange = 3f;
     public LayerMask targetMask;
 
@@ -195,7 +194,7 @@ public class Enemy : MonoBehaviour
         float distance = Vector3.Distance(target.transform.position, transform.position);
 
         // 타겟이 공격범위 안에 들어왔을 때
-        if (distance <= attackDist)
+        if (distance <= atkRange)
         {
             state = EnemyState.attack;
             nowStateTime = 0f;
