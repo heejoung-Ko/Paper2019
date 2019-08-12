@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     float attackDist = 1.5f;            // 공격 범위
 
     private const float atkPos = 1f;
-    private float atkRange = 1f;
+    public float atkRange = 3f;
     public LayerMask targetMask;
 
     float velocity = 0.0f;               // 속도
@@ -331,7 +331,7 @@ public class Enemy : MonoBehaviour
 
         if (!isDead)
         {
-            enemiesManager.Die(this);
+            //enemiesManager.Die(this);
             isDead = true;
         }
     }
