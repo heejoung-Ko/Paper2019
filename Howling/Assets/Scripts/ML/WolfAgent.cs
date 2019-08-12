@@ -480,7 +480,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            return true;
+            return false;
         }
     }
 
