@@ -24,8 +24,8 @@ public enum ActionType
     GOTOPLAYER,
     ATTACK,
     DIG,
-    MOVEORDERS,
     ROTATION,
+    MOVEORDERS,
 }
 
 public class WolfAgent : Agent
@@ -187,7 +187,7 @@ public class WolfAgent : Agent
 
     public void DecreaseStatus()
     {
-        Hungry -= Time.deltaTime * 0.1f;
+        Hungry -= Time.deltaTime * 1f;
     }
 
     public override void AgentOnDone()
@@ -290,10 +290,12 @@ public class WolfAgent : Agent
         var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
         transform.Rotate(transform.up, rotate * 25f);
 
-        if (act[(int)ActionType.MOVEORDERS] > .5f)
-        {
+        //if (act[(int)ActionType.MOVEORDERS] > .5f)
+
+        //{
             transform.position += transform.forward;
-        }
+            //AddReward(0.0001f);
+        //}
 
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
@@ -460,8 +462,8 @@ public class WolfAgent : Agent
             {
                 animator.SetTrigger("attackTrigger");
 
-                vic.DecreaseHp((int)AttackDamage);
                 AddReward(vic.atk / 100f); // 공격 보상
+                vic.DecreaseHp((int)AttackDamage);
 
                 if (vic.state == Enemy.EnemyState.die)
                 {
@@ -532,6 +534,9 @@ public class WolfAgent : Agent
         {
             if (Hp <= 0 || enterDeadZone || Hungry <= 0)
             {
+                if (Hp <= 0) Debug.Log("hp <= 0");
+                else if (enterDeadZone) Debug.Log("enterDeadZone");
+                else if (Hungry <= 0) Debug.Log("Hungry <= 0");
                 return true;
             }
 

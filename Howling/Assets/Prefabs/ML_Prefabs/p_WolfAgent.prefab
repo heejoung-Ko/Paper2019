@@ -45,8 +45,8 @@ Rigidbody:
   m_GameObject: {fileID: 1270759937672873574}
   serializedVersion: 2
   m_Mass: 150
-  m_Drag: 10
-  m_AngularDrag: 10
+  m_Drag: 20
+  m_AngularDrag: 20
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -106,8 +106,6 @@ MonoBehaviour:
     numberOfActionsBetweenDecisions: 1
   animator: {fileID: 1270759937672873594}
   pivotTransform: {fileID: 0}
-  targetPlayer: {fileID: 0}
-  targetHome: {fileID: 0}
   colliderLayerMask:
     serializedVersion: 2
     m_Bits: 245760
