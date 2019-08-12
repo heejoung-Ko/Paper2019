@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
             animator.SetBool("isRunning", false);
             animator.SetBool("isMoving", false);
 
-            animator.SetTrigger("attckTrigger");
+            animator.SetTrigger("attackTrigger");
             Attack();
             return;
         }
@@ -331,7 +331,7 @@ public class Enemy : MonoBehaviour
 
         if (!isDead)
         {
-            //enemiesManager.Die(this);
+            enemiesManager.Die(this);
             isDead = true;
         }
     }
