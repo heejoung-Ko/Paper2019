@@ -35,8 +35,6 @@ public class WolfAgent : Agent
 
     [Header("Creature Parameters")]
     public Transform pivotTransform; // 임시 위치 기준점, 트레이닝룸 위치
-    public Transform targetPlayer;
-    public Transform targetHome;
 
     public LayerMask colliderLayerMask;
 

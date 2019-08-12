@@ -1578,7 +1578,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 327447
+    m_Bits: 29736727
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1620,11 +1620,18 @@ MonoBehaviour:
   campfireMask:
     serializedVersion: 2
     m_Bits: 0
+  waterMask:
+    serializedVersion: 2
+    m_Bits: 0
+  mapMask:
+    serializedVersion: 2
+    m_Bits: 0
   actionText: {fileID: 0}
   img: {fileID: 0}
   inventory: {fileID: 0}
   tutorialController: {fileID: 0}
   UIManager: {fileID: 0}
+  water: {fileID: 0}
 --- !u!114 &5235824528154719680
 MonoBehaviour:
   m_ObjectHideFlags: 0
