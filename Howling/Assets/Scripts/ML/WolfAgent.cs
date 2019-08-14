@@ -464,9 +464,9 @@ public class WolfAgent : Agent
 
             //Debug.Log("공격!");
             vic = FirstAdjacent("enemyCollider").GetComponentInParent<Enemy>();
-            Vector3 lookVector = vic.transform.position;
-            lookVector.y = transform.position.y;
-            transform.LookAt(lookVector);
+            //Vector3 lookVector = vic.transform.position;
+            //lookVector.y = transform.position.y;
+            transform.LookAt(vic.transform);
 
             if (vic != null)
             {
