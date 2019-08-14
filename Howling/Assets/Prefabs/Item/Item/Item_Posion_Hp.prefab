@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1076364352382645225}
   - component: {fileID: 1259344336205066690}
   - component: {fileID: 8035744593175900995}
+  - component: {fileID: 7414184989476226147}
   m_Layer: 15
   m_Name: Item_Posion_Hp
   m_TagString: item
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: f0728446a8c47634ba60c79c7088e9ff, type: 2}
+--- !u!114 &7414184989476226147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971653108072797179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8dda86e2f13a64296296b569e2ebbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7661938927915522515
 PrefabInstance:
   m_ObjectHideFlags: 0

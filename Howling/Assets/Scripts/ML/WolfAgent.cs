@@ -21,9 +21,9 @@ public enum ActionType
     MOVE,
     EAT,
     REST,
-    GOTOPLAYER,
     ATTACK,
     DIG,
+    GOTOPLAYER,
     ROTATION,
     MOVEORDERS,
 }
@@ -49,6 +49,7 @@ public class WolfAgent : Agent
     public float RestSpeed;
     public float DigSpeed;
     public float MaxSpeed;
+    [HideInInspector] public float moveForce = 100f;
     public float AttackDamage;
     public float DefendDamage;
     public float Eyesight;
@@ -139,7 +140,7 @@ public class WolfAgent : Agent
 
     public override void AgentReset()   // TODO: Reset 할 곳에 추가하기
     {
-        Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 20f, Random.Range(minRange, maxRange));
+        Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 1f, Random.Range(minRange, maxRange));
         transform.position = randomPos + pivotTransform.position;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
@@ -164,8 +165,6 @@ public class WolfAgent : Agent
     {
         if (Dead)
         {
-            animator.SetTrigger("deadTrigger");
-
             currentAction = "Dead";
             AddReward(-1f);
             Done();
@@ -234,9 +233,9 @@ public class WolfAgent : Agent
         switch (maxAction)
         {
             case (int)ActionType.MOVE:
-                animator.SetBool("isWalk", true);
+                animator.SetBool("isMove", true);
+                animator.SetBool("isRun", false);
                 MoveAgent(vectorAction);
-                animator.SetBool("isWalk", false);
                 break;
             case (int)ActionType.EAT:
                 Eat();
@@ -244,17 +243,24 @@ public class WolfAgent : Agent
             case (int)ActionType.REST:
                 Rest();
                 break;
-            case (int)ActionType.GOTOPLAYER:
-                animator.SetBool("isWalk", true);
-                GoToPlayer();
-                animator.SetBool("isWalk", false);
-                break;
+            //case (int)ActionType.GOTOPLAYER:
+            //    animator.SetBool("isWalk", true);
+            //    GoToPlayer();
+            //    animator.SetBool("isWalk", false);
+            //    break;
             case (int)ActionType.ATTACK:
                 Attack();
                 break;
             case (int)ActionType.DIG:
                 Dig();
                 break;
+        }
+
+        if (vectorAction[(int)ActionType.GOTOPLAYER] > .5f)
+        {
+            animator.SetBool("isMove", true);
+            animator.SetBool("isRun", false);
+            GoToPlayer();
         }
     }
 
@@ -293,7 +299,7 @@ public class WolfAgent : Agent
         //if (act[(int)ActionType.MOVEORDERS] > .5f)
 
         //{
-            transform.position += transform.forward;
+            transform.position += transform.forward/* * Time.deltaTime * moveForce*/;
             //AddReward(0.0001f);
         //}
 
@@ -318,7 +324,9 @@ public class WolfAgent : Agent
     {
         if (CanEat)
         {
-            animator.SetTrigger("eatTrigger");
+            animator.SetTrigger("isEat");
+
+            float oldHungy = Hungry;
 
             var adj = FirstAdjacent("item");
             if (adj != null)
@@ -329,25 +337,23 @@ public class WolfAgent : Agent
                 {
                     Debug.Log("생고기 냠냠");
                     Hungry += 10f;
-                    AddReward(0.1f);
                 }
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
                 {
                     Debug.Log("사료 냠냠");
                     Hungry += 20f;
-                    Friendly += 5f;
-                    AddReward(0.25f);
+                    Friendly += 3f;
                 }
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
                     Debug.Log("사과 냠냠");
                     Hungry += 3f;
-                    AddReward(0.05f);
                 }
-
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
+                AddReward((Hungry - oldHungy) * 0.03f);
+
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
                 Destroy(adj);
@@ -417,10 +423,12 @@ public class WolfAgent : Agent
     {
         if (CanGoToPlayer)
         {
-            Friendly += 5f;
+            Friendly += 1f;
             Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
-            AddReward(0.001f * Friendly);
+            var reward = 0.001f * Friendly;
+            Debug.Log("Go to player reward - " + reward);
+            AddReward(reward);
             SetPlayerRelation();
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
             currentAction = "GoToPlayer";
@@ -456,9 +464,9 @@ public class WolfAgent : Agent
 
             //Debug.Log("공격!");
             vic = FirstAdjacent("enemyCollider").GetComponentInParent<Enemy>();
-            Vector3 lookVector = vic.transform.position;
-            lookVector.y = transform.position.y;
-            transform.LookAt(lookVector);
+            //Vector3 lookVector = vic.transform.position;
+            //lookVector.y = transform.position.y;
+            transform.LookAt(vic.transform);
 
             if (vic != null)
             {

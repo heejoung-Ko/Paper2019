@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7211449184388506858}
   - component: {fileID: 9172836739080298310}
   - component: {fileID: 5976155529909721545}
+  - component: {fileID: 6586648225977876598}
   m_Layer: 15
   m_Name: Item_Posion_Mp
   m_TagString: item
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: afe9eb27a3212c84390b6dba38187bd0, type: 2}
+--- !u!114 &6586648225977876598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064923403047942192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8dda86e2f13a64296296b569e2ebbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4508073022388755486
 PrefabInstance:
   m_ObjectHideFlags: 0

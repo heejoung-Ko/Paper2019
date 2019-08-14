@@ -68,6 +68,8 @@ MonoBehaviour:
   state: 0
   oldState: 0
   type: 0
+  atkPos: 0
+  atkRange: 3
   targetMask:
     serializedVersion: 2
     m_Bits: 0
@@ -410,7 +412,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 111794968604163562, guid: cc95c6d2cc753f24c8f9b0a31ca8cc4c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cc95c6d2cc753f24c8f9b0a31ca8cc4c, type: 3}
 --- !u!4 &5248773362189796591 stripped
 Transform:

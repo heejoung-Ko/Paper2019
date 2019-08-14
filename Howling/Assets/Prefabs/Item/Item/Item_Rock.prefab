@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 260734073}
   - component: {fileID: 1407555323378792601}
   - component: {fileID: 4558833480365084910}
+  - component: {fileID: 4836347489271794613}
   m_Layer: 15
   m_Name: Item_Rock
   m_TagString: item
@@ -122,3 +123,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 20a258cddcc4d404595ce41770651195, type: 2}
+--- !u!114 &4836347489271794613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3348651261939690299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8dda86e2f13a64296296b569e2ebbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

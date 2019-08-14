@@ -15,7 +15,7 @@ public class FeedController : MonoBehaviour
         if (meatRespawn)
         {
             meatRespawnTime += 1;
-            if (meatRespawnTime > 200)
+            if (meatRespawnTime > 1000)
             {
                 meatRespawnTime = 0;
                 meatRespawn = false;
@@ -30,7 +30,6 @@ public class FeedController : MonoBehaviour
             Debug.Log("player - agent 닿음!");
             if (!meatRespawn)
             {
-                Debug.Log("player - DropFeed!");
                 DropFeed();
                 meatRespawn = true;
             }

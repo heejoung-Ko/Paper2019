@@ -1174,8 +1174,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1352306435}
-  - component: {fileID: 1352306437}
-  - component: {fileID: 1352306436}
   m_Layer: 0
   m_Name: Low_Bear_v01
   m_TagString: Untagged
@@ -1199,65 +1197,6 @@ Transform:
   m_Father: {fileID: 516791839}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &1352306437
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1352306434}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Animation: {fileID: 7400048, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400002, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400004, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400006, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400008, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400010, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400012, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400014, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400016, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400018, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400020, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400022, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400024, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400026, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400028, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400030, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400032, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400034, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400036, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400038, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400040, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400042, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400044, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400046, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  - {fileID: 7400048, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
---- !u!95 &1352306436
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1352306434}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1402431401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1237,6 @@ GameObject:
   m_Component:
   - component: {fileID: 516791839}
   - component: {fileID: 1414212602}
-  - component: {fileID: 1414212600}
   - component: {fileID: 3268255649851450974}
   - component: {fileID: 8803759733957970874}
   - component: {fileID: 1121389164010558977}
@@ -1341,25 +1279,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &1414212600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414212599}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e15bf089839aad34a99034f67b1ea1cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  dropItem: {fileID: 3046654654559911320, guid: 13dbb83f892600349a9029d91b1c475c,
-    type: 3}
-  Hp: 40
-  AttackDamage: 5
-  direction: {x: 0, y: 0, z: 0.1}
-  velocity: 3
 --- !u!114 &3268255649851450974
 MonoBehaviour:
   m_ObjectHideFlags: 0
