@@ -326,6 +326,8 @@ public class WolfAgent : Agent
         {
             animator.SetTrigger("isEat");
 
+            float oldHungy = Hungry;
+
             var adj = FirstAdjacent("item");
             if (adj != null)
             {
@@ -335,7 +337,6 @@ public class WolfAgent : Agent
                 {
                     Debug.Log("생고기 냠냠");
                     Hungry += 10f;
-                    AddReward(0.1f);
                 }
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
@@ -343,17 +344,16 @@ public class WolfAgent : Agent
                     Debug.Log("사료 냠냠");
                     Hungry += 20f;
                     Friendly += 3f;
-                    AddReward(0.2f);
                 }
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
                     Debug.Log("사과 냠냠");
                     Hungry += 3f;
-                    AddReward(0.05f);
                 }
-
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
+                AddReward((Hungry - oldHungy) * 0.03f);
+
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
                 Destroy(adj);
