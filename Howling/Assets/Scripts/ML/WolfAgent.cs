@@ -331,7 +331,10 @@ public class WolfAgent : Agent
             var adj = FirstAdjacent("item");
             if (adj != null)
             {
-                transform.LookAt(adj.transform);
+                Vector3 lookVector = transform.position;
+                lookVector.y = adj.transform.position.y;
+                transform.LookAt(lookVector);
+                //transform.LookAt(adj.transform);
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기")
                 {
@@ -384,7 +387,10 @@ public class WolfAgent : Agent
             var adj = FirstAdjacent("home");
             if (adj != null)
             {
-                transform.LookAt(adj.transform);
+                Vector3 lookVector = transform.position;
+                lookVector.y = adj.transform.position.y;
+                transform.LookAt(lookVector);
+                //transform.LookAt(adj.transform);
 
                 Debug.Log("rest 중!!!");
 
@@ -466,8 +472,8 @@ public class WolfAgent : Agent
 
             //Debug.Log("공격!");
             vic = FirstAdjacent("enemyCollider").GetComponentInParent<Enemy>();
-            Vector3 lookVector = vic.transform.position;
-            lookVector.y = transform.position.y;
+            Vector3 lookVector = transform.position;
+            lookVector.y = vic.transform.position.y;
             transform.LookAt(lookVector);
 
             if (vic != null)
