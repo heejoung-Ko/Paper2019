@@ -337,24 +337,39 @@ public class Enemy : MonoBehaviour
 
     public void DecreaseHp(int cnt)
     {
-        if (state == EnemyState.die || state == EnemyState.hit)
-            return;
-        {
-            hp -= cnt;
-            oldState = state;
-            state = EnemyState.hit;
-            velocity = 0;
-            Debug.Log("데미지: " + cnt);
+        if (state == EnemyState.die || state == EnemyState.hit) return;
+        hp -= cnt;
+        oldState = state;
+        state = EnemyState.hit;
+        velocity = 0;
+        //Debug.Log("데미지: " + cnt);
 
-            if (hp <= 0)
-            {
-                Debug.Log("주겄당!!");
-                state = EnemyState.die;
-                oldRotation = transform.rotation;
-                animator.SetTrigger("dieTrigger");
-            }
+        if (hp <= 0)
+        {
+            Debug.Log("주겄당!!");
+            state = EnemyState.die;
+            oldRotation = transform.rotation;
+            animator.SetTrigger("dieTrigger");
         }
         //Debug.Log("enemy hp: " + hp);
+    }
+
+    public void DecreaseHpByWolf(int cnt)
+    {
+        if (state == EnemyState.die || state == EnemyState.hit) return;
+        hp -= cnt;
+        oldState = state;
+        state = EnemyState.hit;
+        velocity = 0;
+
+        if (hp <= 0)
+        {
+            //Debug.Log("주겄당!!");
+            enemiesManager.DieReward();
+            state = EnemyState.die;
+            oldRotation = transform.rotation;
+            animator.SetTrigger("dieTrigger");
+        }
     }
 
     void DropItem()

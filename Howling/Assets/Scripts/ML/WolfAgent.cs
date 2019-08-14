@@ -463,14 +463,14 @@ public class WolfAgent : Agent
                 animator.SetTrigger("attackTrigger");
 
                 AddReward(vic.atk / 100f); // 공격 보상
-                vic.DecreaseHp((int)AttackDamage);
+                vic.DecreaseHpByWolf((int)AttackDamage);
 
-                if (vic.state == Enemy.EnemyState.die)
-                {
-                    Debug.Log("해치웠다!");
+                //if (vic.state == Enemy.EnemyState.die)
+                //{
+                //    Debug.Log("해치웠다!");
 
-                    AddReward(.25f);
-                }
+                //    AddReward(.25f);
+                //}
             } else {
                 Debug.Log("vic에  null 들감");
             }
@@ -478,10 +478,17 @@ public class WolfAgent : Agent
         Hungry -= Time.deltaTime * 0.01f; // 공격했으니 허기소비
     }
 
+    public void EnemyDieReward()
+    {
+        Debug.Log("WolfAgent - Enemy 해치웠다!");
+        AddReward(.25f);
+    }
+
     bool CanDig
     {
         get
         {
+            // TODO: 가까이에 타겟 없을 때 return true;
             return false;
         }
     }
@@ -495,7 +502,6 @@ public class WolfAgent : Agent
             currentAction = "Dig";
 
             Hungry -= Time.deltaTime * 1f;
-            //AddReward(0.001f);
 
             if (Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
             {

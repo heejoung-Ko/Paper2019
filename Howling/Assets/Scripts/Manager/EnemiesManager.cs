@@ -24,8 +24,11 @@ public class EnemiesManager : MonoBehaviour
     [SerializeField] public static float randomNum = 10f;
     public Transform[] spawnPoints;
 
+    public WolfAgent wolfAgent;
+
     private void Start()
     {
+        wolfAgent = FindObjectOfType<WolfAgent>();
         InitialSpawnPoints();
         SpawnAllEnemies();
     }
@@ -84,6 +87,17 @@ public class EnemiesManager : MonoBehaviour
         enemies[k].enemy = instance.GetComponent<Enemy>();
         enemies[k].enemy.type = enemies[k].type;
         enemies[k].currentNum += 1;
+    }
+
+    public void DieReward()
+    {
+        //if (wolfAgent == null) wolfAgent = FindObjectOfType<WolfAgent>();
+        if (wolfAgent == null)
+        {
+            Debug.Log("EnemiesManager - Wolf Agent is null.");
+            return;
+        }
+        wolfAgent.EnemyDieReward();
     }
 
     public void Die(Enemy enemy)
