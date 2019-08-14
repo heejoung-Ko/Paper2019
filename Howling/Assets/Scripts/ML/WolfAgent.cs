@@ -165,8 +165,6 @@ public class WolfAgent : Agent
     {
         if (Dead)
         {
-            animator.SetTrigger("deadTrigger");
-
             currentAction = "Dead";
             AddReward(-1f);
             Done();
@@ -235,9 +233,9 @@ public class WolfAgent : Agent
         switch (maxAction)
         {
             case (int)ActionType.MOVE:
-                animator.SetBool("isWalk", true);
+                animator.SetBool("isMove", true);
+                animator.SetBool("isRun", false);
                 MoveAgent(vectorAction);
-                animator.SetBool("isWalk", false);
                 break;
             case (int)ActionType.EAT:
                 Eat();
@@ -260,9 +258,9 @@ public class WolfAgent : Agent
 
         if (vectorAction[(int)ActionType.GOTOPLAYER] > .5f)
         {
-            animator.SetBool("isWalk", true);
+            animator.SetBool("isMove", true);
+            animator.SetBool("isRun", false);
             GoToPlayer();
-            animator.SetBool("isWalk", false);
         }
     }
 
@@ -326,7 +324,7 @@ public class WolfAgent : Agent
     {
         if (CanEat)
         {
-            animator.SetTrigger("eatTrigger");
+            animator.SetTrigger("isEat");
 
             var adj = FirstAdjacent("item");
             if (adj != null)
