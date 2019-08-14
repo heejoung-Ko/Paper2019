@@ -8,6 +8,8 @@ public enum EnemyType
 
 public class EnemiesManager : MonoBehaviour
 {
+    public float destroyTime = 2f;
+    public float respawnTime = 5f;
     [System.Serializable]
     public struct EnemiesDB
     {
@@ -21,8 +23,8 @@ public class EnemiesManager : MonoBehaviour
     }
     public EnemiesDB[] enemies;
     public GameObject[] dropItems;
-    [SerializeField] public static float randomNum = 10f;
     public Transform[] spawnPoints;
+    [SerializeField] public static float randomNum = 10f;
 
     public WolfAgent wolfAgent;
 
@@ -119,7 +121,7 @@ public class EnemiesManager : MonoBehaviour
 
     IEnumerator DestroyEnemy(Enemy enemy)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(destroyTime);
         Debug.Log("아이템 뿌린당!!!");
         for(int i = 0; i < dropItems.Length; ++i)
             Instantiate(dropItems[i], enemy.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
@@ -128,7 +130,7 @@ public class EnemiesManager : MonoBehaviour
 
     IEnumerator AddEnemy(Enemy enemy)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(respawnTime);
         for (int k = 0; k < enemies.Length; ++k)
         {
             if (enemies[k].currentNum >= enemies[k].maxNum) continue;
