@@ -147,7 +147,7 @@ class ExportTerrain : EditorWindow
             {
                 UpdateProgress();
                 StringBuilder sb = new StringBuilder("v ", 20);
-                // StringBuilder stuff is done this way because it's faster than using the "{0} {1} {2}"etc. format
+                // StringBuilder stuff is done this way because its faster than using the "{0} {1} {2}"etc. format
                 // Which is important when you're exporting huge terrains.
                 sb.Append(tVertices[i].x.ToString()).Append(" ").
                    Append(tVertices[i].y.ToString()).Append(" ").
