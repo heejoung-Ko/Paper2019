@@ -8,7 +8,7 @@ namespace Howling
 {
     public class Slot : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
-        static public int itemMaxCount = 3;
+        static public int itemMaxCount = 5;
 
         public static bool isSlotClick = false;
         public static bool isSlotDrag = false;

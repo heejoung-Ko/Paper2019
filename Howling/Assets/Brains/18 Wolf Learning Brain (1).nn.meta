@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 78714c45622aaf14390a4f6a44b5fb6e
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400000: Assets/Brains/18 Wolf Learning Brain (1).nn
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 83221ad3db87f4b3b91b041047cb2bc5, type: 3}

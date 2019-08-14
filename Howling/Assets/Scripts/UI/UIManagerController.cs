@@ -84,6 +84,8 @@ public class UIManagerController : MonoBehaviour
     void enterMaking()
     {
         state = UIState.MAKING;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         enterUI();
 
@@ -93,6 +95,8 @@ public class UIManagerController : MonoBehaviour
     void exitMaking()
     {
         state = UIState.NONE;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         exitUI();
 

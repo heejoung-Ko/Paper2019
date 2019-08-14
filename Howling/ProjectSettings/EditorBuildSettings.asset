@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/HowlingTitleScene.unity
+    guid: a9cb89af68489a945a386f6dda9d4bf8
+  - enabled: 1
     path: Assets/Scenes/HowlingScene.unity
     guid: 150d4d3a0045ed048856c5c4e22f20be
-  - enabled: 1
-    path: Assets/Scenes/HowlingTitleScene.unity
+  - enabled: 0
+    path: Assets/Scenes/HowlingLoadScene.unity
     guid: fd9e939e74ff4d547af058dfe945ab89
   m_configObjects: {}
