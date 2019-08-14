@@ -108,10 +108,10 @@ Animator:
   m_GameObject: {fileID: 1270759937672873574}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0faec1d65d1a862429fd6c3fdef4bfcb, type: 3}
-  m_Controller: {fileID: 9100000, guid: 340c7fd704fe49448affd51e055742ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7db55d3bc61132b42a408698195a0776, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -209,6 +209,11 @@ PrefabInstance:
     - target: {fileID: 1525676354884992, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6463781831033448818, guid: 0f848e738a34ef34591b2ee4348b507a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877650516467224, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
