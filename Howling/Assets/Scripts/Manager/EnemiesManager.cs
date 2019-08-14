@@ -122,7 +122,7 @@ public class EnemiesManager : MonoBehaviour
     IEnumerator DestroyEnemy(Enemy enemy)
     {
         yield return new WaitForSeconds(destroyTime);
-        Debug.Log("아이템 뿌린당!!!");
+        //Debug.Log("아이템 뿌린당!!!");
         for(int i = 0; i < dropItems.Length; ++i)
             Instantiate(dropItems[i], enemy.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
         Destroy(enemy.gameObject);

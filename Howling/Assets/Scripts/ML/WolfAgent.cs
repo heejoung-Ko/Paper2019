@@ -328,23 +328,23 @@ public class WolfAgent : Agent
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기")
                 {
                     Debug.Log("생고기 냠냠");
-                    Hungry += 5f;
-                    AddReward(0.05f);
+                    Hungry += 10f;
+                    AddReward(0.1f);
                 }
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
                 {
                     Debug.Log("사료 냠냠");
-                    Hungry += 10f;
+                    Hungry += 20f;
                     Friendly += 5f;
-                    AddReward(0.1f);
+                    AddReward(0.25f);
                 }
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
                     Debug.Log("사과 냠냠");
                     Hungry += 3f;
-                    AddReward(0.03f);
+                    AddReward(0.05f);
                 }
 
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
@@ -473,13 +473,13 @@ public class WolfAgent : Agent
     public void EnemyAtkReward(int atk)
     {
         Debug.Log("WolfAgent - EnemyAtkReward, 공격했다!");
-        AddReward(atk / 100f);
+        AddReward(atk * 0.002f);
     }
 
     public void EnemyDieReward()
     {
         Debug.Log("WolfAgent - EnemyDieReward, 해치웠다!");
-        AddReward(.25f);
+        AddReward(.1f);
     }
 
     bool CanDig

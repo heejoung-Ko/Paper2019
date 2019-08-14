@@ -346,7 +346,7 @@ public class Enemy : MonoBehaviour
 
         if (hp <= 0)
         {
-            Debug.Log("주겄당!!");
+            //Debug.Log("주겄당!!");
             state = EnemyState.die;
             oldRotation = transform.rotation;
             animator.SetTrigger("dieTrigger");
