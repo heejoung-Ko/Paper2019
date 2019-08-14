@@ -361,6 +361,7 @@ public class Enemy : MonoBehaviour
         oldState = state;
         state = EnemyState.hit;
         velocity = 0;
+        enemiesManager.AtkReward(atk);
 
         if (hp <= 0)
         {

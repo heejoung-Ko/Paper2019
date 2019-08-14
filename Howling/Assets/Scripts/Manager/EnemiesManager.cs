@@ -89,6 +89,16 @@ public class EnemiesManager : MonoBehaviour
         enemies[k].currentNum += 1;
     }
 
+    public void AtkReward(int atk)
+    {
+        if (wolfAgent == null)
+        {
+            Debug.Log("EnemiesManager - Wolf Agent is null.");
+            return;
+        }
+        wolfAgent.EnemyAtkReward(atk);
+    }
+
     public void DieReward()
     {
         //if (wolfAgent == null) wolfAgent = FindObjectOfType<WolfAgent>();
@@ -109,7 +119,7 @@ public class EnemiesManager : MonoBehaviour
 
     IEnumerator DestroyEnemy(Enemy enemy)
     {
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(2f);
         Debug.Log("아이템 뿌린당!!!");
         for(int i = 0; i < dropItems.Length; ++i)
             Instantiate(dropItems[i], enemy.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);

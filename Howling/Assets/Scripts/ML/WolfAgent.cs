@@ -454,33 +454,31 @@ public class WolfAgent : Agent
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
             Enemy vic = null;
 
-            Debug.Log("공격!");
+            //Debug.Log("공격!");
             vic = FirstAdjacent("enemyCollider").GetComponentInParent<Enemy>();
-            transform.LookAt(vic.transform);
+            Vector3 lookVector = vic.transform.position;
+            lookVector.y = transform.position.y;
+            transform.LookAt(lookVector);
 
             if (vic != null)
             {
                 animator.SetTrigger("attackTrigger");
-
-                AddReward(vic.atk / 100f); // 공격 보상
                 vic.DecreaseHpByWolf((int)AttackDamage);
-
-                //if (vic.state == Enemy.EnemyState.die)
-                //{
-                //    Debug.Log("해치웠다!");
-
-                //    AddReward(.25f);
-                //}
-            } else {
-                Debug.Log("vic에  null 들감");
             }
+            else Debug.Log("WolfAgent - Attack, vic is null.");
         }
         Hungry -= Time.deltaTime * 0.01f; // 공격했으니 허기소비
     }
 
+    public void EnemyAtkReward(int atk)
+    {
+        Debug.Log("WolfAgent - EnemyAtkReward, 공격했다!");
+        AddReward(atk / 100f);
+    }
+
     public void EnemyDieReward()
     {
-        Debug.Log("WolfAgent - Enemy 해치웠다!");
+        Debug.Log("WolfAgent - EnemyDieReward, 해치웠다!");
         AddReward(.25f);
     }
 
