@@ -70,7 +70,7 @@ MonoBehaviour:
   moveForce: 5
   AttackDamage: 25
   DefendDamage: 5
-  Eyesight: 15
+  Eyesight: 30
   Hp: 0
   Hungry: 0
   Friendly: 0

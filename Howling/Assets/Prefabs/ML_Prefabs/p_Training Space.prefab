@@ -192,7 +192,7 @@ PrefabInstance:
     - target: {fileID: 1270759937672873572, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
         type: 3}
       propertyPath: Eyesight
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e90a102bc65934b4ea4f0ad6257fcfe4, type: 3}
