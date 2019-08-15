@@ -74,6 +74,7 @@ public class WolfAgent : Agent
     private float nextAction;
     private bool enterDeadZone;
     private RayPerception rayPer;
+    private float targetRange = 2f;
 
     public GameObject[] dropItem;
 
@@ -264,9 +265,9 @@ public class WolfAgent : Agent
         }
     }
 
-    private GameObject FirstAdjacent(string tag)
+    private GameObject FirstAdjacent(string tag, float range)
     {
-        var colliders = Physics.OverlapSphere(transform.position, 2f, colliderLayerMask);
+        var colliders = Physics.OverlapSphere(transform.position, range, colliderLayerMask);
         foreach (var collider in colliders)
         {
             if (collider.gameObject.tag == tag)
@@ -311,7 +312,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            var adj = FirstAdjacent("item");
+            var adj = FirstAdjacent("item", targetRange);
             if (adj != null)
             {
                 return true;
@@ -328,7 +329,7 @@ public class WolfAgent : Agent
 
             float oldHungy = Hungry;
 
-            var adj = FirstAdjacent("item");
+            var adj = FirstAdjacent("item", targetRange);
             if (adj != null)
             {
                 transform.LookAt(adj.transform);
@@ -338,15 +339,13 @@ public class WolfAgent : Agent
                     Debug.Log("생고기 냠냠");
                     Hungry += 10f;
                 }
-
-                if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
+                else if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
                 {
                     Debug.Log("사료 냠냠");
                     Hungry += 20f;
-                    Friendly += 3f;
+                    Friendly += 5f;
                 }
-
-                if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
+                else if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
                     Debug.Log("사과 냠냠");
                     Hungry += 3f;
@@ -368,7 +367,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("home") != null) return true;
+            if (FirstAdjacent("home", targetRange) != null) return true;
             return false;
         }
     }
@@ -379,7 +378,7 @@ public class WolfAgent : Agent
         {
             animator.SetTrigger("restTrigger");
 
-            var adj = FirstAdjacent("home");
+            var adj = FirstAdjacent("home", targetRange);
             if (adj != null)
             {
                 transform.LookAt(adj.transform);
@@ -395,7 +394,7 @@ public class WolfAgent : Agent
                 Hp = Mathf.Clamp(Hp, 0f, MaxHp);
 
                 Friendly += 1f;
-                Hungry -= Time.deltaTime * 0.01f;
+                //Hungry -= Time.deltaTime * 0.01f;
 
                 nextAction = Time.timeSinceLevelLoad + (25 / RestSpeed);
                 currentAction = "Resting";
@@ -407,7 +406,13 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("Player") != null) return true;
+            float playerRange = 5f;
+            GameObject playerObj = FirstAdjacent("Player", playerRange);
+            if (playerObj != null)
+            {
+                //transform.LookAt(playerObj.transform);
+                return true;
+            }
             return false;
 
             //// TODO: playerRelation 따라서 판단. (일단 임시로 정했음.)
@@ -423,7 +428,7 @@ public class WolfAgent : Agent
     {
         if (CanGoToPlayer)
         {
-            Friendly += 1f;
+            Friendly += 2f;
             Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
             var reward = 0.001f * Friendly;
@@ -439,7 +444,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            var testvic = FirstAdjacent("enemyCollider");
+            var testvic = FirstAdjacent("enemyCollider", targetRange);
 
             if (testvic != null)
             {
@@ -463,7 +468,7 @@ public class WolfAgent : Agent
             Enemy vic = null;
 
             //Debug.Log("공격!");
-            vic = FirstAdjacent("enemyCollider").GetComponentInParent<Enemy>();
+            vic = FirstAdjacent("enemyCollider", targetRange).GetComponentInParent<Enemy>();
             //Vector3 lookVector = vic.transform.position;
             //lookVector.y = transform.position.y;
             transform.LookAt(vic.transform);
@@ -475,19 +480,19 @@ public class WolfAgent : Agent
             }
             else Debug.Log("WolfAgent - Attack, vic is null.");
         }
-        Hungry -= Time.deltaTime * 0.01f; // 공격했으니 허기소비
+        //Hungry -= Time.deltaTime * 0.01f; // 공격했으니 허기소비
     }
 
     public void EnemyAtkReward(int atk)
     {
         Debug.Log("WolfAgent - EnemyAtkReward, 공격했다!");
-        AddReward(atk * 0.002f);
+        AddReward(atk * 0.01f);
     }
 
     public void EnemyDieReward()
     {
         Debug.Log("WolfAgent - EnemyDieReward, 해치웠다!");
-        AddReward(.1f);
+        AddReward(.3f);
     }
 
     bool CanDig
@@ -507,7 +512,7 @@ public class WolfAgent : Agent
 
             currentAction = "Dig";
 
-            Hungry -= Time.deltaTime * 1f;
+            //Hungry -= Time.deltaTime * 1f;
 
             if (Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
             {
