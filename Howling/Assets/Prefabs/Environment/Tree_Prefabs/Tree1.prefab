@@ -597,6 +597,7 @@ GameObject:
   - component: {fileID: 8327061902161016619}
   - component: {fileID: 4293452313799410397}
   - component: {fileID: 3118374845578139639}
+  - component: {fileID: 118790135960939783}
   m_Layer: 0
   m_Name: Tree1
   m_TagString: tree
@@ -677,11 +678,24 @@ CapsuleCollider:
   m_GameObject: {fileID: 8327061902161016620}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 1.6218264
   m_Height: 8.291874
   m_Direction: 1
   m_Center: {x: -0.05099058, y: 2.983038, z: 0}
+--- !u!65 &118790135960939783
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327061902161016620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6914978, y: 8.686587, z: 2.4395733}
+  m_Center: {x: 0.01799512, y: 2.8175888, z: -0.07197952}
 --- !u!1001 &4922331627076508198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -735,6 +749,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f177cb18accd04541b9c50799c3b9b00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: f177cb18accd04541b9c50799c3b9b00, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
