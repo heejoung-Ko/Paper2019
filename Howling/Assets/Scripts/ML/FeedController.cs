@@ -15,7 +15,7 @@ public class FeedController : MonoBehaviour
         if (meatRespawn)
         {
             meatRespawnTime += 1;
-            if (meatRespawnTime > 1000)
+            if (meatRespawnTime > 500)
             {
                 meatRespawnTime = 0;
                 meatRespawn = false;
