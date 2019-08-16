@@ -124,8 +124,11 @@ public class UIManagerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
         MenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        enterUI();
+
+        Time.timeScale = 0f;    // 시간 정지
     }
 
     void exitMenu()
@@ -136,6 +139,8 @@ public class UIManagerController : MonoBehaviour
         Cursor.visible = false;
 
         MenuUI.SetActive(false);
+        exitUI();
+
         Time.timeScale = 1f;
     }
 

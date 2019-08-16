@@ -66,8 +66,8 @@ public class WolfAgent : Agent
 
     [Header("Species Parameters")]
     // 랜덤 스폰하기 위한 임시적인 범위, 맵 20X20 공간에서만 가능
-    private float minRange = -40f;
-    private float maxRange = 40f;
+    private float minRange = -5f;
+    private float maxRange = 5f;
 
     private GameObject Environment;
     private Rigidbody agentRB;
@@ -77,51 +77,6 @@ public class WolfAgent : Agent
     private float targetRange = 2f;
 
     public GameObject[] dropItem;
-
-    //public Vector3 GetPos()
-    //{
-    //    return transform.position;
-    //}
-    //public void SetPos(Vector3 savePos)
-    //{
-    //    transform.position = savePos;
-    //}
-
-    //public Vector3 GetRot()
-    //{
-    //    return transform.eulerAngles;
-    //}
-    //public void SetRot(Vector3 saveRot)
-    //{
-    //    transform.eulerAngles = saveRot;
-    //}
-
-    //public float GetHp()
-    //{
-    //    return Hp;
-    //}
-    //public void SetHp(float saveHp)
-    //{
-    //    Hp = saveHp;
-    //}
-
-    //public float GetHungry()
-    //{
-    //    return Hungry;
-    //}
-    //public void SetHungry(float saveHungry)
-    //{
-    //    Hungry = saveHungry;
-    //}
-
-    //public float GetFriendly()
-    //{
-    //    return Friendly;
-    //}
-    //public void SetFriendly(float saveFriendly)
-    //{
-    //    Friendly = saveFriendly;
-    //}
 
     private void Start()
     {
@@ -301,7 +256,6 @@ public class WolfAgent : Agent
 
         //{
             transform.position += transform.forward/* * Time.deltaTime * moveForce*/;
-            //AddReward(0.0001f);
         //}
 
         currentAction = "Moving";
@@ -337,21 +291,25 @@ public class WolfAgent : Agent
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기")
                 {
                     Debug.Log("생고기 냠냠");
-                    Hungry += 10f;
+                    Hungry += 20f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
                 {
                     Debug.Log("사료 냠냠");
-                    Hungry += 20f;
+                    Hungry += 30f;
                     Friendly += 5f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
                     Debug.Log("사과 냠냠");
-                    Hungry += 3f;
+                    Hungry += 10f;
                 }
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
-                AddReward((Hungry - oldHungy) * 0.03f);
+
+                float eatReward = (Hungry - oldHungy) * 0.03f;
+
+                Debug.Log("냠냠 Reward : " + eatReward);
+                AddReward(eatReward);
 
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
@@ -378,20 +336,22 @@ public class WolfAgent : Agent
         {
             animator.SetTrigger("restTrigger");
 
+            float oldHp = Hp;
+
             var adj = FirstAdjacent("home", targetRange);
             if (adj != null)
             {
+                float restReward = (Hp - oldHp) * (1 - (Hp / MaxHp)) * 0.03f;
+
                 transform.LookAt(adj.transform);
 
                 Debug.Log("rest 중!!!");
 
-                if (Hp < 90)
-                {
-                    AddReward(.01f);
-                }
-
                 Hp += 10f;
                 Hp = Mathf.Clamp(Hp, 0f, MaxHp);
+
+                AddReward(restReward);
+
 
                 Friendly += 1f;
                 //Hungry -= Time.deltaTime * 0.01f;
@@ -432,7 +392,7 @@ public class WolfAgent : Agent
             Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
             var reward = 0.001f * Friendly;
-            Debug.Log("Go to player reward - " + reward);
+            Debug.Log("Go to player reward");
             AddReward(reward);
             SetPlayerRelation();
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
@@ -486,7 +446,7 @@ public class WolfAgent : Agent
     public void EnemyAtkReward(int atk)
     {
         Debug.Log("WolfAgent - EnemyAtkReward, 공격했다!");
-        AddReward(atk * 0.01f);
+        AddReward(atk * 0.05f);
     }
 
     public void EnemyDieReward()
@@ -499,8 +459,22 @@ public class WolfAgent : Agent
     {
         get
         {
-            // TODO: 가까이에 타겟 없을 때 return true;
-            return false;
+            var colliders = Physics.OverlapSphere(transform.position, 20f);
+
+            foreach(var collider in colliders)
+            {
+                if(collider.CompareTag("item") || 
+                   collider.CompareTag("home") ||
+                   collider.CompareTag("enemyCollider") ||
+                   collider.CompareTag("Player"))
+                {
+                    Debug.Log("앞에 뭐가 있다!!!");
+                    return false;
+                }
+            }
+            Debug.Log("앞에 암것도 없으니 땅을 파겠다!!");
+            return true;
+
         }
     }
 
@@ -521,7 +495,7 @@ public class WolfAgent : Agent
 
                 DropItem();
 
-                AddReward(.05f); // 성공 보상
+                AddReward(.01f); // 성공 보상
             }
             else
             {
@@ -542,7 +516,7 @@ public class WolfAgent : Agent
         int itemIndex = Random.Range(0, dropItem.Length);
 
         // 땅파서 아이템 나오는 위치 보고,, 수정하던지 해야할듯,,!
-        //Instantiate(dropItem[itemIndex], transform.position, Quaternion.identity);
+        Instantiate(dropItem[itemIndex], transform.position, Quaternion.identity);
     }
 
     bool Dead
@@ -561,9 +535,9 @@ public class WolfAgent : Agent
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("dead"))
+        if (other.collider.CompareTag("dead"))
         {
             enterDeadZone = true;
         }
