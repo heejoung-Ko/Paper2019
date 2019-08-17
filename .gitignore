@@ -109,3 +109,7 @@ Howling/Library/StateCache/Hierarchy/ad5b92-mainStage.json
 Howling/obj/Debug/Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
 Howling/obj/Debug/Assembly-CSharp-Editor.csprojAssemblyReference.cache
 Howling/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+*.log
+*.log
+Howling/Assets/Resources/LowPolyWater_Pack/Plane Meshes/Plane50x50W300H1000.asset
+Howling/Assets/Prefabs/ML_Prefabs/p_WolfAgent_Camera.prefab.meta

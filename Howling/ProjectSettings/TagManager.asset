@@ -38,11 +38,11 @@ TagManager:
   - 
   - 
   - invisible
-  - ball
-  - goalieWall
-  - goalie
-  - strikerWall
-  - striker
+  - 
+  - 
+  - 
+  - 
+  - 
   - Player
   - Item
   - EnemyCollider
