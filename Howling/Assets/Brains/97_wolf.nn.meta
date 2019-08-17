@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 85cc2518e6f521c41a370738170aa42f
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400002: Assets/Brains/97_wolf.nn
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 83221ad3db87f4b3b91b041047cb2bc5, type: 3}

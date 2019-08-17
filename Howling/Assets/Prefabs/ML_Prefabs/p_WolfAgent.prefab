@@ -82,6 +82,7 @@ MonoBehaviour:
   - {fileID: 1153693903604504, guid: 2c9868bb7821e484083e774038674eb1, type: 3}
   - {fileID: 1473933667410898, guid: 20df3b3bdddb94f47b7d2e59e491ff51, type: 3}
   - {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727, type: 3}
+  - {fileID: 8718725412594261390, guid: 123050e4ff8890342901ab4a4649d9a6, type: 3}
 --- !u!54 &1270759937672873595
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -209,11 +210,6 @@ PrefabInstance:
     - target: {fileID: 1525676354884992, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
       value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463781831033448818, guid: 0f848e738a34ef34591b2ee4348b507a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877650516467224, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
