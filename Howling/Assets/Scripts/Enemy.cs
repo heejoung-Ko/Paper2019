@@ -66,14 +66,14 @@ public class Enemy : MonoBehaviour
         if (state == EnemyState.trace)
         {
             animator.SetBool("isRunning", true);
-            animator.SetBool("isMoving", false);
+            animator.SetBool("isMoving", true);
             Trace();
             return;
         }
         else if (state == EnemyState.escape)
         {
             animator.SetBool("isRunning", true);
-            animator.SetBool("isMoving", false);
+            animator.SetBool("isMoving", true);
             Escape();
             return;
         }
@@ -93,26 +93,16 @@ public class Enemy : MonoBehaviour
         }
         else if (state == EnemyState.attack)
         {
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isMoving", false);
-
             animator.SetTrigger("attackTrigger");
             Attack();
             return;
         }
         else if (state == EnemyState.hit)
         {
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isMoving", false);
-
-            animator.SetTrigger("hitTrigger");
             Hit();
         }
         else if (state == EnemyState.die)
         {
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isMoving", false);
-
             animator.SetTrigger("dieTrigger");
             Die();
         }
@@ -313,6 +303,8 @@ public class Enemy : MonoBehaviour
 
     void Hit()
     {
+        if(currentInvincibleTime == 0)
+            animator.SetTrigger("hitTrigger");
         currentInvincibleTime += Time.deltaTime;
         if (currentInvincibleTime > invincibleTime)
         {
