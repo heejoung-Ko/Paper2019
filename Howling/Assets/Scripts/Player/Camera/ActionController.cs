@@ -219,6 +219,9 @@ namespace Howling
         {
             Item selectItem = inventory.GetComponent<Inventory>().getSelectItem();
 
+            isCampfire = false;
+            isCookedMeat = false;
+
             if (selectItem != null )
             {
                 if (selectItem.ItemName == "나무")
