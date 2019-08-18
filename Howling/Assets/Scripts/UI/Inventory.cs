@@ -34,6 +34,9 @@ namespace Howling
         [SerializeField]
         private Item Feed;
 
+        [SerializeField]
+        private Item CookedMeat;
+
         void Start()
         {
             items = Resources.LoadAll<Item>("Item");
@@ -240,6 +243,16 @@ namespace Howling
             if (selectSlot != null && selectSlot.item.ItemName == "나무")
             {
                 selectSlot.SetSlotCount(-1);
+            }
+            SwapItem();
+        }
+
+        public void useMeatToCampfire()
+        {
+            if (selectSlot != null && selectSlot.item.ItemName == "손질된 고기")
+            {
+                selectSlot.SetSlotCount(-1);
+                AddItem(CookedMeat, 1);
             }
             SwapItem();
         }
