@@ -16,6 +16,8 @@ public class Campfire : MonoBehaviour
     [SerializeField]
     GameObject big;
 
+    bool isFire = false;
+
     public void Update()
     {
         state -= Time.deltaTime;
@@ -36,10 +38,17 @@ public class Campfire : MonoBehaviour
         SetFireSize();
     }
 
+    public bool GetIsFire()
+    {
+        return isFire;
+    }
+
     private void SetFireSize()
     {
-        if(state == 0)
+        isFire = true;
+        if (state == 0)
         {
+            isFire = false;
             SetNone();
         }
         else if(state <= 30f)

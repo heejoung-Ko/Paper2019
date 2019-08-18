@@ -51,6 +51,7 @@ namespace Howling
 
         private bool isBox = false;
         private bool isCampfire = false;
+        private bool isCookedMeat = false;
         private bool isWater = false;
 
         [SerializeField]
@@ -86,6 +87,7 @@ namespace Howling
                     CanPickUp();
                     CheckBoxOpen();
                     CheckUseWoodToCampfire();
+                    CheckUseMeatToCampfire();
                     if (isWater)
                         GetWater();
                 }
@@ -102,6 +104,12 @@ namespace Howling
         {
             if (isCampfire)
                 UseWoodToCampfire();
+        }
+
+        private void CheckUseMeatToCampfire()
+        {
+            if (isCookedMeat)
+                UseMeatToCampfire();
         }
 
         private void CanPickUp()
@@ -211,12 +219,25 @@ namespace Howling
         {
             Item selectItem = inventory.GetComponent<Inventory>().getSelectItem();
 
-            if (selectItem != null && selectItem.ItemName == "나무")
+            if (selectItem != null )
             {
-                actionText.gameObject.SetActive(true);
-                actionText.text = "나무 넣기" + "<color=yellow>" + "(E)키" + "</color>";
+                if (selectItem.ItemName == "나무")
+                {
+                    actionText.gameObject.SetActive(true);
+                    actionText.text = "나무 넣기" + "<color=yellow>" + "(E)키" + "</color>";
 
-                isCampfire = true;
+                    isCampfire = true;
+                }
+                else if (selectItem.ItemName == "손질된 고기")
+                {
+                    if (true == hitInfoCampfire.transform.GetComponent<Campfire>().GetIsFire())
+                    {
+                        actionText.gameObject.SetActive(true);
+                        actionText.text = "손질된 고기 굽기" + "<color=yellow>" + "(E)키" + "</color>";
+
+                        isCookedMeat = true;
+                    }
+                }
             }
         }
 
@@ -226,6 +247,7 @@ namespace Howling
                 actionText.gameObject.SetActive(false);
 
             isCampfire = false;
+            isCookedMeat = false;
         }
 
         private void UseWoodToCampfire()
@@ -233,6 +255,11 @@ namespace Howling
             inventory.GetComponent<Inventory>().useWoodToCampfire();
 
             hitInfoCampfire.transform.GetComponent<Campfire>().InputWood();
+        }
+
+        private void UseMeatToCampfire()
+        {
+            inventory.GetComponent<Inventory>().useMeatToCampfire();
         }
 
         private void WaterApear()
