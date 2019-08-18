@@ -56,7 +56,7 @@ Light:
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 12100000, guid: 54fbbf098d116effa00081aba8ad6659, type: 2}
+  m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
@@ -4870,7 +4870,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 2dea6853374df3a42957170e0c703062, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1b2880e09cd929542953691f0137c685, type: 2}
+      objectReference: {fileID: 2100000, guid: af8a121e04460324687e753a59c4535a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dea6853374df3a42957170e0c703062, type: 3}
 --- !u!4 &11202880926246358 stripped
