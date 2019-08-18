@@ -4394,6 +4394,10 @@ MonoBehaviour:
     type:
     - THIRSTY
     num: 14000000
+  - item: {fileID: 11400000, guid: 4cba44b5af17d0449b2628801a6bf1d1, type: 2}
+    type:
+    - HUNGRY
+    num: 28000000
   playerStatus: {fileID: 131607921}
 --- !u!4 &317595305
 Transform:
