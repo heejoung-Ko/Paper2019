@@ -118,7 +118,7 @@ namespace Howling
             }
         }
 
-        public void AddItem(Item acquireItem, int cnt = 1)
+        public bool AddItem(Item acquireItem, int cnt = 1)
         {
             if (Item.ItemType.Equipment != acquireItem.itemType && Item.ItemType.ETC != acquireItem.itemType)
             {
@@ -129,7 +129,7 @@ namespace Howling
                         if (slots[i].item.ItemName == acquireItem.ItemName && slots[i].itemCount < slots[i].getItemMax())
                         {
                             slots[i].SetSlotCount(cnt);
-                            return;
+                            return true;
                         }
                     }
                 }
@@ -142,9 +142,36 @@ namespace Howling
                     slots[i].AddItem(acquireItem, cnt);
                     if (Item.ItemType.Equipment == acquireItem.itemType && slots[i] == selectSlot)
                         SwapItem();
-                    return;
+                    return true;
                 }
-            }    
+            }
+            return false;
+        }
+
+        public bool CheckCanAddItem(Item acquireItem, int cnt = 1)
+        {
+            if (Item.ItemType.Equipment != acquireItem.itemType && Item.ItemType.ETC != acquireItem.itemType)
+            {
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    if (slots[i].item != null)
+                    {
+                        if (slots[i].item.ItemName == acquireItem.ItemName && slots[i].itemCount < slots[i].getItemMax())
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i].item == null)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void SwapSlot(int n)
@@ -184,6 +211,7 @@ namespace Howling
 
         public void subItem(Item acquireItem, int cnt)
         {
+            Debug.Log(cnt);
             int c = cnt;
             for (int i = 0; i < slots.Length; i++)
             {
@@ -195,6 +223,8 @@ namespace Howling
                             return;
                         slots[i].SetSlotCount(-1);
                         cnt -= 1;
+
+                        i--;
                     }
                 }
             }

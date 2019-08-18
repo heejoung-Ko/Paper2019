@@ -121,9 +121,11 @@ namespace Howling
                 if (hitInfo.transform != null)
                 {
                     // Debug.Log(hitInfo.transform.GetComponent<ItemPickUP>().item.ItemName + " 획득");
-                    inventory.AddItem(hitInfo.transform.GetComponent<ItemPickUP>().item);
-                    Destroy(hitInfo.transform.gameObject);
-                    ItemInfoDisappear();
+                    if (inventory.AddItem(hitInfo.transform.GetComponent<ItemPickUP>().item))
+                    {
+                        Destroy(hitInfo.transform.gameObject);
+                        ItemInfoDisappear();
+                    }
                     // animator.SetTrigger("PickUp");
                 }
             }
