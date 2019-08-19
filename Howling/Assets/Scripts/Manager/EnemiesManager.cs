@@ -80,7 +80,7 @@ public class EnemiesManager : MonoBehaviour
         enemy.gameObject.SetActive(true);
         enemy.transform.position = spawn.position + randomPos;
         enemy.transform.rotation = randomRot;
-        enemy.Reset();
+        enemy.ResetForRespawn();
         //Debug.Log(enemy.gameObject.name + " - SetActive(true)");
     }
 }

@@ -325,7 +325,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetForRespawn()
     {
         hp = maxHp;
         state = EnemyState.idle;
