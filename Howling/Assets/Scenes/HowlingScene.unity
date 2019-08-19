@@ -3651,11 +3651,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 83225062592910245, guid: b7731a12337d29a4a9b75e13204fba44,
+    - target: {fileID: 714419144698907126, guid: b7731a12337d29a4a9b75e13204fba44,
         type: 3}
-      propertyPath: currentHand
-      value: 
-      objectReference: {fileID: 230826015}
+      propertyPath: atk
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8065123231763355234, guid: b7731a12337d29a4a9b75e13204fba44,
         type: 3}
       propertyPath: m_IsActive
@@ -4166,6 +4166,11 @@ PrefabInstance:
       propertyPath: Inventory
       value: 
       objectReference: {fileID: 1978531896}
+    - target: {fileID: 83225062592910245, guid: b7731a12337d29a4a9b75e13204fba44,
+        type: 3}
+      propertyPath: currentHand
+      value: 
+      objectReference: {fileID: 230826015}
     - target: {fileID: 83225062592910245, guid: b7731a12337d29a4a9b75e13204fba44,
         type: 3}
       propertyPath: currentHand
