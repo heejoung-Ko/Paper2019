@@ -251,6 +251,8 @@ public class Enemy : MonoBehaviour
                 if (t.gameObject.CompareTag("target"))
                 {
                     GameObject.Find("UIManager").transform.GetChild(0).Find("Status").GetComponent<StatusController>().HitEnemy(atk);
+                    GameObject.Find("CameraManager").GetComponent<EffectCameraController>().EffectCameraOn();
+
                 }
                 else if (t.gameObject.CompareTag("agent"))
                 {
