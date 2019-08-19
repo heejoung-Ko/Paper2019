@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     public int hp;         // 체력
     public int atk;        // 공격력
-    static int maxHp;
+    private int maxHp;
 
     public float invincibleTime = 1f; // 무적 시간
     public float currentInvincibleTime = 0f;
@@ -341,6 +341,7 @@ public class Enemy : MonoBehaviour
         velocity = 0;
         EnemyExplosion enemyExplosion = GetComponentInChildren<EnemyExplosion>();
         enemyExplosion.isEnemyAtked = true;
+        Runaway();
         //Debug.Log("데미지: " + cnt);
 
         if (hp <= 0)
@@ -363,6 +364,7 @@ public class Enemy : MonoBehaviour
         EnemyExplosion enemyExplosion = GetComponentInChildren<EnemyExplosion>();
         enemyExplosion.isEnemyAtked = true;
         enemiesManager.AtkReward(atk);
+        Runaway();
 
         if (hp <= 0)
         {
@@ -372,6 +374,16 @@ public class Enemy : MonoBehaviour
             oldRotation = transform.rotation;
             animator.SetTrigger("dieTrigger");
         }
+    }
+
+    public void Runaway()
+    {
+        if (type == EnemyType.BOAR || type == EnemyType.BEAR) return;
+        if (type == EnemyType.FOX || type == EnemyType.DEAR)
+        {
+            if (hp >= maxHp * 0.3f) return;
+        }
+        state = EnemyState.escape;
     }
 
     void DropItem()

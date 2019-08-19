@@ -304,7 +304,7 @@ public class WolfAgent : Agent
 
                 float eatReward = (Hungry - oldHungy) * 0.03f;
 
-                Debug.Log("냠냠 Reward : " + eatReward);
+                //Debug.Log("냠냠 Reward : " + eatReward);
                 AddReward(eatReward);
 
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
