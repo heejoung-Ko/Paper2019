@@ -42,13 +42,13 @@ namespace Howling
             {
                 if (Input.GetMouseButtonDown(0) && Slot.isSlotClick == false)
                 {
-                    if (tutorialController.currentShow > 4)
+                    //if (tutorialController.currentShow > 4)
                     {
                         animator.SetBool("Attack", true);
 
                         AttackCheck();
                         currentAtkTime = 0;
-                        tutorialController.isPlayerAttack = true;
+                        //tutorialController.isPlayerAttack = true;
                     }
                 }
             }

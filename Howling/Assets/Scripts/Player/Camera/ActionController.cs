@@ -121,7 +121,7 @@ namespace Howling
                 if (hitInfo.transform != null)
                 {
                     // Debug.Log(hitInfo.transform.GetComponent<ItemPickUP>().item.ItemName + " 획득");
-                    if (inventory.AddItem(hitInfo.transform.GetComponent<ItemPickUP>().item))
+                    if (inventory.AddItem(hitInfo.transform.GetComponent<ItemPickUP>().item, 1, hitInfo.transform.GetComponent<ItemController>().getDurability()))
                     {
                         Destroy(hitInfo.transform.gameObject);
                         ItemInfoDisappear();

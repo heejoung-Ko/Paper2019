@@ -109,9 +109,12 @@ namespace Howling
             if (item != null)
             {
                 Rigidbody itemInstance = Instantiate(item.ItemPrefab.GetComponent<Rigidbody>(), itemDropSpawn.position + itemDropSpawn.forward / 2, itemDropSpawn.rotation) as Rigidbody;
+                
                 if (itemInstance != null)
                 {
                     itemInstance.velocity = itemDropForce * itemDropSpawn.forward;
+
+                    itemInstance.GetComponent<ItemController>().setDurability(Durability);
                 }
                 SetSlotCount(-1);
             }
@@ -219,22 +222,23 @@ namespace Howling
 
         public int getItemMax() { return itemMaxCount; }
 
-        public void UseTool(float n = 1f)
+        public bool UseTool(float n = 1f)
         {
-            if (item != null) return;
-            if (item.itemType != Item.ItemType.Equipment) return;
+            if (item == null) return false;
+            if (item.itemType != Item.ItemType.Equipment) return false;
             Durability -= n;
             if (Durability <= 0)
             {
                 ClearSlot();
-                return;
+                return true;
             }
             GaugeUpdate();
+            return false;
         }
 
         public void GaugeUpdate()
         {
-            GaugeBar.fillAmount = (float)(Durability / 100);
+            GaugeBar.fillAmount = (float)(Durability / 10);
         }
     }
 }

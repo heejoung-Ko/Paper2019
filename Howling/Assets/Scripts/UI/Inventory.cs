@@ -118,7 +118,7 @@ namespace Howling
             }
         }
 
-        public bool AddItem(Item acquireItem, int cnt = 1)
+        public bool AddItem(Item acquireItem, int cnt = 1, float dur = 10)
         {
             if (Item.ItemType.Equipment != acquireItem.itemType && Item.ItemType.ETC != acquireItem.itemType)
             {
@@ -139,7 +139,7 @@ namespace Howling
             {
                 if (slots[i].item == null)
                 {
-                    slots[i].AddItem(acquireItem, cnt);
+                    slots[i].AddItem(acquireItem, cnt, dur);
                     if (Item.ItemType.Equipment == acquireItem.itemType && slots[i] == selectSlot)
                         SwapItem();
                     return true;
@@ -264,6 +264,7 @@ namespace Howling
         public void subSelecSlot()
         {
             selectSlot.SetSlotCount(-1);
+            SwapItem();
         }
 
         public void useWoodToCampfire()
@@ -287,7 +288,9 @@ namespace Howling
 
         public void useSelectItem()
         {
-            selectSlot.UseTool();
+            if(selectSlot.UseTool())
+                subSelecSlot();
+            
         }
     }
 }
