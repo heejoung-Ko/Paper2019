@@ -22,11 +22,18 @@ public class Make : MonoBehaviour
             GetComponent<Button>().interactable = false;
             return;
         }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            makeFree();
+        }
+
         if (!recipeMaterial.GetComponent<RecipeMaterial>().canMaking())
         {
             GetComponent<Button>().interactable = false;
             return;
         }
+
         GetComponent<Button>().interactable = true;
     }
 
@@ -52,5 +59,15 @@ public class Make : MonoBehaviour
         GetComponent<Button>().interactable = false;
 
         making.GetComponent<Making>().UnsetRecipe();
+    }
+
+    public void makeFree()
+    {
+        GameObject selectRecipe = recipeList.GetComponent<RecipeList>().SelectedRecipe;
+
+        if (!inventory.GetComponent<Inventory>().CheckCanAddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1))
+            return;
+   
+        inventory.GetComponent<Inventory>().AddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1);
     }
 }

@@ -16,8 +16,8 @@ MonoBehaviour:
   Explanation: "\uC801\uB4E4\uC758 \uCE68\uC785\uC744 \uB9C9\uAC70\uB098 \uC601\uC5ED\uC744
     \uD45C\uC2DC\uD560 \uC218 \uC788\uB294 \uC6B8\uD0C0\uB9AC."
   Material1: {fileID: 11400000, guid: c53be92f54c9e9e478c7e2d9e508c0eb, type: 2}
-  Material1_num: 0
+  Material1_num: 3
   Material2: {fileID: 11400000, guid: 0c3f752860675ea4b933f5e26fa53538, type: 2}
-  Material2_num: 0
+  Material2_num: 2
   Material3: {fileID: 0}
   Material3_num: 0

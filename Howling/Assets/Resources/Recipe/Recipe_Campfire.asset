@@ -15,8 +15,8 @@ MonoBehaviour:
   Result: {fileID: 11400000, guid: 5c6188bd2779905498451ecc62b757eb, type: 2}
   Explanation: "\uBD88\uC744 \uC9C0\uD544 \uC218 \uC788\uB294 \uBAA8\uB2E5\uBD88."
   Material1: {fileID: 11400000, guid: 20a258cddcc4d404595ce41770651195, type: 2}
-  Material1_num: 0
+  Material1_num: 3
   Material2: {fileID: 11400000, guid: c53be92f54c9e9e478c7e2d9e508c0eb, type: 2}
-  Material2_num: 0
+  Material2_num: 2
   Material3: {fileID: 0}
   Material3_num: 0

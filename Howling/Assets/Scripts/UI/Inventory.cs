@@ -189,12 +189,11 @@ namespace Howling
         {
             if (selectSlot.item == null || selectSlot.item.itemType != Item.ItemType.Equipment)
             {
-                go_PlayerHand.GetComponent<PlayerHand>().swapTools(-1);
+                go_PlayerHand.GetComponent<PlayerHand>().swapTools(-1, 1);
             }
             else
             {
-                go_PlayerHand.GetComponent<PlayerHand>().swapTools(selectSlot.item.weaponType);
-
+                go_PlayerHand.GetComponent<PlayerHand>().swapTools(selectSlot.item.weaponType, selectSlot.item.weaponAtk);
             }
         }
 
