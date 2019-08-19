@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public enum EnemyType
 {
-    RABBIT, FOX, DEAR, BOAR, BEAR
+    RABBIT, FOX, DEER, BOAR, BEAR
 }
 
 public class EnemiesManager : MonoBehaviour
@@ -29,12 +30,24 @@ public class EnemiesManager : MonoBehaviour
     public WolfAgent wolfAgent;
 
     public string[] enemiesName;
+    public int[] enemiesNum;
 
     private void Awake()
     {
-        for (int i = 0; i < enemiesName.Length; i++)
+        for (int i = 0; i < 5; ++i)
         {
+            for (int j = 0; j < enemiesNum[i]; ++j)
+            {
+                GameObject new_enemy = ObjectPool.Instance.PopFromPool(enemiesName[i]);
 
+                int randomSpawn = UnityEngine.Random.Range(0, enemies[i].enemiesSpawn.Length);
+                Transform spawn = enemies[i].enemiesSpawn[randomSpawn] as Transform;
+                Vector3 randomPos = new Vector3(UnityEngine.Random.Range(-randomNum, randomNum), 0, UnityEngine.Random.Range(-randomNum, randomNum));
+                Quaternion randomRot = Quaternion.Euler(spawn.rotation.x, spawn.rotation.y + UnityEngine.Random.Range(0, 360), spawn.rotation.z);
+                new_enemy.gameObject.SetActive(true);
+                new_enemy.transform.position = spawn.position + randomPos;
+                new_enemy.transform.rotation = randomRot;
+            }
         }
     }
 
@@ -63,34 +76,44 @@ public class EnemiesManager : MonoBehaviour
         wolfAgent.EnemyDieReward();
     }
 
-    public void Die(Enemy enemy)
+    internal void Die(GameObject enemy)
     {
         StartCoroutine(DestroyEnemy(enemy));
     }
 
-    IEnumerator DestroyEnemy(Enemy enemy)
+    private IEnumerator DestroyEnemy(GameObject enemy)
     {
         yield return new WaitForSeconds(destroyTime);
-        //Debug.Log("아이템 뿌린당!!!");
-        for(int i = 0; i < dropItems.Length; ++i)
+
+        for (int i = 0; i < dropItems.Length; ++i)
             Instantiate(dropItems[i], enemy.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
-        enemy.gameObject.SetActive(false);
+
+        ObjectPool.Instance.PushToPool(enemy.name, enemy);
         //Debug.Log(enemy.gameObject.name + " - SetActive(false)");
         StartCoroutine(RespawnEnemy(enemy));
     }
 
-    IEnumerator RespawnEnemy(Enemy enemy)
+    private IEnumerator RespawnEnemy(GameObject enemy)
     {
         yield return new WaitForSeconds(respawnTime);
-        int k = (int)enemy.type;
-        int randomSpawn = Random.Range(0, enemies[k].enemiesSpawn.Length);
-        Transform spawn = enemies[k].enemiesSpawn[randomSpawn] as Transform;
-        Vector3 randomPos = new Vector3(Random.Range(-randomNum, randomNum), 0, Random.Range(-randomNum, randomNum));
-        Quaternion randomRot = Quaternion.Euler(spawn.rotation.x, spawn.rotation.y + Random.Range(0, 360), spawn.rotation.z);
-        enemy.gameObject.SetActive(true);
-        enemy.transform.position = spawn.position + randomPos;
-        enemy.transform.rotation = randomRot;
-  //      enemy.Reset();
-        //Debug.Log(enemy.gameObject.name + " - SetActive(true)");
+
+        Debug.Log(enemy.name);
+
+        GameObject new_enemy = ObjectPool.Instance.PopFromPool(enemy.name);
+
+        int enemyId = 0;
+        if (enemy.name.Equals("Rabbit")) enemyId = 0;
+        else if (enemy.name.Equals("Fox")) enemyId = 1;
+        else if (enemy.name.Equals("Deer")) enemyId = 2;
+        else if (enemy.name.Equals("Boar")) enemyId = 3;
+        else if (enemy.name.Equals("Bear")) enemyId = 4;
+
+        int randomSpawn = UnityEngine.Random.Range(0, enemies[enemyId].enemiesSpawn.Length);
+        Transform spawn = enemies[enemyId].enemiesSpawn[randomSpawn] as Transform;
+        Vector3 randomPos = new Vector3(UnityEngine.Random.Range(-randomNum, randomNum), 0, UnityEngine.Random.Range(-randomNum, randomNum));
+        Quaternion randomRot = Quaternion.Euler(spawn.rotation.x, spawn.rotation.y + UnityEngine.Random.Range(0, 360), spawn.rotation.z);
+        new_enemy.gameObject.SetActive(true);
+        new_enemy.transform.position = spawn.position + randomPos;
+        new_enemy.transform.rotation = randomRot;
     }
 }

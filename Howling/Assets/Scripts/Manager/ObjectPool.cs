@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,4 +44,5 @@ public class ObjectPool : Singleton<ObjectPool>
         Debug.LogWarning("There's no matched pool list");
         return null;
     }
+
 }

@@ -73,7 +73,7 @@ namespace Howling
                     }
 
                     isSwing = false;
-                    Debug.Log(hitInfo.transform.name);
+ //                   Debug.Log(hitInfo.transform.name);
                 }
                 yield return null;
             }

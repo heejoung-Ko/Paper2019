@@ -17,7 +17,7 @@ public class PooledObject
     [SerializeField]
 
     private List<GameObject> poolList = new List<GameObject>();
-
+    private List<Enemy> enemyPoolList = new List<Enemy>();
 
 
     public void Initialize(Transform parent = null) {
@@ -48,6 +48,4 @@ public class PooledObject
         item.SetActive(false);
         return item;
     }
-
-
 }

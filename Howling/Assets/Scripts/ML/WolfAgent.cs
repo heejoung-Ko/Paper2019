@@ -275,8 +275,6 @@ public class WolfAgent : Agent
     {
         if (CanEat)
         {
-            animator.SetTrigger("isEat");
-
             float oldHungy = Hungry;
 
             var adj = FirstAdjacent("item", targetRange);
@@ -330,8 +328,6 @@ public class WolfAgent : Agent
     {
         if (CanRest)
         {
-            animator.SetTrigger("restTrigger");
-
             float oldHp = Hp;
 
             var adj = FirstAdjacent("home", targetRange);
@@ -420,7 +416,6 @@ public class WolfAgent : Agent
 
             if (vic != null)
             {
-                animator.SetTrigger("attackTrigger");
                 vic.DecreaseHpByWolf((int)AttackDamage);
             }
             else Debug.Log("WolfAgent - Attack, vic is null.");
@@ -467,15 +462,12 @@ public class WolfAgent : Agent
     {
         if (CanDig)
         {
-            animator.SetTrigger("digTrigger");
-
             currentAction = "Dig";
 
             //Hungry -= Time.deltaTime * 1f;
 
             if (Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
             {
-                animator.SetTrigger("successTrigger");
                 currentAction = "DigSuccess";
 
                 DropItem();
@@ -486,7 +478,6 @@ public class WolfAgent : Agent
             {
                 Debug.Log("땅파기 실패!!");
 
-                animator.SetTrigger("failTrigger");
                 currentAction = "DigFail";
             }
 

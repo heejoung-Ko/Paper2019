@@ -52,13 +52,25 @@ public class Enemy : MonoBehaviour
     public GameObject dropItem;
     private EnemiesManager enemiesManager;
 
+   // public string name;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         enemiesManager = FindObjectOfType<EnemiesManager>();
         isDead = false;
         isAttack = false;
-        //targetMask = 1 << LayerMask.NameToLayer("Player");
+
+        switch (type)
+        {
+            case EnemyType.RABBIT: name = "RABBIT"; break;
+            case EnemyType.FOX: name = "FOX"; break;
+            case EnemyType.DEER: name = "DEER"; break;
+            case EnemyType.BOAR: name = "BOAR"; break;
+            case EnemyType.BEAR: name = "BEAR"; break;
+            default: break;
+        }
+
         maxHp = hp;
     }
 
@@ -272,36 +284,6 @@ public class Enemy : MonoBehaviour
             isAttack = false;
         }
         return;
-
-        //if (nowStateTime <= 0.5f)
-        //{
-        //    Quaternion rotation = Quaternion.identity;
-        //    rotation.eulerAngles = new Vector3(0, 30f, 0);
-        //    Quaternion newRotation = oldRotation * rotation;
-        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
-        //    return;
-        //}
-        //else if (nowStateTime <= 1.5f)
-        //{
-        //    Quaternion rotation = Quaternion.identity;
-        //    rotation.eulerAngles = new Vector3(0, -60f, 0);
-        //    Quaternion newRotation = oldRotation * rotation;
-        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
-
-        //}
-        //else if (nowStateTime <= nextStateTime)
-        //{
-        //    Quaternion rotation = Quaternion.identity;
-        //    rotation.eulerAngles = new Vector3(0, 0, 0);
-        //    Quaternion newRotation = oldRotation * rotation;
-        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 5.0f);
-        //}
-        //else
-        //{
-        //    state = EnemyState.trace;
-        //    ChangeNextState();
-        //    isAttack = false;
-        //}
     }
 
     void Hit()
@@ -320,7 +302,7 @@ public class Enemy : MonoBehaviour
     {
         if (!isDead)
         {
-            enemiesManager.Die(this);
+            enemiesManager.Die(gameObject);
             isDead = true;
         }
     }
@@ -379,7 +361,7 @@ public class Enemy : MonoBehaviour
     public void Runaway()
     {
         if (type == EnemyType.BOAR || type == EnemyType.BEAR) return;
-        if (type == EnemyType.FOX || type == EnemyType.DEAR)
+        if (type == EnemyType.FOX || type == EnemyType.DEER)
         {
             if (hp >= maxHp * 0.3f) return;
         }
