@@ -211,7 +211,6 @@ namespace Howling
 
         public void subItem(Item acquireItem, int cnt)
         {
-            Debug.Log(cnt);
             int c = cnt;
             for (int i = 0; i < slots.Length; i++)
             {

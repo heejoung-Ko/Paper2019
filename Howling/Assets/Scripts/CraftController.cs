@@ -19,12 +19,18 @@ public class CraftController : MonoBehaviour
     private Craft Box;
     [SerializeField]
     private Craft CampFire;
+    [SerializeField]
+    private Craft Fence;
+
+    [SerializeField]
+    private Craft nowCraft = null;
 
     [SerializeField]
     GameObject Inventory;
 
     bool isBox = false;
     bool isCampfire = false;
+    bool isFence = false;
 
     private RaycastHit hitInfo;
     [SerializeField]
@@ -42,15 +48,24 @@ public class CraftController : MonoBehaviour
 
         if (isBox)
         {
-            ViewPreviewBox();
+            RotateRL();
+            ViewPreviewOther();
             if (Input.GetMouseButtonDown(1))
-                CraftBox();
+                CraftBuilding();
         }
         else if (isCampfire)
         {
+            RotateRL();
             ViewPreviewCampfire();
             if (Input.GetMouseButtonDown(1))
-                CraftCampfire();
+                CraftBuilding();
+        }
+        else if (isFence)
+        {
+            RotateFB();
+            ViewPreviewOther();
+            if (Input.GetMouseButtonDown(1))
+                CraftBuilding();
         }
     }
 
@@ -58,24 +73,47 @@ public class CraftController : MonoBehaviour
     {
         Item select = Inventory.GetComponent<Inventory>().getSelectItem();
 
-        if (isBox || isCampfire)
-            return;
-
         if (select == Box.item)
         {
+            if (isBox)
+                return;
+
             isBox = true;
             isCampfire = false;
-            if(go != null)
+            isFence = false;
+
+            if (go != null)
                 Destroy(go);
-            go = Instantiate(Box.prefabPreview);
+            nowCraft = Box;
+            go = Instantiate(nowCraft.prefabPreview);
         }
         else if (select == CampFire.item)
         {
-            isCampfire = true;
+            if (isCampfire)
+                return;
+
             isBox = false;
+            isCampfire = true;
+            isFence = false;
+
             if (go != null)
                 Destroy(go);
-            go = Instantiate(CampFire.prefabPreview);
+            nowCraft = CampFire;
+            go = Instantiate(nowCraft.prefabPreview);
+        }
+        else if(select == Fence.item)
+        {
+            if (isFence)
+                return;
+
+            isBox = false;
+            isCampfire = false;
+            isFence = true;
+
+            if (go != null)
+                Destroy(go);
+            nowCraft = Fence;
+            go = Instantiate(nowCraft.prefabPreview);
         }
         else
         {
@@ -83,10 +121,11 @@ public class CraftController : MonoBehaviour
             isCampfire = false;
             if (go != null)
                 Destroy(go);
+            
         }
     }
 
-    void ViewPreviewBox()
+    void ViewPreviewOther()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
@@ -95,6 +134,10 @@ public class CraftController : MonoBehaviour
                 Vector3 location = hitInfo.point;
                 go.transform.position = location;
             }
+        }
+        else
+        {
+            go.transform.position = new Vector3(0f, 0f, 0f);
         }
     }
 
@@ -108,9 +151,13 @@ public class CraftController : MonoBehaviour
                 go.transform.position = new Vector3(location.x, location.y + 0.2f, location.z);
             }
         }
+        else
+        {
+            go.transform.position = new Vector3(0f, 0f, 0f);
+        }
     }
 
-    void CraftBox()
+    void CraftBuilding()
     {
         if (go.transform.position == new Vector3(0f, 0f, 0f))
             return;
@@ -119,30 +166,57 @@ public class CraftController : MonoBehaviour
             return;
 
         Vector3 position = go.transform.position;
+        Quaternion rotation = go.transform.rotation;
 
         Destroy(go);
-        GameObject newGo = Instantiate(Box.prefab);
+        GameObject newGo = Instantiate(nowCraft.prefab);
         newGo.transform.position = position;
+        newGo.transform.rotation = rotation;
+
         Inventory.GetComponent<Inventory>().subSelecSlot();
 
         isBox = false;
     }
 
-    void CraftCampfire()
+    void RotateRL()
     {
-        if (go.transform.position == new Vector3(0f, 0f, 0f))
-            return;
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
 
-        if (!go.GetComponent<CanCraftCheck>().checkCraft())
-            return;
+        if (wheelInput > 0.1)
+        {
+            go.transform.Rotate(Vector3.up, 15);
+        }
+        else if (wheelInput < -0.1)
+        {
+            go.transform.Rotate(Vector3.down, 15);
+        }
+    }
 
-        Vector3 position = go.transform.position;
+    void RotateUD()
+    {
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
 
-        Destroy(go);
-        GameObject newGo = Instantiate(CampFire.prefab);
-        newGo.transform.position = position;
-        Inventory.GetComponent<Inventory>().subSelecSlot();
+        if (wheelInput > 0.1)
+        {
+            go.transform.Rotate(Vector3.left, 15);
+        }
+        else if (wheelInput < -0.1)
+        {
+            go.transform.Rotate(Vector3.right, 15);
+        }
+    }
 
-        isCampfire = false;
+    void RotateFB()
+    {
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
+
+        if (wheelInput > 0.1)
+        {
+            go.transform.Rotate(Vector3.forward, 15);
+        }
+        else if (wheelInput < -0.1)
+        {
+            go.transform.Rotate(Vector3.back, 15);
+        }
     }
 }

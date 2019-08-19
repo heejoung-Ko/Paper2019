@@ -1527,6 +1527,7 @@ GameObject:
   - component: {fileID: 5045246165558586177}
   - component: {fileID: 5045246165558586178}
   - component: {fileID: 5235824528154719680}
+  - component: {fileID: 2607948262698843299}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1645,6 +1646,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: 9610d5d32e16525428559110e05829d1, type: 2}
+--- !u!114 &2607948262698843299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5045246165558586180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa6ffad40defbb43aebbed274dec4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Box:
+    item: {fileID: 11400000, guid: 81bace4dc9056b346af7ee29d08bc7bd, type: 2}
+    prefab: {fileID: 2097722229962348989, guid: 2bdf0b71b8d65d34db9f01bc1babe717,
+      type: 3}
+    prefabPreview: {fileID: 7477585151132572889, guid: 6f38edb881bed6a41aae0285bf8fa525,
+      type: 3}
+  CampFire:
+    item: {fileID: 11400000, guid: 5c6188bd2779905498451ecc62b757eb, type: 2}
+    prefab: {fileID: 5663100994730171202, guid: 5be757482218cbe48ac742ad3e2e1661,
+      type: 3}
+    prefabPreview: {fileID: 4048139298663997374, guid: 85e05a3900b8d1540a541830ccd7ee61,
+      type: 3}
+  Fence:
+    item: {fileID: 11400000, guid: 5ba5d37883747474599d77fd11e90795, type: 2}
+    prefab: {fileID: 6677271763150193307, guid: 5e6ce3b3d7ce19d47ac66d7d0063ee33,
+      type: 3}
+    prefabPreview: {fileID: 6281135081280885034, guid: 1d7adb0cfe8e5ca4fafab33ddf113e3d,
+      type: 3}
+  Inventory: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 16777216
+  range: 5
+  go: {fileID: 0}
 --- !u!1 &5045246167024226982
 GameObject:
   m_ObjectHideFlags: 0

@@ -105,7 +105,7 @@ public class Resource : MonoBehaviour
 
         SoundManager.instance.PlaySE(crash_sound);
 
-        Vector3 position = new Vector3(col.bounds.center.x, col.bounds.center.y + 0.2f, col.bounds.center.z);
+        Vector3 position = new Vector3(col.bounds.center.x, col.bounds.center.y + 2f, col.bounds.center.z);
 
         for (int i = 0; i < count1; i++)
         {

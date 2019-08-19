@@ -12652,48 +12652,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c570ea140dbf7544ba2fc9b605e33b2, type: 3}
---- !u!1 &896996150 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5045246165558586180, guid: b7731a12337d29a4a9b75e13204fba44,
-    type: 3}
-  m_PrefabInstance: {fileID: 292386756}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &896996155 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5045246165558586176, guid: b7731a12337d29a4a9b75e13204fba44,
     type: 3}
   m_PrefabInstance: {fileID: 292386756}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &896996156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 896996150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa6ffad40defbb43aebbed274dec4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Box:
-    item: {fileID: 11400000, guid: 81bace4dc9056b346af7ee29d08bc7bd, type: 2}
-    prefab: {fileID: 2097722229962348989, guid: 2bdf0b71b8d65d34db9f01bc1babe717,
-      type: 3}
-    prefabPreview: {fileID: 7477585151132572889, guid: 6f38edb881bed6a41aae0285bf8fa525,
-      type: 3}
-  CampFire:
-    item: {fileID: 11400000, guid: 5c6188bd2779905498451ecc62b757eb, type: 2}
-    prefab: {fileID: 5663100994730171202, guid: 5be757482218cbe48ac742ad3e2e1661,
-      type: 3}
-    prefabPreview: {fileID: 4048139298663997374, guid: 85e05a3900b8d1540a541830ccd7ee61,
-      type: 3}
-  Inventory: {fileID: 1978531896}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 16777216
-  range: 5
-  go: {fileID: 0}
 --- !u!1001 &903047240
 PrefabInstance:
   m_ObjectHideFlags: 0
