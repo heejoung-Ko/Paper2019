@@ -8,7 +8,7 @@ namespace Howling
     {
         public string handName;     // 종류 구분
         public float range;         // 공격 범위 
-        public int damage;          // 공격력
+        public int atk;          // 공격력
         public float workSpeed;   // 작업 속도
         public float attackDelay;   // 공격 딜레이
         public float attackActiveDelay;  // 공격 활성화 시점.
@@ -39,7 +39,7 @@ namespace Howling
             transform.rotation = HandPosition.transform.rotation;
         }
 
-        public void swapTools(int n)
+        public void swapTools(int n, int iAtk)
         {
             if (EquipToolType == n)
             {
@@ -59,6 +59,9 @@ namespace Howling
                 EquipToolType = n;
                 transform.GetChild(0).transform.GetChild(EquipToolType).gameObject.SetActive(true);
             }
+
+            atk = iAtk;
+
             anim.SetInteger("Tool", EquipToolType);
             anim.SetBool("Swap", true);
         }
@@ -75,6 +78,11 @@ namespace Howling
             if (EquipToolType == 1)
                 return true;
             else return false;
+        }
+
+        public int getAtk()
+        {
+            return atk;
         }
     }
 }

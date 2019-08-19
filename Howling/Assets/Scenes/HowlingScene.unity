@@ -4026,6 +4026,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 388661695684618361, guid: b7731a12337d29a4a9b75e13204fba44,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 388661695684618361, guid: b7731a12337d29a4a9b75e13204fba44,
+        type: 3}
+      propertyPath: playerHand
+      value: 
+      objectReference: {fileID: 230826015}
     - target: {fileID: 5152069598074103091, guid: b7731a12337d29a4a9b75e13204fba44,
         type: 3}
       propertyPath: m_RootOrder
@@ -4156,6 +4166,11 @@ PrefabInstance:
       propertyPath: Inventory
       value: 
       objectReference: {fileID: 1978531896}
+    - target: {fileID: 83225062592910245, guid: b7731a12337d29a4a9b75e13204fba44,
+        type: 3}
+      propertyPath: currentHand
+      value: 
+      objectReference: {fileID: 230826015}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7731a12337d29a4a9b75e13204fba44, type: 3}
 --- !u!1001 &292897752
@@ -29847,6 +29862,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: aa5229e5cacf1ae488419c1848a0c90d, type: 3}
       propertyPath: m_Name
       value: Island
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: aa5229e5cacf1ae488419c1848a0c90d, type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: aa5229e5cacf1ae488419c1848a0c90d, type: 3}
       propertyPath: m_LocalPosition.x

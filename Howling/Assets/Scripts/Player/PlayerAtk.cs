@@ -13,10 +13,11 @@ namespace Howling
         private int atkTime = 30;
         private int currentAtkTime = 0;
         private bool isAtk = false;
-        private int atk = 10;
 
         private Animator animator;
         private TutorialController tutorialController;
+
+        public PlayerHand playerHand;
 
         // Start is called before the first frame update
         void Awake()
@@ -55,14 +56,14 @@ namespace Howling
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, enemyMask);
             foreach (Collider enemy in colliders) Attack(enemy.gameObject);
-            foreach (Collider resource in colliders) Gathering(resource.gameObject);
+            // foreach (Collider resource in colliders) Gathering(resource.gameObject);
         }
 
         private void Attack(GameObject obj)
         {
             //if (obj.activeSelf == false) return;
             Enemy enemy = obj.GetComponentInParent<Enemy>();
-            enemy.DecreaseHp(atk);
+            enemy.DecreaseHp(playerHand.getAtk());
         }
 
         private void Gathering(GameObject obj)

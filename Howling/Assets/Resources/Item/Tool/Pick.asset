@@ -18,4 +18,5 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7481286292432363270, guid: 392535ec2944d6043aed2ffb2716b4f0,
     type: 3}
   weaponType: 1
+  weaponAtk: 5
   itemType: 0

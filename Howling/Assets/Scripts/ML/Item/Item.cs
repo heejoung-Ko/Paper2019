@@ -11,6 +11,7 @@ public class Item : ScriptableObject
     public GameObject ItemPrefab;   // 아이템 프리펩
 
     public int weaponType;       // 무기 유형
+    public int weaponAtk;
 
     public ItemType itemType;       
     public enum ItemType            // 아이템 유형

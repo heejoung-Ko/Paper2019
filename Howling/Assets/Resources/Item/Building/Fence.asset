@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Fence
   m_EditorClassIdentifier: 
   ItemName: "\uC6B8\uD0C0\uB9AC"
-  ItemImage_32x32: {fileID: 0}
-  ItemImage_64x64: {fileID: 0}
+  ItemImage_32x32: {fileID: 21300000, guid: 477cd128beebe5c4db3d709571c7e405, type: 3}
+  ItemImage_64x64: {fileID: 21300000, guid: 477cd128beebe5c4db3d709571c7e405, type: 3}
   ItemPrefab: {fileID: 6677271763150193307, guid: 5e6ce3b3d7ce19d47ac66d7d0063ee33,
     type: 3}
   weaponType: 0
+  weaponAtk: 0
   itemType: 3
