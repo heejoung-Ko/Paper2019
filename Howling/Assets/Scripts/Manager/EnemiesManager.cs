@@ -28,6 +28,16 @@ public class EnemiesManager : MonoBehaviour
 
     public WolfAgent wolfAgent;
 
+    public string[] enemiesName;
+
+    private void Awake()
+    {
+        for (int i = 0; i < enemiesName.Length; i++)
+        {
+
+        }
+    }
+
     private void Start()
     {
         wolfAgent = FindObjectOfType<WolfAgent>();
@@ -80,7 +90,7 @@ public class EnemiesManager : MonoBehaviour
         enemy.gameObject.SetActive(true);
         enemy.transform.position = spawn.position + randomPos;
         enemy.transform.rotation = randomRot;
-        enemy.ResetForRespawn();
+  //      enemy.Reset();
         //Debug.Log(enemy.gameObject.name + " - SetActive(true)");
     }
 }
