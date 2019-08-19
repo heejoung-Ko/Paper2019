@@ -15,6 +15,9 @@ namespace Howling
 
         private RaycastHit hitInfo;
 
+        [SerializeField]
+        private Inventory inventory;
+
         // Update is called once per frame
         void Update()
         {
@@ -60,10 +63,13 @@ namespace Howling
                     if(hitInfo.transform.tag == "tree" && currentHand.EquipAxe())
                     {
                         hitInfo.transform.GetComponent<Resource>().Gathering();
+
+                        inventory.useSelectItem();
                     }
                     else if (hitInfo.transform.tag == "rock" && currentHand.EquipPick())
                     {
                         hitInfo.transform.GetComponent<Resource>().Gathering();
+                        inventory.useSelectItem();
                     }
 
                     isSwing = false;

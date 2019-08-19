@@ -284,5 +284,10 @@ namespace Howling
             }
             SwapItem();
         }
+
+        public void useSelectItem()
+        {
+            selectSlot.UseTool();
+        }
     }
 }

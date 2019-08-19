@@ -19,6 +19,9 @@ namespace Howling
 
         public PlayerHand playerHand;
 
+        [SerializeField]
+        private Inventory inventory;
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -27,7 +30,7 @@ namespace Howling
             currentAtkTime = 0;
             isAtk = false;
             animator = GetComponent<Animator>();
-            tutorialController = FindObjectOfType<TutorialController>();
+            // tutorialController = FindObjectOfType<TutorialController>();
         }
 
         // Update is called once per frame
@@ -64,6 +67,7 @@ namespace Howling
             //if (obj.activeSelf == false) return;
             Enemy enemy = obj.GetComponentInParent<Enemy>();
             enemy.DecreaseHp(playerHand.getAtk());
+            inventory.useSelectItem();
         }
 
         private void Gathering(GameObject obj)

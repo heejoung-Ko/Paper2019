@@ -27,12 +27,19 @@ namespace Howling
         public Transform itemDropSpawn;
         public float itemDropForce;
 
+        private float Durability;     // 내구도
+        [SerializeField]
+        private GameObject Gauge;
+        [SerializeField]
+        private Image GaugeBar;
+
         void Start()
         {
             itemEffectDB = FindObjectOfType<ItemEffectDB>();
             isSlotClick = false;
             isSlotDrag = false;
-            tutorialController = FindObjectOfType<TutorialController>();
+            Durability = 0f;
+            // tutorialController = FindObjectOfType<TutorialController>();
         }
 
         private void SetColor(float alpha)
@@ -51,7 +58,7 @@ namespace Howling
             }
         }
 
-        public void AddItem(Item addItem, int cnt = 1)
+        public void AddItem(Item addItem, int cnt = 1, float dur = 10f)
         {
             item = addItem;
             itemCount = cnt;
@@ -61,11 +68,15 @@ namespace Howling
             {
                 go_CountImage.SetActive(true);
                 text_Count.text = itemCount.ToString();
+                Gauge.SetActive(false);
+                Durability = 0;
             }
             else
             {
                 text_Count.text = "0";
                 go_CountImage.SetActive(false);
+                Gauge.SetActive(true);
+                Durability = dur;
             }
 
             SetColor(1);
@@ -89,6 +100,8 @@ namespace Howling
 
             text_Count.text = "0";
             go_CountImage.SetActive(false);
+            Gauge.SetActive(false);
+            Durability = 0;
         }
 
         public void DropItem()
@@ -205,5 +218,23 @@ namespace Howling
         }
 
         public int getItemMax() { return itemMaxCount; }
+
+        public void UseTool(float n = 1f)
+        {
+            if (item != null) return;
+            if (item.itemType != Item.ItemType.Equipment) return;
+            Durability -= n;
+            if (Durability <= 0)
+            {
+                ClearSlot();
+                return;
+            }
+            GaugeUpdate();
+        }
+
+        public void GaugeUpdate()
+        {
+            GaugeBar.fillAmount = (float)(Durability / 100);
+        }
     }
 }
