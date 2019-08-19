@@ -94,7 +94,7 @@ public class WolfAgent : Agent
         currentAction = "Idle";
     }
 
-    public override void AgentReset()   // TODO: Reset 할 곳에 추가하기
+    public override void AgentReset()
     {
         Vector3 randomPos = new Vector3(Random.Range(minRange, maxRange), 1f, Random.Range(minRange, maxRange));
         transform.position = randomPos + pivotTransform.position;
@@ -166,10 +166,6 @@ public class WolfAgent : Agent
         AddVectorObs(BoolToFloat(CanGoToPlayer));
         AddVectorObs(BoolToFloat(CanAttack));
         AddVectorObs(BoolToFloat(CanDig));
-
-        // TODO: 플레이어와의 거리 or 플레이어 위치 추가? (일단 없앴음.) 
-        //AddVectorObs(targetPlayer.position);
-        //AddVectorObs((int)playerRelation);
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -370,17 +366,9 @@ public class WolfAgent : Agent
             GameObject playerObj = FirstAdjacent("Player", playerRange);
             if (playerObj != null)
             {
-                //transform.LookAt(playerObj.transform);
                 return true;
             }
             return false;
-
-            //// TODO: playerRelation 따라서 판단. (일단 임시로 정했음.)
-            //if (playerRelation >= PlayerRelation.Stranger)
-            //{
-            //    if (FirstAdjacent("Player") != null) return true;
-            //    return false;
-            //}
         }
     }
 
@@ -426,11 +414,8 @@ public class WolfAgent : Agent
             currentAction = "Attack";
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
             Enemy vic = null;
-
-            //Debug.Log("공격!");
             vic = FirstAdjacent("enemyCollider", targetRange).GetComponentInParent<Enemy>();
-            //Vector3 lookVector = vic.transform.position;
-            //lookVector.y = transform.position.y;
+
             transform.LookAt(vic.transform);
 
             if (vic != null)
@@ -543,9 +528,8 @@ public class WolfAgent : Agent
         }
     }
 
-    public void SetPlayerRelation() // TODO: Friendly 값 바뀌는 곳에 이 함수 추가하기
+    public void SetPlayerRelation()
     {
-        // TODO: playerRelation 상태 바뀌는 기준 정하기. (일단 임시로 정했음.)
         if (Friendly < MaxFriendly * 0.2) playerRelation = PlayerRelation.Enemy;
         else if (Friendly < MaxFriendly * 0.5) playerRelation = PlayerRelation.Stranger;
         else if (Friendly < MaxFriendly * 0.8) playerRelation = PlayerRelation.Friend;

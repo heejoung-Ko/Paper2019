@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EnemyNumber: 1
   state: 0
   oldState: 0
-  type: 0
+  type: 1
   atkPos: 0
   atkRange: 1.5
   targetMask:
