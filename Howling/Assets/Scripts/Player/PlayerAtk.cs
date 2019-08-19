@@ -60,10 +60,9 @@ namespace Howling
 
         private void Attack(GameObject obj)
         {
+            //if (obj.activeSelf == false) return;
             Enemy enemy = obj.GetComponentInParent<Enemy>();
             enemy.DecreaseHp(atk);
-            EnemyExplosion enemyExplosion = enemy.GetComponentInChildren<EnemyExplosion>();
-            enemyExplosion.isEnemyAtked = true;
         }
 
         private void Gathering(GameObject obj)

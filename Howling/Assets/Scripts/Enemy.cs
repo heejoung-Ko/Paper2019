@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
 
     public int hp;         // 체력
     public int atk;        // 공격력
+    static int maxHp;
 
     public float invincibleTime = 1f; // 무적 시간
     public float currentInvincibleTime = 0f;
@@ -58,6 +59,7 @@ public class Enemy : MonoBehaviour
         isDead = false;
         isAttack = false;
         //targetMask = 1 << LayerMask.NameToLayer("Player");
+        maxHp = hp;
     }
 
     // Update is called once per frame
@@ -246,7 +248,6 @@ public class Enemy : MonoBehaviour
             Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
             foreach (Collider t in targets)
             {
-                //Debug.Log(t.tag);
                 if (t.gameObject.CompareTag("target"))
                 {
                     GameObject.Find("UIManager").transform.GetChild(0).Find("Status").GetComponent<StatusController>().HitEnemy(atk);
@@ -315,16 +316,18 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        // Quaternion rotation = Quaternion.identity;
-        // rotation.eulerAngles = new Vector3(0, 0, 90);
-        // Quaternion newRotation = oldRotation * rotation;
-        // this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime);
-
         if (!isDead)
         {
             enemiesManager.Die(this);
             isDead = true;
         }
+    }
+
+    public void Reset()
+    {
+        hp = maxHp;
+        state = EnemyState.idle;
+        oldState = EnemyState.idle;
     }
 
     public void DecreaseHp(int cnt)
@@ -334,6 +337,8 @@ public class Enemy : MonoBehaviour
         oldState = state;
         state = EnemyState.hit;
         velocity = 0;
+        EnemyExplosion enemyExplosion = GetComponentInChildren<EnemyExplosion>();
+        enemyExplosion.isEnemyAtked = true;
         //Debug.Log("데미지: " + cnt);
 
         if (hp <= 0)
@@ -353,6 +358,8 @@ public class Enemy : MonoBehaviour
         oldState = state;
         state = EnemyState.hit;
         velocity = 0;
+        EnemyExplosion enemyExplosion = GetComponentInChildren<EnemyExplosion>();
+        enemyExplosion.isEnemyAtked = true;
         enemiesManager.AtkReward(atk);
 
         if (hp <= 0)
