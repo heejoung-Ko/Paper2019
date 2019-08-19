@@ -128,7 +128,7 @@ public class StatusController : MonoBehaviour
                 currentThirstyDecreaseTime++;
             else
             {
-                currentThirsty -= (int)(Time.deltaTime * 40f);
+                currentThirsty -= Time.deltaTime * 40f;
                 currentThirstyDecreaseTime = 0;
             }
         }
