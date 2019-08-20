@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ClockController : MonoBehaviour
 {
-    float clock = 0.5f;
+    float clock = 0f;
 
     public GameObject sun;
 
@@ -14,7 +14,9 @@ public class ClockController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        clock += sun.GetComponent<LightController>().getClockCalc() / 360;
+//        clock += sun.GetComponent<LightController>().getClockCalc() / 360;
+
+        clock = sun.GetComponent<DayNightCycle>().percentageOfDay;
 
         float day = Mathf.Floor(clock);
         float time = clock - day;

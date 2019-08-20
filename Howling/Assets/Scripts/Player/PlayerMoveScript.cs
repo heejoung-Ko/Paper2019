@@ -64,7 +64,7 @@ namespace Howling
             {
                 PlayerRotation();
             }
-            //if (tutorialController.currentShow > 1)
+            if (tutorialController.currentShow > 1)
                 PlayerMove();
         }
 
