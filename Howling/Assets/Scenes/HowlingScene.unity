@@ -1055,6 +1055,7 @@ MonoBehaviour:
   dieEffectImg: {fileID: 1674760933}
   dieCamera: {fileID: 3816293}
   dieTime: 1
+  respawnTime: 3
 --- !u!1 &75001105
 GameObject:
   m_ObjectHideFlags: 0

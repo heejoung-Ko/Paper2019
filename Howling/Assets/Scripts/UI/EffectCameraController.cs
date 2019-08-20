@@ -15,6 +15,7 @@ public class EffectCameraController : MonoBehaviour
     public Image dieEffectImg;
     public Camera dieCamera;
     public float dieTime;
+    public float respawnTime;
 
     Vector3 startPosAtk;
     Howling.PlayerMoveScript playerMoveScript;
@@ -131,6 +132,11 @@ public class EffectCameraController : MonoBehaviour
         }
 
         dieEffectImg.color = tempColor;
+        Invoke("PlayerRespawn", respawnTime);
+    }
+
+    public void PlayerRespawn()
+    {
         playerMoveScript.Respawn();
     }
 
