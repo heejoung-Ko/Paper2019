@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a3bdb2cd68f901469e7cc149151eb49, type: 3}
-  m_Name: Effect Post-Processing Profile
+  m_Name: Post-Processing Profile GameOver Effect
   m_EditorClassIdentifier: 
   debugViews:
     m_Enabled: 1
@@ -78,11 +78,11 @@ MonoBehaviour:
       useCameraFov: 0
       kernelSize: 1
   motionBlur:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       shutterAngle: 270
-      sampleCount: 5
-      frameBlending: 0.05
+      sampleCount: 10
+      frameBlending: 0.1
   eyeAdaptation:
     m_Enabled: 0
     m_Settings:
@@ -318,17 +318,17 @@ MonoBehaviour:
       size: 1
       luminanceContribution: 0.8
   vignette:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       mode: 0
-      color: {r: 0.6698113, g: 0.072668225, b: 0.072668225, a: 1}
+      color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.3
-      smoothness: 0.3
+      intensity: 0.45
+      smoothness: 0.2
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
-      rounded: 1
+      rounded: 0
   dithering:
     m_Enabled: 0
   monitors:

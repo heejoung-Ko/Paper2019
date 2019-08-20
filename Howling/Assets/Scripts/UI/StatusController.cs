@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StatusController : MonoBehaviour
 {
@@ -47,8 +48,19 @@ public class StatusController : MonoBehaviour
 
     private const int HP = 0, SP = 1, HUNGRY = 2, THIRSTY = 3;
 
-    // Use this for initialization
+    public bool isDie;
+    EffectCameraController effectCameraController;
+    HowlingSceneManager sceneManager;
+
     void Start()
+    {
+        StatusInitial();
+        isDie = false;
+        effectCameraController = FindObjectOfType<EffectCameraController>();
+        sceneManager = FindObjectOfType<HowlingSceneManager>();
+    }
+
+    public void StatusInitial()
     {
         currentHp = hp;
         currentSp = sp;
@@ -56,13 +68,33 @@ public class StatusController : MonoBehaviour
         currentThirsty = thirsty;
     }
 
-    // Update is called once per frame
+    public void ResetForRespawn()
+    {
+        StatusInitial();
+        isDie = false;
+        effectCameraController.DieCameraOff();
+    }
+
+    private void StatusCheats()
+    {
+        if (Input.GetKey(KeyCode.F1))
+        {
+            StatusInitial();
+            //DieCheats();
+        }
+        else if (Input.GetKey(KeyCode.F2))
+        {
+            Die();
+        }
+    }
+
     void Update()
     {
         Hungry();
         Thirsty();
         MpRechargeTime();
         MpRecover();
+        StatusCheats();
         GaugeUpdate();
     }
 
@@ -190,7 +222,10 @@ public class StatusController : MonoBehaviour
         currentHp -= cnt;
 
         if (currentHp <= 0)
+        {
             currentHp = 0;
+            Die();
+        }
         //    Debug.Log("캐릭터의 hp가 0이 되었습니다!");
     }
 
@@ -224,7 +259,10 @@ public class StatusController : MonoBehaviour
     public void DecreaseHungry(int cnt)
     {
         if (currentHungry - cnt < 0)
+        {
             currentHungry = 0;
+            Die();
+        }
         else
             currentHungry -= cnt;
     }
@@ -240,7 +278,10 @@ public class StatusController : MonoBehaviour
     public void DecreaseThirsty(int cnt)
     {
         if (currentThirsty - cnt < 0)
+        {
             currentThirsty = 0;
+            Die();
+        }
         else
             currentThirsty -= cnt;
     }
@@ -256,4 +297,22 @@ public class StatusController : MonoBehaviour
         //Debug.Log("맞았당! HP: " + currentHp);
         
     }
+
+    public void Die()
+    {
+        if (!isDie)
+        {
+            isDie = true;
+            effectCameraController.DieCameraOn();
+        }
+    }
+
+    //public void DieCheats()
+    //{
+    //    if (isDie)
+    //    {
+    //        isDie = false;
+    //        effectCameraController.DieCameraOff();
+    //    }
+    //}
 }

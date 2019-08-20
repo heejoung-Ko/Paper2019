@@ -6,15 +6,16 @@ namespace Howling
 {
     public class PlayerMoveScript : MonoBehaviour
     {
-        private enum PlayerState { idle, walk, run };
+        public Transform respawnPos;
+
+        private enum PlayerState { idle, walk, run, die };
         private PlayerState state = PlayerState.idle;
 
         private Transform playerCamera = null;
         private Animator animator;
         private StatusController statusController;
         private TutorialController tutorialController;
-
-
+        
         // WASD move
         private float velocity = 0.0f;
         public static float walkAcc = 5.0f;
@@ -135,6 +136,13 @@ namespace Howling
             //rigidbody.MovePosition(transform.position + moveVector);
 
             tutorialController.isPlayerMove = true;
+        }
+
+        public void Respawn()
+        {
+            statusController.ResetForRespawn();
+            transform.position = respawnPos.position;
+            transform.rotation = respawnPos.rotation;
         }
 
         //private void PlayerJump()
