@@ -17,6 +17,8 @@ public class UIManagerController : MonoBehaviour
 
     bool isBox = false;
 
+    [HideInInspector] public bool isGameOver;
+
     enum UIState
     {
         NONE, MAKING, MAP, MENU, BOX
@@ -30,10 +32,13 @@ public class UIManagerController : MonoBehaviour
     {
         //BoxSlotM.GetComponent<BoxSlotManager>();
         state = UIState.NONE;
+        isGameOver = false;
     }
 
     void Update()
     {
+        if (isGameOver) return;
+
         if (Input.GetKeyDown(KeyCode.H))
         {
             // 조합 상태 일때
@@ -42,7 +47,7 @@ public class UIManagerController : MonoBehaviour
                 exitMaking();
             }
             // 아무 상태도 아닐때
-            else if(state == UIState.NONE)
+            else if (state == UIState.NONE)
             {
                 enterMaking();
             }
@@ -69,12 +74,13 @@ public class UIManagerController : MonoBehaviour
         {
             isBox = true;
         }
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if(state == UIState.MENU)
+            if (state == UIState.MENU)
             {
                 exitMenu();
-            } else if(state == UIState.NONE)
+            }
+            else if (state == UIState.NONE)
             {
                 enterMenu();
             }
@@ -146,6 +152,8 @@ public class UIManagerController : MonoBehaviour
 
     public void enterBox()
     {
+        if (isGameOver) return;
+
         state = UIState.BOX;
 
         enterUI();
@@ -182,7 +190,7 @@ public class UIManagerController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    void enterUI()
+    public void enterUI()
     {
         PlayerController.GetComponent<PlayerMoveScript>().enabled = false;
         PlayerController.GetComponent<PlayerAtk>().enabled = false;
@@ -190,7 +198,7 @@ public class UIManagerController : MonoBehaviour
         PlayerController.GetComponentInChildren<ActionController>().enabled = false;
     }
 
-    void exitUI()
+    public void exitUI()
     {
         PlayerController.GetComponent<PlayerMoveScript>().enabled = true;
         PlayerController.GetComponent<PlayerAtk>().enabled = true;

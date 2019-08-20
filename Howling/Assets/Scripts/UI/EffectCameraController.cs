@@ -19,10 +19,13 @@ public class EffectCameraController : MonoBehaviour
 
     Vector3 startPosAtk;
     Howling.PlayerMoveScript playerMoveScript;
+    UIManagerController uiManagerController;
+    public Howling.Inventory inventory;
 
     private void Start()
     {
-        playerMoveScript = FindObjectOfType<Howling.PlayerMoveScript>();  
+        playerMoveScript = FindObjectOfType<Howling.PlayerMoveScript>();
+        uiManagerController = FindObjectOfType<UIManagerController>();
     }
 
     public void EffectCameraOn()
@@ -47,8 +50,11 @@ public class EffectCameraController : MonoBehaviour
         dieEffectImg.gameObject.SetActive(true);
         dieCamera.gameObject.SetActive(true);
         dieCamera.transform.localPosition = Vector3.zero;
-        dieCamera.transform.Rotate(Vector3.zero);
+        //dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
         DieEffect(0.2f, dieTime);
+        inventory.isGameOver = true;
+        uiManagerController.isGameOver = true;
+        uiManagerController.enterUI();
     }
 
     public void DieCameraOff()
@@ -58,9 +64,12 @@ public class EffectCameraController : MonoBehaviour
         if (dieCamera.gameObject.activeSelf == true)
         {
             dieCamera.transform.localPosition = Vector3.zero;
-            dieCamera.transform.Rotate(Vector3.zero);
+            dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
             dieCamera.gameObject.SetActive(false);
         }
+        inventory.isGameOver = false;
+        uiManagerController.isGameOver = false;
+        uiManagerController.exitUI();
     }
 
     public void FadeIn(float startAlpha, float fadeInTime)
@@ -160,7 +169,8 @@ public class EffectCameraController : MonoBehaviour
         {
             shakeTime += Time.deltaTime * 1.5f;
             dieCamera.transform.localPosition = new Vector3(0, Mathf.Lerp(0, -1, shakeTime), 0);
-            dieCamera.transform.Rotate(0, 0, Mathf.Lerp(0, 1, shakeTime));
+            Quaternion rot = dieCamera.transform.rotation;
+            dieCamera.transform.localRotation = Quaternion.Euler(rot.x, rot.y, rot.z + Mathf.Lerp(0, 30, shakeTime));
             yield return null;
         }
     }

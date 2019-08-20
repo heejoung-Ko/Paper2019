@@ -11,7 +11,7 @@ namespace Howling
         private enum PlayerState { idle, walk, run, die };
         private PlayerState state = PlayerState.idle;
 
-        private Transform playerCamera = null;
+        public Transform playerCamera;
         private Animator animator;
         private StatusController statusController;
         private TutorialController tutorialController;
@@ -42,7 +42,7 @@ namespace Howling
 
         void Awake()
         {
-            playerCamera = Camera.main.transform;
+            //playerCamera = Camera.main.transform;
             animator = GetComponent<Animator>();
             statusController = FindObjectOfType<StatusController>();
             tutorialController = FindObjectOfType<TutorialController>();

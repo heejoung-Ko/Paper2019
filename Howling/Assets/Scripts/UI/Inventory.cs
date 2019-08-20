@@ -37,6 +37,8 @@ namespace Howling
         [SerializeField]
         private Item CookedMeat;
 
+        [HideInInspector] public bool isGameOver = false;
+
         void Start()
         {
             items = Resources.LoadAll<Item>("Item");
@@ -49,6 +51,8 @@ namespace Howling
 
         private void Update()
         {
+            if (isGameOver) return;
+
             if(Input.GetKeyDown(KeyCode.Alpha1))
             {
                 SwapSlot(0);

@@ -1055,7 +1055,8 @@ MonoBehaviour:
   dieEffectImg: {fileID: 1674760933}
   dieCamera: {fileID: 3816293}
   dieTime: 1
-  respawnTime: 3
+  respawnTime: 2
+  inventory: {fileID: 1978531898}
 --- !u!1 &75001105
 GameObject:
   m_ObjectHideFlags: 0
@@ -4255,6 +4256,11 @@ PrefabInstance:
       propertyPath: respawnPos
       value: 
       objectReference: {fileID: 743781455}
+    - target: {fileID: 5045246167024226980, guid: b7731a12337d29a4a9b75e13204fba44,
+        type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1293987146}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7731a12337d29a4a9b75e13204fba44, type: 3}
 --- !u!1001 &292897752
@@ -17972,6 +17978,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c570ea140dbf7544ba2fc9b605e33b2, type: 3}
+--- !u!4 &1293987146 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6741046998750803708, guid: b7731a12337d29a4a9b75e13204fba44,
+    type: 3}
+  m_PrefabInstance: {fileID: 292386756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1299110195 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1471487488687944476, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
@@ -19486,6 +19498,7 @@ MonoBehaviour:
   MapUI: {fileID: 966290896}
   BoxUI: {fileID: 453640334}
   MenuUI: {fileID: 1398025634}
+  isGameOver: 0
   state: 0
 --- !u!4 &1418528484 stripped
 Transform:
@@ -27697,6 +27710,7 @@ MonoBehaviour:
   player: {fileID: 1987263220}
   Feed: {fileID: 11400000, guid: ecb1ba7c182070143a0314c4b8956b42, type: 2}
   CookedMeat: {fileID: 11400000, guid: 4cba44b5af17d0449b2628801a6bf1d1, type: 2}
+  isGameOver: 0
 --- !u!4 &1981676583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9052363185018462599, guid: c934b4c57b6f53a4fb534ba85967d64e,
