@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4cdf8f927483f42b010131fc5167cf, type: 3}
+  m_Name: Recipe_Torch
+  m_EditorClassIdentifier: 
+  Result: {fileID: 11400000, guid: a13df51ac339d1943939ec8a469a7ce9, type: 2}
+  Explanation: "\uBC24\uC5D0 \uBD88\uC744 \uBC1D\uD790 \uC218 \uC788\uB294 \uD683\uBD88"
+  Material1: {fileID: 11400000, guid: 0c3f752860675ea4b933f5e26fa53538, type: 2}
+  Material1_num: 1
+  Material2: {fileID: 11400000, guid: 241ae2273c97d434b96c9ca86539fc72, type: 2}
+  Material2_num: 1
+  Material3: {fileID: 0}
+  Material3_num: 0

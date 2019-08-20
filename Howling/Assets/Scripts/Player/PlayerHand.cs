@@ -28,15 +28,9 @@ namespace Howling
 
         private void Start()
         {
-            int count = transform.GetChild(0).childCount;
+            int count = HandPosition.transform.childCount;
 
             EquipToolType = -1;
-        }
-
-        private void Update()
-        {
-            transform.position = HandPosition.transform.position;
-            transform.rotation = HandPosition.transform.rotation;
         }
 
         public void swapTools(int n, int iAtk)
@@ -48,16 +42,16 @@ namespace Howling
             }
             // 맨 손일 때
             if (n == -1)
-            { 
-                transform.GetChild(0).transform.GetChild(EquipToolType).gameObject.SetActive(false);
+            {
+                HandPosition.transform.GetChild(EquipToolType).gameObject.SetActive(false);
                 EquipToolType = n;
             }
             else
             {
                 if(EquipToolType != -1)
-                    transform.GetChild(0).transform.GetChild(EquipToolType).gameObject.SetActive(false);
+                    HandPosition.transform.GetChild(EquipToolType).gameObject.SetActive(false);
                 EquipToolType = n;
-                transform.GetChild(0).transform.GetChild(EquipToolType).gameObject.SetActive(true);
+                HandPosition.transform.GetChild(EquipToolType).gameObject.SetActive(true);
             }
 
             atk = iAtk;

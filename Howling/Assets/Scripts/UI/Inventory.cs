@@ -37,6 +37,9 @@ namespace Howling
         [SerializeField]
         private Item CookedMeat;
 
+        [SerializeField]
+        private Item Torch;
+
         [HideInInspector] public bool isGameOver = false;
 
         void Start()
@@ -108,6 +111,12 @@ namespace Howling
             if (Input.GetKeyDown(KeyCode.R))
             {
                 deactivateMeat();
+            }
+
+            if(selectSlot != null && selectSlot.item == Torch)
+            {
+                float time = Time.deltaTime;
+                useSelectItem(time/ 10);    // 100초 동안 사용
             }
         }
 
@@ -290,9 +299,9 @@ namespace Howling
             SwapItem();
         }
 
-        public void useSelectItem()
+        public void useSelectItem(float n = 1)
         {
-            if(selectSlot.UseTool())
+            if(selectSlot.UseTool(n))
                 subSelecSlot();
             
         }
