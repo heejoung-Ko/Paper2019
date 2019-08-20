@@ -32,7 +32,7 @@ public class DayNightCycle : MonoBehaviour
         turnSpeed = 360.0f / (minitesInDay * 60.0f) * Time.deltaTime;
         transform.RotateAround(transform.position, transform.right, turnSpeed);
 
-        Debug.Log(percentageOfDay);
+        //Debug.Log(percentageOfDay);
     }
 
     bool isNight

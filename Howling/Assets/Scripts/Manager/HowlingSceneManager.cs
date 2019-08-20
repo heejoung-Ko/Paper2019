@@ -27,13 +27,21 @@ public class HowlingSceneManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SceneReset()
+    {
+        gameObject.SetActive(true);
+        Loby.SetActive(true);
+        Loading.SetActive(false);
+    }
+
     public void ClickStart()
     {
         Loby.SetActive(false);
         Loading.SetActive(true);
 
         Debug.Log("게임 로딩중 ... ..");
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
 
         StartCoroutine(LoadCoroutine());
     }
@@ -44,7 +52,7 @@ public class HowlingSceneManager : MonoBehaviour
         Loading.SetActive(true);
 
         Debug.Log("게임 로드 중 . .. ..!");
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
 
         StartCoroutine(LoadCoroutine());
     }
