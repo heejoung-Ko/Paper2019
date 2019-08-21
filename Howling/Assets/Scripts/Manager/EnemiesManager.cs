@@ -33,6 +33,8 @@ public class EnemiesManager : MonoBehaviour
     public int[] enemiesNum;
 
     [HideInInspector] public bool isNight;
+    public StatusController statusController;
+    public EffectCameraController effectCameraController;
 
     private void Awake()
     {

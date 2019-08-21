@@ -72,7 +72,7 @@ namespace Howling
 
         private void Gathering(GameObject obj)
         {
-            if (obj.tag == "tree" || obj.tag == "rock")
+            if (obj.CompareTag("tree") || obj.CompareTag("rock"))
             {
                 Resource resource = obj.GetComponentInParent<Resource>();
                 resource.Gathering();

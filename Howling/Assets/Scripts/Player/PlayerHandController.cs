@@ -60,13 +60,13 @@ namespace Howling
             {
                 if (CheckObject())
                 {
-                    if(hitInfo.transform.tag == "tree" && currentHand.EquipAxe())
+                    if(hitInfo.transform.CompareTag("tree") && currentHand.EquipAxe())
                     {
                         hitInfo.transform.GetComponent<Resource>().Gathering();
 
                         inventory.useSelectItem();
                     }
-                    else if (hitInfo.transform.tag == "rock" && currentHand.EquipPick())
+                    else if (hitInfo.transform.CompareTag("rock") && currentHand.EquipPick())
                     {
                         hitInfo.transform.GetComponent<Resource>().Gathering();
                         inventory.useSelectItem();

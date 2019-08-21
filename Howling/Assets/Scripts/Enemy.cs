@@ -16,11 +16,13 @@ public class Enemy : MonoBehaviour
 
     // 현재 타겟으로 설정된 객체
     GameObject target = null;
-
+    string targetTag = "target";
+    string agentTag = "agent";
 
     public float atkPos = 0f;
     public float atkRange = 3f;
     public LayerMask targetMask;
+    public LayerMask fireMask;
 
     float velocity = 0.0f;               // 속도
     float walkAcc = 0.6f;               // 걸을 때 가속도
@@ -127,7 +129,7 @@ public class Enemy : MonoBehaviour
     {
         if (target == null)
         {
-            if (other.tag == "target" || other.tag == "agent")
+            if (other.CompareTag(targetTag) || other.CompareTag(agentTag))
             {
                 state = EnemyState.trace;
                 target = other.gameObject;
@@ -135,6 +137,7 @@ public class Enemy : MonoBehaviour
                 nextStateTime = 0.0f;
             }
         }
+        //if ()
     }
 
     private void OnTriggerExit(Collider other)
@@ -234,7 +237,9 @@ public class Enemy : MonoBehaviour
 
     void Escape()
     {
-        direction = (target.transform.position - transform.position).normalized;  // 타겟으로 향하는 방향 
+        if (target != null)
+            direction = (target.transform.position - transform.position).normalized;  // 타겟으로 향하는 방향 
+        else direction = transform.position.normalized;
         direction.y = 0;
         direction *= -1;                                                // 타겟으로 향하는 역방향으로 전환
 
@@ -266,13 +271,15 @@ public class Enemy : MonoBehaviour
             Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
             foreach (Collider t in targets)
             {
-                if (t.gameObject.CompareTag("target"))
+                if (t.gameObject.CompareTag(targetTag))
                 {
                     if (enemiesManager.isNight) tempAtk = atk * 1.5f;
-                    GameObject.Find("UIManager").transform.GetChild(0).Find("Status").GetComponent<StatusController>().HitEnemy((int)tempAtk);
-                    GameObject.Find("CameraManager").GetComponent<EffectCameraController>().EffectCameraOn();
+                    //GameObject.Find("UIManager").transform.GetChild(0).Find("Status").GetComponent<StatusController>().HitEnemy((int)tempAtk);
+                    //GameObject.Find("CameraManager").GetComponent<EffectCameraController>().EffectCameraOn();
+                    enemiesManager.statusController.HitEnemy((int)tempAtk);
+                    enemiesManager.effectCameraController.EffectCameraOn();
                 }
-                else if (t.gameObject.CompareTag("agent"))
+                else if (t.gameObject.CompareTag(agentTag))
                 {
                     if (enemiesManager.isNight) tempAtk = atk * 1.5f;
                     WolfAgent wolf = t.GetComponent<WolfAgent>();

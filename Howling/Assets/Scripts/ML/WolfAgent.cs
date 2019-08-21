@@ -221,7 +221,7 @@ public class WolfAgent : Agent
         var colliders = Physics.OverlapSphere(transform.position, range, colliderLayerMask);
         foreach (var collider in colliders)
         {
-            if (collider.gameObject.tag == tag)
+            if (collider.gameObject.CompareTag(tag))
             {
                 if (collider.CompareTag("item"))
                 {

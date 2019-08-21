@@ -270,7 +270,7 @@ public class CreatureAgent : Agent
         var colliders = Physics.OverlapSphere(transform.position, 1.2f * size);
         foreach (var collider in colliders)
         {
-            if (collider.gameObject.tag == tag)
+            if (collider.gameObject.CompareTag(tag))
             {
                 return collider.gameObject;
             }

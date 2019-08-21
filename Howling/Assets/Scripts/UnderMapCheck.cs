@@ -10,18 +10,18 @@ public class UnderMapCheck : MonoBehaviour
     {
         Debug.Log(other.name + " - UnderMap trigger enter!");
 
-        if (other.tag == "item")
+        if (other.CompareTag("item"))
         {
             Vector3 itemPos = other.gameObject.transform.position;
             other.gameObject.transform.position = new Vector3(itemPos.x, replaceHeight, itemPos.z);
         }
-        else if (other.tag == "agent")
+        else if (other.CompareTag("agent"))
         {
             WolfAgent agent = other.gameObject.GetComponent<WolfAgent>();
             agent.Done();
             agent.AgentReset();
         }
-        else if (other.tag == "enemyCollider")
+        else if (other.CompareTag("enemyCollider"))
         {
             Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
             enemy.state = Enemy.EnemyState.die;

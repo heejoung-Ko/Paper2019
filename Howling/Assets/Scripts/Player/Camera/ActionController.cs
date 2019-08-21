@@ -137,12 +137,12 @@ namespace Howling
             ray.direction = transform.forward;
             if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, itemMask))
             {
-                if (hitInfo.transform.tag == "item")
+                if (hitInfo.transform.CompareTag("item"))
                 {
                     ItemInfoAppear();
                 }
 
-                if(hitInfo.transform.tag == "resource")
+                if(hitInfo.transform.CompareTag("resource"))
                 {
                     ObjectInfoAppear();
                 }
