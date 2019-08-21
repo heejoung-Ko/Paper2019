@@ -141,11 +141,6 @@ namespace Howling
                 {
                     ItemInfoAppear();
                 }
-
-                if(hitInfo.transform.CompareTag("resource"))
-                {
-                    ObjectInfoAppear();
-                }
                 return;
             }
             else
@@ -178,11 +173,11 @@ namespace Howling
                 WaterDisapear();
         }
 
-        private void ObjectInfoAppear()
-        {
-            actionText.gameObject.SetActive(true);
-            actionText.text = hitInfo.transform.name + "선택됨";
-        }
+        //private void ObjectInfoAppear()
+        //{
+        //    actionText.gameObject.SetActive(true);
+        //    actionText.text = hitInfo.transform.name + "선택됨";
+        //}
         private void ItemInfoAppear()
         {
             pickUpActivated = true;
