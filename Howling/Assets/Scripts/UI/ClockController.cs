@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ClockController : MonoBehaviour
 {
-    float clock = 0f;
+    float time = 0f;
 
     public GameObject sun;
 
@@ -16,20 +16,30 @@ public class ClockController : MonoBehaviour
     {
 //        clock += sun.GetComponent<LightController>().getClockCalc() / 360;
 
-        clock = sun.GetComponent<DayNightCycle>().percentageOfDay;
+        time = sun.GetComponent<DayNightCycle>().percentageOfDay;
+        float day = sun.GetComponent<DayNightCycle>().day;
 
-        float day = Mathf.Floor(clock);
-        float time = clock - day;
+//        float time = clock - day;
         time *= 2 * 12;
         float hour = Mathf.Floor(time);
         float minit = time - hour;
         minit = minit / 10 * 60;
 
         text.GetComponent<Text>().text = "Day " + day + "   ";
-        if (hour < 10)
-            text.GetComponent<Text>().text += "0" + hour + " : ";
-        else
-            text.GetComponent<Text>().text += hour + " : ";
+        
+        if(hour < 12)
+        {
+            text.GetComponent<Text>().text += (hour + 12) + " : ";
+        }
+        else if (hour >= 12)
+        {
+            hour -= 10;
+
+            if (hour < 10)
+                text.GetComponent<Text>().text += "0" + hour + " : ";
+            else
+                text.GetComponent<Text>().text += hour + " : ";
+        }
 
         text.GetComponent<Text>().text += Mathf.Floor(minit) * 10;
 
@@ -37,15 +47,5 @@ public class ClockController : MonoBehaviour
             text.GetComponent<Text>().text += "0";
 
         //Debug.Log("Day " + day + " | " + hour + "h " + Mathf.Floor(minit) * 10 + "m");
-    }
-
-    public float GetClock()
-    {
-        return clock;
-    }
-
-    public void SetClock(float _saveClock)
-    {
-        clock = _saveClock;
     }
 }

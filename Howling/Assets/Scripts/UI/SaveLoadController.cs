@@ -8,6 +8,7 @@ public class SaveData
 {
     // 시스템
     public float gameTime;
+    public int gameDay;
 
     // 플레이어
     public Vector3 playerPos;
@@ -51,7 +52,7 @@ public class SaveLoadController : MonoBehaviour
     private string SAVE_DATA_DIRECTORY;
     private string SAVE_FILENAME = "/SaveFile.txt";
 
-    [SerializeField] private ClockController gameClock;
+    [SerializeField] private DayNightCycle gameClock;
     [SerializeField] private GameObject myPlayer;
     [SerializeField] private StatusController myPlayerStatus;
     private Howling.Inventory myInven;
@@ -75,7 +76,8 @@ public class SaveLoadController : MonoBehaviour
         //myBox = FindObjectOfType<BoxSlotManager>();
 
         // 저장할 데이터
-        saveData.gameTime = gameClock.GetClock();
+        saveData.gameTime = gameClock.GetTime();
+        saveData.gameDay = gameClock.day;
 
         saveData.playerPos = myPlayer.transform.position;
         saveData.playerRot = myPlayer.transform.eulerAngles;
@@ -125,7 +127,7 @@ public class SaveLoadController : MonoBehaviour
             myInven = FindObjectOfType<Howling.Inventory>();
 
             // 로드할 데이터
-            gameClock.SetClock(saveData.gameTime);
+            gameClock.SetTime(saveData.gameTime, saveData.gameDay);
 
             myPlayer.transform.position = saveData.playerPos;
             myPlayer.transform.eulerAngles = saveData.playerRot;

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
+    public int day = 0;
+
     public float minitesInDay = 1f;
 
-    float timer;
     public float percentageOfDay;
+    float timer;
     float turnSpeed;
 
     public float dayNightFogDensity;
@@ -77,6 +79,18 @@ public class DayNightCycle : MonoBehaviour
         if(timer > (minitesInDay * 60.0f))
         {
             timer = 0.0f;
+            day++;
         }
+    }
+
+    public float GetTime()
+    {
+        return timer;
+    }
+
+    public void SetTime(float _saveTime, int _saveDay)
+    {
+        timer = _saveTime;
+        day = _saveDay;
     }
 }
