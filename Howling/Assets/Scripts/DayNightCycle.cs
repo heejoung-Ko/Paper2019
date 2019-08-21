@@ -16,6 +16,9 @@ public class DayNightCycle : MonoBehaviour
     public Gradient dayNightColor; 
     public Gradient dayNightFogColor;
 
+    public StatusController statusController;
+    public EnemiesManager enemiesManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +45,14 @@ public class DayNightCycle : MonoBehaviour
     {
         get
         {
-            if (0.3f < percentageOfDay && percentageOfDay < 0.7f) return true;
+            if (0.3f < percentageOfDay && percentageOfDay < 0.7f)
+            {
+                statusController.isNight = true;
+                enemiesManager.isNight = true;
+                return true;
+            }
+            statusController.isNight = false;
+            enemiesManager.isNight = false;
             return false;
         }
     }

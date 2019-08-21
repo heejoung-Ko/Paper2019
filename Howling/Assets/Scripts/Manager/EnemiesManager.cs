@@ -32,6 +32,8 @@ public class EnemiesManager : MonoBehaviour
     public string[] enemiesName;
     public int[] enemiesNum;
 
+    [HideInInspector] public bool isNight;
+
     private void Awake()
     {
         for (int i = 0; i < 5; ++i)

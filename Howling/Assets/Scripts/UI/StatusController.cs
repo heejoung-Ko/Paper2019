@@ -48,10 +48,10 @@ public class StatusController : MonoBehaviour
 
     private const int HP = 0, SP = 1, HUNGRY = 2, THIRSTY = 3;
 
-    public bool isDie;
+    [HideInInspector] public bool isDie;
     EffectCameraController effectCameraController;
     HowlingSceneManager sceneManager;
-    DayNightCycle dayNightCycle;
+    [HideInInspector] public bool isNight;
     static float originHungryDecreaseAmount = 200f;
     static float originThirstyDecreaseAmount = 150f;
     float hungryDecreaseAmount = originHungryDecreaseAmount;
@@ -64,7 +64,6 @@ public class StatusController : MonoBehaviour
         isDie = false;
         effectCameraController = FindObjectOfType<EffectCameraController>();
         sceneManager = FindObjectOfType<HowlingSceneManager>();
-        dayNightCycle = FindObjectOfType<DayNightCycle>();
     }
 
     public void StatusInitial()
@@ -108,7 +107,7 @@ public class StatusController : MonoBehaviour
 
     private void CheckNight()
     {
-        if (dayNightCycle.isNight)
+        if (isNight)
         {
             hungryDecreaseAmount = originHungryDecreaseAmount * decreaseMultiAmount;
             thirstyDecreaseAmount = originThirstyDecreaseAmount;

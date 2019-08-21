@@ -443,6 +443,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1359899889}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7804743 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2961495491447820737, guid: 17cd520441ae6234bb7661b63e4f1a63,
+    type: 3}
+  m_PrefabInstance: {fileID: 1359899889}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7804741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0875986a14258e14db3ec8eab9392ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!108 &7804744 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 2961495491447820739, guid: 17cd520441ae6234bb7661b63e4f1a63,
@@ -2246,6 +2258,11 @@ PrefabInstance:
       propertyPath: enemies.Array.data[2].enemiesSpawn.Array.data[1]
       value: 
       objectReference: {fileID: 1581419081}
+    - target: {fileID: 3433697733900359633, guid: a1d7ce3c168083946a2ca666c1186ce3,
+        type: 3}
+      propertyPath: dayNightCycle
+      value: 
+      objectReference: {fileID: 7804743}
     - target: {fileID: 7618980698028519585, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
       propertyPath: m_RootOrder
@@ -2626,6 +2643,7 @@ MonoBehaviour:
   - {fileID: 975278044}
   - {fileID: 1131593563}
   isDie: 0
+  isNight: 0
 --- !u!224 &143109048 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1471487488687944476, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
@@ -3137,6 +3155,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c934b4c57b6f53a4fb534ba85967d64e, type: 3}
+--- !u!114 &227917057 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3433697733900359633, guid: a1d7ce3c168083946a2ca666c1186ce3,
+    type: 3}
+  m_PrefabInstance: {fileID: 121451660}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f032b95e7972144cbc6787c8a2dcc6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &230826013 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3424692566078280110, guid: b7731a12337d29a4a9b75e13204fba44,
@@ -19109,6 +19139,16 @@ PrefabInstance:
       propertyPath: dayNightColor.atime0
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2961495491447820737, guid: 17cd520441ae6234bb7661b63e4f1a63,
+        type: 3}
+      propertyPath: enemiesManager
+      value: 
+      objectReference: {fileID: 227917057}
+    - target: {fileID: 2961495491447820737, guid: 17cd520441ae6234bb7661b63e4f1a63,
+        type: 3}
+      propertyPath: statusController
+      value: 
+      objectReference: {fileID: 131607921}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17cd520441ae6234bb7661b63e4f1a63, type: 3}
 --- !u!1 &1368344499
