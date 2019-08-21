@@ -25,7 +25,7 @@ public class EnemiesManager : MonoBehaviour
     public EnemiesDB[] enemies;
     public GameObject[] dropItems;
     //public Transform[] spawnPoints;
-    [SerializeField] public static float randomNum = 10f;
+    [SerializeField] public static float randomNum = 20f;
 
     public WolfAgent wolfAgent;
 

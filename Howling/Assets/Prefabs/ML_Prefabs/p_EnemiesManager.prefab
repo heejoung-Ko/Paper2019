@@ -52,12 +52,16 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   - type: 1
     enemiesSpawn:
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
   - type: 2
     enemiesSpawn:
+    - {fileID: 0}
     - {fileID: 0}
   - type: 3
     enemiesSpawn:
@@ -75,7 +79,7 @@ MonoBehaviour:
   - Deer
   - Boar
   - Bear
-  enemiesNum: 3200000014000000140000000500000001000000
+  enemiesNum: 19000000140000000f0000000500000001000000
 --- !u!1 &6490367502805193944
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,23 +127,23 @@ MonoBehaviour:
   - poolItemName: Rabbit
     prefab: {fileID: 5248994665506766699, guid: 2e577607f6688264ab74457b0cdbec42,
       type: 3}
-    poolCount: 60
+    poolCount: 27
     poolList: []
   - poolItemName: Fox
     prefab: {fileID: 691647849, guid: 595ae5149fadb26449d4b2cb7a3ee451, type: 3}
-    poolCount: 30
+    poolCount: 22
     poolList: []
   - poolItemName: Deer
     prefab: {fileID: 8599248350483425059, guid: 4c36d853a393f9244bac4c7a1aabe012,
       type: 3}
-    poolCount: 30
+    poolCount: 17
     poolList: []
   - poolItemName: Boar
     prefab: {fileID: 9105239298221749027, guid: bf757c9a8c8ded14b8a7e219c82d24f6,
       type: 3}
-    poolCount: 10
+    poolCount: 7
     poolList: []
   - poolItemName: Bear
     prefab: {fileID: 1414212599, guid: 260e51762a437844dae8e311f53bf412, type: 3}
-    poolCount: 5
+    poolCount: 3
     poolList: []
