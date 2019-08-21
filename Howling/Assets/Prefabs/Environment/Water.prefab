@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4633884383971953708}
   - component: {fileID: 7300686742665901834}
   - component: {fileID: 6850850125924281734}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: OceanWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 1383045201350348037}
   - component: {fileID: 1153329151617144286}
   - component: {fileID: 2923505355273089875}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: 'Pawn '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
