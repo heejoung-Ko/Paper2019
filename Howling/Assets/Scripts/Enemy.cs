@@ -140,6 +140,7 @@ public class Enemy : MonoBehaviour
 
         if (other.gameObject.layer == 23)   // campfire
         {
+            if (other.GetComponent<Campfire>().fireSize == FireSizeType.NONE) return;
             if (target == other.gameObject) return;
 
             target = other.gameObject;

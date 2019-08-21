@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FireSizeType
+{
+    NONE, SMALL, MIDIUM, BIG
+}
+
 public class Campfire : MonoBehaviour
 {
     [SerializeField]
@@ -17,6 +22,7 @@ public class Campfire : MonoBehaviour
     GameObject big;
 
     bool isFire = false;
+    public FireSizeType fireSize;
 
     public void Update()
     {
@@ -67,6 +73,7 @@ public class Campfire : MonoBehaviour
 
     private void SetNone()
     {
+        fireSize = FireSizeType.NONE;
         small.SetActive(false);
         midium.SetActive(false);
         big.SetActive(false);
@@ -74,6 +81,7 @@ public class Campfire : MonoBehaviour
 
     private void SetSmall()
     {
+        fireSize = FireSizeType.SMALL;
         small.SetActive(true);
         midium.SetActive(false);
         big.SetActive(false);
@@ -81,6 +89,7 @@ public class Campfire : MonoBehaviour
     
     private void SetMidium()
     {
+        fireSize = FireSizeType.MIDIUM;
         small.SetActive(false);
         midium.SetActive(true);
         big.SetActive(false);
@@ -88,6 +97,7 @@ public class Campfire : MonoBehaviour
     
     private void SetBig()
     {
+        fireSize = FireSizeType.BIG;
         small.SetActive(false);
         midium.SetActive(false);
         big.SetActive(true);

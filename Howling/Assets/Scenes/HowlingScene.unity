@@ -2278,6 +2278,11 @@ PrefabInstance:
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 1987263220}
+    - target: {fileID: 3433697733900359633, guid: a1d7ce3c168083946a2ca666c1186ce3,
+        type: 3}
+      propertyPath: campfire
+      value: 
+      objectReference: {fileID: 1674405734}
     - target: {fileID: 7618980698028519585, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
       propertyPath: m_RootOrder
@@ -23359,6 +23364,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1674405734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 490968841254317966, guid: 5be757482218cbe48ac742ad3e2e1661,
+    type: 3}
+  m_PrefabInstance: {fileID: 2017717399}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ad7d891a04319478e4adbe3c9f53ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1674760931
 GameObject:
   m_ObjectHideFlags: 0
