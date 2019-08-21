@@ -137,7 +137,16 @@ public class Enemy : MonoBehaviour
                 nextStateTime = 0.0f;
             }
         }
-        //if ()
+
+        if (other.gameObject.layer == 23)   // campfire
+        {
+            if (target == other.gameObject) return;
+
+            target = other.gameObject;
+            state = EnemyState.escape;
+            nextStateTime = keepEscapeTime;
+            nowStateTime = keepEscapeTime - 1f;
+        }
     }
 
     private void OnTriggerExit(Collider other)
