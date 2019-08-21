@@ -2273,6 +2273,11 @@ PrefabInstance:
       propertyPath: statusController
       value: 
       objectReference: {fileID: 131607921}
+    - target: {fileID: 3433697733900359633, guid: a1d7ce3c168083946a2ca666c1186ce3,
+        type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 1987263220}
     - target: {fileID: 7618980698028519585, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
       propertyPath: m_RootOrder

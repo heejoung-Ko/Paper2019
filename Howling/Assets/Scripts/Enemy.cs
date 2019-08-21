@@ -237,9 +237,12 @@ public class Enemy : MonoBehaviour
 
     void Escape()
     {
-        if (target != null)
-            direction = (target.transform.position - transform.position).normalized;  // 타겟으로 향하는 방향 
-        else direction = transform.position.normalized;
+        if (target == null)
+        {
+            Debug.Log("Enemy target is null.");
+            direction = transform.forward;
+        }
+        direction = (target.transform.position - transform.position).normalized;  // 타겟으로 향하는 방향 
         direction.y = 0;
         direction *= -1;                                                // 타겟으로 향하는 역방향으로 전환
 
@@ -337,7 +340,7 @@ public class Enemy : MonoBehaviour
         velocity = 0;
         EnemyExplosion enemyExplosion = GetComponentInChildren<EnemyExplosion>();
         enemyExplosion.isEnemyAtked = true;
-        Runaway();
+        Runaway(enemiesManager.playerTarget);
         //Debug.Log("데미지: " + cnt);
 
         if (hp <= 0)
@@ -360,7 +363,7 @@ public class Enemy : MonoBehaviour
         EnemyExplosion enemyExplosion = GetComponentInChildren<EnemyExplosion>();
         enemyExplosion.isEnemyAtked = true;
         enemiesManager.AtkReward(atk);
-        Runaway();
+        Runaway(enemiesManager.wolfAgent.gameObject);
 
         if (hp <= 0)
         {
@@ -372,13 +375,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Runaway()
+    public void Runaway(GameObject go)
     {
         if (type == EnemyType.BOAR || type == EnemyType.BEAR) return;
         if (type == EnemyType.FOX || type == EnemyType.DEER)
         {
             if (hp >= maxHp * 0.3f) return;
         }
+        target = go;
         state = EnemyState.escape;
     }
 
