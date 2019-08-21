@@ -4132,6 +4132,11 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1978531898}
+    - target: {fileID: 388661695684618361, guid: b7731a12337d29a4a9b75e13204fba44,
+        type: 3}
+      propertyPath: buildingMask.m_Bits
+      value: 46137344
+      objectReference: {fileID: 0}
     - target: {fileID: 5152069598074103091, guid: b7731a12337d29a4a9b75e13204fba44,
         type: 3}
       propertyPath: m_RootOrder

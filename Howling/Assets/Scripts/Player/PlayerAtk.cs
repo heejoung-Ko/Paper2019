@@ -22,6 +22,9 @@ namespace Howling
         [SerializeField]
         private Inventory inventory;
 
+        [SerializeField]
+        private LayerMask buildingMask;
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -59,6 +62,12 @@ namespace Howling
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, enemyMask);
             foreach (Collider enemy in colliders) Attack(enemy.gameObject);
+
+            if (playerHand.getAtk() > 1)
+            {
+                colliders = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, buildingMask);
+                foreach (Collider building in colliders) building.GetComponent<Building>().Hittied();
+            }
             // foreach (Collider resource in colliders) Gathering(resource.gameObject);
         }
 
