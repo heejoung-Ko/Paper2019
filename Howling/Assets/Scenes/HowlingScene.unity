@@ -2052,6 +2052,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2123812927}
     m_Modifications:
+    - target: {fileID: 1772089991793919012, guid: a1d7ce3c168083946a2ca666c1186ce3,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemiesManager
+      objectReference: {fileID: 0}
     - target: {fileID: 4973337316635948746, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2106,11 +2111,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1772089991793919012, guid: a1d7ce3c168083946a2ca666c1186ce3,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemiesManager
       objectReference: {fileID: 0}
     - target: {fileID: 3433697733900359633, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
@@ -2263,6 +2263,16 @@ PrefabInstance:
       propertyPath: dayNightCycle
       value: 
       objectReference: {fileID: 7804743}
+    - target: {fileID: 3433697733900359633, guid: a1d7ce3c168083946a2ca666c1186ce3,
+        type: 3}
+      propertyPath: effectCameraController
+      value: 
+      objectReference: {fileID: 74373783}
+    - target: {fileID: 3433697733900359633, guid: a1d7ce3c168083946a2ca666c1186ce3,
+        type: 3}
+      propertyPath: statusController
+      value: 
+      objectReference: {fileID: 131607921}
     - target: {fileID: 7618980698028519585, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
       propertyPath: m_RootOrder
@@ -22918,6 +22928,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 702304909}
     m_Modifications:
+    - target: {fileID: 1270759937672873574, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
+        type: 3}
+      propertyPath: m_Name
+      value: p_WolfAgent
+      objectReference: {fileID: 0}
+    - target: {fileID: 1270759937672873572, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
+        type: 3}
+      propertyPath: pivotTransform
+      value: 
+      objectReference: {fileID: 702304909}
     - target: {fileID: 1270759937672873575, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22972,16 +22992,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1270759937672873572, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
-        type: 3}
-      propertyPath: pivotTransform
-      value: 
-      objectReference: {fileID: 702304909}
-    - target: {fileID: 1270759937672873574, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
-        type: 3}
-      propertyPath: m_Name
-      value: p_WolfAgent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e90a102bc65934b4ea4f0ad6257fcfe4, type: 3}
