@@ -84,18 +84,18 @@ public class StatusController : MonoBehaviour
 
     private void StatusCheats()
     {
-        if (Input.GetKey(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             isInvincibility = !isInvincibility;
             DieCheats();
             Debug.Log("무적 모드 " + isInvincibility);
         }
-        else if (Input.GetKey(KeyCode.F2))
+        else if (Input.GetKeyDown(KeyCode.F2))
         {
             StatusInitial();
             //DieCheats();
         }
-        else if (Input.GetKey(KeyCode.F3))
+        else if (Input.GetKeyDown(KeyCode.F3))
         {
             Die();
         }
