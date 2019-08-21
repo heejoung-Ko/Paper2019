@@ -28,7 +28,7 @@ public class Make : MonoBehaviour
             makeFree();
         }
 
-        if (!recipeMaterial.GetComponent<RecipeMaterial>().canMaking())
+        if (recipeMaterial.GetComponent<RecipeMaterial>().canMaking() == 0)
         {
             GetComponent<Button>().interactable = false;
             return;

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class RecipeMaterial : MonoBehaviour
 {
     public GameObject inventory;
-    bool canMake = false;
+    int canMake = 0;
 
     public void SetMaterial(Recipe recipe)
     {
@@ -27,12 +27,12 @@ public class RecipeMaterial : MonoBehaviour
             if (holdItemNum < requestItemNum)
             {
                 go.transform.GetChild(1).GetComponent<Text>().color = Color.red;
-                canMake = false;
+                canMake = 0;
             }
             else
             {
                 go.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-                canMake = true;
+                canMake = 1;
             }
         }
         if (recipe.Material2 != null)
@@ -48,12 +48,12 @@ public class RecipeMaterial : MonoBehaviour
             if (holdItemNum < requestItemNum)
             {
                 go.transform.GetChild(1).GetComponent<Text>().color = Color.red;
-                canMake = false;
+                canMake *= 0;
             }
             else
             {
                 go.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-                canMake = true;
+                canMake *= 1;
             }
         }
         if (recipe.Material3 != null)
@@ -69,12 +69,12 @@ public class RecipeMaterial : MonoBehaviour
             if (holdItemNum < requestItemNum)
             {
                 go.transform.GetChild(1).GetComponent<Text>().color = Color.red;
-                canMake = false;
+                canMake *= 0;
             }
             else
             {
                 go.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-                canMake = true;
+                canMake *= 1;
             }
         }
     }
@@ -83,8 +83,8 @@ public class RecipeMaterial : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
             transform.GetChild(i).gameObject.SetActive(false);
-        canMake = false;
+        canMake = 0;
     }
 
-    public bool canMaking() { return canMake; }
+    public int canMaking() { return canMake; }
 }
