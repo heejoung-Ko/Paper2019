@@ -653,7 +653,7 @@ MonoBehaviour:
   destroy: 0
   destroyTime: 5
   respawnTime: 10
-  col: {fileID: 3118374845578139639}
+  col: {fileID: 118790135960939783}
   count1: 2
   count2: 3
   hiddenCout: 2
@@ -713,7 +713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f177cb18accd04541b9c50799c3b9b00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -2.91
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f177cb18accd04541b9c50799c3b9b00, type: 3}
       propertyPath: m_LocalPosition.z

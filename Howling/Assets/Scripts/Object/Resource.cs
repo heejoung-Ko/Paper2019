@@ -21,7 +21,7 @@ public class Resource : MonoBehaviour
     private float respawnTimeCount; // 리스폰 카운트
 
     [SerializeField]
-    private CapsuleCollider col;
+    private BoxCollider col;
     [SerializeField]
     private int count1; // 자원 등장 갯수
     [SerializeField]
@@ -105,7 +105,7 @@ public class Resource : MonoBehaviour
 
         SoundManager.instance.PlaySE(crash_sound);
 
-        Vector3 position = new Vector3(col.bounds.center.x, col.bounds.center.y + 2f, col.bounds.center.z);
+        Vector3 position = new Vector3(col.bounds.center.x, col.bounds.center.y + 0.5f, col.bounds.center.z);
 
         for (int i = 0; i < count1; i++)
         {

@@ -2278,7 +2278,7 @@ MonoBehaviour:
   destroy: 0
   destroyTime: 3
   respawnTime: 1440
-  col: {fileID: 8377785298028393582}
+  col: {fileID: 7025767899686653035}
   count1: 1
   count2: 1
   hiddenCout: 3
@@ -2319,8 +2319,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1720452, y: 1.7875323, z: 2.5219104}
-  m_Center: {x: 0.25365132, y: 0.48127007, z: -0.07871878}
+  m_Size: {x: 2.1720452, y: 2.2180386, z: 2.5219104}
+  m_Center: {x: 0.25365138, y: 0.6965232, z: -0.07871878}
 --- !u!1001 &7638813021859934784
 PrefabInstance:
   m_ObjectHideFlags: 0

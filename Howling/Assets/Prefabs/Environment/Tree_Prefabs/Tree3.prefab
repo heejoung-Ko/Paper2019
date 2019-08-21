@@ -649,7 +649,7 @@ MonoBehaviour:
   destroy: 0
   destroyTime: 5
   respawnTime: 10
-  col: {fileID: 2690800763067450789}
+  col: {fileID: 2879713648425379939}
   count1: 2
   count2: 4
   hiddenCout: 1
