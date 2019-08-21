@@ -57,6 +57,7 @@ public class StatusController : MonoBehaviour
     float hungryDecreaseAmount = originHungryDecreaseAmount;
     float thirstyDecreaseAmount = originThirstyDecreaseAmount;
     float decreaseMultiAmount = 1.5f;
+    bool isInvincibility = false;
 
     void Start()
     {
@@ -85,10 +86,16 @@ public class StatusController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F1))
         {
+            isInvincibility = !isInvincibility;
+            DieCheats();
+            Debug.Log("무적 모드 " + isInvincibility);
+        }
+        else if (Input.GetKey(KeyCode.F2))
+        {
             StatusInitial();
             //DieCheats();
         }
-        else if (Input.GetKey(KeyCode.F2))
+        else if (Input.GetKey(KeyCode.F3))
         {
             Die();
         }
@@ -323,6 +330,7 @@ public class StatusController : MonoBehaviour
 
     public void Die()
     {
+        if (isInvincibility) return;
         if (!isDie)
         {
             isDie = true;
@@ -330,12 +338,12 @@ public class StatusController : MonoBehaviour
         }
     }
 
-    //public void DieCheats()
-    //{
-    //    if (isDie)
-    //    {
-    //        isDie = false;
-    //        effectCameraController.DieCameraOff();
-    //    }
-    //}
+    public void DieCheats()
+    {
+        if (isDie)
+        {
+            isDie = false;
+            effectCameraController.DieCameraOff();
+        }
+    }
 }
