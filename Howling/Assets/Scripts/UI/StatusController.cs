@@ -51,6 +51,12 @@ public class StatusController : MonoBehaviour
     public bool isDie;
     EffectCameraController effectCameraController;
     HowlingSceneManager sceneManager;
+    DayNightCycle dayNightCycle;
+    static float originHungryDecreaseAmount = 200f;
+    static float originThirstyDecreaseAmount = 150f;
+    float hungryDecreaseAmount = originHungryDecreaseAmount;
+    float thirstyDecreaseAmount = originThirstyDecreaseAmount;
+    float decreaseMultiAmount = 1.5f;
 
     void Start()
     {
@@ -58,6 +64,7 @@ public class StatusController : MonoBehaviour
         isDie = false;
         effectCameraController = FindObjectOfType<EffectCameraController>();
         sceneManager = FindObjectOfType<HowlingSceneManager>();
+        dayNightCycle = FindObjectOfType<DayNightCycle>();
     }
 
     public void StatusInitial()
@@ -90,12 +97,27 @@ public class StatusController : MonoBehaviour
 
     void Update()
     {
+        CheckNight();
         Hungry();
         Thirsty();
         MpRechargeTime();
         MpRecover();
         StatusCheats();
         GaugeUpdate();
+    }
+
+    private void CheckNight()
+    {
+        if (dayNightCycle.isNight)
+        {
+            hungryDecreaseAmount = originHungryDecreaseAmount * decreaseMultiAmount;
+            thirstyDecreaseAmount = originThirstyDecreaseAmount;
+        }
+        else
+        {
+            hungryDecreaseAmount = originHungryDecreaseAmount;
+            thirstyDecreaseAmount = originThirstyDecreaseAmount * decreaseMultiAmount;
+        }
     }
 
     public int GetHP()
@@ -142,7 +164,8 @@ public class StatusController : MonoBehaviour
                 currentHungryDecreaseTime++;
             else
             {
-                currentHungry -= Time.deltaTime * 60f;
+                //currentHungry -= Time.deltaTime * hungryDecreaseAmount /*60f*/;
+                DecreaseHungry(Time.deltaTime * hungryDecreaseAmount);
                 currentHungryDecreaseTime = 0;
             }
         }
@@ -160,7 +183,8 @@ public class StatusController : MonoBehaviour
                 currentThirstyDecreaseTime++;
             else
             {
-                currentThirsty -= Time.deltaTime * 40f;
+                //currentThirsty -= Time.deltaTime * thirstyDecreaseAmount /*40f*/;
+                DecreaseThirsty(Time.deltaTime * thirstyDecreaseAmount);
                 currentThirstyDecreaseTime = 0;
             }
         }
@@ -248,7 +272,7 @@ public class StatusController : MonoBehaviour
             currentSp = 0;
     }
 
-    public void IncreaseHungry(int cnt)
+    public void IncreaseHungry(float cnt)
     {
         if (currentHungry + cnt < hungry)
             currentHungry += cnt;
@@ -256,7 +280,7 @@ public class StatusController : MonoBehaviour
             currentHungry = hungry;
     }
 
-    public void DecreaseHungry(int cnt)
+    public void DecreaseHungry(float cnt)
     {
         if (currentHungry - cnt < 0)
         {
@@ -267,7 +291,7 @@ public class StatusController : MonoBehaviour
             currentHungry -= cnt;
     }
 
-    public void IncreaseThirsty(int cnt)
+    public void IncreaseThirsty(float cnt)
     {
         if (currentThirsty + cnt < thirsty)
             currentThirsty += cnt;
@@ -275,7 +299,7 @@ public class StatusController : MonoBehaviour
             currentThirsty = thirsty;
     }
 
-    public void DecreaseThirsty(int cnt)
+    public void DecreaseThirsty(float cnt)
     {
         if (currentThirsty - cnt < 0)
         {

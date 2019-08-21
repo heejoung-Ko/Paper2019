@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 7804744}
-  m_IndirectSpecularColor: {r: 0.14982428, g: 0.26409113, b: 0.29845595, a: 1}
+  m_IndirectSpecularColor: {r: 0.14982301, g: 0.26408938, b: 0.2984532, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2040,11 +2040,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2123812927}
     m_Modifications:
-    - target: {fileID: 1772089991793919012, guid: a1d7ce3c168083946a2ca666c1186ce3,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemiesManager
-      objectReference: {fileID: 0}
     - target: {fileID: 4973337316635948746, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2099,6 +2094,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772089991793919012, guid: a1d7ce3c168083946a2ca666c1186ce3,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemiesManager
       objectReference: {fileID: 0}
     - target: {fileID: 3433697733900359633, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
@@ -2266,11 +2266,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3853595827773814910, guid: a1d7ce3c168083946a2ca666c1186ce3,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1589036824009789148, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
       propertyPath: m_RootOrder
@@ -2350,6 +2345,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 80.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853595827773814910, guid: a1d7ce3c168083946a2ca666c1186ce3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5369280250069240205, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
@@ -22878,16 +22878,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 702304909}
     m_Modifications:
-    - target: {fileID: 1270759937672873574, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
-        type: 3}
-      propertyPath: m_Name
-      value: p_WolfAgent
-      objectReference: {fileID: 0}
-    - target: {fileID: 1270759937672873572, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
-        type: 3}
-      propertyPath: pivotTransform
-      value: 
-      objectReference: {fileID: 702304909}
     - target: {fileID: 1270759937672873575, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22942,6 +22932,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1270759937672873572, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
+        type: 3}
+      propertyPath: pivotTransform
+      value: 
+      objectReference: {fileID: 702304909}
+    - target: {fileID: 1270759937672873574, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
+        type: 3}
+      propertyPath: m_Name
+      value: p_WolfAgent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e90a102bc65934b4ea4f0ad6257fcfe4, type: 3}

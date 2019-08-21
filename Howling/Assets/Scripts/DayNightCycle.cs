@@ -37,11 +37,12 @@ public class DayNightCycle : MonoBehaviour
         //Debug.Log(percentageOfDay);
     }
 
-    bool isNight
+    [HideInInspector]
+    public bool isNight
     {
         get
         {
-            if (percentageOfDay > 0.5f) return true;
+            if (0.3f < percentageOfDay && percentageOfDay < 0.7f) return true;
             return false;
         }
     }
