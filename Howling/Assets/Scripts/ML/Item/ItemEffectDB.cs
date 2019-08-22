@@ -35,7 +35,7 @@ public class ItemEffectDB : MonoBehaviour
         //}
         //else 
 
-        if (item.itemType == Item.ItemType.Used)
+        if (item.itemType == Item.ItemType.Used || item.itemType == Item.ItemType.Recycle)
         {
             for (int i = 0; i < itemEffects.Length; ++i)
             {

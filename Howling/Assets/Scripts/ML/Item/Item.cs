@@ -19,6 +19,7 @@ public class Item : ScriptableObject
         Equipment,                  // 장비
         Used,                       // 소모품
         Ingredient,                 // 재료
+        Recycle,                    // 재활용 가능
         ETC                         // 기타
     }
 

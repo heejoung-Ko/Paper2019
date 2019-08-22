@@ -133,9 +133,9 @@ namespace Howling
 
         public bool AddItem(Item acquireItem, int cnt = 1, float dur = 10)
         {
-            if (Item.ItemType.Equipment != acquireItem.itemType && Item.ItemType.ETC != acquireItem.itemType)
+            if (Item.ItemType.Equipment != acquireItem.itemType && Item.ItemType.ETC != acquireItem.itemType && Item.ItemType.Recycle != acquireItem.itemType)
             {
-                for (int i = 0; i < slots.Length; i++)
+                for (int i = 0; i < slots.Length; ++i)
                 {
                     if (slots[i].item != null)
                     {
@@ -148,7 +148,7 @@ namespace Howling
                 }
             }
 
-            for (int i = 0; i < slots.Length; i++)
+            for (int i = 0; i < slots.Length; ++i)
             {
                 if (slots[i].item == null)
                 {
@@ -163,7 +163,7 @@ namespace Howling
 
         public bool CheckCanAddItem(Item acquireItem, int cnt = 1)
         {
-            if (Item.ItemType.Equipment != acquireItem.itemType && Item.ItemType.ETC != acquireItem.itemType)
+            if (Item.ItemType.Equipment != acquireItem.itemType && Item.ItemType.ETC != acquireItem.itemType && Item.ItemType.Recycle != acquireItem.itemType)
             {
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -243,12 +243,24 @@ namespace Howling
 
         void useItem()
         {
-            if (selectSlot.item != null && selectSlot.item.itemType == Item.ItemType.Used)
+            if (selectSlot.item != null)
             {
-                itemEffectDB.GetComponent<ItemEffectDB>().UseItem(selectSlot.item);
-                subItem(selectSlot.item, 1);
-                player.GetComponent<PlayerAtk>().setDrink();
-                SwapItem();
+                if (selectSlot.item.itemType == Item.ItemType.Used)
+                {
+                    itemEffectDB.GetComponent<ItemEffectDB>().UseItem(selectSlot.item);
+                    subItem(selectSlot.item, 1);
+                    player.GetComponent<PlayerAtk>().setDrink();
+                    SwapItem();
+                }
+                else if (selectSlot.item.itemType == Item.ItemType.Recycle)
+                {
+                    if (selectSlot.Durability > 0)
+                    {
+                        itemEffectDB.GetComponent<ItemEffectDB>().UseItem(selectSlot.item);
+                        player.GetComponent<PlayerAtk>().setDrink();
+                        useSelectItem(selectSlot.DurabilityMaxAbmount / 3f);
+                    }
+                }
             }
         }
 
@@ -301,9 +313,14 @@ namespace Howling
 
         public void useSelectItem(float n = 1)
         {
-            if(selectSlot.UseTool(n))
+            if (selectSlot.UseTool(n))
                 subSelecSlot();
-            
+        }
+
+        public void FillGaugeRecycleItem()
+        {
+            selectSlot.Durability = selectSlot.DurabilityMaxAbmount;
+            selectSlot.GaugeUpdate();
         }
     }
 }
