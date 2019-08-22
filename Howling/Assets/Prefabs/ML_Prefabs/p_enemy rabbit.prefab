@@ -69,7 +69,7 @@ MonoBehaviour:
   oldState: 0
   type: 0
   atkPos: 0
-  atkRange: 3
+  atkRange: 1
   targetMask:
     serializedVersion: 2
     m_Bits: 278528
