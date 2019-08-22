@@ -120,6 +120,7 @@ public class Enemy : MonoBehaviour
         }
         else if (state == EnemyState.die)
         {
+            animator.Play("die", 0);
             animator.SetTrigger("dieTrigger");
             Die();
         }
