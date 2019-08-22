@@ -264,11 +264,19 @@ namespace Howling
 
         private void WaterApear()
         {
-            actionText.gameObject.SetActive(true);
+            Item selectItem = inventory.GetComponent<Inventory>().getSelectItem();
 
-            actionText.text = "물 획득" + "<color=yellow>" + "(E)키" + "</color>";
+            if (selectItem != null)
+            {
+                if (selectItem.ItemName == "물")
+                {
+                    actionText.gameObject.SetActive(true);
 
-            isWater = true;
+                    actionText.text = "물 획득" + "<color=yellow>" + "(E)키" + "</color>";
+
+                    isWater = true;
+                }
+            }
         }
 
         private void WaterDisapear()
@@ -281,7 +289,8 @@ namespace Howling
 
         private void GetWater()
         {
-            inventory.GetComponent<Inventory>().AddItem(water);
+            //inventory.GetComponent<Inventory>().AddItem(water);
+            inventory.GetComponent<Inventory>().FillGaugeRecycleItem();
         }
     }
 }

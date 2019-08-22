@@ -27,7 +27,8 @@ namespace Howling
         public Transform itemDropSpawn;
         public float itemDropForce;
 
-        private float Durability;     // 내구도
+        [HideInInspector] public float Durability;     // 내구도
+        [HideInInspector] public float DurabilityMaxAbmount = 10f;
         [SerializeField]
         private GameObject Gauge;
         [SerializeField]
@@ -50,7 +51,7 @@ namespace Howling
 
             if (item != null)
             {
-                if (item.itemType != Item.ItemType.Equipment)
+                if (item.itemType != Item.ItemType.Equipment && item.itemType != Item.ItemType.Recycle)
                 {
                     if (alpha - float.Epsilon <= 0f) go_CountImage.SetActive(false);
                     else go_CountImage.SetActive(true);
@@ -64,7 +65,7 @@ namespace Howling
             itemCount = cnt;
             itemImage.sprite = item.ItemImage_32x32;
 
-            if (item.itemType != Item.ItemType.Equipment)
+            if (item.itemType != Item.ItemType.Equipment && item.itemType != Item.ItemType.Recycle)
             {
                 go_CountImage.SetActive(true);
                 text_Count.text = itemCount.ToString();
@@ -225,12 +226,20 @@ namespace Howling
         public bool UseTool(float n = 1f)
         {
             if (item == null) return false;
-            if (item.itemType != Item.ItemType.Equipment) return false;
+            if (item.itemType != Item.ItemType.Equipment && item.itemType != Item.ItemType.Recycle) return false;
+
             Durability -= n;
             if (Durability <= 0)
             {
-                ClearSlot();
-                return true;
+                if (item.itemType == Item.ItemType.Equipment)
+                {
+                    ClearSlot();
+                    return true;
+                }
+                else if (item.itemType == Item.ItemType.Recycle)
+                {
+                    Durability = 0;
+                }
             }
             GaugeUpdate();
             return false;
