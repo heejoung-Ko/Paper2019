@@ -243,10 +243,11 @@ namespace Howling
 
         void useItem()
         {
+            if(player.GetComponent<PlayerAtk>().isDrink()) return;
             if (selectSlot.item != null && selectSlot.item.itemType == Item.ItemType.Used)
             {
                 itemEffectDB.GetComponent<ItemEffectDB>().UseItem(selectSlot.item);
-                subItem(selectSlot.item, 1);
+                selectSlot.SetSlotCount(-1);
                 player.GetComponent<PlayerAtk>().setDrink();
                 SwapItem();
             }
@@ -256,7 +257,7 @@ namespace Howling
         {
             if (selectSlot.item != null && selectSlot.item.ItemName == "손질되지 않은 고기")
             {
-                subItem(selectSlot.item, 1);
+                selectSlot.SetSlotCount(-1);
                 AddItem(Feed, 1);
                 SwapItem();
             }
