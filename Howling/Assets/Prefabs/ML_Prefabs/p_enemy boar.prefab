@@ -139,6 +139,7 @@ MonoBehaviour:
   atk: 7
   invincibleTime: 1
   currentInvincibleTime: 0
+  isDead: 0
   dropItem: {fileID: 197605295, guid: eba5ea91128e3ed418b5b51db3df9a05, type: 3}
   detectDist: 5
 --- !u!54 &9105239298221749031
@@ -169,7 +170,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: aa7066cc29d0627478b14a9c961eb97a, type: 3}
   m_Controller: {fileID: 9100000, guid: 1d0962974d8e85d47b605dd8632f1b29, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 

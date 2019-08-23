@@ -80,7 +80,9 @@ MonoBehaviour:
   atk: 5
   invincibleTime: 1
   currentInvincibleTime: 0
+  isDead: 0
   dropItem: {fileID: 0}
+  detectDist: 5
 --- !u!95 &6487584846483167924
 Animator:
   serializedVersion: 3
@@ -93,7 +95,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: a666bc52ea3645348930a8ea354d3c20, type: 3}
   m_Controller: {fileID: 9100000, guid: f9ef33f721e485b42a6c6149cb07aed6, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
