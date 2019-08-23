@@ -37,7 +37,7 @@ namespace Howling
 
         IEnumerator AttackCoroutine()
         {
-            Debug.Log("start attack coroutine");
+            //Debug.Log("start attack coroutine");
             isAttack = true;
             currentHand.anim.SetBool("Attack", true);
 
