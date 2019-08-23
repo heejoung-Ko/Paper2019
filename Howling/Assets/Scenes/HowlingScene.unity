@@ -2060,7 +2060,7 @@ PrefabInstance:
     - target: {fileID: 1772089991793919012, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4973337316635948746, guid: a1d7ce3c168083946a2ca666c1186ce3,
         type: 3}
@@ -9628,7 +9628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &702304909
 Transform:
   m_ObjectHideFlags: 0
@@ -19833,6 +19833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1416874242}
   - component: {fileID: 1416874243}
+  - component: {fileID: 1416874244}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -19874,6 +19875,18 @@ MonoBehaviour:
   MenuUI: {fileID: 1398025634}
   isGameOver: 0
   state: 0
+--- !u!114 &1416874244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416874241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1d667aee9b76443bec0b4fa6bf8217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1418528484 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6426931083246733946, guid: e2baf028e6b942446b42c62b5e1b69a7,
