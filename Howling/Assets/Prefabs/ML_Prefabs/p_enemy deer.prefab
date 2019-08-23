@@ -169,12 +169,13 @@ MonoBehaviour:
     m_Bits: 278528
   fireMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8388608
   hp: 30
   atk: 10
   invincibleTime: 1
   currentInvincibleTime: 0
   dropItem: {fileID: 197605295, guid: eba5ea91128e3ed418b5b51db3df9a05, type: 3}
+  detectDist: 5
 --- !u!135 &5947704296487588946
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -75,12 +75,13 @@ MonoBehaviour:
     m_Bits: 278528
   fireMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8388608
   hp: 50
   atk: 25
   invincibleTime: 1
   currentInvincibleTime: 0
   dropItem: {fileID: 0}
+  detectDist: 5
 --- !u!95 &8803759733957970874
 Animator:
   serializedVersion: 3

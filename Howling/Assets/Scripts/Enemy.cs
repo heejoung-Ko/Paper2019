@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class Enemy : MonoBehaviour
@@ -46,6 +47,7 @@ public class Enemy : MonoBehaviour
     public float invincibleTime = 1f; // 무적 시간
     public float currentInvincibleTime = 0f;
 
+    [SerializeField]
     bool isDead;
     bool isAttack;
 
@@ -55,12 +57,8 @@ public class Enemy : MonoBehaviour
     private EnemiesManager enemiesManager;
     float nightSpeed = 1f;
 
-    // s[SerializeField]
-    // sGameObject player;
-    // s[SerializeField]
-    // sGameObject wolf;
-
-    // public string name;
+    [SerializeField]
+    private float detectDist = 5f;
 
     private void Awake()
     {
@@ -68,6 +66,9 @@ public class Enemy : MonoBehaviour
         enemiesManager = FindObjectOfType<EnemiesManager>();
         isDead = false;
         isAttack = false;
+
+        StartCoroutine(Detect());
+        StartCoroutine(Action());
 
         switch (type)
         {
@@ -82,53 +83,81 @@ public class Enemy : MonoBehaviour
         maxHp = hp;
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Detect()
     {
-        
-        
-        if (state == EnemyState.trace)
+        while (!isDead)
         {
-            animator.SetBool("isRunning", true);
-            animator.SetBool("isMoving", true);
-            Trace();
-            return;
+            Debug.Log("감지");
+            if (state == EnemyState.idle || state == EnemyState.walk || state == EnemyState.hit)
+            {
+                if (target == null)
+                {
+                    Collider[] colliders = Physics.OverlapSphere(transform.position, detectDist, targetMask);
+                    if (colliders.Length != 0)
+                    {
+                        state = EnemyState.trace;
+                        target = colliders[0].gameObject;
+                        ChangeNextState();
+                        nextStateTime = 0.0f;
+                    }
+                    Collider[] colliders2 = Physics.OverlapSphere(transform.position, detectDist, fireMask);
+                    if (colliders2.Length != 0)
+                    {
+                        if (colliders2[0].gameObject.GetComponent<Campfire>().fireSize == FireSizeType.NONE) yield return null;
+                        target = colliders2[0].gameObject;
+                        state = EnemyState.escape;
+                        nextStateTime = keepEscapeTime;
+                        nowStateTime = keepEscapeTime - 1f;
+                    }
+                }
+            }
+            else
+                yield return new WaitForSeconds(keepTraceTime);
+
+            yield return null;
         }
-        else if (state == EnemyState.escape)
+    }
+
+    IEnumerator Action()
+    {
+        while (!isDead)
         {
-            animator.SetBool("isRunning", true);
-            animator.SetBool("isMoving", true);
-            Escape();
-            return;
-        }
-        else if (state == EnemyState.idle)
-        {
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isMoving", false);
-            Idle();
-            return;
-        }
-        else if (state == EnemyState.walk)
-        {
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isMoving", true);
-            Walk();
-            return;
-        }
-        else if (state == EnemyState.attack)
-        {
-            animator.SetTrigger("attackTrigger");
-            Attack();
-            return;
-        }
-        else if (state == EnemyState.hit)
-        {
-            Hit();
-        }
-        else if (state == EnemyState.die)
-        {
-            animator.Play("die", 0);
-            Die();
+            Debug.Log("행동");
+            switch (state)
+            {
+                case EnemyState.idle:
+                    animator.SetBool("isRunning", false);
+                    animator.SetBool("isMoving", false);
+                    Idle();
+                    break;
+                case EnemyState.walk:
+                    animator.SetBool("isRunning", false);
+                    animator.SetBool("isMoving", true);
+                    Walk();
+                    break;
+                case EnemyState.trace:
+                    animator.SetBool("isRunning", true);
+                    animator.SetBool("isMoving", true);
+                    Trace();
+                    break;
+                case EnemyState.escape:
+                    animator.SetBool("isRunning", true);
+                    animator.SetBool("isMoving", true);
+                    Escape();
+                    break;
+                case EnemyState.attack:
+                    animator.SetTrigger("attackTrigger");
+                    Attack();
+                    break;
+                case EnemyState.hit:
+                    Hit();
+                    break;
+                case EnemyState.die:
+                    animator.Play("die", 0);
+                    Die();
+                    break;
+            }
+            yield return null;
         }
     }
 
