@@ -216,14 +216,18 @@ namespace Howling
             for (int i = 0; i < slots.Length; i++) 
             {
                 if (item == slots[i].item)
-                    c+= slots[i].itemCount;
+                {
+                    if (item.itemType == Item.ItemType.Recycle)
+                        if (slots[i].Durability < slots[i].DurabilityMaxAbmount)
+                            continue;
+                    c += slots[i].itemCount;
+                }
             }
             return c;
         }
 
         public void subItem(Item acquireItem, int cnt)
         {
-            int c = cnt;
             for (int i = 0; i < slots.Length; i++)
             {
                 if (slots[i].item != null)
@@ -232,10 +236,19 @@ namespace Howling
                     {
                         if (cnt == 0)
                             return;
-                        slots[i].SetSlotCount(-1);
-                        cnt -= 1;
-
-                        i--;
+                        if (acquireItem.itemType == Item.ItemType.Recycle)
+                        {
+                            if (slots[i].Durability < slots[i].DurabilityMaxAbmount) continue;
+                            slots[i].Durability = 0;
+                            slots[i].GaugeUpdate();
+                            cnt -= 1;
+                        }
+                        else
+                        {
+                            slots[i].SetSlotCount(-1);
+                            cnt -= 1;
+                            i--;
+                        }
                     }
                 }
             }

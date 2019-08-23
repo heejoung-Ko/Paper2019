@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class Make : MonoBehaviour
 {
-    public GameObject inventory;
+    public Inventory inventory;
     public GameObject recipeList;
     public GameObject recipeMaterial;
     public GameObject making;
@@ -41,19 +41,19 @@ public class Make : MonoBehaviour
     {
         GameObject selectRecipe = recipeList.GetComponent<RecipeList>().SelectedRecipe;
 
-        if (!inventory.GetComponent<Inventory>().CheckCanAddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1))
+        if (!inventory.CheckCanAddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1))
             return;
 
         if (selectRecipe.GetComponent<RecipeController>().recipe.Material1 != null)
-            inventory.GetComponent<Inventory>().subItem(selectRecipe.GetComponent<RecipeController>().recipe.Material1, selectRecipe.GetComponent<RecipeController>().recipe.Material1_num);
+            inventory.subItem(selectRecipe.GetComponent<RecipeController>().recipe.Material1, selectRecipe.GetComponent<RecipeController>().recipe.Material1_num);
 
         if (selectRecipe.GetComponent<RecipeController>().recipe.Material2 != null)
-            inventory.GetComponent<Inventory>().subItem(selectRecipe.GetComponent<RecipeController>().recipe.Material2, selectRecipe.GetComponent<RecipeController>().recipe.Material2_num);
+            inventory.subItem(selectRecipe.GetComponent<RecipeController>().recipe.Material2, selectRecipe.GetComponent<RecipeController>().recipe.Material2_num);
 
         if (selectRecipe.GetComponent<RecipeController>().recipe.Material3 != null)
-            inventory.GetComponent<Inventory>().subItem(selectRecipe.GetComponent<RecipeController>().recipe.Material3, selectRecipe.GetComponent<RecipeController>().recipe.Material3_num);
+            inventory.subItem(selectRecipe.GetComponent<RecipeController>().recipe.Material3, selectRecipe.GetComponent<RecipeController>().recipe.Material3_num);
 
-        inventory.GetComponent<Inventory>().AddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1);
+        inventory.AddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1);
         // recipeMaterial.GetComponent<RecipeMaterial>().SetMaterial(selectRecipe.GetComponent<RecipeController>().recipe);
 
         GetComponent<Button>().interactable = false;
@@ -65,9 +65,9 @@ public class Make : MonoBehaviour
     {
         GameObject selectRecipe = recipeList.GetComponent<RecipeList>().SelectedRecipe;
 
-        if (!inventory.GetComponent<Inventory>().CheckCanAddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1))
+        if (!inventory.CheckCanAddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1))
             return;
    
-        inventory.GetComponent<Inventory>().AddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1);
+        inventory.AddItem(selectRecipe.GetComponent<RecipeController>().recipe.Result, 1);
     }
 }
