@@ -39,6 +39,26 @@ public class UIManagerController : MonoBehaviour
     {
         if (isGameOver) return;
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            switch(state)
+            {
+                case UIState.MAKING:
+                    exitMaking();
+                    break;
+                case UIState.MAP:
+                    exitMap();
+                    break;
+                case UIState.BOX:
+                    exitBox();
+                    break;
+                case UIState.MENU:
+                    exitMenu();
+                    break;
+            }
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.H))
         {
             // 조합 상태 일때
