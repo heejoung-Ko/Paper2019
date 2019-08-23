@@ -83,11 +83,17 @@ public class Enemy : MonoBehaviour
         maxHp = hp;
     }
 
+    private void Start()
+    {
+        StartCoroutine(Detect());
+        StartCoroutine(Action());
+    }
+
     IEnumerator Detect()
     {
         while (!isDead)
         {
-            Debug.Log("감지");
+            //Debug.Log("감지");
             if (state == EnemyState.idle || state == EnemyState.walk || state == EnemyState.hit)
             {
                 if (target == null)
@@ -122,7 +128,7 @@ public class Enemy : MonoBehaviour
     {
         while (!isDead)
         {
-            Debug.Log("행동");
+            //Debug.Log("행동");
             switch (state)
             {
                 case EnemyState.idle:
@@ -157,6 +163,7 @@ public class Enemy : MonoBehaviour
                     Die();
                     break;
             }
+
             yield return null;
         }
     }
