@@ -55,6 +55,11 @@ public class Enemy : MonoBehaviour
     private EnemiesManager enemiesManager;
     float nightSpeed = 1f;
 
+    // s[SerializeField]
+    // sGameObject player;
+    // s[SerializeField]
+    // sGameObject wolf;
+
     // public string name;
 
     private void Awake()
@@ -80,6 +85,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         if (state == EnemyState.trace)
         {
             animator.SetBool("isRunning", true);
@@ -125,38 +132,38 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (target == null)
-        {
-            if (other.CompareTag(targetTag) || other.CompareTag(agentTag))
-            {
-                state = EnemyState.trace;
-                target = other.gameObject;
-                ChangeNextState();
-                nextStateTime = 0.0f;
-            }
-        }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (target == null)
+    //     {
+    //         if (other.CompareTag(targetTag) || other.CompareTag(agentTag))
+    //         {
+    //             state = EnemyState.trace;
+    //             target = other.gameObject;
+    //             ChangeNextState();
+    //             nextStateTime = 0.0f;
+    //         }
+    //     }
+    // 
+    //     if (other.gameObject.layer == 23)   // campfire
+    //     {
+    //         if (other.GetComponent<Campfire>().fireSize == FireSizeType.NONE) return;
+    //         if (target == other.gameObject) return;
+    // 
+    //         target = other.gameObject;
+    //         state = EnemyState.escape;
+    //         nextStateTime = keepEscapeTime;
+    //         nowStateTime = keepEscapeTime - 1f;
+    //     }
+    // }
 
-        if (other.gameObject.layer == 23)   // campfire
-        {
-            if (other.GetComponent<Campfire>().fireSize == FireSizeType.NONE) return;
-            if (target == other.gameObject) return;
-
-            target = other.gameObject;
-            state = EnemyState.escape;
-            nextStateTime = keepEscapeTime;
-            nowStateTime = keepEscapeTime - 1f;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (state == EnemyState.trace)
-            nextStateTime = keepTraceTime;
-        else if (state == EnemyState.escape)
-            nextStateTime = keepEscapeTime;
-    }
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     if (state == EnemyState.trace)
+    //         nextStateTime = keepTraceTime;
+    //     else if (state == EnemyState.escape)
+    //         nextStateTime = keepEscapeTime;
+    // }
 
     private void Move()
     {
@@ -249,7 +256,7 @@ public class Enemy : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.Log("Enemy target is null.");
+            // Debug.Log("Enemy target is null.");
             direction = transform.forward;
         }
         direction = (target.transform.position - transform.position).normalized;  // 타겟으로 향하는 방향 
@@ -398,7 +405,7 @@ public class Enemy : MonoBehaviour
 
     void DropItem()
     {
-        Debug.Log("아이템 뿌린당!!!");
+        // Debug.Log("아이템 뿌린당!!!");
         Instantiate(dropItem, transform.position, Quaternion.identity);
     }
 }

@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Bits: 278528
   fireMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8388608
   hp: 20
   atk: 5
   invincibleTime: 1
@@ -109,7 +109,7 @@ SphereCollider:
   m_GameObject: {fileID: 691647849}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0.5, z: 0.17351627}
@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 3779222914580471288}
   - component: {fileID: 188104336782370456}
   - component: {fileID: 6902028981566954420}
+  - component: {fileID: 8895706173192979974}
   m_Layer: 16
   m_Name: collider
   m_TagString: enemyCollider
@@ -169,10 +170,24 @@ BoxCollider:
   m_GameObject: {fileID: 7940646100592786130}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.45711088, y: 1.1097975, z: 1.8478823}
   m_Center: {x: -0.00914979, y: 0.2805941, z: 0.24704504}
+--- !u!136 &8895706173192979974
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7940646100592786130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.55284214
+  m_Height: 2.0220523
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.27595305, z: 0.17621589}
 --- !u!1001 &1388709000871856898
 PrefabInstance:
   m_ObjectHideFlags: 0

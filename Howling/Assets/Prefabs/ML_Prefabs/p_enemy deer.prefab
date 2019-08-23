@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3138304488837704169}
   - component: {fileID: 1848890445567743725}
   - component: {fileID: 2879809500138815493}
+  - component: {fileID: 7931825708535554331}
   m_Layer: 16
   m_Name: collider
   m_TagString: enemyCollider
@@ -56,10 +57,24 @@ BoxCollider:
   m_GameObject: {fileID: 5543376803469081021}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.5848344, y: 1.7302194, z: 2.4320786}
   m_Center: {x: -0.0059309304, y: 0.8395841, z: 0.38912356}
+--- !u!136 &7931825708535554331
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5543376803469081021}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.8717545
+  m_Height: 2.6488278
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.88497555, z: 0.3500408}
 --- !u!1 &8599248350483425059
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +184,7 @@ SphereCollider:
   m_GameObject: {fileID: 8599248350483425059}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0.6801772, z: 0.34399772}
