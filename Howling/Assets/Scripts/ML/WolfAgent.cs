@@ -284,25 +284,25 @@ public class WolfAgent : Agent
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기")
                 {
-                    Debug.Log("생고기 냠냠");
+                    //Debug.Log("생고기 냠냠");
                     Hungry += 20f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
                 {
-                    Debug.Log("사료 냠냠");
+                    //Debug.Log("사료 냠냠");
                     Hungry += 30f;
                     Friendly += 5f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
-                    Debug.Log("사과 냠냠");
+                    //Debug.Log("사과 냠냠");
                     Hungry += 10f;
                 }
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
 
                 float eatReward = (Hungry - oldHungy) * 0.03f;
 
-                //Debug.Log("냠냠 Reward : " + eatReward);
+                //Debug.Log("WolfAgent - 냠냠");
                 AddReward(eatReward);
 
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
@@ -337,7 +337,7 @@ public class WolfAgent : Agent
 
                 transform.LookAt(adj.transform);
 
-                Debug.Log("rest 중!!!");
+                //Debug.Log("WolfAgent - rest 중!!!");
 
                 Hp += 10f;
                 Hp = Mathf.Clamp(Hp, 0f, MaxHp);
@@ -376,7 +376,7 @@ public class WolfAgent : Agent
             Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
             var reward = 0.001f * Friendly;
-            Debug.Log("Go to player reward");
+            //Debug.Log("WolfAgent - Go to player reward");
             AddReward(reward);
             SetPlayerRelation();
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
@@ -392,7 +392,7 @@ public class WolfAgent : Agent
 
             if (testvic != null)
             {
-                Debug.Log("enemy 발견!");
+                //Debug.Log("enemy 발견!");
                 return true;
             }
             else
@@ -418,20 +418,20 @@ public class WolfAgent : Agent
             {
                 vic.DecreaseHpByWolf((int)AttackDamage);
             }
-            else Debug.Log("WolfAgent - Attack, vic is null.");
+            //else Debug.Log("WolfAgent - Attack, vic is null.");
         }
         //Hungry -= Time.deltaTime * 0.01f; // 공격했으니 허기소비
     }
 
     public void EnemyAtkReward(int atk)
     {
-        Debug.Log("WolfAgent - EnemyAtkReward, 공격했다!");
+        //Debug.Log("WolfAgent - EnemyAtkReward, 공격했다!");
         AddReward(atk * 0.05f);
     }
 
     public void EnemyDieReward()
     {
-        Debug.Log("WolfAgent - EnemyDieReward, 해치웠다!");
+        //Debug.Log("WolfAgent - EnemyDieReward, 해치웠다!");
         AddReward(.3f);
     }
 
@@ -448,11 +448,11 @@ public class WolfAgent : Agent
                    collider.CompareTag("enemyCollider") ||
                    collider.CompareTag("Player"))
                 {
-                    Debug.Log("앞에 뭐가 있다!!!");
+                    //Debug.Log("앞에 뭐가 있다!!!");
                     return false;
                 }
             }
-            Debug.Log("앞에 암것도 없으니 땅을 파겠다!!");
+            //Debug.Log("앞에 암것도 없으니 땅을 파겠다!!");
             return true;
 
         }
@@ -476,7 +476,7 @@ public class WolfAgent : Agent
             }
             else
             {
-                Debug.Log("땅파기 실패!!");
+                //Debug.Log("땅파기 실패!!");
 
                 currentAction = "DigFail";
             }
@@ -488,7 +488,7 @@ public class WolfAgent : Agent
 
     void DropItem()
     {
-        Debug.Log("땅파기 성공!!");
+        //Debug.Log("WolfAgent - 땅파기 성공!!");
         int itemIndex = Random.Range(0, dropItem.Length);
 
         // 땅파서 아이템 나오는 위치 보고,, 수정하던지 해야할듯,,!
@@ -501,9 +501,9 @@ public class WolfAgent : Agent
         {
             if (Hp <= 0 || enterDeadZone || Hungry <= 0)
             {
-                if (Hp <= 0) Debug.Log("hp <= 0");
-                else if (enterDeadZone) Debug.Log("enterDeadZone");
-                else if (Hungry <= 0) Debug.Log("Hungry <= 0");
+                //if (Hp <= 0) Debug.Log("hp <= 0");
+                //else if (enterDeadZone) Debug.Log("enterDeadZone");
+                //else if (Hungry <= 0) Debug.Log("Hungry <= 0");
                 return true;
             }
 
