@@ -90,7 +90,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.012517648
+  m_Radius: 0.01
   m_Center: {x: 0, y: -2.328307e-10, z: 0}
 --- !u!54 &9107338810812439623
 Rigidbody:
@@ -198,7 +198,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.010402197
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 9.313228e-10}
 --- !u!54 &5614602233370403055
 Rigidbody:
@@ -306,7 +306,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.011946584
+  m_Radius: 0.01
   m_Center: {x: 0, y: -9.313228e-10, z: -4.656614e-10}
 --- !u!54 &4253886256555957377
 Rigidbody:
@@ -414,7 +414,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0087072
+  m_Radius: 0.01
   m_Center: {x: 9.313226e-10, y: 4.656614e-10, z: 0}
 --- !u!54 &3532702466714996730
 Rigidbody:
@@ -522,7 +522,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.012352337
+  m_Radius: 0.01
   m_Center: {x: -4.656613e-10, y: 0, z: -9.313228e-10}
 --- !u!54 &6124038975958806538
 Rigidbody:
@@ -630,7 +630,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.011537085
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &339389504456116283
 Rigidbody:
@@ -738,7 +738,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.010152509
+  m_Radius: 0.01
   m_Center: {x: 4.656613e-10, y: 0, z: 0}
 --- !u!54 &889549938146656474
 Rigidbody:
@@ -846,7 +846,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.009774218
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: -4.656614e-10}
 --- !u!54 &2645681786239303433
 Rigidbody:
@@ -954,7 +954,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.011531169
+  m_Radius: 0.01
   m_Center: {x: -4.656613e-10, y: 0, z: 9.313228e-10}
 --- !u!54 &1989302053542245237
 Rigidbody:
@@ -1062,7 +1062,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.011843926
+  m_Radius: 0.01
   m_Center: {x: 0, y: 9.313228e-10, z: -9.313228e-10}
 --- !u!54 &1347289593512527383
 Rigidbody:
@@ -1129,10 +1129,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5740455209522530304}
-  - component: {fileID: 5265048134502768803}
   - component: {fileID: 2699112348531328957}
   - component: {fileID: 237501683913661803}
-  - component: {fileID: 1903752570440290259}
   m_Layer: 0
   m_Name: Rock2
   m_TagString: rock
@@ -1156,22 +1154,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &5265048134502768803
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740455209522530305}
-  serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!114 &2699112348531328957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,23 +1196,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8745411
-  m_Height: 2.4726274
+  m_Radius: 1
+  m_Height: 0
   m_Direction: 1
-  m_Center: {x: 0.059586108, y: 0.7363137, z: -0.076610565}
---- !u!65 &1903752570440290259
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740455209522530305}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 2.1521854, y: 1.9055367, z: 1.9288462}
-  m_Center: {x: 0.09494758, y: 0.6732545, z: -0.1495542}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1805094537471474968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1274,17 +1243,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5017adad6bb6db44f921768caf7825ea, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: 2fb913c85ab1fb54aaf5459e815b0628, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2fb913c85ab1fb54aaf5459e815b0628, type: 3}
---- !u!4 &1805094537471338392 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 2fb913c85ab1fb54aaf5459e815b0628,
-    type: 3}
-  m_PrefabInstance: {fileID: 1805094537471474968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1805094537471572920 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 2fb913c85ab1fb54aaf5459e815b0628,
+    type: 3}
+  m_PrefabInstance: {fileID: 1805094537471474968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1805094537471338392 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 2fb913c85ab1fb54aaf5459e815b0628,
     type: 3}
   m_PrefabInstance: {fileID: 1805094537471474968}
   m_PrefabAsset: {fileID: 0}

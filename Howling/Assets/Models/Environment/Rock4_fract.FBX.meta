@@ -106,7 +106,12 @@ ModelImporter:
     4300034: Rock_21_Part_18
     4300036: Rock_21_Part_19
     4300038: Rock_21_Part_20
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock
+    second: {fileID: 2100000, guid: 5017adad6bb6db44f921768caf7825ea, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -137,7 +142,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.03
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
