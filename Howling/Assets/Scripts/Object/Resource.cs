@@ -18,10 +18,10 @@ public class Resource : MonoBehaviour
     [SerializeField]
     private float respawnTime; // 리스폰에 필요한 시간
 
-    private float respawnTimeCount; // 리스폰 카운트
+    //private float respawnTimeCount; // 리스폰 카운트
 
     [SerializeField]
-    private BoxCollider col;
+    private CapsuleCollider col;
     [SerializeField]
     private int count1; // 자원 등장 갯수
     [SerializeField]
@@ -54,36 +54,9 @@ public class Resource : MonoBehaviour
         //age = (int)(Random.Range(1.0f, 10.0f));
 
         //transform.localScale = Vector3.one * (age * 0.2f);
-        respawnTimeCount = respawnTime;
+        //respawnTimeCount = respawnTime;
         hp = initHp;
         init_posY = transform.position.y;
-    }
-
-    private void Update()
-    {
-        if (destroy)
-        {
-            if (respawnTimeCount <= 0)
-            {
-                respawnTimeCount = respawnTime;
-                Respawn();
-            }
-
-            respawnTimeCount -= Time.deltaTime;
-        }
-    }
-
-    public void Respawn()
-    {
-        transform.position = new Vector3 (transform.position.x, init_posY);
-        //transform.localScale = Vector3.one * Mathf.Pow(age, 1 / 3);
-        destroy = false;
-        hp = initHp;
-        respawnTimeCount = respawnTime;
-
-        col.enabled = true;
-
-        basic_resource.SetActive(true);
     }
 
     public void Gathering()
@@ -105,7 +78,7 @@ public class Resource : MonoBehaviour
 
         SoundManager.instance.PlaySE(crash_sound);
 
-        Vector3 position = new Vector3(col.bounds.center.x, col.bounds.center.y + 0.5f, col.bounds.center.z);
+        Vector3 position = new Vector3(col.bounds.center.x, col.bounds.center.y + 1f, col.bounds.center.z);
 
         for (int i = 0; i < count1; i++)
         {
@@ -126,6 +99,21 @@ public class Resource : MonoBehaviour
         Destroy(fract_clone, destroyTime);
 
         col.enabled = false;
-        destroy = true;
+
+        StartCoroutine("Respawn");
     }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        transform.position = new Vector3(transform.position.x, init_posY, transform.position.y);
+
+        hp = initHp;
+
+        col.enabled = true;
+
+        basic_resource.SetActive(true);
+    }
+
 }
