@@ -16,6 +16,7 @@ public class EffectCameraController : MonoBehaviour
     public Camera dieCamera;
     public float dieTime;
     public float respawnTime;
+    private bool isGameOver;
 
     Vector3 startPosAtk;
     Howling.PlayerMoveScript playerMoveScript;
@@ -51,6 +52,8 @@ public class EffectCameraController : MonoBehaviour
         dieCamera.gameObject.SetActive(true);
         dieCamera.transform.localPosition = Vector3.zero;
         //dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        isGameOver = true;
         DieEffect(0.2f, dieTime);
         inventory.isGameOver = true;
         uiManagerController.isGameOver = true;
@@ -67,6 +70,8 @@ public class EffectCameraController : MonoBehaviour
             dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
             dieCamera.gameObject.SetActive(false);
         }
+
+        isGameOver = false;
         inventory.isGameOver = false;
         uiManagerController.isGameOver = false;
         uiManagerController.exitUI();
@@ -146,6 +151,7 @@ public class EffectCameraController : MonoBehaviour
 
     public void PlayerRespawn()
     {
+        if (!isGameOver) return;
         playerMoveScript.Respawn();
     }
 
