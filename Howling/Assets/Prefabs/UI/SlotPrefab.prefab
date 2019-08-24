@@ -211,7 +211,9 @@ MonoBehaviour:
   text_Count: {fileID: 1471487488535517668}
   go_CountImage: {fileID: 1471487488966554191}
   itemDropSpawn: {fileID: 0}
-  itemDropForce: 25
+  itemDropForce: 10
+  Durability: 0
+  DurabilityMaxAbmount: 10
   Gauge: {fileID: 3281907752754807940}
   GaugeBar: {fileID: 1147750423982584431}
 --- !u!1 &1471487488966554191
