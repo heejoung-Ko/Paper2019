@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     string agentTag = "agent";
 
     public float atkPos = 0f;
-    public float atkRange = 3f;
+    public float atkRange;
     public LayerMask targetMask;
     public LayerMask fireMask;
 
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
     float nightSpeed = 1f;
 
     [SerializeField]
-    private float detectDist = 10f;
+    private float detectDist;
 
     private void Awake()
     {
@@ -70,16 +70,28 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Detect());
         StartCoroutine(Action());
 
+        detectDist = atkRange * 2f;
         switch (type)
         {
-            case EnemyType.RABBIT: name = "RABBIT"; break;
-            case EnemyType.FOX: name = "FOX"; break;
-            case EnemyType.DEER: name = "DEER"; break;
-            case EnemyType.BOAR: name = "BOAR"; break;
-            case EnemyType.BEAR: name = "BEAR"; break;
+            case EnemyType.RABBIT:
+                name = "RABBIT";
+                break;
+            case EnemyType.FOX:
+                name = "FOX";
+                break;
+            case EnemyType.DEER:
+                name = "DEER";
+                detectDist = atkRange * 1.5f;
+                break;
+            case EnemyType.BOAR:
+                name = "BOAR";
+                break;
+            case EnemyType.BEAR:
+                name = "BEAR";
+                detectDist = atkRange * 3f;
+                break;
             default: break;
         }
-
         maxHp = hp;
     }
 
@@ -97,16 +109,13 @@ public class Enemy : MonoBehaviour
             Collider[] fireColliders = Physics.OverlapSphere(transform.position, detectDist, fireMask);
             if (fireColliders.Length != 0)
             {
-                if (fireColliders[0].gameObject.GetComponent<Campfire>().fireSize == FireSizeType.NONE) yield return null;
-                if (target == fireColliders[0].gameObject) yield return null;
                 Debug.Log("enemy - campfire 닿음!!");
                 target = fireColliders[0].gameObject;
                 state = EnemyState.escape;
                 nextStateTime = keepEscapeTime;
-                nowStateTime = keepEscapeTime - 1f;
-                yield return null;
+                nowStateTime = keepEscapeTime - 2f;
             }
-            if (state == EnemyState.idle || state == EnemyState.walk || state == EnemyState.hit)
+            else if (state == EnemyState.idle || state == EnemyState.walk || state == EnemyState.hit)
             {
                 if (target == null)
                 {
@@ -120,8 +129,8 @@ public class Enemy : MonoBehaviour
                     }
                 }
             }
-            else
-                yield return new WaitForSeconds(keepTraceTime);
+            //else if (state == EnemyState.escape)
+            //    yield return new WaitForSeconds(keepEscapeTime - nowStateTime);
 
             yield return null;
         }
