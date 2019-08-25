@@ -68,6 +68,7 @@ MonoBehaviour:
   state: 0
   oldState: 0
   type: 4
+  target: {fileID: 0}
   atkPos: 0
   atkRange: 2.6
   targetMask:
@@ -75,7 +76,7 @@ MonoBehaviour:
     m_Bits: 278528
   fireMask:
     serializedVersion: 2
-    m_Bits: 8388608
+    m_Bits: 67108864
   hp: 50
   atk: 25
   invincibleTime: 1
