@@ -22,7 +22,7 @@ namespace Howling
         public static float walkAcc = 5.0f;
         public static float runAcc = 10.0f;
         private static float walkMaxVel = 5.0f;
-        private static float runMaxVel = 10.0f;
+        private static float runMaxVel = 10f;
         private Vector3 moveVector = new Vector3(0, 0, 0);
         private float verticalMove = 0.0f;
         private float horizontalMove = 0.0f;
@@ -47,6 +47,7 @@ namespace Howling
             animator = GetComponent<Animator>();
             statusController = FindObjectOfType<StatusController>();
             tutorialController = FindObjectOfType<TutorialController>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
         void Update()
         {
@@ -94,7 +95,7 @@ namespace Howling
             && ((verticalMove < Mathf.Epsilon) && (verticalMove > -Mathf.Epsilon)))
             {
                 velocity = 0.0f;
-                moveVector.Set(horizontalMove, _rigidbody.velocity.y * Time.deltaTime, verticalMove);
+                moveVector.Set(horizontalMove, -0.0f, verticalMove);
                 moveVector = moveVector.normalized;
                 transform.Translate(moveVector);
 
@@ -123,14 +124,14 @@ namespace Howling
                 velocity = velocity + runAcc * Time.deltaTime;
                 velocity = Mathf.Clamp(velocity, 0.0f, runMaxVel);
         
-                statusController.DecreaseMp(10);
+                statusController.DecreaseSp(1000 * Time.deltaTime);
 
                 tutorialController.isPlayerRun = true;
 
                 animator.SetInteger("State", 2);
             }
 
-            moveVector.Set(horizontalMove, -0.1f, verticalMove);
+            moveVector.Set(horizontalMove, -0.0f, verticalMove);
             moveVector = moveVector.normalized * velocity * Time.deltaTime;
             transform.Translate(moveVector);
             //rigidbody.MovePosition(transform.position + moveVector);

@@ -50,7 +50,7 @@ public class ItemEffectDB : MonoBehaviour
                                 Debug.Log(itemEffects[i].num[j] + "만큼 회복");
                                 break;
                             case MP:
-                                playerStatus.IncreaseMp(itemEffects[i].num[j]);
+                                playerStatus.IncreaseSp(itemEffects[i].num[j]);
                                 break;
                             case THIRSTY:
                                 playerStatus.IncreaseThirsty(itemEffects[i].num[j]);

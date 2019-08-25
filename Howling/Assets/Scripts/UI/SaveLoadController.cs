@@ -14,7 +14,7 @@ public class SaveData
     public Vector3 playerPos;
     public Vector3 playerRot;
     public int playerHp;
-    public int playerSp;
+    public float playerSp;
     public float playerHungry;
     public float playerThirsty;
 

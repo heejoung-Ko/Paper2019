@@ -95,8 +95,6 @@ namespace Howling
 
         public bool isDrink()
         {
-
-            Debug.Log(animator.GetCurrentAnimatorStateInfo(1).IsName("Drink"));
             return animator.GetCurrentAnimatorStateInfo(1).IsName("Drink");
         }
     }

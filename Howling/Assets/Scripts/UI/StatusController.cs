@@ -11,8 +11,8 @@ public class StatusController : MonoBehaviour
     private int currentHp;
 
     [SerializeField]
-    private int sp;
-    private int currentSp;
+    private float sp;
+    private float currentSp;
 
     [SerializeField]
     private int spIncreaseSpeed;
@@ -135,7 +135,7 @@ public class StatusController : MonoBehaviour
         currentHp = saveHp;
     }
 
-    public int GetSP()
+    public float GetSP()
     {
         return currentSp;
     }
@@ -259,7 +259,7 @@ public class StatusController : MonoBehaviour
         //    Debug.Log("캐릭터의 hp가 0이 되었습니다!");
     }
 
-    public void IncreaseMp(int cnt)
+    public void IncreaseSp(float cnt)
     {
         if (currentSp + cnt < sp)
             currentSp += cnt;
@@ -267,7 +267,7 @@ public class StatusController : MonoBehaviour
             currentSp = sp;
     }
 
-    public void DecreaseMp(int cnt)
+    public void DecreaseSp(float cnt)
     {
         isSpUsed = true;
         currentSpRechargeTime = 0;
@@ -316,7 +316,7 @@ public class StatusController : MonoBehaviour
             currentThirsty -= cnt;
     }
 
-    public int GetCurrentMp()
+    public float GetCurrentMp()
     {
         return currentSp;
     }
