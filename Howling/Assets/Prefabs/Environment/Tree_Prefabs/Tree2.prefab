@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2228039935593006690
 Transform:
   m_ObjectHideFlags: 0
@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2228039935592520258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: 0, y: -0.04, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 2228039935593006710}
   - {fileID: 2228039935593006704}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 2228039935591679558}
   - component: {fileID: 2228039935590581382}
   - component: {fileID: 8384624087276574279}
-  - component: {fileID: 3274314908957922412}
+  - component: {fileID: 5186336150143493387}
   m_Layer: 0
   m_Name: oak tree 5_Part_8
   m_TagString: Untagged
@@ -131,8 +131,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &3274314908957922412
-MeshCollider:
+--- !u!135 &5186336150143493387
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -141,10 +141,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300014, guid: 645fafd69af62b84d88b16dffd340479, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0.5070247, y: 5.293956e-22, z: -0.00000003725291}
 --- !u!1 &2228039935592520272
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +156,7 @@ GameObject:
   - component: {fileID: 2228039935591679568}
   - component: {fileID: 2228039935590581392}
   - component: {fileID: 1256786056823627108}
-  - component: {fileID: 272205910592172627}
+  - component: {fileID: 3102068428293515516}
   m_Layer: 0
   m_Name: oak tree 5_Part_3
   m_TagString: Untagged
@@ -241,8 +240,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &272205910592172627
-MeshCollider:
+--- !u!135 &3102068428293515516
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -251,10 +250,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300004, guid: 645fafd69af62b84d88b16dffd340479, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0.7113428, y: 0.000000007450581, z: -0.00000003725291}
 --- !u!1 &2228039935592520276
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +265,7 @@ GameObject:
   - component: {fileID: 2228039935591679572}
   - component: {fileID: 2228039935590581396}
   - component: {fileID: 7063634845106118558}
-  - component: {fileID: 721715549080205807}
+  - component: {fileID: 5274922241436601705}
   m_Layer: 0
   m_Name: oak tree 5_Part_10
   m_TagString: Untagged
@@ -283,7 +281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2228039935592520276}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -5.272174, y: 4.170895, z: 0.23251395}
+  m_LocalPosition: {x: -5.272174, y: 11.2, z: 0.23251395}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 2228039935593006690}
@@ -350,8 +348,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &721715549080205807
-MeshCollider:
+--- !u!135 &5274922241436601705
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -360,10 +358,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300018, guid: 645fafd69af62b84d88b16dffd340479, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0.5461061, y: 0.000000001862647, z: -0.12923968}
 --- !u!1 &2228039935592520278
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +373,7 @@ GameObject:
   - component: {fileID: 2228039935591679574}
   - component: {fileID: 2228039935590581398}
   - component: {fileID: 3966992342367168158}
-  - component: {fileID: 2900156621056590428}
+  - component: {fileID: 8906263813327408981}
   m_Layer: 0
   m_Name: oak tree 5_Part_1
   m_TagString: Untagged
@@ -460,8 +457,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &2900156621056590428
-MeshCollider:
+--- !u!135 &8906263813327408981
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -470,10 +467,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 645fafd69af62b84d88b16dffd340479, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0.44688368, y: 0.0000000018626436, z: 0.11089301}
 --- !u!1 &2228039935592520286
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +482,7 @@ GameObject:
   - component: {fileID: 2228039935591679582}
   - component: {fileID: 2228039935590581406}
   - component: {fileID: 7185635904437401867}
-  - component: {fileID: 2842946811175588692}
+  - component: {fileID: 7058392373749758075}
   m_Layer: 0
   m_Name: oak tree 5_Part_4
   m_TagString: Untagged
@@ -570,8 +566,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &2842946811175588692
-MeshCollider:
+--- !u!135 &7058392373749758075
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -580,10 +576,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300006, guid: 645fafd69af62b84d88b16dffd340479, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0.3017849, y: 0.0000000037252892, z: 0.085286506}
 --- !u!1 &7959656383156891674
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +590,6 @@ GameObject:
   - component: {fileID: 4458052660133259918}
   - component: {fileID: 5254769028338895054}
   - component: {fileID: 276719447841169149}
-  - component: {fileID: 7265375251618567661}
   m_Layer: 0
   m_Name: Tree2
   m_TagString: tree
@@ -632,10 +626,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initHp: 3
-  destroy: 0
   destroyTime: 5
   respawnTime: 10
-  col: {fileID: 7265375251618567661}
+  col: {fileID: 276719447841169149}
   count1: 3
   count2: 2
   hiddenCout: 3
@@ -660,24 +653,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 7959656383156891674}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 1.2803189
   m_Height: 6.5686417
   m_Direction: 1
   m_Center: {x: 0, y: 2.7843208, z: -0.00000011920929}
---- !u!65 &7265375251618567661
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7959656383156891674}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.8888718, y: 9.683293, z: 2.254877}
-  m_Center: {x: -0.026144087, y: 3.9231744, z: 0.00000047683716}
 --- !u!1001 &6533979963755826504
 PrefabInstance:
   m_ObjectHideFlags: 0

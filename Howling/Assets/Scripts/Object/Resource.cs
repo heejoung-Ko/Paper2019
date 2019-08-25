@@ -6,12 +6,7 @@ public class Resource : MonoBehaviour
 {
     [SerializeField]
     private int initHp;
-
     private int hp;
-    private int age;
-
-    [SerializeField]
-    private bool destroy;
 
     [SerializeField]
     private float destroyTime; // 파편 제거 시간
@@ -51,10 +46,6 @@ public class Resource : MonoBehaviour
 
     private void Start()
     {
-        //age = (int)(Random.Range(1.0f, 10.0f));
-
-        //transform.localScale = Vector3.one * (age * 0.2f);
-        //respawnTimeCount = respawnTime;
         hp = initHp;
         init_posY = transform.position.y;
     }

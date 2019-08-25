@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8243852363310885992}
   - component: {fileID: 8243852363311984296}
   - component: {fileID: 2594663973577735677}
-  - component: {fileID: 8413468062805432310}
+  - component: {fileID: 3335659886620978111}
   m_Layer: 0
   m_Name: OakTree4_Part_8
   m_TagString: Untagged
@@ -96,8 +96,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &8413468062805432310
-MeshCollider:
+--- !u!135 &3335659886620978111
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,10 +106,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300014, guid: 25fb646e5770b5e47a146525918a5055, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8243852363309985900
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +134,7 @@ Transform:
   m_GameObject: {fileID: 8243852363309985900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.17626, y: 0.41418, z: -0.045011}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 8243852363310083160}
   - {fileID: 8243852363310083166}
@@ -157,7 +156,7 @@ GameObject:
   - component: {fileID: 8243852363310886002}
   - component: {fileID: 8243852363311984306}
   - component: {fileID: 2225890569188965741}
-  - component: {fileID: 6497397525603501780}
+  - component: {fileID: 2150312391993323423}
   m_Layer: 0
   m_Name: OakTree4_Part_5
   m_TagString: Untagged
@@ -242,8 +241,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6497397525603501780
-MeshCollider:
+--- !u!135 &2150312391993323423
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -252,10 +251,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300008, guid: 25fb646e5770b5e47a146525918a5055, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8243852363309985910
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +266,7 @@ GameObject:
   - component: {fileID: 8243852363310886006}
   - component: {fileID: 8243852363311984310}
   - component: {fileID: 4570509575886617003}
-  - component: {fileID: 7480862699275065653}
+  - component: {fileID: 5988706843524226787}
   m_Layer: 0
   m_Name: OakTree4_Part_7
   m_TagString: Untagged
@@ -352,8 +350,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &7480862699275065653
-MeshCollider:
+--- !u!135 &5988706843524226787
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -362,10 +360,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300012, guid: 25fb646e5770b5e47a146525918a5055, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8243852363309985912
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +375,7 @@ GameObject:
   - component: {fileID: 8243852363310886008}
   - component: {fileID: 8243852363311984312}
   - component: {fileID: 6880242190996049797}
-  - component: {fileID: 5184258823402696183}
+  - component: {fileID: 3327401205832148721}
   m_Layer: 0
   m_Name: OakTree4_Part_1
   m_TagString: Untagged
@@ -461,8 +458,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &5184258823402696183
-MeshCollider:
+--- !u!135 &3327401205832148721
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -471,10 +468,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 25fb646e5770b5e47a146525918a5055, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8243852363309985918
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +483,7 @@ GameObject:
   - component: {fileID: 8243852363310886014}
   - component: {fileID: 8243852363311984318}
   - component: {fileID: 285680793864229751}
-  - component: {fileID: 6845194376929574841}
+  - component: {fileID: 7921498658444432441}
   m_Layer: 0
   m_Name: OakTree4_Part_3
   m_TagString: Untagged
@@ -571,8 +567,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6845194376929574841
-MeshCollider:
+--- !u!135 &7921498658444432441
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -581,10 +577,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300004, guid: 25fb646e5770b5e47a146525918a5055, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8327061902161016620
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +591,6 @@ GameObject:
   - component: {fileID: 8327061902161016617}
   - component: {fileID: 4293452313799410397}
   - component: {fileID: 3118374845578139639}
-  - component: {fileID: 118790135960939783}
   m_Layer: 0
   m_Name: Tree1
   m_TagString: tree
@@ -633,10 +627,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initHp: 3
-  destroy: 0
   destroyTime: 5
   respawnTime: 10
-  col: {fileID: 118790135960939783}
+  col: {fileID: 3118374845578139639}
   count1: 2
   count2: 3
   hiddenCout: 2
@@ -661,24 +654,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 8327061902161016620}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 1.6218264
   m_Height: 8.291874
   m_Direction: 1
   m_Center: {x: -0.05099058, y: 2.983038, z: 0}
---- !u!65 &118790135960939783
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8327061902161016620}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.6914978, y: 8.686587, z: 2.4395733}
-  m_Center: {x: 0.01799512, y: 2.8175888, z: -0.07197952}
 --- !u!1001 &4922331627076508198
 PrefabInstance:
   m_ObjectHideFlags: 0
