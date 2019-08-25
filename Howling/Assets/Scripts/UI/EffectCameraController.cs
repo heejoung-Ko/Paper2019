@@ -16,7 +16,7 @@ public class EffectCameraController : MonoBehaviour
     public Camera dieCamera;
     public float dieTime;
     public float respawnTime;
-    private bool isGameOver;
+    [HideInInspector] public bool isGameOver;
 
     Vector3 startPosAtk;
     Howling.PlayerMoveScript playerMoveScript;
