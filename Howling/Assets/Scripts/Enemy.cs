@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     public EnemyType type;
 
     // 현재 타겟으로 설정된 객체
-    GameObject target = null;
+    [SerializeField] GameObject target = null;
     string targetTag = "target";
     string agentTag = "agent";
 
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
     float nightSpeed = 1f;
 
     [SerializeField]
-    private float detectDist = 5f;
+    private float detectDist = 10f;
 
     private void Awake()
     {
@@ -94,6 +94,18 @@ public class Enemy : MonoBehaviour
         while (!isDead)
         {
             //Debug.Log("감지");
+            Collider[] fireColliders = Physics.OverlapSphere(transform.position, detectDist, fireMask);
+            if (fireColliders.Length != 0)
+            {
+                if (fireColliders[0].gameObject.GetComponent<Campfire>().fireSize == FireSizeType.NONE) yield return null;
+                if (target == fireColliders[0].gameObject) yield return null;
+                Debug.Log("enemy - campfire 닿음!!");
+                target = fireColliders[0].gameObject;
+                state = EnemyState.escape;
+                nextStateTime = keepEscapeTime;
+                nowStateTime = keepEscapeTime - 1f;
+                yield return null;
+            }
             if (state == EnemyState.idle || state == EnemyState.walk || state == EnemyState.hit)
             {
                 if (target == null)
@@ -105,15 +117,6 @@ public class Enemy : MonoBehaviour
                         target = colliders[0].gameObject;
                         ChangeNextState();
                         nextStateTime = 0.0f;
-                    }
-                    Collider[] colliders2 = Physics.OverlapSphere(transform.position, detectDist, fireMask);
-                    if (colliders2.Length != 0)
-                    {
-                        if (colliders2[0].gameObject.GetComponent<Campfire>().fireSize == FireSizeType.NONE) yield return null;
-                        target = colliders2[0].gameObject;
-                        state = EnemyState.escape;
-                        nextStateTime = keepEscapeTime;
-                        nowStateTime = keepEscapeTime - 1f;
                     }
                 }
             }
