@@ -263,6 +263,15 @@ public class Enemy : MonoBehaviour
 
     void Trace()
     {
+        if (enemiesManager.effectCameraController.isGameOver)
+        {
+            nowStateTime = nextStateTime;
+            ChangeNextState();
+            state = EnemyState.walk;
+            target = null;
+            return;
+        }
+
         // 타겟과의 거리 계산
         float distance = Vector3.Distance(target.transform.position, transform.position);
 
