@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HowlingTitleScene.unity
     guid: a9cb89af68489a945a386f6dda9d4bf8
   - enabled: 1
