@@ -7,6 +7,7 @@ namespace Howling
     public class PlayerMoveScript : MonoBehaviour
     {
         public Transform respawnPos;
+        private Rigidbody _rigidbody;
 
         private enum PlayerState { idle, walk, run, die };
         private PlayerState state = PlayerState.idle;
@@ -47,8 +48,7 @@ namespace Howling
             statusController = FindObjectOfType<StatusController>();
             tutorialController = FindObjectOfType<TutorialController>();
         }
-
-        void FixedUpdate()
+        void Update()
         {
             mouseRotationX = Input.GetAxis("Mouse X");
             mouseRotationY = Input.GetAxis("Mouse Y");
@@ -94,7 +94,7 @@ namespace Howling
             && ((verticalMove < Mathf.Epsilon) && (verticalMove > -Mathf.Epsilon)))
             {
                 velocity = 0.0f;
-                moveVector.Set(horizontalMove, 0, verticalMove);
+                moveVector.Set(horizontalMove, _rigidbody.velocity.y * Time.deltaTime, verticalMove);
                 moveVector = moveVector.normalized;
                 transform.Translate(moveVector);
 
@@ -130,7 +130,7 @@ namespace Howling
                 animator.SetInteger("State", 2);
             }
 
-            moveVector.Set(horizontalMove, 0, verticalMove);
+            moveVector.Set(horizontalMove, -0.1f, verticalMove);
             moveVector = moveVector.normalized * velocity * Time.deltaTime;
             transform.Translate(moveVector);
             //rigidbody.MovePosition(transform.position + moveVector);
