@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 260734073}
   - component: {fileID: 4558833480365084910}
   - component: {fileID: 4836347489271794613}
-  - component: {fileID: 7987192729738564019}
+  - component: {fileID: 6917954694638379624}
   m_Layer: 15
   m_Name: Item_Rock
   m_TagString: item
@@ -77,8 +77,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Durability: 10
---- !u!135 &7987192729738564019
-SphereCollider:
+--- !u!136 &6917954694638379624
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -87,9 +87,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.15404385
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.1074103
+  m_Height: 0.31715646
+  m_Direction: 2
+  m_Center: {x: -0.0014912784, y: 0.12151392, z: 0.007403776}
 --- !u!1001 &6421683070553508752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8120340fb7b901d4d822f5966b77d724, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8120340fb7b901d4d822f5966b77d724, type: 3}
       propertyPath: m_LocalPosition.z

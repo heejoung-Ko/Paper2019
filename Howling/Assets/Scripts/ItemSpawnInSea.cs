@@ -20,9 +20,24 @@ public class ItemSpawnInSea : MonoBehaviour
 
     float finalSpawnTime = 0f;
 
+    [SerializeField]
+    GameObject wave;
+
+    private float waveHeight;
+    private float waveFrequency;
+    private float waveLength;
+
+    private Vector3 waveOriginPosition;
+
     private void Start()
     {
         respawnItem();
+
+        waveHeight = wave.GetComponent<LowPolyWater.LowPolyWater>().waveHeight;
+        waveFrequency = wave.GetComponent<LowPolyWater.LowPolyWater>().waveFrequency;
+        waveLength = wave.GetComponent<LowPolyWater.LowPolyWater>().waveLength;
+
+        waveOriginPosition = wave.GetComponent<LowPolyWater.LowPolyWater>().waveOriginPosition;
     }
 
     // Update is called once per frame
@@ -30,13 +45,25 @@ public class ItemSpawnInSea : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapBox(transform.position, boxSize, transform.rotation, itemLayer);
 
-        foreach (Collider c in colliders)
-        {
-           c.transform.position = new Vector3(c.transform.position.x - 5 * Time.deltaTime, c.transform.position.y, c.transform.position.z);
-        }
-
         float time = sun.GetComponent<DayNightCycle>().percentageOfDay;
         time *= 2 * 12;
+
+        Debug.Log(Mathf.Sin(time) * 0.02f);
+
+        foreach (Collider c in colliders)
+        {
+            float distance = Vector3.Distance(c.transform.position, waveOriginPosition);
+            distance = (distance % waveLength) / waveLength;
+
+            float y = waveHeight * Mathf.Sin(Time.time * Mathf.PI * 1.0f * waveFrequency + (Mathf.PI * 2.0f * distance)) * 0.5f;
+
+            distance = Vector3.Distance(transform.position, waveOriginPosition);
+
+            y = y / distance * 10 + transform.position.y;
+
+            c.transform.position = new Vector3(c.transform.position.x - 2 * Time.deltaTime / distance * 30, y, c.transform.position.z);
+        }
+
 
         if (finalSpawnTime + 24 < time)
         {
