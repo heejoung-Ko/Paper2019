@@ -176,6 +176,8 @@ public class CraftController : MonoBehaviour
         Inventory.GetComponent<Inventory>().subSelecSlot();
 
         isBox = false;
+        isCampfire = false;
+        isFence = false;
     }
 
     void RotateRL()
