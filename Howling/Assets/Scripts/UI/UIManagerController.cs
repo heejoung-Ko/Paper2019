@@ -12,16 +12,18 @@ public class UIManagerController : MonoBehaviour
     public GameObject MakingUI;
     public GameObject MapUI;
     public GameObject BoxUI;
+    public GameObject SupplyBoxUI;
     //public BoxSlotManager BoxSlotM;
     public GameObject MenuUI;
 
     bool isBox = false;
+    bool isSupply = false;
 
     [HideInInspector] public bool isGameOver;
 
     enum UIState
     {
-        NONE, MAKING, MAP, MENU, BOX
+        NONE, MAKING, MAP, MENU, BOX, SUPPLY
     };
 
     [SerializeField]
@@ -54,6 +56,9 @@ public class UIManagerController : MonoBehaviour
                     break;
                 case UIState.MENU:
                     exitMenu();
+                    break;
+                case UIState.SUPPLY:
+                    exitSupplyBox();
                     break;
             }
             return;
@@ -93,6 +98,15 @@ public class UIManagerController : MonoBehaviour
         if (state == UIState.BOX && isBox == false)
         {
             isBox = true;
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isSupply)
+                exitSupplyBox();
+        }
+        if (state == UIState.SUPPLY && isSupply == false)
+        {
+            isSupply = true;
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -209,6 +223,34 @@ public class UIManagerController : MonoBehaviour
 
         Time.timeScale = 1f;
     }
+
+    public void enterSupplyBox(GameObject go)
+    {
+        if (isGameOver) return;
+
+        state = UIState.SUPPLY;
+
+        enterUI();
+
+        SupplyBoxUI.SetActive(true);
+        
+
+        Time.timeScale = 0f;
+    }
+
+    void exitSupplyBox()
+    {
+        isSupply = false;
+
+        state = UIState.NONE;
+
+        exitUI();
+
+        SupplyBoxUI.SetActive(false);
+
+        Time.timeScale = 1f;
+    }
+
 
     public void enterUI()
     {

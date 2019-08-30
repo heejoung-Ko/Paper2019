@@ -34,6 +34,10 @@ namespace Howling
         [SerializeField]
         private LayerMask mapMask;
 
+
+        [SerializeField]
+        private LayerMask supplyBoxMask;
+
         // 필요한 컴포넌트
         [SerializeField]
         private Text actionText;
@@ -53,11 +57,14 @@ namespace Howling
         private bool isCampfire = false;
         private bool isCookedMeat = false;
         private bool isWater = false;
+        private bool isSupplyBox = false;
 
         [SerializeField]
         Item water;
 
         Ray ray = new Ray();
+
+        GameObject go = null;
 
         private void Start()
         {
@@ -97,6 +104,12 @@ namespace Howling
         private void CheckBoxOpen()
         {
             if (isBox)
+                OpenBox();
+        }
+
+        private void CheckSupplyBoxOpen()
+        {
+            if (isSupplyBox)
                 OpenBox();
         }
 
@@ -171,6 +184,14 @@ namespace Howling
             }
             else
                 WaterDisapear();
+            if(Physics.Raycast(transform.position, transform.forward, out hitInfoBox, range, supplyBoxMask))
+            {
+                SupplyBoxAppear();
+                go = hitInfoBox.collider.gameObject;
+                return;
+            }
+            else
+                SupplyBoxDisapper();
         }
 
         //private void ObjectInfoAppear()
@@ -207,9 +228,32 @@ namespace Howling
             isBox = false;
         }
 
+        private void SupplyBoxAppear()
+        {
+            actionText.gameObject.SetActive(true);
+            actionText.text = "보급상자 열기" + "<color=yellow>" + "(E)키" + "</color>";
+
+            isSupplyBox = true;
+        }
+
+        private void SupplyBoxDisapper()
+        {
+            if (!pickUpActivated)
+                actionText.gameObject.SetActive(false);
+
+            go = null;
+
+            isSupplyBox = false;
+        }
+
         private void OpenBox()
         {
             UIManager.GetComponent<UIManagerController>().enterBox();
+        }
+
+        private void OpenSupplyBox()
+        {
+            //UIManager.GetComponent<UIManagerController>().enterSupplyBox();
         }
 
         private void CampfireAppear()

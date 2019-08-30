@@ -119,6 +119,7 @@ public class CraftController : MonoBehaviour
         {
             isBox = false;
             isCampfire = false;
+            isFence = false;
             if (go != null)
                 Destroy(go);
             

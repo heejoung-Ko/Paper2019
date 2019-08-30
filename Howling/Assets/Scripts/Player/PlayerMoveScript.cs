@@ -19,10 +19,10 @@ namespace Howling
         
         // WASD move
         private float velocity = 0.0f;
-        public static float walkAcc = 5.0f;
-        public static float runAcc = 10.0f;
-        private static float walkMaxVel = 5.0f;
-        private static float runMaxVel = 10f;
+        public static float walkAcc = 20f;
+        public static float runAcc = 30f;
+        private static float walkMaxVel = 20f;
+        private static float runMaxVel = 30f;
         private Vector3 moveVector = new Vector3(0, 0, 0);
         private float verticalMove = 0.0f;
         private float horizontalMove = 0.0f;
@@ -134,7 +134,8 @@ namespace Howling
             moveVector.Set(horizontalMove, -0.0f, verticalMove);
             moveVector = moveVector.normalized * velocity * Time.deltaTime;
             transform.Translate(moveVector);
-            //rigidbody.MovePosition(transform.position + moveVector);
+            //_rigidbody.MovePosition(transform.position + moveVector);
+            //_rigidbody.AddForce(moveVector);
 
             tutorialController.isPlayerMove = true;
         }

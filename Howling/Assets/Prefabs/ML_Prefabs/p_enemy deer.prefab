@@ -171,6 +171,10 @@ MonoBehaviour:
   fireMask:
     serializedVersion: 2
     m_Bits: 67108864
+  walkAcc: 5
+  runAcc: 10
+  walkMaxVel: 5
+  runMaxVel: 10
   hp: 30
   atk: 10
   invincibleTime: 1

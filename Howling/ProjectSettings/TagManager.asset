@@ -28,6 +28,7 @@ TagManager:
   - tree
   - feed
   - box
+  - map
   layers:
   - Default
   - TransparentFX

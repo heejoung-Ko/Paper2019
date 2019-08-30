@@ -26,11 +26,11 @@ public class Enemy : MonoBehaviour
     public LayerMask fireMask;
 
     float velocity = 0.0f;               // 속도
-    float walkAcc = 0.6f;               // 걸을 때 가속도
-    float runAcc = 1.3f;                // 뛸 때 가속도 (추적, 도주 상태 일 때)
+    [SerializeField] float walkAcc = 0.6f;               // 걸을 때 가속도
+    [SerializeField] float runAcc = 1.3f;                // 뛸 때 가속도 (추적, 도주 상태 일 때)
 
-    static float walkMaxVel = 6.0f;      // 걸을 때 최고 속도
-    static float runMaxVel = 13.0f;      // 뛸 때 최고 속도
+    [SerializeField] float walkMaxVel = 6.0f;      // 걸을 때 최고 속도
+    [SerializeField] float runMaxVel = 13.0f;      // 뛸 때 최고 속도
 
     static float keepTraceTime = 5.0f;   // 타겟이 인식 범위 밖으로 나갔을 때 추적 상태를 유지하는 시간
     static float keepEscapeTime = 5.0f;  // 타겟이 인식 범위 밖으로 나갔을 때 도주 상태를 유지하는 시간
@@ -164,7 +164,6 @@ public class Enemy : MonoBehaviour
                     Escape();
                     break;
                 case EnemyState.attack:
-                    animator.SetTrigger("attackTrigger");
                     Attack();
                     break;
                 case EnemyState.hit:
@@ -344,6 +343,10 @@ public class Enemy : MonoBehaviour
     {
         if (!isAttack)
         {
+            animator.SetTrigger("attackTrigger");
+
+            nextStateTime = 0.3f;
+
             float tempAtk = atk;
             Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
             foreach (Collider t in targets)
