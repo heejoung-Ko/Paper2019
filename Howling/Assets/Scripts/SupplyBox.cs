@@ -74,7 +74,7 @@ public class SupplyBox : MonoBehaviour
             isGround = true;
             collider.enabled = true;
             triger.enabled = false;
-            //transform.GetComponent<Rigidbody>().useGravity = true;
+            transform.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 }

@@ -32,8 +32,8 @@ namespace Howling
         //private bool isJump = false;
 
         // mouse rotation
-        private float minY = -60.0f;
-        private float maxY = 60.0f;
+        private float minY = -45.0f;
+        private float maxY = 45.0f;
         private float sensX = 300.0f;
         private float sensY = 150.0f;
         private float rotationX = 0.0f;
@@ -62,7 +62,7 @@ namespace Howling
             }
             else state = PlayerState.walk;
 
-            if (!Slot.isSlotDrag && tutorialController.currentShow > 0)
+            //if (!Slot.isSlotDrag && tutorialController.currentShow > 0)
             {
                 PlayerRotation();
             }
@@ -85,7 +85,7 @@ namespace Howling
                 playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
             }
 
-            tutorialController.isPlayerRotation = true;
+            //tutorialController.isPlayerRotation = true;
         }
 
         private void PlayerMove()
