@@ -87,10 +87,12 @@ public class DayNightCycle : MonoBehaviour
     {
         timer += Time.deltaTime;
         percentageOfDay = timer / (minitesInDay * 60.0f);
-        if(timer > (minitesInDay * 60.0f))
+        enemiesManager.SetTraceAtNightByTimer(percentageOfDay);
+        if (timer > (minitesInDay * 60.0f))
         {
             timer = 0.0f;
             day++;
+            enemiesManager.SetTraceAtNightByDay(day, percentageOfDay);
         }
     }
 
