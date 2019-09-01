@@ -109,13 +109,16 @@ namespace Howling
         {
             if (item != null)
             {
-                Rigidbody itemInstance = Instantiate(item.ItemPrefab.GetComponent<Rigidbody>(), itemDropSpawn.position + itemDropSpawn.forward / 2, itemDropSpawn.rotation) as Rigidbody;
-                
-                if (itemInstance != null)
+                if (item.itemType != Item.ItemType.ETC)
                 {
-                    itemInstance.velocity = itemDropForce * itemDropSpawn.forward;
+                    Rigidbody itemInstance = Instantiate(item.ItemPrefab.GetComponent<Rigidbody>(), itemDropSpawn.position + itemDropSpawn.forward / 2, itemDropSpawn.rotation) as Rigidbody;
 
-                    itemInstance.GetComponent<ItemController>().setDurability(Durability);
+                    if (itemInstance != null)
+                    {
+                        itemInstance.velocity = itemDropForce * itemDropSpawn.forward;
+
+                        itemInstance.GetComponent<ItemController>().setDurability(Durability);
+                    }
                 }
                 SetSlotCount(-1);
             }
