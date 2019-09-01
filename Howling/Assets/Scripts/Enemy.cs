@@ -99,6 +99,24 @@ public class Enemy : MonoBehaviour
     {
         StartCoroutine(Detect());
         StartCoroutine(Action());
+
+        if (type == EnemyType.BOAR)
+        {
+            StartCoroutine(SetTraceAtNightBoar());
+        }
+        else if (type == EnemyType.BEAR)
+        {
+            StartCoroutine(SetTraceAtNightBear());
+        }
+    }
+
+    void TraceAtNight()
+    {
+        // TODO: 2시간 동안은 모닥불 닿여서 도망갔다가 다시 trace하기
+        // 모닥불 닿여서 도망갈 때 시간 1초에서 좀 줄이기 
+        state = EnemyState.trace;
+        target = enemiesManager.playerTarget;
+        nextStateTime = 0.0f;
     }
 
     IEnumerator Detect()
@@ -132,6 +150,32 @@ public class Enemy : MonoBehaviour
             //else if (state == EnemyState.escape)
             //    yield return new WaitForSeconds(keepEscapeTime - nowStateTime);
 
+            yield return null;
+        }
+    }
+
+    IEnumerator SetTraceAtNightBoar()
+    {
+        while (!isDead)
+        {
+            if (enemiesManager.isBoarTraceAtNight)
+            {
+                TraceAtNight();
+                yield return new WaitForSeconds(keepTraceTime);
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator SetTraceAtNightBear()
+    {
+        while (!isDead)
+        {
+            if (enemiesManager.isBearTraceAtNight)
+            {
+                TraceAtNight();
+                yield return new WaitForSeconds(keepTraceTime);
+            }
             yield return null;
         }
     }

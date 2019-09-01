@@ -34,8 +34,17 @@ public class EnemiesManager : MonoBehaviour
     public int[] enemiesNum;
 
     [HideInInspector] public bool isNight;
+    //public DayNightCycle dayNightCycle;
     public StatusController statusController;
     public EffectCameraController effectCameraController;
+
+    int boarOldDay;
+    static int boarDayCycle = 7;
+    [HideInInspector] public bool isBoarTraceAtNight;
+    int bearOldDay;
+    static int bearDayCycle = 7;
+    [HideInInspector] public bool isBearTraceAtNight;
+    float oldPercentageOfDay;
 
     private void Awake()
     {
@@ -86,6 +95,35 @@ public class EnemiesManager : MonoBehaviour
     internal void Die(GameObject enemy)
     {
         StartCoroutine(DestroyEnemy(enemy));
+    }
+
+    public void SetTraceAtNightByDay(int day, float perOfDay)
+    {
+        //int day = dayNightCycle.day;
+        if (boarOldDay + boarDayCycle >= day)
+        {
+            boarOldDay = day;
+            Debug.Log("isBoarTraceAtNight true!");
+            isBoarTraceAtNight = true;
+
+        }
+        if (bearOldDay + bearDayCycle >= day)
+        {
+            bearOldDay = day;
+            Debug.Log("isBearTraceAtNight true!");
+            isBearTraceAtNight = true;
+        }
+        oldPercentageOfDay = perOfDay;
+    }
+
+    public void SetTraceAtNightByTimer(float perOfDay)
+    {
+        if (!isBoarTraceAtNight && !isBearTraceAtNight) return;
+        if (oldPercentageOfDay + (2 / 24) >= perOfDay)
+        {
+            Debug.Log("isTraceAtNight false!");
+            isBoarTraceAtNight = isBearTraceAtNight = false;
+        }
     }
 
     private IEnumerator DestroyEnemy(GameObject enemy)
