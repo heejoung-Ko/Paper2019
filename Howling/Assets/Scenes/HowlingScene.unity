@@ -9904,6 +9904,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f9add3ef05f9904bbc3589a7fd969ff, type: 3}
+--- !u!4 &549227803 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2239424302864221202, guid: b7731a12337d29a4a9b75e13204fba44,
+    type: 3}
+  m_PrefabInstance: {fileID: 292386756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &549352724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6d12394080790f74e857c7436242dbd1,
@@ -10783,7 +10789,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive
@@ -10933,7 +10939,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487488687944479, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: itemCount
@@ -20870,7 +20876,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive
@@ -23379,12 +23385,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1745246223}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1301016013 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2239424302864221296, guid: b7731a12337d29a4a9b75e13204fba44,
-    type: 3}
-  m_PrefabInstance: {fileID: 292386756}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1305177212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25310,7 +25310,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive
@@ -25531,7 +25531,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive
@@ -27333,7 +27333,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive
@@ -29598,6 +29598,11 @@ PrefabInstance:
       propertyPath: pivotTransform
       value: 
       objectReference: {fileID: 702304909}
+    - target: {fileID: 1270759937672873572, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1270759937672873575, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29657,6 +29662,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1270759937672873595, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1270759937672873595, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e90a102bc65934b4ea4f0ad6257fcfe4, type: 3}
@@ -31378,7 +31393,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive
@@ -32241,7 +32256,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive
@@ -37250,7 +37265,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive
@@ -37906,7 +37921,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemDropSpawn
       value: 
-      objectReference: {fileID: 1301016013}
+      objectReference: {fileID: 549227803}
     - target: {fileID: 1471487489909563424, guid: 2f9add3ef05f9904bbc3589a7fd969ff,
         type: 3}
       propertyPath: m_IsActive

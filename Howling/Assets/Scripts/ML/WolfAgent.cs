@@ -49,6 +49,7 @@ public class WolfAgent : Agent
     public float RestSpeed;
     public float DigSpeed;
     public float MaxSpeed;
+    public float walkSpeed;
     [HideInInspector] public float moveForce = 100f;
     public float AttackDamage;
     public float DefendDamage;
@@ -77,6 +78,8 @@ public class WolfAgent : Agent
     private float targetRange = 2f;
 
     public GameObject[] dropItem;
+
+    public bool isMoving = false;
 
     private void Start()
     {
@@ -131,8 +134,14 @@ public class WolfAgent : Agent
 
     public void FixedUpdate()
     {
+        if(isMoving)
+        {
+            transform.position += transform.forward * Time.deltaTime * walkSpeed;
+        }
+
         if (Time.timeSinceLevelLoad > nextAction)
         {
+            isMoving = false;
             currentAction = "Deciding";
             RequestDecision();
         }
@@ -185,14 +194,17 @@ public class WolfAgent : Agent
         switch (maxAction)
         {
             case (int)ActionType.MOVE:
+                isMoving = true;
                 animator.SetBool("isMove", true);
                 animator.SetBool("isRun", false);
                 MoveAgent(vectorAction);
                 break;
             case (int)ActionType.EAT:
+                isMoving = false;
                 Eat();
                 break;
             case (int)ActionType.REST:
+                isMoving = false;
                 Rest();
                 break;
             //case (int)ActionType.GOTOPLAYER:
@@ -201,9 +213,12 @@ public class WolfAgent : Agent
             //    animator.SetBool("isWalk", false);
             //    break;
             case (int)ActionType.ATTACK:
+                isMoving = false;
                 Attack();
                 break;
             case (int)ActionType.DIG:
+                isMoving = false;
+                animator.SetTrigger("isDig");
                 Dig();
                 break;
         }
@@ -246,12 +261,13 @@ public class WolfAgent : Agent
     public void MoveAgent(float[] act)
     {
         var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
-        transform.Rotate(transform.up, rotate * 25f);
+        transform.Rotate(transform.up, rotate * 10f);
+
+        
 
         //if (act[(int)ActionType.MOVEORDERS] > .5f)
 
         //{
-            transform.position += transform.forward/* * Time.deltaTime * moveForce*/;
         //}
 
         currentAction = "Moving";
