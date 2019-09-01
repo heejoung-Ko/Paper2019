@@ -30,8 +30,8 @@ public enum ActionType
 
 public class WolfAgent : Agent
 {
-    [SerializeField]
-    private Animator animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] public GameObject digEffect;
 
     [Header("Creature Parameters")]
     public Transform pivotTransform; // 임시 위치 기준점, 트레이닝룸 위치
@@ -122,6 +122,14 @@ public class WolfAgent : Agent
 
     void Update()
     {
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+
+        if (isMoving)
+        {
+            transform.position += transform.forward * Time.deltaTime * walkSpeed;
+        }
+        DecreaseStatus();
+
         if (Dead)
         {
             currentAction = "Dead";
@@ -134,19 +142,12 @@ public class WolfAgent : Agent
 
     public void FixedUpdate()
     {
-        if(isMoving)
-        {
-            transform.position += transform.forward * Time.deltaTime * walkSpeed;
-        }
-
         if (Time.timeSinceLevelLoad > nextAction)
         {
             isMoving = false;
             currentAction = "Deciding";
             RequestDecision();
         }
-
-        DecreaseStatus();
     }
 
     public void DecreaseStatus()
@@ -196,7 +197,6 @@ public class WolfAgent : Agent
             case (int)ActionType.MOVE:
                 isMoving = true;
                 animator.SetBool("isMove", true);
-                animator.SetBool("isRun", false);
                 MoveAgent(vectorAction);
                 break;
             case (int)ActionType.EAT:
@@ -226,7 +226,6 @@ public class WolfAgent : Agent
         if (vectorAction[(int)ActionType.GOTOPLAYER] > .5f)
         {
             animator.SetBool("isMove", true);
-            animator.SetBool("isRun", false);
             GoToPlayer();
         }
     }
@@ -478,6 +477,7 @@ public class WolfAgent : Agent
     {
         if (CanDig)
         {
+            OnDigEffect();
             currentAction = "Dig";
 
             //Hungry -= Time.deltaTime * 1f;
@@ -498,8 +498,14 @@ public class WolfAgent : Agent
             }
 
             nextAction = Time.timeSinceLevelLoad + (25 / DigSpeed);
-
         }
+    }
+
+    IEnumerator OnDigEffect()
+    {
+        digEffect.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        //digEffect.SetActive(false);
     }
 
     void DropItem()
