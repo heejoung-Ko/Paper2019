@@ -15921,7 +15921,7 @@ MonoBehaviour:
     width: 1280
     height: 720
     qualityLevel: 5
-    timeScale: 5
+    timeScale: 2
     targetFrameRate: 60
   resetParameters:
     resetParameters: []
@@ -29642,6 +29642,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Center.z
       value: 0.29999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518563421053975818, guid: e90a102bc65934b4ea4f0ad6257fcfe4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e90a102bc65934b4ea4f0ad6257fcfe4, type: 3}

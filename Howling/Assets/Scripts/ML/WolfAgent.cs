@@ -144,6 +144,11 @@ public class WolfAgent : Agent
     {
         if (Time.timeSinceLevelLoad > nextAction)
         {
+            if (currentAction == "Dig")
+            {
+                DigResult();
+                return;
+            }
             isMoving = false;
             currentAction = "Deciding";
             RequestDecision();
@@ -218,7 +223,6 @@ public class WolfAgent : Agent
                 break;
             case (int)ActionType.DIG:
                 isMoving = false;
-                animator.SetTrigger("isDig");
                 Dig();
                 break;
         }
@@ -480,25 +484,37 @@ public class WolfAgent : Agent
             OnDigEffect();
             currentAction = "Dig";
 
+            digEffect.SetActive(true);
+
             //Hungry -= Time.deltaTime * 1f;
 
-            if (Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
-            {
-                currentAction = "DigSuccess";
-
-                DropItem();
-
-                AddReward(.01f); // 성공 보상
-            }
-            else
-            {
-                //Debug.Log("땅파기 실패!!");
-
-                currentAction = "DigFail";
-            }
+            animator.SetBool("isDig", true);
 
             nextAction = Time.timeSinceLevelLoad + (25 / DigSpeed);
         }
+    }
+
+    void DigResult()
+    {
+        if (Random.Range(0.0f, 1.0f) <= 0.3f) // 땅파기 성공!
+        {
+            currentAction = "DigSuccess";
+
+            DropItem();
+
+            AddReward(.01f); // 성공 보상
+            Debug.Log("땅파기 성공!!");
+        }
+        else
+        {
+            Debug.Log("땅파기 실패!!");
+
+            currentAction = "DigFail";
+        }
+
+        animator.SetBool("isDig", false);
+
+        digEffect.SetActive(false);
     }
 
     IEnumerator OnDigEffect()
