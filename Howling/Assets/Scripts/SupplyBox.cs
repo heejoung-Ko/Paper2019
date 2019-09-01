@@ -31,7 +31,7 @@ public class SupplyBox : MonoBehaviour
         for (int i = 0; i < itemNum; i++)
         {
             int n = Random.RandomRange(0, spawnItemNum);
-            //Debug.Log(items.Length);
+            Debug.Log(items.Length);
             items[i] = spawnItems[n];
 
             isGround = false;

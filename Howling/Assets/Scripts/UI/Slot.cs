@@ -121,16 +121,6 @@ namespace Howling
             }
         }
 
-        public void DropItem(GameObject go)
-        {
-            if (item != null)
-            {
-                Rigidbody itemInstance = Instantiate(item.ItemPrefab.GetComponent<Rigidbody>(), go.transform.position, go.transform.rotation) as Rigidbody;
-
-                SetSlotCount(-1);
-            }
-        }
-
         public void OnPointerDown(PointerEventData eventData)
         {
             if (DragSlot.instance == null) return;

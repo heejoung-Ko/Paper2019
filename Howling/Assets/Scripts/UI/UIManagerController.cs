@@ -247,8 +247,6 @@ public class UIManagerController : MonoBehaviour
 
         exitUI();
 
-        SupplyBoxUI.GetComponent<SupplyBoxController>().ClosedBox();
-
         SupplyBoxUI.SetActive(false);
 
         Time.timeScale = 1f;
