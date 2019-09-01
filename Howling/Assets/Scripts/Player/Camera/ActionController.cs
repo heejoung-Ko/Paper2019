@@ -93,6 +93,7 @@ namespace Howling
                     CheckItem();
                     CanPickUp();
                     CheckBoxOpen();
+                    CheckSupplyBoxOpen();
                     CheckUseWoodToCampfire();
                     CheckUseMeatToCampfire();
                     if (isWater)
@@ -110,7 +111,7 @@ namespace Howling
         private void CheckSupplyBoxOpen()
         {
             if (isSupplyBox)
-                OpenBox();
+                OpenSupplyBox();
         }
 
         private void CheckUseWoodToCampfire()
@@ -172,6 +173,14 @@ namespace Howling
             }
             else
                 CampfireDisappear();
+            if(Physics.Raycast(transform.position, transform.forward, out hitInfoBox, range, supplyBoxMask))
+            {
+                SupplyBoxAppear();
+                go = hitInfoBox.collider.gameObject;
+                return;
+            }
+            else
+                SupplyBoxDisapper();
             if (Physics.Raycast(transform.position, transform.forward, out hitInfoMap, range, mapMask))
             {
                 WaterDisapear();
@@ -184,14 +193,6 @@ namespace Howling
             }
             else
                 WaterDisapear();
-            if(Physics.Raycast(transform.position, transform.forward, out hitInfoBox, range, supplyBoxMask))
-            {
-                SupplyBoxAppear();
-                go = hitInfoBox.collider.gameObject;
-                return;
-            }
-            else
-                SupplyBoxDisapper();
         }
 
         //private void ObjectInfoAppear()
@@ -253,7 +254,7 @@ namespace Howling
 
         private void OpenSupplyBox()
         {
-            //UIManager.GetComponent<UIManagerController>().enterSupplyBox();
+            UIManager.GetComponent<UIManagerController>().enterSupplyBox(go);
         }
 
         private void CampfireAppear()
