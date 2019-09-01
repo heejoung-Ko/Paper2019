@@ -123,9 +123,9 @@ public class UIManagerController : MonoBehaviour
 
     void enterMaking()
     {
+        Time.timeScale = 0f;
+
         state = UIState.MAKING;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
 
         enterUI();
 
@@ -135,8 +135,6 @@ public class UIManagerController : MonoBehaviour
     void exitMaking()
     {
         state = UIState.NONE;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
 
         exitUI();
 
@@ -160,15 +158,14 @@ public class UIManagerController : MonoBehaviour
 
     void enterMenu()
     {
+        Time.timeScale = 0f;
+
         state = UIState.MENU;
 
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
 
         MenuUI.SetActive(true);
         enterUI();
-
-        Time.timeScale = 0f;    // 시간 정지
     }
 
     void exitMenu()
@@ -180,12 +177,12 @@ public class UIManagerController : MonoBehaviour
 
         MenuUI.SetActive(false);
         exitUI();
-
-        Time.timeScale = 1f;
     }
 
     public void enterBox()
     {
+        Time.timeScale = 0f;
+
         if (isGameOver) return;
 
         state = UIState.BOX;
@@ -202,11 +199,11 @@ public class UIManagerController : MonoBehaviour
 
         //BoxUI.GetComponent<BoxController>().BoxStart();
 
-        Time.timeScale = 0f;
     }
 
     void exitBox()
     {
+
         isBox = false;
 
         state = UIState.NONE;
@@ -220,12 +217,12 @@ public class UIManagerController : MonoBehaviour
         //BoxSlotM.boxSlots_line4 = BoxUI.boxControllerSlots_line4;
 
         BoxUI.SetActive(false);
-
-        Time.timeScale = 1f;
     }
 
     public void enterSupplyBox(GameObject go)
     {
+        Time.timeScale = 0f;
+
         if (isGameOver) return;
 
         state = UIState.SUPPLY;
@@ -235,12 +232,11 @@ public class UIManagerController : MonoBehaviour
         SupplyBoxUI.SetActive(true);
 
         SupplyBoxUI.GetComponent<SupplyBoxController>().SetItem(go);
-
-        Time.timeScale = 0f;
     }
 
     void exitSupplyBox()
     {
+
         isSupply = false;
 
         state = UIState.NONE;
@@ -250,8 +246,6 @@ public class UIManagerController : MonoBehaviour
         SupplyBoxUI.GetComponent<SupplyBoxController>().ClosedBox();
 
         SupplyBoxUI.SetActive(false);
-
-        Time.timeScale = 1f;
     }
 
 
@@ -261,13 +255,21 @@ public class UIManagerController : MonoBehaviour
         PlayerController.GetComponent<PlayerAtk>().enabled = false;
         PlayerController.GetComponentInChildren<PlayerHandController>().enabled = false;
         PlayerController.GetComponentInChildren<ActionController>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void exitUI()
     {
+        Time.timeScale = 1f;
+
         PlayerController.GetComponent<PlayerMoveScript>().enabled = true;
         PlayerController.GetComponent<PlayerAtk>().enabled = true;
         PlayerController.GetComponentInChildren<PlayerHandController>().enabled = true;
         PlayerController.GetComponentInChildren<ActionController>().enabled = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
     }
 }

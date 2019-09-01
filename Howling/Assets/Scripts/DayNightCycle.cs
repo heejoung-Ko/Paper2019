@@ -18,6 +18,8 @@ public class DayNightCycle : MonoBehaviour
 
     public StatusController statusController;
     public EnemiesManager enemiesManager;
+    public GameObject fireFliesControl;
+
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +65,8 @@ public class DayNightCycle : MonoBehaviour
 
         if (isNight)
         {
+            fireFliesControl.SetActive(true);
+                
             if (l.intensity > 0.0f)
             {
                 l.intensity -= 0.005f * Time.deltaTime;
@@ -71,6 +75,7 @@ public class DayNightCycle : MonoBehaviour
         }
         else
         {
+            fireFliesControl.SetActive(false);
             if (l.intensity < 1.0f)
             {
                 l.intensity += 0.005f * Time.deltaTime;

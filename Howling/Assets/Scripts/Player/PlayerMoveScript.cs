@@ -43,7 +43,13 @@ namespace Howling
 
         void Awake()
         {
+            //Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true);
+            
             //playerCamera = Camera.main.transform;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
             animator = GetComponent<Animator>();
             statusController = FindObjectOfType<StatusController>();
             tutorialController = FindObjectOfType<TutorialController>();
