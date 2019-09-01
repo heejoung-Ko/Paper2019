@@ -233,7 +233,8 @@ public class UIManagerController : MonoBehaviour
         enterUI();
 
         SupplyBoxUI.SetActive(true);
-        
+
+        SupplyBoxUI.GetComponent<SupplyBoxController>().SetItem(go);
 
         Time.timeScale = 0f;
     }
@@ -245,6 +246,8 @@ public class UIManagerController : MonoBehaviour
         state = UIState.NONE;
 
         exitUI();
+
+        SupplyBoxUI.GetComponent<SupplyBoxController>().ClosedBox();
 
         SupplyBoxUI.SetActive(false);
 
