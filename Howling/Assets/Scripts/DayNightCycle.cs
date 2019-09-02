@@ -32,7 +32,7 @@ public class DayNightCycle : MonoBehaviour
         timer = 0.0f;
         isCanSetTraceAtNightByDay = true;
 
-        RenderSettings.fogDensity = dayNightFogDensity;
+        RenderSettings.fogDensity = 0.0005f;
         RenderSettings.fogColor = dayNightFogColor.Evaluate(timer);
     }
 
@@ -53,7 +53,7 @@ public class DayNightCycle : MonoBehaviour
     {
         get
         {
-            if (0.3f < percentageOfDay && percentageOfDay < 0.7f)
+            if (0.27f < percentageOfDay && percentageOfDay < 0.7f)
             {
                 statusController.isNight = true;
                 enemiesManager.isNight = true;
@@ -76,30 +76,29 @@ public class DayNightCycle : MonoBehaviour
 
         if (isNight)
         {
-            //SoundManager.instance.PlayBGMEffect(nightBgmName);
+            SoundManager.instance.PlayBGMEffect(nightBgmName);
 
             fireFliesControl.SetActive(true);
                 
             if (l.intensity > 0.0f)
             {
                 l.intensity -= 0.005f * Time.deltaTime;
-                dayNightFogDensity += 0.1f * Time.deltaTime;
+                dayNightFogDensity += 0.001f * Time.deltaTime;
             }
         }
         else
         {
-            //SoundManager.instance.PlayBGMEffect(dayBgmName);
+            SoundManager.instance.PlayBGMEffect(dayBgmName);
 
             fireFliesControl.SetActive(false);
             if (l.intensity < 1.0f)
             {
                 l.intensity += 0.005f * Time.deltaTime;
-                dayNightFogDensity -= 0.1f * Time.deltaTime;
+                dayNightFogDensity -= 0.001f * Time.deltaTime;
             }
         }
         l.color = dayNightColor.Evaluate(percentageOfDay);
  //       RenderSettings.ambientLight = dayNightColor.Evaluate(timer);
-        RenderSettings.fogDensity = dayNightFogDensity * 15f;
         RenderSettings.fogColor = dayNightFogColor.Evaluate(percentageOfDay);
     }
 
