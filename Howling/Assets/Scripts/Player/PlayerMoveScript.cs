@@ -19,10 +19,10 @@ namespace Howling
         
         // WASD move
         private float velocity = 0.0f;
-        public static float walkAcc = 20f;
-        public static float runAcc = 30f;
-        private static float walkMaxVel = 20f;
-        private static float runMaxVel = 30f;
+        public static float walkAcc = 10f;
+        public static float runAcc = 20f;
+        private static float walkMaxVel = 10f;
+        private static float runMaxVel = 20f;
         private Vector3 moveVector = new Vector3(0, 0, 0);
         private float verticalMove = 0.0f;
         private float horizontalMove = 0.0f;

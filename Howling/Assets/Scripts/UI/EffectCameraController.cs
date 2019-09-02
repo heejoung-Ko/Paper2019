@@ -135,15 +135,21 @@ public class EffectCameraController : MonoBehaviour
     {
         Color tempColor = dieEffectImg.color;
         tempColor.a = startAlpha;
+        //float time = 0f;
+
         while (tempColor.a < 1f)
         {
+            //Debug.Log(time += Time.deltaTime);
             tempColor.a += Time.deltaTime / fadeInTime;
-            dieEffectImg.color = tempColor;
 
             if (tempColor.a >= 1f) tempColor.a = 1f;
 
+            dieEffectImg.color = tempColor;
+
             yield return null;
         }
+
+        //Debug.Log(time += Time.deltaTime);
 
         dieEffectImg.color = tempColor;
         Invoke("PlayerRespawn", respawnTime);
@@ -177,6 +183,7 @@ public class EffectCameraController : MonoBehaviour
             dieCamera.transform.localPosition = new Vector3(0, Mathf.Lerp(0, -1, shakeTime), 0);
             Quaternion rot = dieCamera.transform.rotation;
             dieCamera.transform.localRotation = Quaternion.Euler(rot.x, rot.y, rot.z + Mathf.Lerp(0, 30, shakeTime));
+
             yield return null;
         }
     }
