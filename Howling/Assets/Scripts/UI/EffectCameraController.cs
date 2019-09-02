@@ -20,7 +20,7 @@ public class EffectCameraController : MonoBehaviour
 
     [Header("Sleep In Tent Effect Setting")]
     [HideInInspector] public bool isSleepInTent;
-    public float sleepTime = 2f;
+    private float sleepTime = 1f;
 
     Vector3 startPosAtk;
     Howling.PlayerMoveScript playerMoveScript;
@@ -69,8 +69,8 @@ public class EffectCameraController : MonoBehaviour
         if (dieCamera.gameObject.activeSelf == true)
         {
             dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
-            //dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+            dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            //dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
             dieCamera.gameObject.SetActive(false);
         }
         effectCamera.gameObject.SetActive(true);
@@ -103,8 +103,8 @@ public class EffectCameraController : MonoBehaviour
         if (dieCamera.gameObject.activeSelf == true)
         {
             dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
-            //dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+            dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            //dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
             dieCamera.gameObject.SetActive(false);
         }
         effectCamera.gameObject.SetActive(true);
@@ -195,7 +195,27 @@ public class EffectCameraController : MonoBehaviour
         //Debug.Log(time += Time.deltaTime);
 
         dieEffectImg.color = tempColor;
-        Invoke("PlayerRespawn", respawnTime);
+        if (isSleepInTent)
+            StartCoroutine(CoSleepFadeOut(sleepTime));
+        else
+            Invoke("PlayerRespawn", respawnTime);
+    }
+
+    // 불투명 -> 투명
+    IEnumerator CoSleepFadeOut(float fadeOutTime)
+    {
+        Color tempColor = dieEffectImg.color;
+        while (tempColor.a > 0f)
+        {
+            tempColor.a -= Time.deltaTime / fadeOutTime;
+            dieEffectImg.color = tempColor;
+
+            if (tempColor.a <= 0f) tempColor.a = 0f;
+
+            yield return null;
+        }
+        dieEffectImg.color = tempColor;
+        SleepCameraOff();
     }
 
     public void PlayerRespawn()
