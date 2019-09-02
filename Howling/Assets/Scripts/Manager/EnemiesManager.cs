@@ -39,10 +39,10 @@ public class EnemiesManager : MonoBehaviour
     public EffectCameraController effectCameraController;
 
     int boarOldDay;
-    static int boarDayCycle = 7;
+    public int boarDayCycle = 3;
     [HideInInspector] public bool isBoarTraceAtNight;
     int bearOldDay;
-    static int bearDayCycle = 7;
+    public int bearDayCycle = 7;
     [HideInInspector] public bool isBearTraceAtNight;
     float oldPercentageOfDay;
 
