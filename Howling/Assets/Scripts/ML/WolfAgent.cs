@@ -266,14 +266,14 @@ public class WolfAgent : Agent
         var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
         transform.Rotate(transform.up, rotate * 10f);
 
-        var adj = FirstAdjacent("Player", targetRange * 3);
-        if (adj != null) {
-            AddReward(0.001f);
-            Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처");
-            Friendly += Time.deltaTime;
-        }
-        else
-            Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처 아뉨");
+        // var adj = FirstAdjacent("Player", targetRange * 3);
+        // if (adj != null) {
+        //     AddReward(0.001f);
+        //     Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처");
+        //     Friendly += Time.deltaTime;
+        // }
+        // else
+        //     Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처 아뉨");
 
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);

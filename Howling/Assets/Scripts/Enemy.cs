@@ -32,8 +32,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float walkMaxVel = 6.0f;      // 걸을 때 최고 속도
     [SerializeField] float runMaxVel = 13.0f;      // 뛸 때 최고 속도
 
-    static float keepTraceTime = 5.0f;   // 타겟이 인식 범위 밖으로 나갔을 때 추적 상태를 유지하는 시간
-    static float keepEscapeTime = 5.0f;  // 타겟이 인식 범위 밖으로 나갔을 때 도주 상태를 유지하는 시간
+    static float keepTraceTime = 2.0f;   // 타겟이 인식 범위 밖으로 나갔을 때 추적 상태를 유지하는 시간
+    static float keepEscapeTime = 2.0f;  // 타겟이 인식 범위 밖으로 나갔을 때 도주 상태를 유지하는 시간
     
     float nextStateTime = 0.0f;          // 다음 랜덤 상태까지 걸리는 총 시간
     float nowStateTime = 0.0f;           // 현재 기본 상태(idle, walk)에서 보낸 시간
@@ -125,6 +125,11 @@ public class Enemy : MonoBehaviour
         {
             //Debug.Log("감지");
             Collider[] fireColliders = Physics.OverlapSphere(transform.position, detectDist, fireMask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, detectDist, targetMask);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, 10);
+
             if (fireColliders.Length != 0)
             {
                 Debug.Log("enemy - campfire 닿음!!");
@@ -137,7 +142,6 @@ public class Enemy : MonoBehaviour
             {
                 if (target == null)
                 {
-                    Collider[] colliders = Physics.OverlapSphere(transform.position, detectDist, targetMask);
                     if (colliders.Length != 0)
                     {
                         state = EnemyState.trace;
@@ -146,6 +150,17 @@ public class Enemy : MonoBehaviour
                         nextStateTime = 0.0f;
                     }
                 }
+            }
+            else if(state == EnemyState.trace || state == EnemyState.escape)
+            {
+                if (colliders.Length == 0)
+                {
+                    if (state == EnemyState.trace)
+                        nextStateTime = keepTraceTime;
+                    else if (state == EnemyState.escape)
+                        nextStateTime = keepEscapeTime;
+                }
+
             }
             //else if (state == EnemyState.escape)
             //    yield return new WaitForSeconds(keepEscapeTime - nowStateTime);
