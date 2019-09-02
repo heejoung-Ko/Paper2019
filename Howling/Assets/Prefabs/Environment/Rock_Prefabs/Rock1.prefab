@@ -1167,7 +1167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initHp: 3
-  destroy: 0
   destroyTime: 3
   respawnTime: 10
   col: {fileID: 6629019381159842289}
@@ -1214,6 +1213,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 7352599f100047a4aa7742bfbb7d922f, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7352599f100047a4aa7742bfbb7d922f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7352599f100047a4aa7742bfbb7d922f, type: 3}
       propertyPath: m_LocalPosition.x
