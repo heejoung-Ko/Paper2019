@@ -10,6 +10,9 @@ public enum FireSizeType
 public class Campfire : MonoBehaviour
 {
     [SerializeField]
+    private AudioSource _audioSource;
+
+    [SerializeField]
     float state = 0f;
 
     [SerializeField]
@@ -36,10 +39,16 @@ public class Campfire : MonoBehaviour
 
     public void InputWood()
     {
+        if(!_audioSource.isPlaying)
+        {
+            _audioSource.Play();
+        }
+
         state += 30f;
 
         if (state > 100)
             state = 100;
+
 
         SetFireSize();
     }
@@ -54,6 +63,11 @@ public class Campfire : MonoBehaviour
         isFire = true;
         if (state == 0)
         {
+            if(_audioSource.isPlaying)
+            {
+                _audioSource.Stop();
+            }
+
             isFire = false;
             SetNone();
         }
@@ -81,6 +95,8 @@ public class Campfire : MonoBehaviour
 
     private void SetSmall()
     {
+        _audioSource.volume = 0.1f;
+
         fireSize = FireSizeType.SMALL;
         small.SetActive(true);
         midium.SetActive(false);
@@ -89,6 +105,8 @@ public class Campfire : MonoBehaviour
     
     private void SetMidium()
     {
+        _audioSource.volume = 0.3f;
+
         fireSize = FireSizeType.MIDIUM;
         small.SetActive(false);
         midium.SetActive(true);
@@ -97,6 +115,8 @@ public class Campfire : MonoBehaviour
     
     private void SetBig()
     {
+        _audioSource.volume = 0.5f;
+
         fireSize = FireSizeType.BIG;
         small.SetActive(false);
         midium.SetActive(false);
