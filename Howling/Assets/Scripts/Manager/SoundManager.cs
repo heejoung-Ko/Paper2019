@@ -123,7 +123,7 @@ public class SoundManager : MonoBehaviour
             {
                 if (bgmEffectAudioSource.isPlaying)
                 {
-                    if (playBGMName == bgmEffectSounds[i].name) return;
+                    if (playBGMEffectName == bgmEffectSounds[i].name) return;
 
                     StopBGM(playBGMEffectName);
                 }
