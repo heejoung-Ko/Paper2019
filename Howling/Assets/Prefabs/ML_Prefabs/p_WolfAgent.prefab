@@ -69,7 +69,7 @@ MonoBehaviour:
   RestSpeed: 10
   DigSpeed: 10
   MaxSpeed: 100
-  walkSpeed: 0
+  walkSpeed: 3
   moveForce: 5
   AttackDamage: 25
   DefendDamage: 5
@@ -87,7 +87,6 @@ MonoBehaviour:
   - {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727, type: 3}
   - {fileID: 8718725412594261390, guid: 123050e4ff8890342901ab4a4649d9a6, type: 3}
   isMoving: 0
-  DigEffect: {fileID: 0}
 --- !u!54 &1270759937672873595
 Rigidbody:
   m_ObjectHideFlags: 0

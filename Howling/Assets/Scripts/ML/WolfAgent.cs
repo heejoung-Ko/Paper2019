@@ -212,11 +212,11 @@ public class WolfAgent : Agent
                 isMoving = false;
                 Rest();
                 break;
-            //case (int)ActionType.GOTOPLAYER:
-            //    animator.SetBool("isWalk", true);
-            //    GoToPlayer();
-            //    animator.SetBool("isWalk", false);
-            //    break;
+            case (int)ActionType.GOTOPLAYER:
+                animator.SetBool("isWalk", true);
+                GoToPlayer();
+                animator.SetBool("isWalk", false);
+                break;
             case (int)ActionType.ATTACK:
                 isMoving = false;
                 Attack();
@@ -227,11 +227,11 @@ public class WolfAgent : Agent
                 break;
         }
 
-        if (vectorAction[(int)ActionType.GOTOPLAYER] > .5f)
-        {
-            animator.SetBool("isMove", true);
-            GoToPlayer();
-        }
+        // if (vectorAction[(int)ActionType.GOTOPLAYER] > .5f)
+        // {
+        //     animator.SetBool("isMove", true);
+        //     GoToPlayer();
+        // }
     }
 
     private GameObject FirstAdjacent(string tag, float range)
@@ -266,12 +266,14 @@ public class WolfAgent : Agent
         var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
         transform.Rotate(transform.up, rotate * 10f);
 
-        
-
-        //if (act[(int)ActionType.MOVEORDERS] > .5f)
-
-        //{
-        //}
+        var adj = FirstAdjacent("Player", targetRange * 3);
+        if (adj != null) {
+            AddReward(0.001f);
+            Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처");
+            Friendly += Time.deltaTime;
+        }
+        else
+            Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처 아뉨");
 
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
