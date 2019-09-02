@@ -37,7 +37,7 @@ public class ClockController : MonoBehaviour
         {
             hour -= 12;
 
-            if (hour < 12)
+            if (hour < 10)
                 text.GetComponent<Text>().text += "0" + hour + " : ";
             else
                 text.GetComponent<Text>().text += hour + " : ";
