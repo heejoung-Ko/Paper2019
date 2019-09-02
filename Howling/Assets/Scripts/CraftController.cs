@@ -21,6 +21,8 @@ public class CraftController : MonoBehaviour
     private Craft CampFire;
     [SerializeField]
     private Craft Fence;
+    [SerializeField]
+    private Craft Tent;
 
     [SerializeField]
     private Craft nowCraft = null;
@@ -31,6 +33,7 @@ public class CraftController : MonoBehaviour
     bool isBox = false;
     bool isCampfire = false;
     bool isFence = false;
+    bool isTent = false;
 
     private RaycastHit hitInfo;
     [SerializeField]
@@ -67,6 +70,13 @@ public class CraftController : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
                 CraftBuilding();
         }
+        else if(isTent)
+        {
+            RotateRL();
+            ViewPreviewOther();
+            if (Input.GetMouseButtonDown(1))
+                CraftBuilding();
+        }
     }
 
     void CheckInventory()
@@ -81,6 +91,7 @@ public class CraftController : MonoBehaviour
             isBox = true;
             isCampfire = false;
             isFence = false;
+            isTent = false;
 
             if (go != null)
                 Destroy(go);
@@ -95,6 +106,7 @@ public class CraftController : MonoBehaviour
             isBox = false;
             isCampfire = true;
             isFence = false;
+            isTent = false;
 
             if (go != null)
                 Destroy(go);
@@ -109,10 +121,26 @@ public class CraftController : MonoBehaviour
             isBox = false;
             isCampfire = false;
             isFence = true;
+            isTent = false;
 
             if (go != null)
                 Destroy(go);
             nowCraft = Fence;
+            go = Instantiate(nowCraft.prefabPreview);
+        }
+        else if(select == Tent.item)
+        {
+            if (isTent)
+                return;
+
+            isBox = false;
+            isCampfire = false;
+            isFence = false;
+            isTent = true;
+
+            if (go != null)
+                Destroy(go);
+            nowCraft = Tent;
             go = Instantiate(nowCraft.prefabPreview);
         }
         else
@@ -120,6 +148,7 @@ public class CraftController : MonoBehaviour
             isBox = false;
             isCampfire = false;
             isFence = false;
+            isTent = false;
             if (go != null)
                 Destroy(go);
             
@@ -179,6 +208,7 @@ public class CraftController : MonoBehaviour
         isBox = false;
         isCampfire = false;
         isFence = false;
+        isTent = false;
     }
 
     void RotateRL()
