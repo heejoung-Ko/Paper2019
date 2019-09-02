@@ -95,7 +95,7 @@ public class EnemiesManager : MonoBehaviour
 
     public void SetTraceAtNightByDay(int day)
     {
-        if (bearOldDay + bearDayCycle == day)
+        if (bearOldDay + bearDayCycle - 1 == day)
         {
             bearOldDay = day;
             Debug.Log("isBearTraceAtNight true!");
