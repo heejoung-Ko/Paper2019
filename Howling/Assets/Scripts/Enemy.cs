@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     static float keepTraceTime = 2.0f;   // 타겟이 인식 범위 밖으로 나갔을 때 추적 상태를 유지하는 시간
     static float keepEscapeTime = 2.0f;  // 타겟이 인식 범위 밖으로 나갔을 때 도주 상태를 유지하는 시간
-    
+
     float nextStateTime = 0.0f;          // 다음 랜덤 상태까지 걸리는 총 시간
     float nowStateTime = 0.0f;           // 현재 기본 상태(idle, walk)에서 보낸 시간
 
@@ -59,6 +59,9 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private float detectDist;
+
+    private bool isGoToSpawnPoint;
+    private bool isTraceAtNight;
 
     private void Awake()
     {
@@ -93,6 +96,8 @@ public class Enemy : MonoBehaviour
             default: break;
         }
         maxHp = hp;
+        isGoToSpawnPoint = false;
+        isTraceAtNight = false;
     }
 
     private void Start()
@@ -112,8 +117,7 @@ public class Enemy : MonoBehaviour
 
     void TraceAtNight()
     {
-        // TODO: 2시간 동안은 모닥불 닿여서 도망갔다가 다시 trace하기
-        // 모닥불 닿여서 도망갈 때 시간 1초에서 좀 줄이기 
+        Debug.Log("TraceAtNight()");
         state = EnemyState.trace;
         target = enemiesManager.playerTarget;
         nextStateTime = 0.0f;
@@ -151,7 +155,7 @@ public class Enemy : MonoBehaviour
                     }
                 }
             }
-            else if(state == EnemyState.trace || state == EnemyState.escape)
+            else if (state == EnemyState.trace || state == EnemyState.escape)
             {
                 if (colliders.Length == 0)
                 {
@@ -173,11 +177,18 @@ public class Enemy : MonoBehaviour
     {
         while (!isDead)
         {
-            if (enemiesManager.isBoarTraceAtNight)
+            if (enemiesManager.isBoarTraceAtNight && !isGoToSpawnPoint)
             {
+                Debug.Log("SetTraceAtNightboar()");
+                if (!isTraceAtNight)
+                {
+                    isTraceAtNight = true;
+                    StartCoroutine(StartGoToSpawnPointTimer());
+                }
                 TraceAtNight();
                 yield return new WaitForSeconds(keepTraceTime);
             }
+            else isGoToSpawnPoint = false;
             yield return null;
         }
     }
@@ -186,13 +197,35 @@ public class Enemy : MonoBehaviour
     {
         while (!isDead)
         {
-            if (enemiesManager.isBearTraceAtNight)
+            if (enemiesManager.isBearTraceAtNight && !isGoToSpawnPoint)
             {
+                Debug.Log("SetTraceAtNightBear()");
+                if (!isTraceAtNight)
+                {
+                    isTraceAtNight = true;
+                    StartCoroutine(StartGoToSpawnPointTimer());
+                }
                 TraceAtNight();
                 yield return new WaitForSeconds(keepTraceTime);
             }
+            else isGoToSpawnPoint = false;
             yield return null;
         }
+    }
+
+    IEnumerator StartGoToSpawnPointTimer()
+    {
+        yield return new WaitForSeconds(15f);
+        isGoToSpawnPoint = true;
+        isTraceAtNight = false;
+        GoToSpawnPoint();
+    }
+
+    void GoToSpawnPoint()
+    {
+        //state = EnemyState.trace;
+        Debug.Log("goToSpawnPoint()");
+        target = enemiesManager.enemies[(int)type].enemiesSpawn[0].gameObject;
     }
 
     IEnumerator Action()
