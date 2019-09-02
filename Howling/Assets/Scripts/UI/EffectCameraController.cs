@@ -38,31 +38,28 @@ public class EffectCameraController : MonoBehaviour
     {
         atkEffectImg.gameObject.SetActive(true);
         FadeIn(0.2f, effectOffTime * 0.1f);
-        //effectCamera.gameObject.SetActive(true);
-        //startPosAtk = effectCamera.transform.localPosition;
         StartCoroutine(EffectShake(shakeAmount, effectOffTime));
         Invoke("EffectCameraOff", effectOffTime);
     }
 
     public void EffectCameraOff()
     {
-        //Debug.Log("effect camera off!");
         atkEffectImg.gameObject.SetActive(false);
-        //effectCamera.gameObject.SetActive(false);
     }
 
     public void DieCameraOn()
     {
         dieEffectImg.gameObject.SetActive(true);
+        effectCamera.gameObject.SetActive(false);
         dieCamera.gameObject.SetActive(true);
-        dieCamera.transform.localPosition = Vector3.zero;
+        dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
         //dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         isGameOver = true;
         DieEffect(0.2f, dieTime);
         inventory.isGameOver = true;
         uiManagerController.isGameOver = true;
-        uiManagerController.enterUI();
+        uiManagerController.enterUIEffectCamera();
     }
 
     public void DieCameraOff()
@@ -71,15 +68,17 @@ public class EffectCameraController : MonoBehaviour
         dieEffectImg.gameObject.SetActive(false);
         if (dieCamera.gameObject.activeSelf == true)
         {
-            dieCamera.transform.localPosition = Vector3.zero;
-            dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
+            //dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
             dieCamera.gameObject.SetActive(false);
         }
+        effectCamera.gameObject.SetActive(true);
 
         isGameOver = false;
         inventory.isGameOver = false;
         uiManagerController.isGameOver = false;
-        uiManagerController.exitUI();
+        uiManagerController.exitUIEffectCamera();
     }
 
     public void SleepCameraOn()
@@ -87,13 +86,14 @@ public class EffectCameraController : MonoBehaviour
         EffectCameraOff();
         dieEffectImg.gameObject.SetActive(true);
         dieCamera.gameObject.SetActive(true);
-        dieCamera.transform.localPosition = Vector3.zero;
+        effectCamera.gameObject.SetActive(false);
+        dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
 
         isSleepInTent = true;
         SleepInTentEffect(0.2f, sleepTime);
         inventory.isGameOver = true;
         uiManagerController.isGameOver = true;
-        uiManagerController.enterUI();
+        uiManagerController.enterUIEffectCamera();
     }
 
     public void SleepCameraOff()
@@ -102,15 +102,17 @@ public class EffectCameraController : MonoBehaviour
         dieEffectImg.gameObject.SetActive(false);
         if (dieCamera.gameObject.activeSelf == true)
         {
-            dieCamera.transform.localPosition = Vector3.zero;
-            dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
+            //dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            dieCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
             dieCamera.gameObject.SetActive(false);
         }
+        effectCamera.gameObject.SetActive(true);
 
         isSleepInTent = false;
         inventory.isGameOver = false;
         uiManagerController.isGameOver = false;
-        uiManagerController.exitUI();
+        uiManagerController.exitUIEffectCamera();
     }
 
     public void FadeIn(float startAlpha, float fadeInTime)

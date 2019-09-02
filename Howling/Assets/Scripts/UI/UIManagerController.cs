@@ -272,6 +272,26 @@ public class UIManagerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
 
+    public void enterUIEffectCamera()
+    {
+        PlayerController.GetComponent<PlayerMoveScript>().enabled = false;
+        PlayerController.GetComponent<PlayerAtk>().enabled = false;
+        PlayerController.GetComponentInChildren<PlayerHandController>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void exitUIEffectCamera()
+    {
+        Time.timeScale = 1f;
+
+        PlayerController.GetComponent<PlayerMoveScript>().enabled = true;
+        PlayerController.GetComponent<PlayerAtk>().enabled = true;
+        PlayerController.GetComponentInChildren<PlayerHandController>().enabled = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
