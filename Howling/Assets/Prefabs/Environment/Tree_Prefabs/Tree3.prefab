@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initHp: 3
-  destroyTime: 5
-  respawnTime: 10
+  destroyTime: 1
+  respawnTime: 60
   col: {fileID: 2690800763067450789}
   count1: 2
   count2: 4

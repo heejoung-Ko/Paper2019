@@ -427,7 +427,10 @@ public class Enemy : MonoBehaviour
             nextStateTime = 0.3f;
 
             float tempAtk = atk;
-            Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, targetMask);
+
+            Vector3 atkPosition = new Vector3(transform.position.x, transform.position.y + atkPos, transform.forward.z * transform.position.z + atkPos);
+
+            Collider[] targets = Physics.OverlapSphere(atkPosition, atkRange, targetMask);
             foreach (Collider t in targets)
             {
                 if (t.gameObject.CompareTag(targetTag))

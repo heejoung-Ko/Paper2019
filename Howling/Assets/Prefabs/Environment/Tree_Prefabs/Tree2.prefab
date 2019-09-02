@@ -627,7 +627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initHp: 3
   destroyTime: 5
-  respawnTime: 10
+  respawnTime: 60
   col: {fileID: 276719447841169149}
   count1: 3
   count2: 2
