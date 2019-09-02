@@ -18,6 +18,10 @@ public class EffectCameraController : MonoBehaviour
     public float respawnTime;
     [HideInInspector] public bool isGameOver;
 
+    [Header("Sleep In Tent Effect Setting")]
+    [HideInInspector] public bool isSleepInTent;
+    public float sleepTime = 2f;
+
     Vector3 startPosAtk;
     Howling.PlayerMoveScript playerMoveScript;
     UIManagerController uiManagerController;
@@ -78,6 +82,37 @@ public class EffectCameraController : MonoBehaviour
         uiManagerController.exitUI();
     }
 
+    public void SleepCameraOn()
+    {
+        EffectCameraOff();
+        dieEffectImg.gameObject.SetActive(true);
+        dieCamera.gameObject.SetActive(true);
+        dieCamera.transform.localPosition = Vector3.zero;
+
+        isSleepInTent = true;
+        SleepInTentEffect(0.2f, sleepTime);
+        inventory.isGameOver = true;
+        uiManagerController.isGameOver = true;
+        uiManagerController.enterUI();
+    }
+
+    public void SleepCameraOff()
+    {
+        EffectCameraOff();
+        dieEffectImg.gameObject.SetActive(false);
+        if (dieCamera.gameObject.activeSelf == true)
+        {
+            dieCamera.transform.localPosition = Vector3.zero;
+            dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            dieCamera.gameObject.SetActive(false);
+        }
+
+        isSleepInTent = false;
+        inventory.isGameOver = false;
+        uiManagerController.isGameOver = false;
+        uiManagerController.exitUI();
+    }
+
     public void FadeIn(float startAlpha, float fadeInTime)
     {
         StartCoroutine(CoFadeIn(startAlpha, fadeInTime));
@@ -92,6 +127,11 @@ public class EffectCameraController : MonoBehaviour
     {
         StartCoroutine(CoDieFadeIn(startAlpha, endTime));
         StartCoroutine(DieShake(endTime));
+    }
+
+    public void SleepInTentEffect(float startAlpha, float endTime)
+    {
+        StartCoroutine(CoDieFadeIn(startAlpha, endTime));
     }
 
     // 투명 -> 불투명

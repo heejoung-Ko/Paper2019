@@ -200,7 +200,7 @@ public class Enemy : MonoBehaviour
     void GoToSpawnPoint()
     {
         //state = EnemyState.trace;
-        Debug.Log("GoToSpawnPoint()");
+        //Debug.Log("GoToSpawnPoint()");
         state = EnemyState.walk;
         target = enemiesManager.enemies[(int)type].enemiesSpawn[0].gameObject;
         direction = (target.transform.position - transform.position).normalized; // 타겟으로 향하는 방향
@@ -342,6 +342,11 @@ public class Enemy : MonoBehaviour
             ChangeNextState();
             state = EnemyState.walk;
             target = null;
+            return;
+        }
+        else if (enemiesManager.effectCameraController.isSleepInTent)
+        {
+            GoToSpawnPoint();
             return;
         }
 
