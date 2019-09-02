@@ -35,6 +35,8 @@ public class UIManagerController : MonoBehaviour
         //BoxSlotM.GetComponent<BoxSlotManager>();
         state = UIState.NONE;
         isGameOver = false;
+
+        Screen.fullScreen = true;
     }
 
     void Update()
