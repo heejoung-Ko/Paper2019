@@ -37,9 +37,8 @@ public class EnemiesManager : MonoBehaviour
     //public DayNightCycle dayNightCycle;
     public StatusController statusController;
     public EffectCameraController effectCameraController;
-
-    //public DayNightCycle dayNightCycle;
-    int bearOldDay = 0;
+    
+    [HideInInspector] public int bearOldDay = 0;
     static int bearDayCycle = 3;
     [HideInInspector] public bool isBearTraceAtNight;
     float oldPercentageOfDay;
@@ -101,7 +100,7 @@ public class EnemiesManager : MonoBehaviour
         if (bearOldDay + bearDayCycle >= day)
         {
             bearOldDay = day;
-            Debug.Log("isBearTraceAtNight true!");
+            //Debug.Log("isBearTraceAtNight true!");
             isBearTraceAtNight = true;
         }
         oldPercentageOfDay = perOfDay;
@@ -111,7 +110,7 @@ public class EnemiesManager : MonoBehaviour
     public IEnumerator SetOffTraceAtNight()
     {
         yield return new WaitForSeconds(stopTimeTraceAtNight);
-        Debug.Log("isTraceAtNight false!");
+        //Debug.Log("isTraceAtNight false!");
         isBearTraceAtNight = false;
     }
 

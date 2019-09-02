@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
 
     void TraceAtNight()
     {
-        Debug.Log("TraceAtNight()");
+        //Debug.Log("TraceAtNight()");
         state = EnemyState.trace;
         target = enemiesManager.playerTarget;
         nextStateTime = 0.0f;
@@ -199,8 +199,12 @@ public class Enemy : MonoBehaviour
     void GoToSpawnPoint()
     {
         //state = EnemyState.trace;
-        Debug.Log("GoToSpawnPoint()");
+        //Debug.Log("GoToSpawnPoint()");
+        state = EnemyState.walk;
         target = enemiesManager.enemies[(int)type].enemiesSpawn[0].gameObject;
+        direction = (target.transform.position - transform.position).normalized; // 타겟으로 향하는 방향
+        direction.y = 0;
+        target = null;
     }
 
     IEnumerator Action()
