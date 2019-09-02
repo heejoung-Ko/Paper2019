@@ -75,6 +75,50 @@ CapsuleCollider:
   m_Height: 3.009177
   m_Direction: 2
   m_Center: {x: 0, y: 0.83119607, z: -0.04372704}
+--- !u!1 &3864492114718893376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6724830778460467712}
+  - component: {fileID: 2435535189423318823}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6724830778460467712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864492114718893376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9105239298221749026}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2435535189423318823
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864492114718893376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9105239298221749027
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +152,7 @@ Transform:
   m_Children:
   - {fileID: 2023126944917530356}
   - {fileID: 2082612088208142124}
+  - {fileID: 6724830778460467712}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,8 +173,8 @@ MonoBehaviour:
   oldState: 0
   type: 3
   target: {fileID: 0}
-  atkPos: 0
-  atkRange: 2
+  atkPos: 0.8
+  atkRange: 0.7
   targetMask:
     serializedVersion: 2
     m_Bits: 278528
@@ -155,14 +200,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9105239298221749027}
   serializedVersion: 2
-  m_Mass: 60
-  m_Drag: 10
-  m_AngularDrag: 10
+  m_Mass: 300
+  m_Drag: 0.01
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!95 &9105239298221749025
 Animator:
   serializedVersion: 3
@@ -193,7 +238,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &951489640517588618
 PrefabInstance:
