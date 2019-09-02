@@ -38,6 +38,7 @@ public class EnemiesManager : MonoBehaviour
     public StatusController statusController;
     public EffectCameraController effectCameraController;
 
+    public DayNightCycle dayNightCycle;
     int bearOldDay;
     int bearDayCycle = 3;
     [HideInInspector] public bool isBearTraceAtNight;
