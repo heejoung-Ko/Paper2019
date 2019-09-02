@@ -38,11 +38,8 @@ public class EnemiesManager : MonoBehaviour
     public StatusController statusController;
     public EffectCameraController effectCameraController;
 
-    int boarOldDay;
-    public int boarDayCycle;
-    [HideInInspector] public bool isBoarTraceAtNight;
     int bearOldDay;
-    public int bearDayCycle;
+    int bearDayCycle = 3;
     [HideInInspector] public bool isBearTraceAtNight;
     float oldPercentageOfDay;
 
@@ -99,13 +96,6 @@ public class EnemiesManager : MonoBehaviour
 
     public void SetTraceAtNightByDay(int day, float perOfDay)
     {
-        //int day = dayNightCycle.day;
-        if (boarOldDay + boarDayCycle >= day)
-        {
-            boarOldDay = day;
-            Debug.Log("isBoarTraceAtNight true!");
-            isBoarTraceAtNight = true;
-        }
         if (bearOldDay + bearDayCycle >= day)
         {
             bearOldDay = day;
@@ -113,13 +103,14 @@ public class EnemiesManager : MonoBehaviour
             isBearTraceAtNight = true;
         }
         oldPercentageOfDay = perOfDay;
-        Invoke("SetOffTraceAtNight", 15f);
+        StartCoroutine(SetOffTraceAtNight());
     }
 
-    public void SetOffTraceAtNight()
+    public IEnumerator SetOffTraceAtNight()
     {
+        yield return new WaitForSeconds(15f);
         Debug.Log("isTraceAtNight false!");
-        isBoarTraceAtNight = isBearTraceAtNight = false;
+        isBearTraceAtNight = false;
     }
 
     private IEnumerator DestroyEnemy(GameObject enemy)

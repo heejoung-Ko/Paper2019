@@ -84,9 +84,7 @@ MonoBehaviour:
   isNight: 0
   statusController: {fileID: 0}
   effectCameraController: {fileID: 0}
-  boarDayCycle: 3
-  isBoarTraceAtNight: 0
-  bearDayCycle: 1
+  bearDayCycle: 3
   isBearTraceAtNight: 0
 --- !u!1 &6490367502805193944
 GameObject:

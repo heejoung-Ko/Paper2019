@@ -25,7 +25,7 @@ public class ClockController : MonoBehaviour
         float minit = time - hour;
         minit = minit / 10 * 60;
 
-        Debug.Log(Mathf.Floor(time / 24));
+        //Debug.Log(Mathf.Floor(time / 24));
 
         text.GetComponent<Text>().text = "Day " + day + "   ";
         

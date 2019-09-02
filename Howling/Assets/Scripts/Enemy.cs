@@ -105,11 +105,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Detect());
         StartCoroutine(Action());
 
-        if (type == EnemyType.BOAR)
-        {
-            StartCoroutine(SetTraceAtNightBoar());
-        }
-        else if (type == EnemyType.BEAR)
+        if (type == EnemyType.BEAR)
         {
             StartCoroutine(SetTraceAtNightBear());
         }
@@ -169,26 +165,6 @@ public class Enemy : MonoBehaviour
             //else if (state == EnemyState.escape)
             //    yield return new WaitForSeconds(keepEscapeTime - nowStateTime);
 
-            yield return null;
-        }
-    }
-
-    IEnumerator SetTraceAtNightBoar()
-    {
-        while (!isDead)
-        {
-            if (enemiesManager.isBoarTraceAtNight && !isGoToSpawnPoint)
-            {
-                Debug.Log("SetTraceAtNightboar()");
-                if (!isTraceAtNight)
-                {
-                    isTraceAtNight = true;
-                    StartCoroutine(StartGoToSpawnPointTimer());
-                }
-                TraceAtNight();
-                yield return new WaitForSeconds(keepTraceTime);
-            }
-            else isGoToSpawnPoint = false;
             yield return null;
         }
     }

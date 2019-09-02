@@ -51,6 +51,7 @@ public class DayNightCycle : MonoBehaviour
             {
                 statusController.isNight = true;
                 enemiesManager.isNight = true;
+                enemiesManager.SetTraceAtNightByDay(day, percentageOfDay);
                 return true;
             }
             statusController.isNight = false;
@@ -97,7 +98,6 @@ public class DayNightCycle : MonoBehaviour
         {
             timer = 0.0f;
             day++;
-            enemiesManager.SetTraceAtNightByDay(day, percentageOfDay);
         }
     }
 
