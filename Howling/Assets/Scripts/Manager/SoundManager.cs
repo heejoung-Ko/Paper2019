@@ -27,12 +27,15 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource[] effectsAudioSource;
     public AudioSource bgmAudioSource;
+    public AudioSource bgmEffectAudioSource;
 
     public string[] playSEName;
     public string playBGMName;
+    public string playBGMEffectName;
 
     public Sound[] effectSounds;
     public Sound[] bgmSounds;
+    public Sound[] bgmEffectSounds;
 
     private void Start()
     {
@@ -108,6 +111,36 @@ public class SoundManager : MonoBehaviour
     {
         if (playBGMName == _name)
             bgmAudioSource.Stop();
+        else
+            Debug.Log("재생 중인" + _name + " 사운드가 없습니다");
+    }
+
+    public void PlayBGMEffect(string _name)
+    {
+        for (int i = 0; i < bgmEffectSounds.Length; i++)
+        {
+            if (_name == bgmEffectSounds[i].name)
+            {
+                if (bgmEffectAudioSource.isPlaying)
+                {
+                    if (playBGMName == bgmEffectSounds[i].name) return;
+
+                    StopBGM(playBGMEffectName);
+                }
+
+                playBGMEffectName = bgmEffectSounds[i].name;
+                bgmEffectAudioSource.clip = bgmEffectSounds[i].clip;
+                bgmEffectAudioSource.Play();
+                return;
+            }
+        }
+        Debug.Log(_name + "은 SoundManager에 등록되지 않은 BGM입니다.");
+    }
+
+    public void StopBGMEffect(string _name)
+    {
+        if (playBGMEffectName == _name)
+            bgmEffectAudioSource.Stop();
         else
             Debug.Log("재생 중인" + _name + " 사운드가 없습니다");
     }

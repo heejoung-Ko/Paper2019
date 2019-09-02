@@ -20,10 +20,13 @@ public class DayNightCycle : MonoBehaviour
     public EnemiesManager enemiesManager;
     public GameObject fireFliesControl;
 
+    [SerializeField] private string dayBgmName;
+    [SerializeField] private string nightBgmName;
 
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.instance.PlayBGM("bgm");
         timer = 0.0f;
 
         RenderSettings.fogDensity = dayNightFogDensity;
@@ -66,6 +69,8 @@ public class DayNightCycle : MonoBehaviour
 
         if (isNight)
         {
+            SoundManager.instance.PlayBGMEffect(nightBgmName);
+
             fireFliesControl.SetActive(true);
                 
             if (l.intensity > 0.0f)
@@ -76,6 +81,8 @@ public class DayNightCycle : MonoBehaviour
         }
         else
         {
+            SoundManager.instance.PlayBGMEffect(dayBgmName);
+
             fireFliesControl.SetActive(false);
             if (l.intensity < 1.0f)
             {
