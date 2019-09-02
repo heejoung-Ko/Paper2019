@@ -669,6 +669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 68b9cfee16e724444b9b6660464cb1f3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 68b9cfee16e724444b9b6660464cb1f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0

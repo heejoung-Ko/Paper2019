@@ -371,7 +371,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initHp: 3
-  destroy: 0
   destroyTime: 3
   respawnTime: 1440
   col: {fileID: 8377785298028393582}
@@ -1210,6 +1209,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 1819b0baa82eba241bd07d62a0ba1b84, type: 3}
       propertyPath: m_Name
       value: Rock3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1819b0baa82eba241bd07d62a0ba1b84, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1819b0baa82eba241bd07d62a0ba1b84, type: 3}
       propertyPath: m_LocalPosition.x
