@@ -58,6 +58,7 @@ public class StatusController : MonoBehaviour
     float thirstyDecreaseAmount = originThirstyDecreaseAmount;
     float decreaseMultiAmount = 1.5f;
     bool isInvincibility = false;
+    float decreaseSleepAmount = 20f;
 
     void Start()
     {
@@ -326,6 +327,13 @@ public class StatusController : MonoBehaviour
         DecreaseHp(enemATK);
         //Debug.Log("맞았당! HP: " + currentHp);
         
+    }
+
+    public void SetStatusSleepInTent()
+    {
+        SetHP(hp);
+        DecreaseHungry(decreaseSleepAmount);
+        DecreaseThirsty(decreaseSleepAmount);
     }
 
     public void Die()

@@ -17,6 +17,7 @@ namespace Howling
         private RaycastHit hitInfoCampfire;
         private RaycastHit hitInfoWater;
         private RaycastHit hitInfoMap;
+        private RaycastHit hitInfoTent;
 
         // 아이템 레이어에만 반응하도록 레이어 마스크 설정
         [SerializeField]
@@ -34,6 +35,8 @@ namespace Howling
         [SerializeField]
         private LayerMask mapMask;
 
+        [SerializeField]
+        private LayerMask tentMask;
 
         [SerializeField]
         private LayerMask supplyBoxMask;
@@ -49,6 +52,12 @@ namespace Howling
         private Inventory inventory;
 
         [SerializeField]
+        private StatusController statusController;
+
+        [SerializeField]
+        private DayNightCycle dayNightCycle;
+
+        [SerializeField]
         TutorialController tutorialController = null;
         [SerializeField]
         public GameObject UIManager;
@@ -58,6 +67,7 @@ namespace Howling
         private bool isCookedMeat = false;
         private bool isWater = false;
         private bool isSupplyBox = false;
+        private bool isTent = false;
 
         [SerializeField]
         Item water;
@@ -98,6 +108,8 @@ namespace Howling
                     CheckUseMeatToCampfire();
                     if (isWater)
                         GetWater();
+                    if (isTent)
+                        GetSleepInTent();
                 }
             }
         }
@@ -149,6 +161,7 @@ namespace Howling
         {
             ray.origin = transform.position;
             ray.direction = transform.forward;
+
             if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, itemMask))
             {
                 if (hitInfo.transform.CompareTag("item"))
@@ -159,6 +172,7 @@ namespace Howling
             }
             else
                 ItemInfoDisappear();
+
             if (Physics.Raycast(transform.position, transform.forward, out hitInfoBox, range, boxMask))
             {
                 BoxAppear();
@@ -166,6 +180,7 @@ namespace Howling
             }
             else
                 BoxDisapper();
+
             if (Physics.Raycast(transform.position, transform.forward, out hitInfoCampfire, range, campfireMask))
             {
                 CampfireAppear();
@@ -173,6 +188,7 @@ namespace Howling
             }
             else
                 CampfireDisappear();
+
             if(Physics.Raycast(transform.position, transform.forward, out hitInfoBox, range, supplyBoxMask))
             {
                 SupplyBoxAppear();
@@ -181,18 +197,28 @@ namespace Howling
             }
             else
                 SupplyBoxDisapper();
+
             if (Physics.Raycast(transform.position, transform.forward, out hitInfoMap, range, mapMask))
             {
                 WaterDisapear();
 
                 return;
             }
+
             if (Physics.Raycast(transform.position, transform.forward, out hitInfoWater, range, waterMask))
             {
                 WaterApear();
             }
             else
                 WaterDisapear();
+
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfoTent, range, tentMask))
+            {
+                TentAppear();
+                return;
+            }
+            else
+                TentDisappear();
         }
 
         //private void ObjectInfoAppear()
@@ -336,6 +362,30 @@ namespace Howling
         {
             //inventory.GetComponent<Inventory>().AddItem(water);
             inventory.GetComponent<Inventory>().FillGaugeRecycleItem();
+        }
+
+        private void TentAppear()
+        {
+            actionText.gameObject.SetActive(true);
+            actionText.text = "텐트에서 자기 " + "<color=yellow>" + "(E)키" + "</color>";
+
+            isTent = true;
+        }
+
+        private void TentDisappear()
+        {
+            if (!pickUpActivated)
+                actionText.gameObject.SetActive(false);
+
+            go = null;
+
+            isTent = false;
+        }
+
+        private void GetSleepInTent()
+        {
+            statusController.GetComponent<StatusController>().SetStatusSleepInTent();
+            dayNightCycle.GetComponent<DayNightCycle>().SetTimeSleepInTent();
         }
     }
 }

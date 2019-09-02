@@ -76,7 +76,7 @@ public class DayNightCycle : MonoBehaviour
 
         if (isNight)
         {
-            SoundManager.instance.PlayBGMEffect(nightBgmName);
+            //SoundManager.instance.PlayBGMEffect(nightBgmName);
 
             fireFliesControl.SetActive(true);
                 
@@ -88,7 +88,7 @@ public class DayNightCycle : MonoBehaviour
         }
         else
         {
-            SoundManager.instance.PlayBGMEffect(dayBgmName);
+            //SoundManager.instance.PlayBGMEffect(dayBgmName);
 
             fireFliesControl.SetActive(false);
             if (l.intensity < 1.0f)
@@ -125,5 +125,11 @@ public class DayNightCycle : MonoBehaviour
     {
         timer = _saveTime;
         day = _saveDay;
+    }
+
+    public void SetTimeSleepInTent()
+    {
+        //percentageOfDay += 0.3f;
+        timer += (minitesInDay * 60.0f) * 0.3f;
     }
 }

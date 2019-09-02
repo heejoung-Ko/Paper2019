@@ -1802,7 +1802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f8d085bac2d074ab7374f9a1baefd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
+  range: 5
   itemMask:
     serializedVersion: 2
     m_Bits: 32768
@@ -1818,12 +1818,17 @@ MonoBehaviour:
   mapMask:
     serializedVersion: 2
     m_Bits: 16777216
+  tentMask:
+    serializedVersion: 2
+    m_Bits: 268435456
   supplyBoxMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 134217728
   actionText: {fileID: 0}
   img: {fileID: 0}
   inventory: {fileID: 0}
+  statusController: {fileID: 0}
+  dayNightCycle: {fileID: 0}
   tutorialController: {fileID: 0}
   UIManager: {fileID: 0}
   water: {fileID: 11400000, guid: 66ec74fd7441dcd4582a1e2eba3a65cd, type: 2}
@@ -2213,6 +2218,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1163316886537102159}
     m_Modifications:
+    - target: {fileID: 100000, guid: 590f621bd76b33847ba52f0d342e24c6, type: 3}
+      propertyPath: m_Name
+      value: axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 590f621bd76b33847ba52f0d342e24c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 590f621bd76b33847ba52f0d342e24c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.022
@@ -2269,14 +2282,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 130
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 590f621bd76b33847ba52f0d342e24c6, type: 3}
-      propertyPath: m_Name
-      value: axe
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 590f621bd76b33847ba52f0d342e24c6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 590f621bd76b33847ba52f0d342e24c6, type: 3}
 --- !u!4 &3934412384421099541 stripped
@@ -2292,6 +2297,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1163316886537102159}
     m_Modifications:
+    - target: {fileID: 1207755418966846, guid: 6191d242d97347540a6f4263049bdfed, type: 3}
+      propertyPath: m_Name
+      value: Pick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207755418966846, guid: 6191d242d97347540a6f4263049bdfed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4296929895643056, guid: 6191d242d97347540a6f4263049bdfed, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.052
@@ -2348,14 +2361,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.20000008
       objectReference: {fileID: 0}
-    - target: {fileID: 1207755418966846, guid: 6191d242d97347540a6f4263049bdfed, type: 3}
-      propertyPath: m_Name
-      value: Pick
-      objectReference: {fileID: 0}
-    - target: {fileID: 1207755418966846, guid: 6191d242d97347540a6f4263049bdfed, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6191d242d97347540a6f4263049bdfed, type: 3}
 --- !u!4 &4142650408350461151 stripped
@@ -2371,6 +2376,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1163316886537102159}
     m_Modifications:
+    - target: {fileID: 4271479440823613896, guid: 750fe29a418d26743a9d0959fa5a61f0,
+        type: 3}
+      propertyPath: m_Name
+      value: torch_fired
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271479440823613896, guid: 750fe29a418d26743a9d0959fa5a61f0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1930843413726635390, guid: 750fe29a418d26743a9d0959fa5a61f0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2440,16 +2455,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4271479440823613896, guid: 750fe29a418d26743a9d0959fa5a61f0,
-        type: 3}
-      propertyPath: m_Name
-      value: torch_fired
-      objectReference: {fileID: 0}
-    - target: {fileID: 4271479440823613896, guid: 750fe29a418d26743a9d0959fa5a61f0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 750fe29a418d26743a9d0959fa5a61f0, type: 3}
