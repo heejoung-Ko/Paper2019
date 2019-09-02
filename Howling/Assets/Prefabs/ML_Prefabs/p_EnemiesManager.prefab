@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 197605295, guid: eba5ea91128e3ed418b5b51db3df9a05, type: 3}
   - {fileID: 2277552367229377910, guid: dbccc5dd87447124c9a76934e59f7985, type: 3}
   wolfAgent: {fileID: 0}
+  playerTarget: {fileID: 0}
   enemiesName:
   - Rabbit
   - Fox
@@ -80,6 +81,13 @@ MonoBehaviour:
   - Boar
   - Bear
   enemiesNum: 19000000140000000f0000000500000001000000
+  isNight: 0
+  statusController: {fileID: 0}
+  effectCameraController: {fileID: 0}
+  boarDayCycle: 3
+  isBoarTraceAtNight: 0
+  bearDayCycle: 1
+  isBearTraceAtNight: 0
 --- !u!1 &6490367502805193944
 GameObject:
   m_ObjectHideFlags: 0

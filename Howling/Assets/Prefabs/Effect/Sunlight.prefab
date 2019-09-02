@@ -260,25 +260,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0875986a14258e14db3ec8eab9392ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minitesInDay: 1
+  day: 0
+  minitesInDay: 3
+  percentageOfDay: 0
   dayNightFogDensity: 0
   dayNightColor:
     serializedVersion: 2
-    key0: {r: 1, g: 0.7411765, b: 0.4392157, a: 1}
-    key1: {r: 1, g: 0.9947673, b: 0.8254717, a: 1}
-    key2: {r: 1, g: 0.47339803, b: 0.25943398, a: 0}
+    key0: {r: 1, g: 0.998218, b: 0.9198113, a: 1}
+    key1: {r: 1, g: 0.8691981, b: 0.7216981, a: 1}
+    key2: {r: 1, g: 0.42222193, b: 0.3726415, a: 0}
     key3: {r: 0.5283019, g: 0, b: 0.30832154, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0.3254272, g: 0.41047916, b: 0.6698113, a: 0}
     key6: {r: 0.5990566, g: 0.87620926, b: 1, a: 0}
-    key7: {r: 1, g: 0.74013984, b: 0.43867922, a: 0}
+    key7: {r: 1, g: 1, b: 0.92156863, a: 0}
     ctime0: 0
-    ctime1: 6554
+    ctime1: 9830
     ctime2: 16384
-    ctime3: 29491
-    ctime4: 39321
+    ctime3: 22937
+    ctime4: 32768
     ctime5: 49151
-    ctime6: 58982
+    ctime6: 55705
     ctime7: 65535
     atime0: 0
     atime1: 65535
@@ -320,3 +322,6 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
+  statusController: {fileID: 0}
+  enemiesManager: {fileID: 0}
+  fireFliesControl: {fileID: 0}
