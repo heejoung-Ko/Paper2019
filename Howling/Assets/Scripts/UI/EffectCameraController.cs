@@ -27,6 +27,7 @@ public class EffectCameraController : MonoBehaviour
     {
         playerMoveScript = FindObjectOfType<Howling.PlayerMoveScript>();
         uiManagerController = FindObjectOfType<UIManagerController>();
+        startPosAtk = new Vector3(0, 0, -0.4f);
     }
 
     public void EffectCameraOn()
@@ -34,7 +35,7 @@ public class EffectCameraController : MonoBehaviour
         atkEffectImg.gameObject.SetActive(true);
         FadeIn(0.2f, effectOffTime * 0.1f);
         //effectCamera.gameObject.SetActive(true);
-        startPosAtk = effectCamera.transform.localPosition;
+        //startPosAtk = effectCamera.transform.localPosition;
         StartCoroutine(EffectShake(shakeAmount, effectOffTime));
         Invoke("EffectCameraOff", effectOffTime);
     }
