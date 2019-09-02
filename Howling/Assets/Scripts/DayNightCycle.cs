@@ -23,11 +23,14 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private string dayBgmName;
     [SerializeField] private string nightBgmName;
 
+    bool isCanSetTraceAtNightByDay = true;
+
     // Start is called before the first frame update
     void Start()
     {
         SoundManager.instance.PlayBGM("bgm");
         timer = 0.0f;
+        isCanSetTraceAtNightByDay = true;
 
         RenderSettings.fogDensity = dayNightFogDensity;
         RenderSettings.fogColor = dayNightFogColor.Evaluate(timer);
@@ -54,7 +57,11 @@ public class DayNightCycle : MonoBehaviour
             {
                 statusController.isNight = true;
                 enemiesManager.isNight = true;
-                enemiesManager.SetTraceAtNightByDay(day, percentageOfDay);
+                if (isCanSetTraceAtNightByDay)
+                {
+                    isCanSetTraceAtNightByDay = false;
+                    enemiesManager.SetTraceAtNightByDay(day, percentageOfDay);
+                }
                 return true;
             }
             statusController.isNight = false;
@@ -105,6 +112,7 @@ public class DayNightCycle : MonoBehaviour
         {
             timer = 0.0f;
             day++;
+            isCanSetTraceAtNightByDay = true;
         }
     }
 

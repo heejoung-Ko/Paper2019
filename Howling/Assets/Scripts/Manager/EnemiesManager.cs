@@ -38,11 +38,12 @@ public class EnemiesManager : MonoBehaviour
     public StatusController statusController;
     public EffectCameraController effectCameraController;
 
-    public DayNightCycle dayNightCycle;
-    int bearOldDay;
-    int bearDayCycle = 3;
+    //public DayNightCycle dayNightCycle;
+    int bearOldDay = 0;
+    static int bearDayCycle = 3;
     [HideInInspector] public bool isBearTraceAtNight;
     float oldPercentageOfDay;
+    [HideInInspector] public float stopTimeTraceAtNight = 15f;
 
     private void Awake()
     {
@@ -109,7 +110,7 @@ public class EnemiesManager : MonoBehaviour
 
     public IEnumerator SetOffTraceAtNight()
     {
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(stopTimeTraceAtNight);
         Debug.Log("isTraceAtNight false!");
         isBearTraceAtNight = false;
     }

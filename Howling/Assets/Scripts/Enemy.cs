@@ -127,8 +127,8 @@ public class Enemy : MonoBehaviour
             Collider[] fireColliders = Physics.OverlapSphere(transform.position, detectDist, fireMask);
             Collider[] colliders = Physics.OverlapSphere(transform.position, detectDist, targetMask);
 
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position, 10);
+            //Gizmos.color = Color.red;
+            //Gizmos.DrawSphere(transform.position, 10);
 
             if (fireColliders.Length != 0)
             {
@@ -175,7 +175,6 @@ public class Enemy : MonoBehaviour
         {
             if (enemiesManager.isBearTraceAtNight && !isGoToSpawnPoint)
             {
-                Debug.Log("SetTraceAtNightBear()");
                 if (!isTraceAtNight)
                 {
                     isTraceAtNight = true;
@@ -191,7 +190,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator StartGoToSpawnPointTimer()
     {
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(enemiesManager.stopTimeTraceAtNight);
         isGoToSpawnPoint = true;
         isTraceAtNight = false;
         GoToSpawnPoint();
@@ -200,7 +199,7 @@ public class Enemy : MonoBehaviour
     void GoToSpawnPoint()
     {
         //state = EnemyState.trace;
-        Debug.Log("goToSpawnPoint()");
+        Debug.Log("GoToSpawnPoint()");
         target = enemiesManager.enemies[(int)type].enemiesSpawn[0].gameObject;
     }
 
