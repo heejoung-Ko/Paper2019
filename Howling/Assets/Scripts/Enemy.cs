@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
 
     static float keepTraceTime = 2.0f;   // 타겟이 인식 범위 밖으로 나갔을 때 추적 상태를 유지하는 시간
     static float keepEscapeTime = 2.0f;  // 타겟이 인식 범위 밖으로 나갔을 때 도주 상태를 유지하는 시간
+    static float keepGoToSpawnPointTime = 8.0f;
 
     float nextStateTime = 0.0f;          // 다음 랜덤 상태까지 걸리는 총 시간
     float nowStateTime = 0.0f;           // 현재 기본 상태(idle, walk)에서 보낸 시간
@@ -113,7 +114,7 @@ public class Enemy : MonoBehaviour
 
     void TraceAtNight()
     {
-        //Debug.Log("TraceAtNight()");
+        Debug.Log("TraceAtNight()");
         state = EnemyState.trace;
         target = enemiesManager.playerTarget;
         nextStateTime = 0.0f;
@@ -199,12 +200,14 @@ public class Enemy : MonoBehaviour
     void GoToSpawnPoint()
     {
         //state = EnemyState.trace;
-        //Debug.Log("GoToSpawnPoint()");
+        Debug.Log("GoToSpawnPoint()");
         state = EnemyState.walk;
         target = enemiesManager.enemies[(int)type].enemiesSpawn[0].gameObject;
         direction = (target.transform.position - transform.position).normalized; // 타겟으로 향하는 방향
         direction.y = 0;
         target = null;
+        nextStateTime = keepGoToSpawnPointTime;
+        nowStateTime = 0f;
     }
 
     IEnumerator Action()

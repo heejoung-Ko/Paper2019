@@ -60,7 +60,7 @@ public class DayNightCycle : MonoBehaviour
                 if (isCanSetTraceAtNightByDay)
                 {
                     isCanSetTraceAtNightByDay = false;
-                    enemiesManager.SetTraceAtNightByDay(day, percentageOfDay);
+                    enemiesManager.SetTraceAtNightByDay(day);
                 }
                 return true;
             }

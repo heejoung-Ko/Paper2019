@@ -34,14 +34,12 @@ public class EnemiesManager : MonoBehaviour
     public int[] enemiesNum;
 
     [HideInInspector] public bool isNight;
-    //public DayNightCycle dayNightCycle;
     public StatusController statusController;
     public EffectCameraController effectCameraController;
     
     [HideInInspector] public int bearOldDay = 0;
-    static int bearDayCycle = 3;
+    static int bearDayCycle = 1;
     [HideInInspector] public bool isBearTraceAtNight;
-    float oldPercentageOfDay;
     [HideInInspector] public float stopTimeTraceAtNight = 15f;
 
     private void Awake()
@@ -95,22 +93,21 @@ public class EnemiesManager : MonoBehaviour
         StartCoroutine(DestroyEnemy(enemy));
     }
 
-    public void SetTraceAtNightByDay(int day, float perOfDay)
+    public void SetTraceAtNightByDay(int day)
     {
-        if (bearOldDay + bearDayCycle >= day)
+        if (bearOldDay + bearDayCycle == day)
         {
             bearOldDay = day;
-            //Debug.Log("isBearTraceAtNight true!");
+            Debug.Log("isBearTraceAtNight true!");
             isBearTraceAtNight = true;
         }
-        oldPercentageOfDay = perOfDay;
         StartCoroutine(SetOffTraceAtNight());
     }
 
     public IEnumerator SetOffTraceAtNight()
     {
         yield return new WaitForSeconds(stopTimeTraceAtNight);
-        //Debug.Log("isTraceAtNight false!");
+        Debug.Log("isTraceAtNight false!");
         isBearTraceAtNight = false;
     }
 
