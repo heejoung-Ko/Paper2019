@@ -20,10 +20,12 @@ public class ClockController : MonoBehaviour
         float day = sun.GetComponent<DayNightCycle>().day;
 
 //        float time = clock - day;
-        time *= 2 * 12;
+        time *= 24;
         float hour = Mathf.Floor(time);
         float minit = time - hour;
         minit = minit / 10 * 60;
+
+        Debug.Log(Mathf.Floor(time / 24));
 
         text.GetComponent<Text>().text = "Day " + day + "   ";
         
@@ -33,9 +35,9 @@ public class ClockController : MonoBehaviour
         }
         else if (hour >= 12)
         {
-            hour -= 10;
+            hour -= 12;
 
-            if (hour < 10)
+            if (hour < 12)
                 text.GetComponent<Text>().text += "0" + hour + " : ";
             else
                 text.GetComponent<Text>().text += hour + " : ";

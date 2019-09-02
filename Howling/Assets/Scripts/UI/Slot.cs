@@ -78,6 +78,7 @@ namespace Howling
                 go_CountImage.SetActive(false);
                 Gauge.SetActive(true);
                 Durability = dur;
+                GaugeUpdate();
             }
 
             SetColor(1);

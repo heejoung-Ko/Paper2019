@@ -152,6 +152,7 @@ namespace Howling
             {
                 if (slots[i].item == null)
                 {
+                    Debug.Log(dur);
                     slots[i].AddItem(acquireItem, cnt, dur);
                     if (Item.ItemType.Equipment == acquireItem.itemType && slots[i] == selectSlot)
                         SwapItem();

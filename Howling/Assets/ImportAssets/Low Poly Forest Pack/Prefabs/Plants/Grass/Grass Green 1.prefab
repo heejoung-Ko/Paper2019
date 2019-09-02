@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 9025898766965776576}
+  - component: {fileID: 8731973311718792290}
   m_Layer: 0
   m_Name: Grass Green 1
   m_TagString: Untagged
@@ -96,3 +97,16 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
+--- !u!65 &8731973311718792290
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.45531097, y: 0.40515736, z: 0.65007025}
+  m_Center: {x: -0.05853279, y: 0.013408378, z: -0.12089169}
