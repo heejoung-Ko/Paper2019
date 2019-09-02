@@ -9820,7 +9820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca41040fa4c51d49bbdfa460deb798a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameClock: {fileID: 0}
+  gameClock: {fileID: 7804743}
   myPlayer: {fileID: 1987263220}
   myPlayerStatus: {fileID: 131607921}
   myWolf: {fileID: 370603561}

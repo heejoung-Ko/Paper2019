@@ -22,6 +22,7 @@ public class SaveData
     public List<int> invenArrayNumber = new List<int>();
     public List<string> invenItemName = new List<string>();
     public List<int> invenItemNumber = new List<int>();
+
     //// 아이템 - 상자
     //public List<int> boxArrayNumber1 = new List<int>();
     //public List<string> boxItemName1 = new List<string>();
