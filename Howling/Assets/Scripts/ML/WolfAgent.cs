@@ -348,7 +348,7 @@ public class WolfAgent : Agent
                 {
                     Debug.Log("사료 냠냠");
                     Hungry += 30f;
-                    Friendly += 5f;
+                    Friendly += 10f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
@@ -637,5 +637,14 @@ public class WolfAgent : Agent
     {
         if (val) return 1.0f;
         else return 0.0f;
+    }
+
+    public void decreaseStatusByPlayerAtk(int cnt)
+    {
+        Hp -= cnt;
+        Hp = Mathf.Clamp(Hp, 0, MaxHp);
+        Friendly -= 10f;
+        Friendly = Mathf.Clamp(Friendly, 0, MaxFriendly);
+        SetPlayerRelation();
     }
 }

@@ -9,6 +9,7 @@ namespace Howling
         private const float atkPos = 1f;
         private float atkRange = 1f;
         public LayerMask enemyMask;
+        public LayerMask wolfMask;
         public LayerMask resourceMask;
 
         private bool isAtk = false;
@@ -51,6 +52,14 @@ namespace Howling
         private void AttackCheck()
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, enemyMask);
+            if (colliders.Length == 0)
+            {
+                Collider[] wolfCollider = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, wolfMask);
+                if (wolfCollider.Length != 0)
+                {
+                    wolfCollider[0].GetComponent<WolfAgent>().decreaseStatusByPlayerAtk(playerHand.getAtk());
+                }
+            }
             foreach (Collider enemy in colliders) Attack(enemy.gameObject);
 
             if (playerHand.getAtk() > 1)

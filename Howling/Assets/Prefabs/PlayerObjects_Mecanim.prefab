@@ -2004,6 +2004,12 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 65536
+  wolfMask:
+    serializedVersion: 2
+    m_Bits: 262144
+  resourceMask:
+    serializedVersion: 2
+    m_Bits: 0
   playerHand: {fileID: 0}
   inventory: {fileID: 0}
   buildingMask:
