@@ -117,7 +117,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 7db55d3bc61132b42a408698195a0776, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -215,6 +215,11 @@ PrefabInstance:
     - target: {fileID: 1525676354884992, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6463781831033448818, guid: 0f848e738a34ef34591b2ee4348b507a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877650516467224, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
@@ -464,7 +469,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 18
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6463781831033448818, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
 --- !u!4 &1275230063566354458 stripped
 Transform:

@@ -88,6 +88,13 @@ public class WolfAgent : Agent
 
     public bool isMoving = false;
 
+    private void Awake()
+    {
+        Hp = 100f;
+        Hungry = 100f;
+        Friendly = 0f;
+    }
+
     private void Start()
     {
         InitializeAgent();
