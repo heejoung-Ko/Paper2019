@@ -1762,7 +1762,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.15
+  near clip plane: 0.3
   far clip plane: 500
   field of view: 40
   orthographic: 0
@@ -2155,7 +2155,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.15
+  near clip plane: 0.3
   far clip plane: 500
   field of view: 40
   orthographic: 0
@@ -2163,7 +2163,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 298156311
+    m_Bits: 465928471
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2187,7 +2187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 4b3d54ae061a19442853c979da2ac060, type: 2}
+  profile: {fileID: 0}
 --- !u!1 &9119612049546523503
 GameObject:
   m_ObjectHideFlags: 0
