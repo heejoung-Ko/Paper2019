@@ -324,6 +324,7 @@ public class WolfAgent : Agent
             {
                 return true;
             }
+            animator.SetBool("isEat", false);
             return false;
         }
     }
@@ -338,6 +339,7 @@ public class WolfAgent : Agent
             if (adj != null)
             {
                 transform.LookAt(adj.transform);
+                animator.SetBool("isEat", true);
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기")
                 {
@@ -377,6 +379,7 @@ public class WolfAgent : Agent
         get
         {
             if (FirstAdjacent("home", targetRange) != null) { Debug.Log("회복 가능"); return true; }
+            animator.SetBool("isRest", false);
             return false;
         }
     }
@@ -393,6 +396,7 @@ public class WolfAgent : Agent
                 float restReward = (Hp - oldHp) * (1 - (Hp / MaxHp)) * 0.03f;
 
                 transform.LookAt(adj.transform);
+                animator.SetBool("isRest", true);
 
                 Debug.Log("rest 중!!!");
 
@@ -484,6 +488,7 @@ public class WolfAgent : Agent
             else
             {
                 //Debug.Log("공격대상이 없당");
+                animator.SetBool("isAttack", false);
                 return false;
             }
         }
@@ -493,6 +498,7 @@ public class WolfAgent : Agent
     {
         if (CanAttack)
         {
+            animator.SetBool("isAttack", true);
             currentAction = "Attack";
             nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
             Enemy vic = null;
