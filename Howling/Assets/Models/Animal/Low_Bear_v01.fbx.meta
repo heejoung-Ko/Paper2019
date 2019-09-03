@@ -188,7 +188,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Arm_bear|attack_2
       takeName: Arm_bear|attack_2
-      firstFrame: 0
+      firstFrame: 12.1
       lastFrame: 27
       wrapMode: 0
       orientationOffsetY: 0
@@ -881,7 +881,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.9999999
+    previousCalculatedGlobalScale: 1.4999998
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
