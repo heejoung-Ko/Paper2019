@@ -39,7 +39,7 @@ namespace Howling
         {
             //Debug.Log("start attack coroutine");
             isAttack = true;
-            currentHand.anim.SetBool("Attack", true);
+            // currentHand.anim.SetBool("Attack", true);
 
             yield return new WaitForSeconds(currentHand.attackActiveDelay);
             isSwing = true;
@@ -49,7 +49,7 @@ namespace Howling
             yield return new WaitForSeconds(currentHand.attackCancleDelay);
             isSwing = false;
 
-            currentHand.anim.SetBool("Attack", false);
+            //currentHand.anim.SetBool("Attack", false);
             yield return new WaitForSeconds(currentHand.attackDelay - currentHand.attackActiveDelay - currentHand.attackCancleDelay);
             isAttack = false;
         }
@@ -62,13 +62,13 @@ namespace Howling
                 {
                     if(hitInfo.transform.CompareTag("tree") && currentHand.EquipAxe())
                     {
-                        hitInfo.transform.GetComponent<Resource>().Gathering();
+                        //hitInfo.transform.GetComponent<Resource>().Gathering();
 
                         inventory.useSelectItem();
                     }
                     else if (hitInfo.transform.CompareTag("rock") && currentHand.EquipPick())
                     {
-                        hitInfo.transform.GetComponent<Resource>().Gathering();
+                        //hitInfo.transform.GetComponent<Resource>().Gathering();
                         inventory.useSelectItem();
                     }
 

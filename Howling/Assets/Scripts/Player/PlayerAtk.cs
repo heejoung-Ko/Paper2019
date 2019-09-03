@@ -9,13 +9,11 @@ namespace Howling
         private const float atkPos = 1f;
         private float atkRange = 1f;
         public LayerMask enemyMask;
+        public LayerMask resourceMask;
 
-        private int atkTime = 30;
-        private int currentAtkTime = 0;
         private bool isAtk = false;
 
         private Animator animator;
-        private TutorialController tutorialController;
 
         public PlayerHand playerHand;
 
@@ -28,30 +26,22 @@ namespace Howling
         // Start is called before the first frame update
         void Awake()
         {
-            //enemyMask = 1 << LayerMask.NameToLayer("EnemyCollider");
-            //enemyMask |= 1 << LayerMask.NameToLayer("EnemyCollider");
-            currentAtkTime = 0;
             isAtk = false;
             animator = GetComponent<Animator>();
-            // tutorialController = FindObjectOfType<TutorialController>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (currentAtkTime <= atkTime)
-                currentAtkTime++;
-            else
+            if (animator.GetCurrentAnimatorStateInfo(1).IsName("Idle_None") || animator.GetCurrentAnimatorStateInfo(1).IsName("Idle_Tool"))
             {
                 if (Input.GetMouseButtonDown(0) && Slot.isSlotClick == false)
                 {
-                    //if (tutorialController.currentShow > 4)
                     {
-                        animator.SetBool("Attack", true);
+                        animator.SetTrigger("Attack");
+                        isAtk = true;
 
                         AttackCheck();
-                        currentAtkTime = 0;
-                        //tutorialController.isPlayerAttack = true;
                     }
                 }
             }
@@ -68,7 +58,9 @@ namespace Howling
                 colliders = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, buildingMask);
                 foreach (Collider building in colliders) building.GetComponent<Building>().Hittied();
             }
-            // foreach (Collider resource in colliders) Gathering(resource.gameObject);
+
+            Collider[] resources = Physics.OverlapSphere(transform.position + transform.forward * atkPos, atkRange, resourceMask);
+            foreach (Collider resource in resources) Gathering(resource.gameObject);
         }
 
         private void Attack(GameObject obj)
@@ -81,10 +73,16 @@ namespace Howling
 
         private void Gathering(GameObject obj)
         {
-            if (obj.CompareTag("tree") || obj.CompareTag("rock"))
+            if (obj.transform.CompareTag("tree") && playerHand.EquipAxe())
             {
-                Resource resource = obj.GetComponentInParent<Resource>();
-                resource.Gathering();
+                StartCoroutine( obj.transform.GetComponent<Resource>().Gathering(playerHand.attackActiveDelay));
+
+                inventory.useSelectItem();
+            }
+            else if (obj.transform.CompareTag("rock") && playerHand.EquipPick())
+            {
+                StartCoroutine(obj.transform.GetComponent<Resource>().Gathering(playerHand.attackActiveDelay));
+                inventory.useSelectItem();
             }
         }
 
