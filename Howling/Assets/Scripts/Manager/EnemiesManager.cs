@@ -119,8 +119,38 @@ public class EnemiesManager : MonoBehaviour
 
         Debug.Log("DestroyEnemy");
 
-        for (int i = 0; i < dropItems.Length; ++i)
-            Instantiate(dropItems[i], enemy.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
+        int meatNum = 0;
+        int leatherNum = 0;
+
+        switch (enemy.name)
+        {
+            case "Rabbit":
+                meatNum = 1;
+                leatherNum = 0;
+                break;
+            case "Fox":
+                meatNum = 1;
+                leatherNum = 1;
+                break;
+            case "Deer":
+                meatNum = 2;
+                leatherNum = 1;
+                break;
+            case "Boar":
+                meatNum = 3;
+                leatherNum = 2;
+                break;
+            case "Bear":
+                meatNum = 5;
+                leatherNum = 5;
+                break;
+        }
+
+        for (int i = 0; i < meatNum; ++i)
+            Instantiate(dropItems[0], enemy.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
+
+        for (int i = 0; i < leatherNum; ++i)
+            Instantiate(dropItems[1], enemy.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
 
         ObjectPool.Instance.PushToPool(enemy.name, enemy);
         //Debug.Log(enemy.gameObject.name + " - SetActive(false)");
