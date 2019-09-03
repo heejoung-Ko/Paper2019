@@ -133,13 +133,13 @@ public class WolfAgent : Agent
         enterDeadZone = false;
     }
 
-    //public void MonitorLog()
-    //{
-    //    Monitor.Log("Action", currentAction, transform);
-    //    Monitor.Log("Hp", Hp / MaxHp, transform);
-    //    Monitor.Log("Hungry", Hungry / MaxHungry, transform);
-    //    Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
-    //}
+    public void MonitorLog()
+    {
+        Monitor.Log("Action", currentAction, transform);
+        Monitor.Log("Hp", Hp / MaxHp, transform);
+        Monitor.Log("Hungry", Hungry / MaxHungry, transform);
+        Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
+    }
 
     void Update()
     {
@@ -161,7 +161,7 @@ public class WolfAgent : Agent
 
         GaugeUpdate();
 
-        //MonitorLog();
+        MonitorLog();
     }
 
     public void FixedUpdate()
