@@ -19,6 +19,7 @@ public class EffectCameraController : MonoBehaviour
     [HideInInspector] public bool isGameOver;
 
     [Header("Sleep In Tent Effect Setting")]
+    public Image sleepEffectImg;
     [HideInInspector] public bool isSleepInTent;
     private float sleepTime = 1f;
     [SerializeField] private DayNightCycle dayNightCycle;
@@ -68,6 +69,7 @@ public class EffectCameraController : MonoBehaviour
     {
         EffectCameraOff();
         dieEffectImg.gameObject.SetActive(false);
+        sleepEffectImg.gameObject.SetActive(false);
         if (dieCamera.gameObject.activeSelf == true)
         {
             dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
@@ -86,7 +88,7 @@ public class EffectCameraController : MonoBehaviour
     public void SleepCameraOn()
     {
         EffectCameraOff();
-        dieEffectImg.gameObject.SetActive(true);
+        sleepEffectImg.gameObject.SetActive(true);
         dieCamera.gameObject.SetActive(true);
         effectCamera.gameObject.SetActive(false);
         dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
@@ -102,6 +104,7 @@ public class EffectCameraController : MonoBehaviour
     {
         EffectCameraOff();
         dieEffectImg.gameObject.SetActive(false);
+        sleepEffectImg.gameObject.SetActive(false);
         if (dieCamera.gameObject.activeSelf == true)
         {
             dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
@@ -129,13 +132,13 @@ public class EffectCameraController : MonoBehaviour
 
     public void DieEffect(float startAlpha, float endTime)
     {
-        StartCoroutine(CoDieFadeIn(startAlpha, endTime));
+        StartCoroutine(CoDieFadeIn(startAlpha, endTime, dieEffectImg));
         StartCoroutine(DieShake(endTime));
     }
 
     public void SleepInTentEffect(float startAlpha, float endTime)
     {
-        StartCoroutine(CoDieFadeIn(startAlpha, endTime));
+        StartCoroutine(CoDieFadeIn(startAlpha, endTime, sleepEffectImg));
     }
 
     // 투명 -> 불투명
@@ -176,9 +179,9 @@ public class EffectCameraController : MonoBehaviour
     }
 
     // 투명 -> 불투명
-    IEnumerator CoDieFadeIn(float startAlpha, float fadeInTime)
+    IEnumerator CoDieFadeIn(float startAlpha, float fadeInTime, Image image)
     {
-        Color tempColor = dieEffectImg.color;
+        Color tempColor = image.color;
         tempColor.a = startAlpha;
         //float time = 0f;
 
@@ -189,44 +192,58 @@ public class EffectCameraController : MonoBehaviour
 
             if (tempColor.a >= 1f) tempColor.a = 1f;
 
-            dieEffectImg.color = tempColor;
+            image.color = tempColor;
 
             yield return null;
         }
 
         //Debug.Log(time += Time.deltaTime);
 
-        dieEffectImg.color = tempColor;
-        if (isSleepInTent)
-            StartCoroutine(CoSleepFadeOut(sleepTime));
-        else
+        image.color = tempColor;
+        if (isGameOver)
             Invoke("PlayerRespawn", respawnTime);
+        else if (isSleepInTent)
+            StartCoroutine(CoSleepFadeOut(sleepTime, sleepEffectImg));
     }
 
     // 불투명 -> 투명
-    IEnumerator CoSleepFadeOut(float fadeOutTime)
+    IEnumerator CoSleepFadeOut(float fadeOutTime, Image image)
     {
-        dayNightCycle.SetTimeSleepInTent();
-        statusController.SetStatusSleepInTent();
+        if (isGameOver)
+        {
+            dieCamera.transform.localPosition = new Vector3(0, 0, -0.4f);
+            dieCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (isSleepInTent)
+        {
+            dayNightCycle.SetTimeSleepInTent();
+            statusController.SetStatusSleepInTent();
+        }
 
-        Color tempColor = dieEffectImg.color;
+        Color tempColor = image.color;
+        tempColor.a = 1f;
         while (tempColor.a > 0f)
         {
             tempColor.a -= Time.deltaTime / fadeOutTime;
-            dieEffectImg.color = tempColor;
+            image.color = tempColor;
 
             if (tempColor.a <= 0f) tempColor.a = 0f;
 
             yield return null;
         }
-        dieEffectImg.color = tempColor;
-        SleepCameraOff();
+        image.color = tempColor;
+
+        if (isGameOver)
+            DieCameraOff();
+        if (isSleepInTent)
+            SleepCameraOff();
     }
 
     public void PlayerRespawn()
     {
         if (!isGameOver) return;
         playerMoveScript.Respawn();
+        StartCoroutine(CoSleepFadeOut(dieTime, dieEffectImg));
     }
 
     public IEnumerator EffectShake(float amount, float endTime)

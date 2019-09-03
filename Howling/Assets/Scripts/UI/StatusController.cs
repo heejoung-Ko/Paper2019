@@ -80,7 +80,6 @@ public class StatusController : MonoBehaviour
     {
         StatusInitial();
         isDie = false;
-        effectCameraController.DieCameraOff();
     }
 
     private void StatusCheats()
