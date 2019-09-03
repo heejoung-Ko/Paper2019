@@ -10,6 +10,9 @@ public class ItemSpawnInSea : MonoBehaviour
     [SerializeField]
     GameObject sun;
 
+    [SerializeField]
+    int spawnHour = 24;
+
     // [SerializeField]
     // Item[] spawnItem = new Item[3];
     // 
@@ -19,6 +22,7 @@ public class ItemSpawnInSea : MonoBehaviour
     Vector3 boxSize = new Vector3(20, 5, 35);
 
     float finalSpawnTime = 0f;
+
 
     [SerializeField]
     GameObject supplyBox;
@@ -68,7 +72,7 @@ public class ItemSpawnInSea : MonoBehaviour
         // }
 
 
-        if (finalSpawnTime + 24 < time)
+        if (finalSpawnTime + spawnHour < time)
         {
             respawnItem();
             finalSpawnTime = time;

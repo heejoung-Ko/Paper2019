@@ -30,12 +30,13 @@ public class SupplyBox : MonoBehaviour
     {
         for (int i = 0; i < itemNum; i++)
         {
-            int n = Random.RandomRange(0, spawnItemNum);
+            int n = Random.RandomRange(1, spawnItemNum);
             //Debug.Log(items.Length);
             items[i] = spawnItems[n];
 
             isGround = false;
         }
+        items[0] = spawnItems[0];
     }
 
     // Update is called once per frame
