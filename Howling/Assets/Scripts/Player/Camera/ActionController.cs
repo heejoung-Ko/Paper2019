@@ -165,6 +165,7 @@ namespace Howling
                 {
                     ItemInfoAppear();
                     TentDisappear();
+                    SupplyBoxDisapper();
                 }
                 return;
             }
