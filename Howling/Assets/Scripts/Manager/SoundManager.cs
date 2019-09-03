@@ -58,11 +58,11 @@ public class SoundManager : MonoBehaviour
                         return;
                     }
                 }
-                Debug.Log("모든 가용 AudioSource가 사용중");
+                //Debug.Log("모든 가용 AudioSource가 사용중");
                 return;
             }
         }
-        Debug.Log(_name + "사운드가 SoundManager에 등록되지 X");
+        //Debug.Log(_name + "사운드가 SoundManager에 등록되지 X");
     }
 
     public void StopAllSE()
@@ -82,7 +82,7 @@ public class SoundManager : MonoBehaviour
             break;
         }
 
-        Debug.Log("재생 중인" + _name + "사운드가 SoundManager에 등록되지 X");
+        //Debug.Log("재생 중인" + _name + "사운드가 SoundManager에 등록되지 X");
     }
 
     public void PlayBGM(string _name)
@@ -104,15 +104,15 @@ public class SoundManager : MonoBehaviour
                 return;
             }
         }
-        Debug.Log(_name + "은 SoundManager에 등록되지 않은 BGM입니다.");
+        //Debug.Log(_name + "은 SoundManager에 등록되지 않은 BGM입니다.");
     }
 
     public void StopBGM(string _name)
     {
         if (playBGMName == _name)
             bgmAudioSource.Stop();
-        else
-            Debug.Log("재생 중인" + _name + " 사운드가 없습니다");
+        //else
+        //    Debug.Log("재생 중인" + _name + " 사운드가 없습니다");
     }
 
     public void PlayBGMEffect(string _name)
@@ -134,15 +134,15 @@ public class SoundManager : MonoBehaviour
                 return;
             }
         }
-        Debug.Log(_name + "은 SoundManager에 등록되지 않은 BGM입니다.");
+        //Debug.Log(_name + "은 SoundManager에 등록되지 않은 BGM입니다.");
     }
 
     public void StopBGMEffect(string _name)
     {
         if (playBGMEffectName == _name)
             bgmEffectAudioSource.Stop();
-        else
-            Debug.Log("재생 중인" + _name + " 사운드가 없습니다");
+        //else
+        //    Debug.Log("재생 중인" + _name + " 사운드가 없습니다");
     }
 
 }

@@ -27,7 +27,7 @@ public class FeedController : MonoBehaviour
     {
         if (collision.collider.CompareTag("agent"))
         {
-            Debug.Log("player - agent 닿음!");
+            //Debug.Log("player - agent 닿음!");
             if (!meatRespawn)
             {
                 DropFeed();
@@ -38,7 +38,7 @@ public class FeedController : MonoBehaviour
 
     void DropFeed()
     {
-        Debug.Log("Player - Drop Feed!");
+        //Debug.Log("Player - Drop Feed!");
         Vector3 randomPos = new Vector3(Random.Range(-1, 1), 0.5f, Random.Range(-1, 1));
         var position = randomPos + transform.position;
         Instantiate(feedPrefab, position, Quaternion.identity);

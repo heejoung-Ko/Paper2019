@@ -136,13 +136,13 @@ public class WolfAgent : Agent
         enterDeadZone = false;
     }
 
-    public void MonitorLog()
-    {
-        Monitor.Log("Action", currentAction, transform);
-        Monitor.Log("Hp", Hp / MaxHp, transform);
-        Monitor.Log("Hungry", Hungry / MaxHungry, transform);
-        Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
-    }
+    //public void MonitorLog()
+    //{
+    //    Monitor.Log("Action", currentAction, transform);
+    //    Monitor.Log("Hp", Hp / MaxHp, transform);
+    //    Monitor.Log("Hungry", Hungry / MaxHungry, transform);
+    //    Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
+    //}
 
     void Update()
     {
@@ -166,7 +166,7 @@ public class WolfAgent : Agent
 
         GaugeUpdate();
 
-        MonitorLog();
+        //MonitorLog();
     }
 
     public void FixedUpdate()
@@ -381,18 +381,18 @@ public class WolfAgent : Agent
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기")
                 {
-                    Debug.Log("생고기 냠냠");
+                    //Debug.Log("생고기 냠냠");
                     Hungry += 20f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
                 {
-                    Debug.Log("사료 냠냠");
+                    //Debug.Log("사료 냠냠");
                     Hungry += 30f;
                     Friendly += 10f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
-                    Debug.Log("사과 냠냠");
+                    //Debug.Log("사과 냠냠");
                     Hungry += 10f;
                 }
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
@@ -416,7 +416,9 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("home", targetRange) != null) { Debug.Log("회복 가능"); animator.SetBool("isMove", false);
+            if (FirstAdjacent("home", targetRange) != null) {
+                //Debug.Log("회복 가능");
+                animator.SetBool("isMove", false);
                 return true; }
             return false;
         }
@@ -436,7 +438,7 @@ public class WolfAgent : Agent
                 transform.LookAt(adj.transform);
                 animator.SetBool("isRest", true);
 
-                Debug.Log("rest 중!!!");
+                //Debug.Log("rest 중!!!");
 
                 Hp += 10f;
                 Hp = Mathf.Clamp(Hp, 0f, MaxHp);
@@ -464,7 +466,7 @@ public class WolfAgent : Agent
             Vector2 wolfPos = new Vector2(transform.position.x, transform.position.z);
 
             if (Players == null)
-                Debug.Log(Players);
+                //Debug.Log(Players);
 
             for (int i = 0; i < Players.transform.childCount; i++)
             {
@@ -479,7 +481,7 @@ public class WolfAgent : Agent
 
             if (maxdist <= dist && dist <= playerRange)
             {
-                Debug.Log("가까움");
+                //Debug.Log("가까움");
 
                 walkSpeed = 5f;
                 return true;
@@ -613,11 +615,11 @@ public class WolfAgent : Agent
             DropItem();
 
             AddReward(.01f); // 성공 보상
-            Debug.Log("땅파기 성공!!");
+            //Debug.Log("땅파기 성공!!");
         }
         else
         {
-            Debug.Log("땅파기 실패!!");
+            //Debug.Log("땅파기 실패!!");
 
             currentAction = "DigFail";
         }

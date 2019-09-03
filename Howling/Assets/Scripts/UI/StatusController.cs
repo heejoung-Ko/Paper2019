@@ -89,7 +89,7 @@ public class StatusController : MonoBehaviour
             isInvincibility = !isInvincibility;
             StatusInitial();
             DieCheats();
-            Debug.Log("무적 모드 " + isInvincibility);
+            //Debug.Log("무적 모드 " + isInvincibility);
         }
         else if (Input.GetKeyDown(KeyCode.F2))
         {
@@ -178,7 +178,8 @@ public class StatusController : MonoBehaviour
         }
         //else
         //{
-        //    //Debug.Log("배고픔 수치가 0이 되었습니다");
+        //    
+        //Debug.Log("배고픔 수치가 0이 되었습니다");
         //}
     }
 
