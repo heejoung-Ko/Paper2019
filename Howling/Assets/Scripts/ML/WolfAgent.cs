@@ -437,7 +437,7 @@ public class WolfAgent : Agent
 
             if (vic != null)
             {
-                vic.DecreaseHpByWolf((int)AttackDamage);
+                vic.DecreaseHpByWolf((int)AttackDamage, this);
             }
             //else Debug.Log("WolfAgent - Attack, vic is null.");
         }
