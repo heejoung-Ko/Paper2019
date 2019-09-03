@@ -164,6 +164,7 @@ namespace Howling
                 if (hitInfo.transform.CompareTag("item"))
                 {
                     ItemInfoAppear();
+                    TentDisappear();
                 }
                 return;
             }
