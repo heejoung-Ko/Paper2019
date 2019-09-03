@@ -93,6 +93,9 @@ public class WolfAgent : Agent
     public GameObject[] dropItem;
 
     public bool isMoving = false;
+    public bool isDeadResting = false;
+
+    Quaternion newRotation;
 
     private void Awake()
     {
@@ -147,6 +150,8 @@ public class WolfAgent : Agent
 
         if (isMoving)
         {
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
+
             transform.position += transform.forward * Time.deltaTime * walkSpeed;
         }
         DecreaseStatus();
@@ -155,8 +160,8 @@ public class WolfAgent : Agent
         {
             currentAction = "Dead";
             AddReward(-1f);
-            Done();
-            AgentReset();
+            // Done();
+            // AgentReset();
         }
 
         GaugeUpdate();
@@ -175,6 +180,8 @@ public class WolfAgent : Agent
             }
             isMoving = false;
             currentAction = "Deciding";
+            animator.SetBool("isMove", false);
+
             RequestDecision();
         }
     }
@@ -214,9 +221,33 @@ public class WolfAgent : Agent
         AddVectorObs(BoolToFloat(CanDig));
     }
 
+    void DeadRest()
+    {
+        Hp += 5f;
+        Hp = Mathf.Clamp(Hp, 0, MaxHp);
+        Hungry += 5f;
+        Hungry = Mathf.Clamp(Hungry, 0, MaxHungry);
+        Friendly -= 2f;
+        Friendly = Mathf.Clamp(Friendly, 0, MaxFriendly);
+
+        if (Hp >= MaxHp / 5 && Hungry >= Hungry / 5)
+        {
+            isDeadResting = false;
+            animator.SetBool("isRest", false);
+        }
+        nextAction = Time.timeSinceLevelLoad + (25 / RestSpeed);
+    }
+
     public override void AgentAction(float[] vectorAction, string textAction)
     {
         //Action Space 8 float
+
+        if(isDeadResting)
+        {
+            isMoving = false;
+            DeadRest();
+            return;
+        }
 
         int maxAction = 0;
         for (int i = 0; i < (int)ActionType.DIG; ++i)
@@ -234,10 +265,12 @@ public class WolfAgent : Agent
                 isMoving = true;
                 animator.SetBool("isMove", true);
                 MoveAgent(vectorAction);
+                animator.SetBool("isRest", false);
                 break;
             case (int)ActionType.EAT:
                 isMoving = false;
                 Eat();
+                animator.SetBool("isRest", false);
                 break;
             case (int)ActionType.REST:
                 isMoving = false;
@@ -251,10 +284,12 @@ public class WolfAgent : Agent
             case (int)ActionType.ATTACK:
                 isMoving = false;
                 Attack();
+                animator.SetBool("isRest", false);
                 break;
             case (int)ActionType.DIG:
                 isMoving = false;
                 Dig();
+                animator.SetBool("isRest", false);
                 break;
         }
 
@@ -312,6 +347,9 @@ public class WolfAgent : Agent
         //    //Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처 아뉨");
 
         currentAction = "Moving";
+
+        newRotation = transform.rotation;
+
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
     }
 
@@ -378,8 +416,8 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("home", targetRange) != null) { Debug.Log("회복 가능"); return true; }
-            animator.SetBool("isRest", false);
+            if (FirstAdjacent("home", targetRange) != null) { Debug.Log("회복 가능"); animator.SetBool("isMove", false);
+                return true; }
             return false;
         }
     }
@@ -461,9 +499,7 @@ public class WolfAgent : Agent
             direction = (Player.position - transform.position).normalized; // 타겟으로 향하는 방향
             direction.y = 0;
 
-            Quaternion newRotation = Quaternion.LookRotation(direction);
-
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
+            newRotation = Quaternion.LookRotation(direction);
 
             //var reward = 0.001f * Friendly;
             //Debug.Log("Go to player reward");
@@ -611,11 +647,15 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (Hp <= 0 || enterDeadZone || Hungry <= 0)
+            if (Hp <= 0  || Hungry <= 0)
             {
                 //if (Hp <= 0) Debug.Log("hp <= 0");
                 //else if (enterDeadZone) Debug.Log("enterDeadZone");
                 //else if (Hungry <= 0) Debug.Log("Hungry <= 0");
+                isDeadResting = true;
+                animator.SetBool("isRest", true);
+                animator.SetBool("isMove", false);
+
                 return true;
             }
 
