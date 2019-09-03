@@ -376,7 +376,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("home", targetRange) != null) return true;
+            if (FirstAdjacent("home", targetRange) != null) { Debug.Log("회복 가능"); return true; }
             return false;
         }
     }
@@ -459,7 +459,7 @@ public class WolfAgent : Agent
 
             Quaternion newRotation = Quaternion.LookRotation(direction);
 
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 50.0f);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
 
             //var reward = 0.001f * Friendly;
             //Debug.Log("Go to player reward");
