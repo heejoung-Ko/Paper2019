@@ -52,6 +52,10 @@ public class Enemy : MonoBehaviour
     bool isDead;
     bool isAttack;
 
+
+    [SerializeField]
+    float atkTime = 0f;
+
     Quaternion oldRotation;
 
     public GameObject dropItem;
@@ -74,7 +78,6 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Detect());
         StartCoroutine(Action());
 
-        detectDist = atkRange * 2f;
         switch (type)
         {
             case EnemyType.RABBIT:
@@ -85,14 +88,12 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyType.DEER:
                 name = "DEER";
-                detectDist = atkRange * 1.5f;
                 break;
             case EnemyType.BOAR:
                 name = "BOAR";
                 break;
             case EnemyType.BEAR:
                 name = "BEAR";
-                detectDist = atkRange * 3f;
                 break;
             default: break;
         }
@@ -145,6 +146,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (colliders.Length != 0)
                     {
+                        Debug.Log("찾았다!!!!!!!!1");
                         state = EnemyState.trace;
                         target = colliders[0].gameObject;
                         ChangeNextState();
@@ -334,6 +336,16 @@ public class Enemy : MonoBehaviour
         return;
     }
 
+    private void OnDrawGizmos()
+    {
+        Vector3 atkPosition = new Vector3(transform.position.x, transform.position.y + atkPos, transform.position.z + transform.forward.z * atkPos);
+
+        //Debug.Log(atkPosition);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(atkPosition, atkRange);
+    }
+
     void Trace()
     {
         if (enemiesManager.effectCameraController.isGameOver)
@@ -353,8 +365,12 @@ public class Enemy : MonoBehaviour
         // 타겟과의 거리 계산
         float distance = Vector3.Distance(target.transform.position, transform.position);
 
+        Vector3 atkPosition = new Vector3(transform.position.x, transform.position.y + atkPos, transform.forward.z * transform.position.z + atkPos);
+
+        Collider[] targets = Physics.OverlapSphere(atkPosition, atkRange, targetMask);
+
         // 타겟이 공격범위 안에 들어왔을 때
-        if (distance <= atkRange)
+        if (targets.Length != 0)
         {
             state = EnemyState.attack;
             nowStateTime = 0f;
@@ -424,7 +440,7 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("attackTrigger");
 
-            nextStateTime = 0.3f;
+            nextStateTime = atkTime;
 
             float tempAtk = atk;
 
@@ -461,6 +477,7 @@ public class Enemy : MonoBehaviour
         }
         return;
     }
+
 
     void Hit()
     {
