@@ -15,9 +15,11 @@ public class UIManagerController : MonoBehaviour
     public GameObject SupplyBoxUI;
     //public BoxSlotManager BoxSlotM;
     public GameObject MenuUI;
+    public GameObject WolfStateUI;
 
     bool isBox = false;
     bool isSupply = false;
+    bool onWolfStateUI = false;
 
     [HideInInspector] public bool isGameOver;
 
@@ -66,7 +68,13 @@ public class UIManagerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            WolfStateUI.SetActive(!onWolfStateUI);
+            onWolfStateUI = !onWolfStateUI;
+        }
+
+            if (Input.GetKeyDown(KeyCode.H))
         {
             // 조합 상태 일때
             if (state == UIState.MAKING)
