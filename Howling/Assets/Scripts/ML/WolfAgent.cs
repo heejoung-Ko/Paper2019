@@ -132,13 +132,13 @@ public class WolfAgent : Agent
         enterDeadZone = false;
     }
 
-    //public void MonitorLog()
-    //{
-    //    Monitor.Log("Action", currentAction, transform);
-    //    Monitor.Log("Hp", Hp / MaxHp, transform);
-    //    Monitor.Log("Hungry", Hungry / MaxHungry, transform);
-    //    Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
-    //}
+    public void MonitorLog()
+    {
+        Monitor.Log("Action", currentAction, transform);
+        Monitor.Log("Hp", Hp / MaxHp, transform);
+        Monitor.Log("Hungry", Hungry / MaxHungry, transform);
+        Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
+    }
 
     void Update()
     {
@@ -160,7 +160,7 @@ public class WolfAgent : Agent
 
         GaugeUpdate();
 
-        //MonitorLog();
+        MonitorLog();
     }
 
     public void FixedUpdate()
@@ -375,7 +375,7 @@ public class WolfAgent : Agent
     {
         get
         {
-            if (FirstAdjacent("home", targetRange) != null) return true;
+            if (FirstAdjacent("home", targetRange) != null) { Debug.Log("회복 가능"); return true; }
             return false;
         }
     }
@@ -458,7 +458,7 @@ public class WolfAgent : Agent
 
             Quaternion newRotation = Quaternion.LookRotation(direction);
 
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 50.0f);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
 
             var reward = 0.001f * Friendly;
             Debug.Log("Go to player reward");
