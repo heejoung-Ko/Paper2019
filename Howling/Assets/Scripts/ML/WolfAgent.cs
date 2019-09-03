@@ -51,6 +51,7 @@ public class WolfAgent : Agent
     public float MaxSpeed;
     private float walkSpeed = 3f;
     [HideInInspector] public float moveForce = 100f;
+    static float baseAttackDamage = 10f;
     public float AttackDamage;
     public float DefendDamage;
     public float Eyesight;
@@ -489,7 +490,8 @@ public class WolfAgent : Agent
 
             if (vic != null)
             {
-                vic.DecreaseHpByWolf((int)AttackDamage, this);
+                int atk = (int)(baseAttackDamage + AttackDamage * (Friendly / MaxFriendly));
+                vic.DecreaseHpByWolf(atk, this);
             }
             //else Debug.Log("WolfAgent - Attack, vic is null.");
         }
