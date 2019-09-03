@@ -151,6 +151,8 @@ namespace Howling
             statusController.ResetForRespawn();
             transform.position = respawnPos.position;
             transform.rotation = respawnPos.rotation;
+            playerCamera.rotation = Quaternion.Euler(0, 0, 0);
+            rotationX = rotationY = 0;
         }
 
         //private void PlayerJump()
