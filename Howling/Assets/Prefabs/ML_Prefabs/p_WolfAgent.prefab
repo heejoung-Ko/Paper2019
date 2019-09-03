@@ -65,11 +65,10 @@ MonoBehaviour:
   MaxHp: 100
   MaxHungry: 100
   MaxFriendly: 100
-  EatingSpeed: 10
+  EatingSpeed: 25
   RestSpeed: 10
   DigSpeed: 10
   MaxSpeed: 100
-  walkSpeed: 3
   moveForce: 5
   AttackDamage: 25
   DefendDamage: 5
@@ -78,12 +77,14 @@ MonoBehaviour:
   Hungry: 0
   Friendly: 0
   currentAction: 
+  Player: {fileID: 0}
+  Players: {fileID: 0}
   playerRelation: 0
   targetType: 0
   dropItem:
   - {fileID: 3348651261939690299, guid: 80448679b99b05346864111c18ddf6af, type: 3}
-  - {fileID: 1153693903604504, guid: 2c9868bb7821e484083e774038674eb1, type: 3}
-  - {fileID: 1473933667410898, guid: 20df3b3bdddb94f47b7d2e59e491ff51, type: 3}
+  - {fileID: 4073457979917749041, guid: 1cfabfa5c908dd4498013151ed4e1ada, type: 3}
+  - {fileID: 8553433007550557525, guid: 99ac4aea73bf79646b38328b47238db5, type: 3}
   - {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727, type: 3}
   - {fileID: 8718725412594261390, guid: 123050e4ff8890342901ab4a4649d9a6, type: 3}
   isMoving: 0

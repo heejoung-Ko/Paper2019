@@ -49,7 +49,7 @@ public class WolfAgent : Agent
     public float RestSpeed;
     public float DigSpeed;
     public float MaxSpeed;
-    public float walkSpeed;
+    private float walkSpeed = 3f;
     [HideInInspector] public float moveForce = 100f;
     public float AttackDamage;
     public float DefendDamage;
@@ -60,6 +60,11 @@ public class WolfAgent : Agent
     public float Hungry;
     public float Friendly;
     public string currentAction;
+
+    [SerializeField]
+    Transform Player;
+    [SerializeField]
+    GameObject Players;
 
     /////////////////  Hide Parameters  /////////////////
     [HideInInspector] public PlayerRelation playerRelation;
@@ -77,6 +82,8 @@ public class WolfAgent : Agent
     private RayPerception rayPer;
     private float targetRange = 2f;
 
+    private Vector3 direction;
+
     public GameObject[] dropItem;
 
     public bool isMoving = false;
@@ -85,6 +92,9 @@ public class WolfAgent : Agent
     {
         InitializeAgent();
         AgentReset();
+
+        if (Players == null)
+            Debug.Log(transform.parent.name + "웨요????");
     }
 
     public override void InitializeAgent()
@@ -106,6 +116,7 @@ public class WolfAgent : Agent
         Hp = 100;
         Hungry = 100;
         Friendly = 0;
+        walkSpeed = 3f;
 
         currentAction = "Idle";
         playerRelation = PlayerRelation.Enemy;
@@ -212,11 +223,11 @@ public class WolfAgent : Agent
                 isMoving = false;
                 Rest();
                 break;
-            case (int)ActionType.GOTOPLAYER:
-                animator.SetBool("isWalk", true);
-                GoToPlayer();
-                animator.SetBool("isWalk", false);
-                break;
+            //case (int)ActionType.GOTOPLAYER:
+            //    isMoving = true;
+            //    animator.SetBool("isMove", true);
+            //    GoToPlayer();
+            //    break;
             case (int)ActionType.ATTACK:
                 isMoving = false;
                 Attack();
@@ -227,11 +238,12 @@ public class WolfAgent : Agent
                 break;
         }
 
-        // if (vectorAction[(int)ActionType.GOTOPLAYER] > .5f)
-        // {
-        //     animator.SetBool("isMove", true);
-        //     GoToPlayer();
-        // }
+        if (vectorAction[(int)ActionType.GOTOPLAYER] > .5f)
+        {
+            isMoving = true;
+            animator.SetBool("isMove", true);
+            GoToPlayer();
+        }
     }
 
     private GameObject FirstAdjacent(string tag, float range)
@@ -263,17 +275,21 @@ public class WolfAgent : Agent
     // Actions
     public void MoveAgent(float[] act)
     {
-        var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
-        transform.Rotate(transform.up, rotate * 10f);
+        if (act[(int)ActionType.GOTOPLAYER] <= .5f)
+        {
+            var rotate = Mathf.Clamp(act[(int)ActionType.ROTATION], -1f, 1f);
+            transform.Rotate(transform.up, rotate * 10f);
+        }
 
-        // var adj = FirstAdjacent("Player", targetRange * 3);
-        // if (adj != null) {
-        //     AddReward(0.001f);
-        //     Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처");
-        //     Friendly += Time.deltaTime;
-        // }
-        // else
-        //     Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처 아뉨");
+        var adj = FirstAdjacent("Player", targetRange * 3);
+        if (adj != null)
+        {
+            AddReward(0.001f);
+            //Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처");
+            Friendly += Time.deltaTime * 2;
+        }
+        //else
+        //    //Debug.Log(Mathf.Floor(Time.realtimeSinceStartup / 100) + "무브: 플레이어 근처 아뉨");
 
         currentAction = "Moving";
         nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
@@ -305,18 +321,18 @@ public class WolfAgent : Agent
 
                 if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질되지 않은 고기")
                 {
-                    //Debug.Log("생고기 냠냠");
+                    Debug.Log("생고기 냠냠");
                     Hungry += 20f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "손질된 고기")
                 {
-                    //Debug.Log("사료 냠냠");
+                    Debug.Log("사료 냠냠");
                     Hungry += 30f;
                     Friendly += 5f;
                 }
                 else if (adj.GetComponent<ItemPickUP>().item.ItemName == "사과")
                 {
-                    //Debug.Log("사과 냠냠");
+                    Debug.Log("사과 냠냠");
                     Hungry += 10f;
                 }
                 Hungry = Mathf.Clamp(Hungry, 0f, MaxHungry);
@@ -358,7 +374,7 @@ public class WolfAgent : Agent
 
                 transform.LookAt(adj.transform);
 
-                //Debug.Log("WolfAgent - rest 중!!!");
+                Debug.Log("rest 중!!!");
 
                 Hp += 10f;
                 Hp = Mathf.Clamp(Hp, 0f, MaxHp);
@@ -379,12 +395,34 @@ public class WolfAgent : Agent
     {
         get
         {
-            float playerRange = 5f;
-            GameObject playerObj = FirstAdjacent("Player", playerRange);
-            if (playerObj != null)
+            float playerRange = Eyesight;
+            float dist = 100;
+            float maxdist = 10;
+
+            Vector2 wolfPos = new Vector2(transform.position.x, transform.position.z);
+
+            if (Players == null)
+                Debug.Log(Players);
+
+            for (int i = 0; i < Players.transform.childCount; i++)
             {
+                Vector2 playerPos = new Vector2(Players.transform.GetChild(i).position.x, Players.transform.GetChild(i).position.z);
+
+                if (Vector2.Distance(wolfPos, playerPos) < dist)
+                {
+                    dist = Vector2.Distance(wolfPos, playerPos);
+                    Player = Players.transform.GetChild(i);
+                }
+            }
+
+            if (maxdist <= dist && dist <= playerRange)
+            {
+                Debug.Log("가까움");
+
+                walkSpeed = 5f;
                 return true;
             }
+            walkSpeed = 3f;
             return false;
         }
     }
@@ -396,11 +434,18 @@ public class WolfAgent : Agent
             Friendly += 2f;
             Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
+            direction = (Player.position - transform.position).normalized; // 타겟으로 향하는 방향
+            direction.y = 0;
+
+            Quaternion newRotation = Quaternion.LookRotation(direction);
+
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 50.0f);
+
             var reward = 0.001f * Friendly;
-            //Debug.Log("WolfAgent - Go to player reward");
+            Debug.Log("Go to player reward");
             AddReward(reward);
             SetPlayerRelation();
-            nextAction = Time.timeSinceLevelLoad + (25 / MaxSpeed);
+            nextAction = Time.timeSinceLevelLoad + (25 / RestSpeed);
             currentAction = "GoToPlayer";
         }
     }
@@ -462,9 +507,9 @@ public class WolfAgent : Agent
         {
             var colliders = Physics.OverlapSphere(transform.position, 20f);
 
-            foreach(var collider in colliders)
+            foreach (var collider in colliders)
             {
-                if(collider.CompareTag("item") || 
+                if (collider.CompareTag("item") ||
                    collider.CompareTag("home") ||
                    collider.CompareTag("enemyCollider") ||
                    collider.CompareTag("Player"))

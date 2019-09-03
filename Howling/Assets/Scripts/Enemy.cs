@@ -512,7 +512,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log("enemy hp: " + hp);
     }
 
-    public void DecreaseHpByWolf(int cnt, WolfAgent wolf)
+    public void DecreaseHpByWolf(int cnt, WolfAgent wolf = null)
     {
         if (state == EnemyState.die || state == EnemyState.hit) return;
         hp -= cnt;
@@ -521,13 +521,19 @@ public class Enemy : MonoBehaviour
         velocity = 0;
         EnemyExplosion enemyExplosion = GetComponentInChildren<EnemyExplosion>();
         enemyExplosion.isEnemyAtked = true;
-        enemiesManager.AtkReward(atk, wolf);
-        Runaway(enemiesManager.wolfAgent.gameObject);
+        if (wolf != null)
+        {
+            enemiesManager.AtkReward(atk, wolf);
+            Runaway(wolf.gameObject);
+        }
 
         if (hp <= 0)
         {
             //Debug.Log("주겄당!!");
-            enemiesManager.DieReward(wolf);
+            if (wolf != null)
+            {
+                enemiesManager.DieReward(wolf);
+            }
             state = EnemyState.die;
             oldRotation = transform.rotation;
             animator.SetTrigger("dieTrigger");
