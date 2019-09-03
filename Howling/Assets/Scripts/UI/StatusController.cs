@@ -334,7 +334,6 @@ public class StatusController : MonoBehaviour
         SetHP(hp);
         DecreaseHungry(decreaseSleepAmount);
         DecreaseThirsty(decreaseSleepAmount);
-        effectCameraController.SleepCameraOn();
     }
 
     public void Die()

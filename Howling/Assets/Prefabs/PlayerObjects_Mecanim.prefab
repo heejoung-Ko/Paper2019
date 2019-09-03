@@ -1770,7 +1770,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 298172695
+    m_Bits: 465944855
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1827,8 +1827,7 @@ MonoBehaviour:
   actionText: {fileID: 0}
   img: {fileID: 0}
   inventory: {fileID: 0}
-  statusController: {fileID: 0}
-  dayNightCycle: {fileID: 0}
+  effectCameraController: {fileID: 0}
   tutorialController: {fileID: 0}
   UIManager: {fileID: 0}
   water: {fileID: 11400000, guid: 66ec74fd7441dcd4582a1e2eba3a65cd, type: 2}
@@ -1875,6 +1874,10 @@ MonoBehaviour:
       type: 3}
     prefabPreview: {fileID: 6281135081280885034, guid: 1d7adb0cfe8e5ca4fafab33ddf113e3d,
       type: 3}
+  Tent:
+    item: {fileID: 0}
+    prefab: {fileID: 0}
+    prefabPreview: {fileID: 0}
   nowCraft:
     item: {fileID: 0}
     prefab: {fileID: 0}

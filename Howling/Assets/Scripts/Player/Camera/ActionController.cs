@@ -52,10 +52,7 @@ namespace Howling
         private Inventory inventory;
 
         [SerializeField]
-        private StatusController statusController;
-
-        [SerializeField]
-        private DayNightCycle dayNightCycle;
+        private EffectCameraController effectCameraController;
 
         [SerializeField]
         TutorialController tutorialController = null;
@@ -285,7 +282,7 @@ namespace Howling
 
         private void CampfireAppear()
         {
-            Item selectItem = inventory.GetComponent<Inventory>().getSelectItem();
+            Item selectItem = inventory.getSelectItem();
 
             isCampfire = false;
             isCookedMeat = false;
@@ -323,19 +320,19 @@ namespace Howling
 
         private void UseWoodToCampfire()
         {
-            inventory.GetComponent<Inventory>().useWoodToCampfire();
+            inventory.useWoodToCampfire();
 
             hitInfoCampfire.transform.GetComponent<Campfire>().InputWood();
         }
 
         private void UseMeatToCampfire()
         {
-            inventory.GetComponent<Inventory>().useMeatToCampfire();
+            inventory.useMeatToCampfire();
         }
 
         private void WaterApear()
         {
-            Item selectItem = inventory.GetComponent<Inventory>().getSelectItem();
+            Item selectItem = inventory.getSelectItem();
 
             if (selectItem != null)
             {
@@ -361,7 +358,7 @@ namespace Howling
         private void GetWater()
         {
             //inventory.GetComponent<Inventory>().AddItem(water);
-            inventory.GetComponent<Inventory>().FillGaugeRecycleItem();
+            inventory.FillGaugeRecycleItem();
         }
 
         private void TentAppear()
@@ -384,8 +381,7 @@ namespace Howling
 
         private void GetSleepInTent()
         {
-            statusController.GetComponent<StatusController>().SetStatusSleepInTent();
-            dayNightCycle.GetComponent<DayNightCycle>().SetTimeSleepInTent();
+            effectCameraController.SleepCameraOn();
         }
     }
 }

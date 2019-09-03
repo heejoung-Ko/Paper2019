@@ -21,6 +21,8 @@ public class EffectCameraController : MonoBehaviour
     [Header("Sleep In Tent Effect Setting")]
     [HideInInspector] public bool isSleepInTent;
     private float sleepTime = 1f;
+    [SerializeField] private DayNightCycle dayNightCycle;
+    [SerializeField] private StatusController statusController;
 
     Vector3 startPosAtk;
     Howling.PlayerMoveScript playerMoveScript;
@@ -204,6 +206,9 @@ public class EffectCameraController : MonoBehaviour
     // 불투명 -> 투명
     IEnumerator CoSleepFadeOut(float fadeOutTime)
     {
+        dayNightCycle.SetTimeSleepInTent();
+        statusController.SetStatusSleepInTent();
+
         Color tempColor = dieEffectImg.color;
         while (tempColor.a > 0f)
         {
