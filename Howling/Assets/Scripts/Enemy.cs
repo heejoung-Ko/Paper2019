@@ -146,7 +146,6 @@ public class Enemy : MonoBehaviour
                 {
                     if (colliders.Length != 0)
                     {
-                        Debug.Log("찾았다!!!!!!!!1");
                         state = EnemyState.trace;
                         target = colliders[0].gameObject;
                         ChangeNextState();
@@ -338,7 +337,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Vector3 atkPosition = new Vector3(transform.position.x, transform.position.y + atkPos, transform.position.z + transform.forward.z * atkPos);
+        Vector3 atkPosition = new Vector3(transform.forward.x + transform.position.x, transform.position.y + atkPos, transform.forward.z * atkPos + transform.position.z);
 
         //Debug.Log(atkPosition);
 
@@ -365,7 +364,7 @@ public class Enemy : MonoBehaviour
         // 타겟과의 거리 계산
         float distance = Vector3.Distance(target.transform.position, transform.position);
 
-        Vector3 atkPosition = new Vector3(transform.position.x, transform.position.y + atkPos, transform.forward.z * transform.position.z + atkPos);
+        Vector3 atkPosition = new Vector3(transform.forward.x + transform.position.x, transform.position.y + atkPos, transform.forward.z * atkPos + transform.position.z);
 
         Collider[] targets = Physics.OverlapSphere(atkPosition, atkRange, targetMask);
 
@@ -444,7 +443,7 @@ public class Enemy : MonoBehaviour
 
             float tempAtk = atk;
 
-            Vector3 atkPosition = new Vector3(transform.position.x, transform.position.y + atkPos, transform.forward.z * transform.position.z + atkPos);
+            Vector3 atkPosition = new Vector3(transform.forward.x + transform.position.x, transform.position.y + atkPos, transform.forward.z * atkPos + transform.position.z);
 
             Collider[] targets = Physics.OverlapSphere(atkPosition, atkRange, targetMask);
             foreach (Collider t in targets)

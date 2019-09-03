@@ -181,16 +181,16 @@ MonoBehaviour:
   fireMask:
     serializedVersion: 2
     m_Bits: 67108864
-  walkAcc: 10
-  runAcc: 15
-  walkMaxVel: 10
-  runMaxVel: 15
+  walkAcc: 5
+  runAcc: 7
+  walkMaxVel: 5
+  runMaxVel: 7
   hp: 40
   atk: 7
   invincibleTime: 1
   currentInvincibleTime: 0
   isDead: 0
-  atkTime: 0
+  atkTime: 0.5
   dropItem: {fileID: 197605295, guid: eba5ea91128e3ed418b5b51db3df9a05, type: 3}
   detectDist: 10
 --- !u!54 &9105239298221749031
@@ -201,7 +201,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9105239298221749027}
   serializedVersion: 2
-  m_Mass: 300
+  m_Mass: 35
   m_Drag: 0.01
   m_AngularDrag: 0.5
   m_UseGravity: 1
