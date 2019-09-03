@@ -464,15 +464,16 @@ public class Enemy : MonoBehaviour
                 }
 
                 isAttack = true;
+                return;
             }
         }
 
-        nowStateTime += Time.deltaTime;
-        if (nowStateTime >= nextStateTime)
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
         {
             state = EnemyState.trace;
             ChangeNextState();
             isAttack = false;
+            Debug.Log("공격끗!");
         }
         return;
     }
