@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
+using UnityEngine.UI;
 
 public enum PlayerRelation
 {
@@ -62,6 +63,9 @@ public class WolfAgent : Agent
     public float Friendly;
     public string currentAction;
 
+    private const int HP = 0, FRIENDLY = 1, HUNGRY = 2;
+    [SerializeField] private Image[] imgStatusGauge;
+
     [SerializeField]
     Transform Player;
     [SerializeField]
@@ -91,8 +95,8 @@ public class WolfAgent : Agent
 
     private void Awake()
     {
-        Hp = 100f;
-        Hungry = 100f;
+        Hp = MaxHp;
+        Hungry = MaxHungry;
         Friendly = 0f;
     }
 
@@ -100,9 +104,6 @@ public class WolfAgent : Agent
     {
         InitializeAgent();
         AgentReset();
-
-        if (Players == null)
-            Debug.Log(transform.parent.name + "웨요????");
     }
 
     public override void InitializeAgent()
@@ -121,9 +122,9 @@ public class WolfAgent : Agent
         transform.position = randomPos + pivotTransform.position;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
-        Hp = 100;
-        Hungry = 100;
-        Friendly = 0;
+        Hp = MaxHp;
+        Hungry = MaxHungry;
+        Friendly = 0f;
         walkSpeed = 3f;
 
         currentAction = "Idle";
@@ -131,13 +132,13 @@ public class WolfAgent : Agent
         enterDeadZone = false;
     }
 
-    public void MonitorLog()
-    {
-        Monitor.Log("Action", currentAction, transform);
-        Monitor.Log("Hp", Hp / MaxHp, transform);
-        Monitor.Log("Hungry", Hungry / MaxHungry, transform);
-        Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
-    }
+    //public void MonitorLog()
+    //{
+    //    Monitor.Log("Action", currentAction, transform);
+    //    Monitor.Log("Hp", Hp / MaxHp, transform);
+    //    Monitor.Log("Hungry", Hungry / MaxHungry, transform);
+    //    Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
+    //}
 
     void Update()
     {
@@ -156,7 +157,10 @@ public class WolfAgent : Agent
             Done();
             AgentReset();
         }
-        MonitorLog();
+
+        GaugeUpdate();
+
+        //MonitorLog();
     }
 
     public void FixedUpdate()
@@ -172,6 +176,13 @@ public class WolfAgent : Agent
             currentAction = "Deciding";
             RequestDecision();
         }
+    }
+
+    private void GaugeUpdate()
+    {
+        imgStatusGauge[HP].fillAmount = Hp / MaxHp;
+        imgStatusGauge[FRIENDLY].fillAmount = Friendly / MaxFriendly;
+        imgStatusGauge[HUNGRY].fillAmount = Hungry / MaxHungry;
     }
 
     public void DecreaseStatus()
