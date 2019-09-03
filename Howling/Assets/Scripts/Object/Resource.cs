@@ -50,8 +50,12 @@ public class Resource : MonoBehaviour
         init_posY = transform.position.y;
     }
 
-    public void Gathering()
+    public IEnumerator Gathering(float attackActiveDelay)
     {
+        yield return new WaitForSeconds(attackActiveDelay);
+
+        for (float i = 0f; i < 0.5; i += Time.deltaTime) ;
+
         SoundManager.instance.PlaySE(mining_sound);
 
         var clone = Instantiate(effect_resource, col.bounds.center, Quaternion.identity);
@@ -61,6 +65,8 @@ public class Resource : MonoBehaviour
 
         if (hp <= 0)
             Destruction();
+
+        yield return null;
     }
 
     private void Destruction()
