@@ -56,6 +56,7 @@ public class WolfAgent : Agent
     public float AttackDamage;
     public float DefendDamage;
     public float Eyesight;
+    static float baseEyesight = 15;
 
     [Header("Monitoring")]
     public float Hp;
@@ -132,13 +133,13 @@ public class WolfAgent : Agent
         enterDeadZone = false;
     }
 
-    //public void MonitorLog()
-    //{
-    //    Monitor.Log("Action", currentAction, transform);
-    //    Monitor.Log("Hp", Hp / MaxHp, transform);
-    //    Monitor.Log("Hungry", Hungry / MaxHungry, transform);
-    //    Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
-    //}
+    public void MonitorLog()
+    {
+        Monitor.Log("Action", currentAction, transform);
+        Monitor.Log("Hp", Hp / MaxHp, transform);
+        Monitor.Log("Hungry", Hungry / MaxHungry, transform);
+        Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
+    }
 
     void Update()
     {
@@ -160,7 +161,7 @@ public class WolfAgent : Agent
 
         GaugeUpdate();
 
-        //MonitorLog();
+        MonitorLog();
     }
 
     public void FixedUpdate()
@@ -414,9 +415,9 @@ public class WolfAgent : Agent
     {
         get
         {
-            float playerRange = Eyesight;
+            float playerRange = baseEyesight + (Eyesight - baseEyesight) * (Friendly / MaxFriendly);
             float dist = 100;
-            float maxdist = 10;
+            float maxdist = 8;
 
             Vector2 wolfPos = new Vector2(transform.position.x, transform.position.z);
 
@@ -450,8 +451,8 @@ public class WolfAgent : Agent
     {
         if (CanGoToPlayer)
         {
-            Friendly += 2f;
-            Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
+            //Friendly += 2f;
+            //Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
             direction = (Player.position - transform.position).normalized; // 타겟으로 향하는 방향
             direction.y = 0;
@@ -460,10 +461,10 @@ public class WolfAgent : Agent
 
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 50.0f);
 
-            var reward = 0.001f * Friendly;
-            Debug.Log("Go to player reward");
-            AddReward(reward);
-            SetPlayerRelation();
+            //var reward = 0.001f * Friendly;
+            //Debug.Log("Go to player reward");
+            //AddReward(reward);
+            //SetPlayerRelation();
             nextAction = Time.timeSinceLevelLoad + (25 / RestSpeed);
             currentAction = "GoToPlayer";
         }
