@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1414212602}
   - component: {fileID: 3268255649851450974}
   - component: {fileID: 8803759733957970874}
-  - component: {fileID: 1121389164010558977}
   m_Layer: 0
   m_Name: p_enemy bear
   m_TagString: enemy
@@ -45,7 +44,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414212599}
   serializedVersion: 2
-  m_Mass: 500
+  m_Mass: 50
   m_Drag: 0.01
   m_AngularDrag: 0.5
   m_UseGravity: 1
@@ -78,16 +77,16 @@ MonoBehaviour:
   fireMask:
     serializedVersion: 2
     m_Bits: 67108864
-  walkAcc: 10
-  runAcc: 20
-  walkMaxVel: 10
-  runMaxVel: 20
+  walkAcc: 5
+  runAcc: 5
+  walkMaxVel: 5
+  runMaxVel: 8
   hp: 50
   atk: 25
   invincibleTime: 1
   currentInvincibleTime: 0
   isDead: 0
-  atkTime: 0
+  atkTime: 1
   dropItem: {fileID: 0}
   detectDist: 10
 --- !u!95 &8803759733957970874
@@ -109,19 +108,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!135 &1121389164010558977
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414212599}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 10
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &565141093531281360
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +119,6 @@ GameObject:
   - component: {fileID: 5048198415224108576}
   - component: {fileID: 4547725767687801055}
   - component: {fileID: 3447175139520177415}
-  - component: {fileID: 4592589111333288583}
   m_Layer: 16
   m_Name: collider
   m_TagString: enemyCollider
@@ -181,22 +166,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3802772, y: 2.1645994, z: 3.6500573}
-  m_Center: {x: -0.011883497, y: 1.0576463, z: 0.54070663}
---- !u!136 &4592589111333288583
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565141093531281360}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 1.1565137
-  m_Height: 4.034362
-  m_Direction: 2
-  m_Center: {x: 0, y: 1.0344377, z: 0.47052526}
+  m_Size: {x: 1.3802772, y: 2.1645994, z: 3.925562}
+  m_Center: {x: -0.011883497, y: 1.0576463, z: 0.6784589}
 --- !u!1 &2373927636083452214
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,10 +410,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 516791839}
     m_Modifications:
-    - target: {fileID: 100064, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
-      propertyPath: m_Name
-      value: Low_Bear_v01
-      objectReference: {fileID: 0}
     - target: {fileID: 400064, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -486,6 +453,10 @@ PrefabInstance:
     - target: {fileID: 400064, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100064, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}
+      propertyPath: m_Name
+      value: Low_Bear_v01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 716d7e8e7ab526f4ba5ca918687b3fe5, type: 3}

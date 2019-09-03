@@ -122,16 +122,16 @@ MonoBehaviour:
   fireMask:
     serializedVersion: 2
     m_Bits: 67108864
-  walkAcc: 0.6
-  runAcc: 1.3
-  walkMaxVel: 6
-  runMaxVel: 13
+  walkAcc: 1.8
+  runAcc: 2.7
+  walkMaxVel: 1.8
+  runMaxVel: 2.7
   hp: 5
   atk: 1
   invincibleTime: 1
   currentInvincibleTime: 0
   isDead: 0
-  atkTime: 0
+  atkTime: 0.3
   dropItem: {fileID: 197605295, guid: eba5ea91128e3ed418b5b51db3df9a05, type: 3}
   detectDist: 3
 --- !u!95 &5248994665506766677
@@ -434,10 +434,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5248994665506766698}
     m_Modifications:
-    - target: {fileID: 100080, guid: f1cea6e0f24ea5e43ad1a4d32e9c92da, type: 3}
-      propertyPath: m_Name
-      value: Low_Hare_v01
-      objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: f1cea6e0f24ea5e43ad1a4d32e9c92da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -481,6 +477,10 @@ PrefabInstance:
     - target: {fileID: 400080, guid: f1cea6e0f24ea5e43ad1a4d32e9c92da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100080, guid: f1cea6e0f24ea5e43ad1a4d32e9c92da, type: 3}
+      propertyPath: m_Name
+      value: Low_Hare_v01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1cea6e0f24ea5e43ad1a4d32e9c92da, type: 3}
