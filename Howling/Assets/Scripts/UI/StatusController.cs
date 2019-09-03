@@ -88,6 +88,7 @@ public class StatusController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             isInvincibility = !isInvincibility;
+            StatusInitial();
             DieCheats();
             Debug.Log("무적 모드 " + isInvincibility);
         }
@@ -270,6 +271,7 @@ public class StatusController : MonoBehaviour
 
     public void DecreaseSp(float cnt)
     {
+        if (isInvincibility) return;
         isSpUsed = true;
         currentSpRechargeTime = 0;
 
@@ -289,6 +291,7 @@ public class StatusController : MonoBehaviour
 
     public void DecreaseHungry(float cnt)
     {
+        if (isInvincibility) return;
         if (currentHungry - cnt < 0)
         {
             currentHungry = 0;
@@ -308,6 +311,7 @@ public class StatusController : MonoBehaviour
 
     public void DecreaseThirsty(float cnt)
     {
+        if (isInvincibility) return;
         if (currentThirsty - cnt < 0)
         {
             currentThirsty = 0;

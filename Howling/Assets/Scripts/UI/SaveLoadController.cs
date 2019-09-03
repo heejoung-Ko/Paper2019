@@ -56,6 +56,7 @@ public class SaveLoadController : MonoBehaviour
     [SerializeField] private DayNightCycle gameClock;
     [SerializeField] private GameObject myPlayer;
     [SerializeField] private StatusController myPlayerStatus;
+    [SerializeField] private EnemiesManager enemiesManager;
     private Howling.Inventory myInven;
     //private BoxSlotManager myBox;
     [SerializeField] private WolfAgent myWolf;
@@ -129,6 +130,7 @@ public class SaveLoadController : MonoBehaviour
 
             // 로드할 데이터
             gameClock.SetTime(saveData.gameTime, saveData.gameDay);
+            enemiesManager.bearOldDay = saveData.gameDay;
 
             myPlayer.transform.position = saveData.playerPos;
             myPlayer.transform.eulerAngles = saveData.playerRot;

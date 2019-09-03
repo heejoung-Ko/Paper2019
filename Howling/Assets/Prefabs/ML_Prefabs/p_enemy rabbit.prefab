@@ -115,7 +115,7 @@ MonoBehaviour:
   type: 0
   target: {fileID: 0}
   atkPos: 0.3
-  atkRange: 0.3
+  atkRange: 0.6
   targetMask:
     serializedVersion: 2
     m_Bits: 278528
@@ -131,8 +131,9 @@ MonoBehaviour:
   invincibleTime: 1
   currentInvincibleTime: 0
   isDead: 0
+  atkTime: 0
   dropItem: {fileID: 197605295, guid: eba5ea91128e3ed418b5b51db3df9a05, type: 3}
-  detectDist: 1
+  detectDist: 3
 --- !u!95 &5248994665506766677
 Animator:
   serializedVersion: 3
