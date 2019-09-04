@@ -196,6 +196,13 @@ namespace Howling
             }
             else
                 SupplyBoxDisapper();
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfoTent, range, tentMask))
+            {
+                TentAppear();
+                return;
+            }
+            else
+                TentDisappear();
 
             if (Physics.Raycast(transform.position, transform.forward, out hitInfoMap, range, mapMask))
             {
@@ -211,13 +218,6 @@ namespace Howling
             else
                 WaterDisapear();
 
-            if (Physics.Raycast(transform.position, transform.forward, out hitInfoTent, range, tentMask))
-            {
-                TentAppear();
-                return;
-            }
-            else
-                TentDisappear();
         }
 
         //private void ObjectInfoAppear()

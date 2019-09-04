@@ -277,15 +277,21 @@ public class WolfAgent : Agent
                 animator.SetBool("isMove", true);
                 MoveAgent(vectorAction);
                 animator.SetBool("isRest", false);
+                animator.SetBool("isDig", false);
+                digEffect.SetActive(false);
                 break;
             case (int)ActionType.EAT:
                 isMoving = false;
                 Eat();
                 animator.SetBool("isRest", false);
+                animator.SetBool("isDig", false);
+                digEffect.SetActive(false);
                 break;
             case (int)ActionType.REST:
                 isMoving = false;
                 Rest();
+                animator.SetBool("isDig", false);
+                digEffect.SetActive(false);
                 break;
             //case (int)ActionType.GOTOPLAYER:
             //    isMoving = true;
@@ -295,6 +301,8 @@ public class WolfAgent : Agent
             case (int)ActionType.ATTACK:
                 isMoving = false;
                 Attack();
+                animator.SetBool("isDig", false);
+                digEffect.SetActive(false);
                 animator.SetBool("isRest", false);
                 break;
             case (int)ActionType.DIG:
@@ -309,6 +317,8 @@ public class WolfAgent : Agent
             isMoving = true;
             animator.SetBool("isMove", true);
             GoToPlayer();
+            animator.SetBool("isDig", false);
+            digEffect.SetActive(false);
         }
     }
 
