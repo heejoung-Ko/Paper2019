@@ -460,6 +460,12 @@ public class Enemy : MonoBehaviour
                 {
                     if (enemiesManager.isNight) tempAtk = atk * 1.5f;
                     WolfAgent wolf = t.GetComponent<WolfAgent>();
+                    if (wolf.isDeadResting)
+                    {
+                        state = EnemyState.escape;
+                        target = t.gameObject;
+                        return;
+                    }
                     wolf.Hp -= tempAtk;
                 }
 

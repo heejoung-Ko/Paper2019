@@ -62,7 +62,7 @@ MonoBehaviour:
   colliderLayerMask:
     serializedVersion: 2
     m_Bits: 268681216
-  MaxHp: 100
+  MaxHp: 300
   MaxHungry: 100
   MaxFriendly: 100
   EatingSpeed: 25
@@ -89,6 +89,7 @@ MonoBehaviour:
   - {fileID: 397681286333438700, guid: 34e43339ad15515418e988618ca43727, type: 3}
   - {fileID: 8718725412594261390, guid: 123050e4ff8890342901ab4a4649d9a6, type: 3}
   isMoving: 0
+  isDeadResting: 0
 --- !u!54 &1270759937672873595
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -216,11 +217,6 @@ PrefabInstance:
     - target: {fileID: 1525676354884992, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
       value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463781831033448818, guid: 0f848e738a34ef34591b2ee4348b507a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877650516467224, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
@@ -465,6 +461,11 @@ PrefabInstance:
     - target: {fileID: 1025720409166784, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6463781831033448818, guid: 0f848e738a34ef34591b2ee4348b507a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1345113009596416, guid: 0f848e738a34ef34591b2ee4348b507a, type: 3}
       propertyPath: m_Layer

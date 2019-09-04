@@ -136,22 +136,33 @@ public class WolfAgent : Agent
         enterDeadZone = false;
     }
 
-    //public void MonitorLog()
-    //{
-    //    Monitor.Log("Action", currentAction, transform);
-    //    Monitor.Log("Hp", Hp / MaxHp, transform);
-    //    Monitor.Log("Hungry", Hungry / MaxHungry, transform);
-    //    Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
-    //}
+    public void MonitorLog()
+    {
+        Monitor.Log("Action", currentAction, transform);
+        Monitor.Log("Hp", Hp / MaxHp, transform);
+        Monitor.Log("Hungry", Hungry / MaxHungry, transform);
+        Monitor.Log("Friendly", Friendly / MaxFriendly, transform);
+    }
 
     void Update()
     {
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            Friendly += 10f;
+        }
+
         if (isMoving)
         {
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
+            if (currentAction == "GoToPlayer")
+            {
+                direction = (Player.position - transform.position).normalized; // 타겟으로 향하는 방향
+                direction.y = 0;
 
+                newRotation = Quaternion.LookRotation(direction);
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRotation, Time.deltaTime * 10.0f);
+            }
             transform.position += transform.forward * Time.deltaTime * walkSpeed;
         }
         DecreaseStatus();
@@ -166,7 +177,7 @@ public class WolfAgent : Agent
 
         GaugeUpdate();
 
-        //MonitorLog();
+        MonitorLog();
     }
 
     public void FixedUpdate()
@@ -460,25 +471,27 @@ public class WolfAgent : Agent
         get
         {
             float playerRange = baseEyesight + (Eyesight - baseEyesight) * (Friendly / MaxFriendly);
-            float dist = 100;
             float maxdist = 8;
 
             Vector2 wolfPos = new Vector2(transform.position.x, transform.position.z);
+            Vector2 playerPos = new Vector2(Player.transform.position.x, Player.transform.position.z);
 
-            if (Players == null)
-                //Debug.Log(Players);
+            float dist= Vector2.Distance(wolfPos, playerPos);
 
-            for (int i = 0; i < Players.transform.childCount; i++)
-            {
-                Vector2 playerPos = new Vector2(Players.transform.GetChild(i).position.x, Players.transform.GetChild(i).position.z);
+            //if (Players == null)
+            //    //Debug.Log(Players);
 
-                if (Vector2.Distance(wolfPos, playerPos) < dist)
-                {
-                    dist = Vector2.Distance(wolfPos, playerPos);
-                    Player = Players.transform.GetChild(i);
-                }
-            }
-
+            // for (int i = 0; i < Players.transform.childCount; i++)
+            // {
+            //     Vector2 playerPos = new Vector2(Players.transform.GetChild(i).position.x, Players.transform.GetChild(i).position.z);
+            // 
+            //     if (Vector2.Distance(wolfPos, playerPos) < dist)
+            //     {
+            //         dist = Vector2.Distance(wolfPos, playerPos);
+            //         Player = Players.transform.GetChild(i);
+            //     }
+            // }
+            // 
             if (maxdist <= dist && dist <= playerRange)
             {
                 //Debug.Log("가까움");
