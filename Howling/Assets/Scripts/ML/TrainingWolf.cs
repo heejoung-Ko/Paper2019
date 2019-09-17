@@ -394,7 +394,12 @@ public class TrainingWolf : Agent
 
         }
 
- 
+        int i_hp = (int)Hp / 30;
+        i_hp = Mathf.Clamp(i_hp, 0, 2);
+        int i_hungy = (int)Hungry / 30;
+        i_hungy = Mathf.Clamp(i_hungy, 0, 2);
+        int i_friendly = (int)Friendly / 30;
+        i_friendly = Mathf.Clamp(i_friendly, 0, 2);
 
         switch (maxAction)
 
@@ -408,6 +413,11 @@ public class TrainingWolf : Agent
 
                 MoveAgent(vectorAction);
 
+                Debug.Log("HP: " + i_hp * 30 + "이상 " + 
+                    "| 허기: " + i_hungy * 30  + "이상 " +
+                    "| 친밀도" + i_friendly * 30 + "이상" + 
+                    " 일때) Move");
+
                 break;
 
             case (int)ActionType.EAT:
@@ -416,6 +426,11 @@ public class TrainingWolf : Agent
 
                 Eat();
 
+                Debug.Log("HP: " + i_hp * 30 + "이상 " +
+                    "| 허기: " + i_hungy * 30 + "이상 " +
+                    "| 친밀도" + i_friendly * 30 + "이상" +
+                    " 일때) Eat");   
+
                 break;
 
             case (int)ActionType.REST:
@@ -423,6 +438,11 @@ public class TrainingWolf : Agent
                 isMoving = false;
 
                 Rest();
+
+                Debug.Log("HP: " + i_hp * 30 + "이상 " +
+                    "| 허기: " + i_hungy * 30 + "이상 " +
+                    "| 친밀도" + i_friendly * 30 + "이상" +
+                    " 일때) Rest");
 
                 break;
 
@@ -434,6 +454,11 @@ public class TrainingWolf : Agent
 
                 animator.SetBool("isWalk", false);
 
+                Debug.Log("HP: " + i_hp * 30 + "이상 " +
+                    "| 허기: " + i_hungy * 30 + "이상 " +
+                    "| 친밀도" + i_friendly * 30 + "이상" +
+                    " 일때) GoToPlayer");
+
                 break;
 
             case (int)ActionType.ATTACK:
@@ -441,6 +466,11 @@ public class TrainingWolf : Agent
                 isMoving = false;
 
                 Attack();
+                
+                Debug.Log("HP: " + i_hp * 30 + "이상 " +
+                    "| 허기: " + i_hungy * 30 + "이상 " +
+                    "| 친밀도" + i_friendly * 30 + "이상" +
+                    " 일때) Attack");
 
                 break;
 
@@ -449,6 +479,11 @@ public class TrainingWolf : Agent
                 isMoving = false;
 
                 Dig();
+
+                Debug.Log("HP: " + i_hp * 30 + "이상 " +
+                    "| 허기: " + i_hungy * 30 + "이상 " +
+                    "| 친밀도" + i_friendly * 30 + "이상" +
+                    " 일때) Dig");
 
                 break;
 
@@ -816,7 +851,7 @@ public class TrainingWolf : Agent
 
  
 
-            Debug.Log("플레이어 안뇽 !");
+            //Debug.Log("플레이어 안뇽 !");
 
             var reward = 0.005f * Friendly;
 
@@ -918,7 +953,7 @@ public class TrainingWolf : Agent
 
     {
 
-        Debug.Log("WolfAgent - EnemyAtkReward, 공격했다!");
+        //Debug.Log("WolfAgent - EnemyAtkReward, 공격했다!");
 
         AddReward(atk * 0.05f);
 
@@ -930,7 +965,7 @@ public class TrainingWolf : Agent
 
     {
 
-        Debug.Log("WolfAgent - EnemyDieReward, 해치웠다!");
+        //Debug.Log("WolfAgent - EnemyDieReward, 해치웠다!");
 
         AddReward(.3f);
 
@@ -1036,7 +1071,7 @@ public class TrainingWolf : Agent
 
             AddReward(.01f); // 성공 보상
 
-            Debug.Log("땅파기 성공!!");
+            //Debug.Log("땅파기 성공!!");
 
         }
 
@@ -1044,7 +1079,7 @@ public class TrainingWolf : Agent
 
         {
 
-            Debug.Log("땅파기 실패!!");
+            //Debug.Log("땅파기 실패!!");
 
  
 
