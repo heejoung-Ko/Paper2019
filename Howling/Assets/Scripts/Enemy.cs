@@ -563,6 +563,34 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void DecreaseHpByWolf(int cnt, TrainingWolf wolf = null)
+    {
+        if (state == EnemyState.die || state == EnemyState.hit) return;
+        hp -= cnt;
+        oldState = state;
+        state = EnemyState.hit;
+        velocity = 0;
+        EnemyExplosion enemyExplosion = GetComponentInChildren<EnemyExplosion>();
+        enemyExplosion.isEnemyAtked = true;
+        if (wolf != null)
+        {
+            enemiesManager.AtkReward(atk, wolf);
+            Runaway(wolf.gameObject);
+        }
+
+        if (hp <= 0)
+        {
+            //Debug.Log("주겄당!!");
+            if (wolf != null)
+            {
+                enemiesManager.DieReward(wolf);
+            }
+            state = EnemyState.die;
+            oldRotation = transform.rotation;
+            animator.SetTrigger("dieTrigger");
+        }
+    }
+
     public void Runaway(GameObject go)
     {
         if (type == EnemyType.BOAR || type == EnemyType.BEAR) return;

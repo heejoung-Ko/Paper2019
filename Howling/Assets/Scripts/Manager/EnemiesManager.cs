@@ -28,6 +28,7 @@ public class EnemiesManager : MonoBehaviour
     [SerializeField] public static float randomNum = 20f;
 
     public WolfAgent wolfAgent;
+    public TrainingWolf trainWolfAgent;
     public GameObject playerTarget;
 
     public string[] enemiesName;
@@ -72,7 +73,7 @@ public class EnemiesManager : MonoBehaviour
         if (wolfAgent == null)
         {
             Debug.Log("EnemiesManager - Wolf Agent is null.");
-            wolfAgent = wolf;
+            wolfAgent = FindObjectOfType<WolfAgent>();
             return;
         }
         wolfAgent.EnemyAtkReward(atk);
@@ -88,6 +89,28 @@ public class EnemiesManager : MonoBehaviour
             return;
         }
         wolfAgent.EnemyDieReward();
+    }
+
+    public void AtkReward(int atk, TrainingWolf wolf)
+    {
+        trainWolfAgent = wolf;
+        if (trainWolfAgent == null)
+        {
+            Debug.Log("EnemiesManager - Wolf Agent is null.");
+            return;
+        }
+        trainWolfAgent.EnemyAtkReward(atk);
+    }
+
+    public void DieReward(TrainingWolf wolf)
+    {
+        trainWolfAgent = wolf;
+        if (trainWolfAgent == null)
+        {
+            Debug.Log("EnemiesManager - Wolf Agent is null.");
+            return;
+        }
+        trainWolfAgent.EnemyDieReward();
     }
 
     internal void Die(GameObject enemy)

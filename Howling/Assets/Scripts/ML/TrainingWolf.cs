@@ -8,53 +8,53 @@ using MLAgents;
 
  
 
-public enum PlayerRelation
+//public enum PlayerRelation
 
-{
+//{
 
-    Enemy, Stranger, Friend, Soulmate
+//    Enemy, Stranger, Friend, Soulmate
 
-}
-
- 
-
-public enum TargetType
-
-{
-
-    Player,
-
-    Home,
-
-    Foods,
-
-    Enemies
-
-}
+//}
 
  
 
-public enum ActionType
+//public enum TargetType
 
-{
+//{
 
-    MOVE,
+//    Player,
 
-    EAT,
+//    Home,
 
-    REST,
+//    Foods,
 
-    ATTACK,
+//    Enemies
 
-    DIG,
+//}
 
-    GOTOPLAYER,
+ 
 
-    ROTATION,
+//public enum ActionType
 
-    MOVEORDERS,
+//{
 
-}
+//    MOVE,
+
+//    EAT,
+
+//    REST,
+
+//    ATTACK,
+
+//    DIG,
+
+//    GOTOPLAYER,
+
+//    ROTATION,
+
+//    MOVEORDERS,
+
+//}
 
  
 
