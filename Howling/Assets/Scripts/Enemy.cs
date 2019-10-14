@@ -118,7 +118,8 @@ public class Enemy : MonoBehaviour
         Debug.Log("TraceAtNight()");
         state = EnemyState.trace;
         target = enemiesManager.playerTarget;
-        nextStateTime = 0;
+        //nextStateTime = enemiesManager.stopTimeTraceAtNight;
+        nextStateTime = keepTraceTime;
         nowStateTime = 0f;
     }
 
@@ -184,7 +185,7 @@ public class Enemy : MonoBehaviour
                     StartCoroutine(StartGoToSpawnPointTimer());
                 }
                 TraceAtNight();
-                yield return new WaitForSeconds(keepTraceTime);
+                //yield return new WaitForSeconds(keepTraceTime);
             }
             else isGoToSpawnPoint = false;
             yield return null;
@@ -202,7 +203,6 @@ public class Enemy : MonoBehaviour
     void GoToSpawnPoint()
     {
         //state = EnemyState.trace;
-        //Debug.Log("GoToSpawnPoint()");
         state = EnemyState.walk;
         target = enemiesManager.enemies[(int)type].enemiesSpawn[0].gameObject;
         direction = (target.transform.position - transform.position).normalized; // 타겟으로 향하는 방향

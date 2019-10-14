@@ -41,7 +41,7 @@ public class EnemiesManager : MonoBehaviour
     [HideInInspector] public int bearOldDay = 0;
     static int bearDayCycle = 2;
     [HideInInspector] public bool isBearTraceAtNight;
-    [HideInInspector] public float stopTimeTraceAtNight = 15f;
+    [HideInInspector] public float stopTimeTraceAtNight = 100f;
 
     private void Awake()
     {
@@ -184,7 +184,7 @@ public class EnemiesManager : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnTime);
 
-        Debug.Log(enemy.name);
+        //Debug.Log(enemy.name);
 
         GameObject new_enemy = ObjectPool.Instance.PopFromPool(enemy.name);
 
