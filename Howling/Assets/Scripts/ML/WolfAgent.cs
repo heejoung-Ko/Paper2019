@@ -234,14 +234,14 @@ public class WolfAgent : Agent
 
     void DeadRest()
     {
-        Hp += 5f;
+        Hp += 20f;
         Hp = Mathf.Clamp(Hp, 0, MaxHp);
-        Hungry += 5f;
+        Hungry += 20f;
         Hungry = Mathf.Clamp(Hungry, 0, MaxHungry);
         Friendly -= 2f;
         Friendly = Mathf.Clamp(Friendly, 0, MaxFriendly);
 
-        if (Hp >= MaxHp / 5 && Hungry >= Hungry / 5)
+        if (Hp >= MaxHp / 2 && Hungry >= Hungry / 2)
         {
             isDeadResting = false;
             animator.SetBool("isRest", false);

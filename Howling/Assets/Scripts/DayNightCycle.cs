@@ -109,7 +109,7 @@ public class DayNightCycle : MonoBehaviour
         //enemiesManager.SetTraceAtNightByTimer(percentageOfDay);
         if (timer > (minitesInDay * 60.0f))
         {
-            timer = 0.0f;
+            timer -= (minitesInDay * 60.0f);
             day++;
             isCanSetTraceAtNightByDay = true;
         }
@@ -130,5 +130,6 @@ public class DayNightCycle : MonoBehaviour
     {
         //percentageOfDay += 0.3f;
         timer += (minitesInDay * 60.0f) * 0.3f;
+            Debug.Log("자르기 전 시간 " + timer);
     }
 }
