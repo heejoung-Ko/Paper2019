@@ -58,6 +58,7 @@ namespace Howling
         TutorialController tutorialController = null;
         [SerializeField]
         public GameObject UIManager;
+        DayNightCycle dayNightCycle = null;
 
         private bool isBox = false;
         private bool isCampfire = false;
@@ -77,6 +78,7 @@ namespace Howling
         {
             img.gameObject.SetActive(true);
             tutorialController = FindObjectOfType<TutorialController>();
+            dayNightCycle = FindObjectOfType<DayNightCycle>();
         }
 
         // Update is called once per frame
@@ -384,6 +386,7 @@ namespace Howling
         private void GetSleepInTent()
         {
             effectCameraController.SleepCameraOn();
+            dayNightCycle.isCanSetTraceAtNightByDay = true;
         }
     }
 }

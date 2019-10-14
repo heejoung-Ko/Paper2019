@@ -23,7 +23,7 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private string dayBgmName;
     [SerializeField] private string nightBgmName;
 
-    bool isCanSetTraceAtNightByDay = true;
+    [HideInInspector] public bool isCanSetTraceAtNightByDay = true;
 
     // Start is called before the first frame update
     void Start()

@@ -118,7 +118,8 @@ public class Enemy : MonoBehaviour
         Debug.Log("TraceAtNight()");
         state = EnemyState.trace;
         target = enemiesManager.playerTarget;
-        nextStateTime = 0.0f;
+        nextStateTime = 0;
+        nowStateTime = 0f;
     }
 
     IEnumerator Detect()

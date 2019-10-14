@@ -325,3 +325,6 @@ MonoBehaviour:
   statusController: {fileID: 0}
   enemiesManager: {fileID: 0}
   fireFliesControl: {fileID: 0}
+  dayBgmName: 
+  nightBgmName: 
+  isCanSetTraceAtNightByDay: 1
