@@ -155,6 +155,8 @@ public class WolfAgent : Agent
 
         if (isMoving)
         {
+            if (currentAction == "Eating")
+                Debug.Log("먹는당!!!!");
             if (currentAction == "GoToPlayer")
             {
                 direction = (Player.position - transform.position).normalized; // 타겟으로 향하는 방향
@@ -286,12 +288,14 @@ public class WolfAgent : Agent
                 animator.SetBool("isRest", false);
                 animator.SetBool("isDig", false);
                 digEffect.SetActive(false);
+                return;
                 break;
             case (int)ActionType.REST:
                 isMoving = false;
                 Rest();
                 animator.SetBool("isDig", false);
                 digEffect.SetActive(false);
+                return;
                 break;
             //case (int)ActionType.GOTOPLAYER:
             //    isMoving = true;
@@ -304,11 +308,13 @@ public class WolfAgent : Agent
                 animator.SetBool("isDig", false);
                 digEffect.SetActive(false);
                 animator.SetBool("isRest", false);
+                return;
                 break;
             case (int)ActionType.DIG:
                 isMoving = false;
                 Dig();
                 animator.SetBool("isRest", false);
+                return;
                 break;
         }
 
@@ -425,10 +431,11 @@ public class WolfAgent : Agent
 
                 Friendly = Mathf.Clamp(Friendly, 0f, MaxFriendly);
 
-                Destroy(adj);
+                Destroy(adj, 25 / EatingSpeed);
                 SetPlayerRelation();
                 nextAction = Time.timeSinceLevelLoad + (25 / EatingSpeed);
                 currentAction = "Eating";
+                isMoving = false;
             }
         }
     }
